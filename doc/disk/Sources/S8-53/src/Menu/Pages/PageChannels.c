@@ -1,0 +1,323 @@
+#include "defines.h"
+#include "Log.h"
+#include "Settings/SettingsTypes.h"
+#include "Menu/MenuItems.h"
+#include "Panel/Panel.h"
+#include "FPGA/FPGA.h"
+#include "Display/Display.h"
+#include "Settings/Settings.h"
+#include "Utils/GlobalFunctions.h"
+
+
+/** @addtogroup Menu
+ *  @{
+ *  @addtogroup PageChannels
+ *  @{
+ */
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static const Choice mcInputA;                   ///< КАНАЛ 1 - Вход
+void OnChanged_InputA(bool active);
+static const Choice mcCoupleA;                  ///< КАНАЛ 1 - Связь
+void OnChanged_CoupleA(bool active);
+static const Choice mcFiltrA;                   ///< КАНАЛ 1 - Фильтр
+void OnChanged_FiltrA(bool active);
+static const Choice mcInverseA;                 ///< КАНАЛ 1 - Инверсия
+static void OnChanged_InverseA(bool active);
+static const Choice mcMultiplierA;              ///< КАНАЛ 1 - Множитель
+
+static const Choice mcInputB;                   ///< КАНАЛ 2 - Вход
+void OnChanged_InputB(bool active);
+static const Choice mcCoupleB;                  ///< КАНАЛ 2 - Связь
+void OnChanged_CoupleB(bool active);
+static const Choice mcFiltrB;                   ///< КАНАЛ 2 - Фильтр
+void OnChanged_FiltrB(bool active);
+static const Choice mcInverseB;                 ///< КАНАЛ 2 - Инверсия
+static void OnChanged_InverseB(bool active);
+static const Choice mcMultiplierB;              ///< КАНАЛ 2 - Множитель
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static const char chanInputRu[] =   "1. \"Вкл\" - выводить сигнал на экран.\n"
+                                    "2. \"Откл\" - не выводить сигнал на экран.";
+static const char chanInputEn[] =   "1. \"Enable\" - signal output to the screen.\n"
+                                    "2. \"Disable\" - no output to the screen.";
+
+static const char chanCoupleRu[] =  "Задаёт вид связи с источником сигнала.\n"
+                                    "1. \"Пост\" - открытый вход.\n"
+                                    "2. \"Перем\" - закрытый вход.\n"
+                                    "3. \"Земля\" - вход соединён с землёй.";
+static const char chanCoupleEn[] =  "Sets a type of communication with a signal source.\n"
+                                    "1. \"AC\" - open input.\n"
+                                    "2. \"DC\" - closed input.\n"
+                                    "3. \"Ground\" - input is connected to the ground.";
+
+static const char chanFiltrRu[] = "Включает/отключает фильтр для ограничения полосы пропускания.";
+static const char chanFiltrEn[] = "Includes/switches-off the filter for restriction of a pass-band.";
+
+static const char chanInverseRu[] = "При \"Вкл\" сигнал на экране будет симметрично отражён относительно U = 0В.";
+static const char chanInverseEn[] = "When \"Enable\" signal on the screen will be reflected symmetrically with respect to U = 0V.";
+
+static const char chanMultiplierRu[] = "Ослабление сигнала:\n\"x1\" - сигнал не ослабляется.\n\"x10\" - сигнал ослабляется в 10 раз";
+static const char chanMultiplierEn[] = "Attenuation: \n\"x1\" - the signal is not attenuated.\n\"x10\" - the signal is attenuated by 10 times";
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+extern const Page mainPage;
+
+
+// КАНАЛ 1 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const Page mpChanA =    ///< КАНАЛ 1
+{
+    Item_Page, &mainPage, 0,
+    {
+        "КАНАЛ 1", "CHANNEL 1",
+        "Содержит настройки канала 1.",
+        "Contains settings of the channel 1."
+    },
+    Page_Channel0,
+    {
+        (void*)&mcInputA,       // КАНАЛ 1 - Вход
+        (void*)&mcCoupleA,      // КАНАЛ 1 - Связь
+        (void*)&mcFiltrA,       // КАНАЛ 1 - Фильтр
+        (void*)&mcInverseA,     // КАНАЛ 1 - Инверсия
+        (void*)&mcMultiplierA   // КАНАЛ 1 - Множитель
+    }
+};
+
+
+// КАНАЛ 1 - Вход ------------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcInputA =
+{
+    Item_Choice, &mpChanA, 0,
+    {
+        "Вход", "Input",
+        chanInputRu,
+        chanInputEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&ENABLED_A, OnChanged_InputA
+};
+
+void OnChanged_InputA(bool active)
+{
+    Panel_EnableLEDChannel0(sChannel_Enabled(A));
+}
+
+
+// КАНАЛ 1 - Связь -----------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcCoupleA =
+{
+    Item_Choice, &mpChanA, 0,
+    {
+        "Связь",   "Couple",
+        chanCoupleRu,
+        chanCoupleEn
+    },
+    {
+        {"Пост",    "AC"},
+        {"Перем",   "DC"},
+        {"Земля",   "Ground"}
+    },
+    (int8*)&MODE_COUPLE_A, OnChanged_CoupleA
+};
+
+void OnChanged_CoupleA(bool active)
+{
+    FPGA_SetModeCouple(A, MODE_COUPLE_A);
+}
+
+
+// КАНАЛ 1 - Фильтр ----------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcFiltrA =
+{
+    Item_Choice, &mpChanA, 0,
+    {
+        "Фильтр", "Filtr",
+        chanFiltrRu,
+        chanFiltrEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&FILTR_A, OnChanged_FiltrA
+};
+
+void OnChanged_FiltrA(bool active)
+{
+    FPGA_EnableChannelFiltr(A, FILTR_A);
+}
+
+
+// КАНАЛ 1 - Инверсия --------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcInverseA =
+{
+    Item_Choice, &mpChanA, 0,
+    {
+        "Инверсия",    "Inverse",
+        chanInverseRu,
+        chanInverseEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&INVERSE_A, OnChanged_InverseA
+};
+
+static void OnChanged_InverseA(bool active)
+{
+    FPGA_SetRShift(A, RSHIFT_A);
+}
+
+
+// КАНАЛ 1 - Множитель -------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcMultiplierA =
+{
+    Item_Choice, &mpChanA, 0,
+    {
+        "Множитель", "Multiplier",
+        chanMultiplierRu,
+        chanMultiplierEn
+    },
+    {
+        {"х1",  "x1"},
+        {"x10", "x10"}
+    },
+    (int8*)&MULTIPLIER(A)
+};
+
+
+
+// КАНАЛ 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const Page mpChanB =
+{
+    Item_Page, &mainPage, 0,
+    {
+        "КАНАЛ 2", "CHANNEL 2",
+        "Содержит настройки канала 2.",
+        "Contains settings of the channel 2."
+    },
+    Page_Channel1,
+    {
+        (void*)&mcInputB,       // КАНАЛ 2 - Вход
+        (void*)&mcCoupleB,      // КАНАЛ 2 - Связь
+        (void*)&mcFiltrB,       // КАНАЛ 2 - Фильтр
+        (void*)&mcInverseB,     // КАНАЛ 2 - Инверсия
+        (void*)&mcMultiplierB   // КАНАЛ 2 - Множитель
+    }
+};
+
+
+// КАНАЛ 2 - Вход ------------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcInputB =  ///< КАНАЛ 2
+{
+    Item_Choice, &mpChanB, 0,
+    {
+        "Вход", "Input",
+        chanInputRu,
+        chanInputEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&ENABLED_B, OnChanged_InputB
+};
+
+void OnChanged_InputB(bool active)
+{
+    Panel_EnableLEDChannel1(sChannel_Enabled(B));
+}
+
+
+// КАНАЛ 2 - Связь -----------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcCoupleB =
+{
+    Item_Choice, &mpChanB, 0,
+    {
+        "Связь", "Couple",
+        chanCoupleRu,
+        chanCoupleEn
+    },
+    {
+        {"Пост",    "AC"},
+        {"Перем",   "DC"},
+        {"Земля",   "Ground"}
+    },
+    (int8*)&MODE_COUPLE_B, OnChanged_CoupleB
+};
+
+void OnChanged_CoupleB(bool active)
+{
+    FPGA_SetModeCouple(B, MODE_COUPLE_B);
+}
+
+// КАНАЛ 2 - Фильтр ----------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcFiltrB =
+{
+    Item_Choice, &mpChanB, 0,
+    {
+        "Фильтр", "Filtr",
+        chanFiltrRu,
+        chanFiltrEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&FILTR_B, OnChanged_FiltrB
+};
+
+void OnChanged_FiltrB(bool active)
+{
+    FPGA_EnableChannelFiltr(B, FILTR_B);
+}
+
+
+// КАНАЛ 2 - Инверсия --------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcInverseB =
+{
+    Item_Choice, &mpChanB, 0,
+    {
+        "Инверсия", "Inverse",
+        chanInverseRu,
+        chanInverseEn
+    },
+    {
+        {DISABLE_RU,    DISABLE_EN},
+        {ENABLE_RU,     ENABLE_EN}
+    },
+    (int8*)&INVERSE_B, OnChanged_InverseB
+};
+
+static void OnChanged_InverseB(bool active)
+{
+    FPGA_SetRShift(B, RSHIFT_B);
+}
+
+
+// КАНАЛ 2 - Множитель -------------------------------------------------------------------------------------------------------------------------------
+static const Choice mcMultiplierB =
+{
+    Item_Choice, &mpChanB, 0,
+    {
+        "Множитель", "Multiplier",
+        chanMultiplierRu,
+        chanMultiplierEn
+    },
+    {
+        {"х1",  "x1"},
+        {"x10", "x10"}
+    },
+    (int8*)&MULTIPLIER(B)
+};
+
+
+/** @}  @}
+ */

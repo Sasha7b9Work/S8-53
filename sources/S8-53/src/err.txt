@@ -1,0 +1,7 @@
+[Ethernet\Server.c:139] -> [Ethernet\Server.c:158]: (warning) Possible null pointer dereference: p - otherwise it is redundant to check it against null.
+[Ethernet\Server.c:145] -> [Ethernet\Server.c:158]: (warning) Possible null pointer dereference: p - otherwise it is redundant to check it against null.
+[Ethernet\Server.c:148] -> [Ethernet\Server.c:158]: (warning) Possible null pointer dereference: p - otherwise it is redundant to check it against null.
+[Menu\Menu.c:452]: (style) Variable 'item' is assigned a value that is never used.
+[Menu\MenuItemsLogic.c:309]: (style) Variable 'min' is assigned a value that is never used.
+[Menu\MenuItemsLogic.c:321]: (style) Variable 'max' is assigned a value that is never used.
+(information) Cppcheck cannot find all the include files (use --check-config for details)

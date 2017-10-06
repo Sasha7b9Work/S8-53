@@ -1,0 +1,16 @@
+[PROJECT]
+Target=pr_mn_sever.hex
+Processor_Text=PIC18F2515
+CCSVersion=5.015
+Compiler=PCH
+[Target Data]
+FileList=pr_mn_sever.c
+[Directories]
+Include=C:\Program Files\PICC\devices\;C:\Program Files\PICC\drivers\
+[pr_mn_sever.c]
+Type=4
+[mru-list]
+1=pr_mn_sever.c
+[Units]
+Count=1
+1=pr_mn_sever (main)

@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Display53", "VS-OSCI\Display\Display.vcxproj", "{CD82830C-F605-469F-A07F-0A3E804466A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD82830C-F605-469F-A07F-0A3E804466A7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CD82830C-F605-469F-A07F-0A3E804466A7}.Release|Win32.ActiveCfg = Release|Win32
+		{CD82830C-F605-469F-A07F-0A3E804466A7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {044A44B8-F315-4FDA-A6E0-A93D559C698E}
+	EndGlobalSection
+EndGlobal

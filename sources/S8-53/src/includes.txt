@@ -1,0 +1,12 @@
+e:\Sasha\Projects\Sever\libs\STM32Cube_FW_F2_V1.1.0\Drivers\STM32F2xx_HAL_Driver\Inc\
+C:\Keil_v5\ARM\PACK\Keil\STM32F2xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include\
+C:\Keil_v5\ARM\CMSIS\Include\
+C:\Keil_v5\ARM\ARMCC\include\
+E:\Sasha\Projects\Sever\libs\STM32Cube_FW_F2_V1.1.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\
+e:\Sasha\Projects\Sever\source\Cube\src\VCP\USBD\
+e:\Sasha\Projects\Sever\source\Cube\src\libs\HAL\
+E:\Sasha\Projects\Sever\libs\STM32Cube_FW_F2_V1.1.0\Middlewares\ST\STM32_USB_Host_Library\Core\Inc\
+E:\Sasha\Projects\Sever\libs\STM32Cube_FW_F2_V1.1.0\Middlewares\Third_Party\FatFs\src\
+e:\Sasha\Projects\Sever\source\Cube\src\libs\FatFS\
+e:\Sasha\Projects\Sever\source\Cube\src\libs\USBH\
+e:\Sasha\Projects\Sever\libs\STM32Cube_FW_F2_V1.1.0\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\

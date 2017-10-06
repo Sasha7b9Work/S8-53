@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\main.c" />
+    <ClCompile Include="..\..\painter.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\main.h" />
+    <ClInclude Include="..\..\Microchip\Include\GenericTypeDefs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HardwareProfile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Microchip\Include\Graphics\Graphics.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Microchip\Include\TimeDelay.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Microchip\xc16\v1.26\support\PIC24F\h\p24FJ256DA210.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\painter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{cbfdb793-b143-4829-96f9-59cebc1c2273}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

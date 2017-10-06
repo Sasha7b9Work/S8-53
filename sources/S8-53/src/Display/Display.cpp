@@ -1,0 +1,2614 @@
+#include "defines.h"
+#include "Globals.h"
+#include "Settings/SettingsTypes.h"
+#include "Settings/Settings.h"
+#include "Symbols.h"
+#include "Display.h"
+#include "Grid.h"
+#include "Painter.h"
+#include "font/Font.h"
+#include "Colors.h"
+#include "FlashDrive/FlashDrive.h"
+#include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Types.h"
+#include "FPGA/DataStorage.h"
+#include "Hardware/FSMC.h"
+#include "Hardware/FLASH.h" 
+#include "Hardware/Hardware.h"
+#include "Hardware/Sound.h"
+#include "Hardware/RTC.h"
+#include "VCP/VCP.h"
+#include "Menu/Menu.h"
+#include "Menu/Pages/PageCursors.h"
+#include "Menu/Pages/PageMemory.h"
+#include "Menu/Pages/PageHelp.h"
+#include "Utils/Measures.h"
+#include "Utils/Math.h"
+#include "Utils/GlobalFunctions.h"
+#include "Utils/ProcessingSignal.h"
+#include "Hardware/Timer.h"
+#include "Log.h"
+#include "PainterMem.h"
+#include <math.h>
+#include <limits.h>
+#include "Hardware/DisplayHardware.inc"
+
+
+Display display;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define NUM_P2P_POINTS (FPGA_MAX_POINTS)
+static uint8 dataP2P_0[NUM_P2P_POINTS];
+static uint8 dataP2P_1[NUM_P2P_POINTS];
+static int   lastP2Pdata = 0;
+static bool  dataP2PIsEmpty = true;
+
+#define MAX_NUM_STRINGS         35
+#define SIZE_BUFFER_FOR_STRINGS 2000
+static char                     *strings[MAX_NUM_STRINGS] = {0};
+static char                     bufferForStrings[SIZE_BUFFER_FOR_STRINGS] = {0};
+static int                      lastStringForPause = -1;
+
+#define NUM_WARNINGS            10
+static const char               *warnings[NUM_WARNINGS] = {0};      // Здесь предупреждающие сообщения.
+static uint                     timeWarnings[NUM_WARNINGS] = {0};   // Здесь время, когда предупреждающее сообщение поступило на экран.
+
+static pFuncVV funcOnHand       = 0;
+static pFuncVV funcAdditionDraw = 0;
+static pFuncVV funcAfterDraw    = 0;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void FuncOnTimerDisableShowLevelRShiftA();
+static void FuncOnTimerDisableShowLevelRShiftB();
+static void FuncOnTimerDisableShowLevelTrigLev();
+static void FuncOnTimerRShiftMarkersAutoHide();
+static void OnTimerShowWarning();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Display::Init() 
+{
+    /*
+    PainterMem_SetBuffer(buffer, 100, 100);
+    PainterMem_FillRect(0, 0, 99, 99, ColorChannel(A));
+    PainterMem_DrawRectangle(10, 10, 10, 30, COLOR_FILL);
+    PainterMem_DrawHLine(90, 10, 90, ColorChannel(B));
+    PainterMem_DrawVLine(90, 10, 90, COLOR_BACK);
+    PainterMem_DrawRectangle(0, 0, 99, 99, COLOR_FILL);
+    */
+
+    painter.ResetFlash();
+
+    InitHardware();
+
+    painter.LoadFont(TypeFont_5);
+    painter.LoadFont(TypeFont_8);
+    painter.LoadFont(TypeFont_UGO);
+    painter.LoadFont(TypeFont_UGO2);
+    painter.SetFont(TypeFont_8);
+
+    painter.LoadPalette();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawStringNavigation() 
+{
+    char buffer[100];
+    char *string = menu.StringNavigation(buffer);
+    if(string) 
+    {
+        int length = Font_GetLengthText(string);
+        int height = 10;
+        painter.DrawRectangleC(grid.Left(), GRID_TOP, length + 2, height, COLOR_FILL);
+        painter.FillRegionC(grid.Left() + 1, GRID_TOP + 1, length, height - 2, COLOR_BACK);
+        painter.DrawTextC(grid.Left() + 2, GRID_TOP + 1, string, COLOR_FILL);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::RotateRShift(Channel chan)
+{
+    ResetP2Ppoints(true);
+    LAST_AFFECTED_CHANNEL = chan;
+    if(TIME_SHOW_LEVELS)
+    {
+        (chan == A) ? (gBF.showLevelRShift0 = 1) : (gBF.showLevelRShift1 = 1);
+        Timer_Enable((chan == A) ? kShowLevelRShift0 : kShowLevelRShift1, TIME_SHOW_LEVELS  * 1000, (chan == A) ? FuncOnTimerDisableShowLevelRShiftA :
+                     FuncOnTimerDisableShowLevelRShiftB);
+    };
+    display.Redraw();
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void FuncOnTimerDisableShowLevelRShiftA()
+{
+    display.DisableShowLevelRShiftA();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void FuncOnTimerDisableShowLevelRShiftB()
+{
+    display.DisableShowLevelRShiftB();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::RotateTrigLev()
+{
+    if (TIME_SHOW_LEVELS)
+    {
+        gBF.showLevelTrigLev = 1;
+        Timer_Enable(kShowLevelTrigLev, TIME_SHOW_LEVELS * 1000, FuncOnTimerDisableShowLevelTrigLev);
+    }
+    display.Redraw();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void FuncOnTimerDisableShowLevelTrigLev()
+{
+    display.DisableShowLevelTrigLev();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Redraw(void)
+{
+    gBF.needFinishDraw = 1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static bool ChannelNeedForDraw(const uint8 *data, Channel chan, const DataSettings *ds)
+{
+    if (!data)
+    {
+        return false;
+    }
+
+    if (MODE_WORK_IS_DIRECT)
+    {
+        if (!sChannel_Enabled(chan))
+        {
+            return false;
+        }
+    }
+    else if (ds != 0)
+    {
+        if ((chan == A && ds->enableCh0 == 0) || (chan == B && ds->enableCh1 == 0))
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+    return true;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawMarkersForMeasure(float scale, Channel chan)
+{
+    if (chan == Math)
+    {
+        return;
+    }
+    painter.SetColor(ColorCursors(chan));
+    for(int numMarker = 0; numMarker < 2; numMarker++)
+    {
+        int pos = Processing_GetMarkerHorizontal(chan, numMarker);
+        if(pos != ERROR_VALUE_INT && pos > 0 && pos < 200)
+        {
+            painter.DrawDashedHLine(grid.FullBottom() - pos * scale, grid.Left(), grid.Right(), 3, 2, 0);
+        }
+
+        pos = Processing_GetMarkerVertical(chan, numMarker);
+        if (pos != ERROR_VALUE_INT && pos > 0 && pos < grid.Right())
+        {
+            painter.DrawDashedVLine(grid.Left() + pos * scale, GRID_TOP, grid.FullBottom(), 3, 2, 0);
+        }
+       
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+#define CONVERT_DATA_TO_DISPLAY(out, in)        \
+    out = maxY - ((in) - MIN_VALUE) * scaleY;   \
+    if(out < minY)          { out = minY; }     \
+    else if (out > maxY)    { out = maxY; };
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSignalLined(const uint8 *data, const DataSettings *ds, int startPoint, int endPoint, int minY, int maxY, float scaleY, float scaleX, bool calculateFiltr)
+{
+    if (endPoint < startPoint)
+    {
+        return;
+    }
+    uint8 dataCD[281];
+
+	int gridLeft = grid.Left();
+	int gridRight = grid.Right();
+    
+    int numPoints = sMemory_GetNumPoints(false);
+    int numSmoothing = sDisplay_NumPointSmoothing();
+
+    if (ds->peakDet == PeackDet_Disable)
+    {
+        for (int i = startPoint; i < endPoint; i++)
+        {
+            float x0 = gridLeft + (i - startPoint) * scaleX;
+            if (x0 >= gridLeft && x0 <= gridRight)
+            {
+                int index = i - startPoint;
+                int y = calculateFiltr ? Math_CalculateFiltr(data, i, numPoints, numSmoothing) : data[i];
+                CONVERT_DATA_TO_DISPLAY(dataCD[index], y);
+            }
+        }
+    }
+    else
+    {
+        int shift = ds->length1channel;
+
+        int yMinNext = -1;
+        int yMaxNext = -1;
+       
+        for (int i = startPoint; i < endPoint; i++)
+        {
+            float x = gridLeft + (i - startPoint) * scaleX;
+            if (x >= gridLeft && x <= gridRight)
+            {
+                int yMin = yMinNext;
+                if (yMin == -1)
+                {
+                    CONVERT_DATA_TO_DISPLAY(yMin, data[i + shift]);
+                }
+                int yMax = yMaxNext;
+                if (yMax == -1)
+                {
+                    CONVERT_DATA_TO_DISPLAY(yMax, data[i]);
+                }
+
+                CONVERT_DATA_TO_DISPLAY(yMaxNext, data[i + 1]);
+                if (yMaxNext < yMin)
+                {
+                    yMin = yMaxNext + 1;
+                }
+
+                CONVERT_DATA_TO_DISPLAY(yMinNext, data[i + shift + 1]);
+                if (yMinNext > yMax)
+                {
+                    yMax = yMinNext - 1;
+                }
+
+                painter.DrawVLine((int)x, yMin, yMax);
+            }
+        }
+    }
+
+    if(endPoint - startPoint < 281)
+    {
+        int numPoints = 281 - (endPoint - startPoint);
+        for(int i = 0; i < numPoints; i++)
+        {
+            int index = endPoint - startPoint + i;
+            CONVERT_DATA_TO_DISPLAY(dataCD[index], MIN_VALUE);
+        }
+    }
+
+    if(ds->peakDet == PeackDet_Disable)
+    {
+        CONVERT_DATA_TO_DISPLAY(dataCD[280], data[endPoint]);
+        painter.DrawSignal(grid.Left(), dataCD, true);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSignalPointed(const uint8 *data, const DataSettings *ds, int startPoint, int endPoint, int minY, int maxY, float scaleY, float scaleX)
+{
+    int numPoints = sMemory_GetNumPoints(false);
+    int numSmoothing = sDisplay_NumPointSmoothing();
+    
+    uint8 dataCD[281];
+
+    if (scaleX == 1.0f) //-V550
+    {
+        for (int i = startPoint; i < endPoint; i++)
+        {
+            int index = i - startPoint;
+            CONVERT_DATA_TO_DISPLAY(dataCD[index], Math_CalculateFiltr(data, i, numPoints, numSmoothing));
+        }
+        painter.DrawSignal(grid.Left(), dataCD, false);
+
+        if (ds->peakDet)
+        {
+            int size = endPoint - startPoint;
+            startPoint += numPoints;
+            endPoint = startPoint + size;;
+
+            for (int i = startPoint; i < endPoint; i++)
+            {
+                int index = i - startPoint;
+                CONVERT_DATA_TO_DISPLAY(dataCD[index], Math_CalculateFiltr(data, i, numPoints, numSmoothing));
+            }
+            painter.DrawSignal(grid.Left(), dataCD, false);
+        }
+    }
+    else
+    {
+        for (int i = startPoint; i < endPoint; i++)
+        {
+            int index = i - startPoint;
+            int dat = 0;
+            CONVERT_DATA_TO_DISPLAY(dat, Math_CalculateFiltr(data, i, numPoints, numSmoothing));
+            painter.SetPoint(grid.Left() + index * scaleX, dat);
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Если data == 0, то данные брать из Processing_GetData
+void DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int maxY)
+{
+    bool calculateFiltr = true;
+    if (data == 0)
+    {
+        calculateFiltr = false;
+        if (chan == A)
+        {
+            Processing_GetData(&data, 0, &ds);
+        }
+        else
+        {
+            Processing_GetData(0, &data, &ds);
+        }
+    }
+
+    if (!ChannelNeedForDraw(data, chan, ds))
+    {
+        return;
+    }
+
+    float scaleY = (float)(maxY - minY) / (MAX_VALUE - MIN_VALUE);
+    float scaleX = (float)grid.Width() / 280.0f;
+
+    if(SHOW_MEASURES)
+    {
+        DrawMarkersForMeasure(scaleY, chan);
+    }
+
+    int firstPoint = 0;
+    int lastPoint = 0;
+    sDisplay_PointsOnDisplay(&firstPoint, &lastPoint);
+    if(data == dataP2P_0 || data == dataP2P_1)
+    {
+        if(SELFRECORDER)
+        {
+            LOG_TRACE
+        }
+        else if(lastPoint > lastP2Pdata)
+        {
+            lastPoint = lastP2Pdata;
+        }
+    }
+
+    painter.SetColor(ColorChannel(chan));
+    if(MODE_DRAW_IS_SIGNAL_LINES)
+    {
+        /*
+        if (set.display.numAveraging > NumAveraging_1)
+        {
+            painter.SetColor(ColorGrid());
+            DrawSignalLined(DS_GetData(chan, 0), ds, firstPoint, lastPoint, minY, maxY, scaleY, scaleX, calculateFiltr);    // WARN
+        }
+        painter.SetColor(ColorChannel(chan));
+        */
+        DrawSignalLined(data, ds, firstPoint, lastPoint, minY, maxY, scaleY, scaleX, calculateFiltr);
+    }
+    else
+    {
+        DrawSignalPointed(data, ds, firstPoint, lastPoint, minY, maxY, scaleY, scaleX);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawMath()
+{
+    if (DISABLED_DRAW_MATH || dataStorage.GetData(A, 0) == 0 || dataStorage.GetData(B, 0) == 0)
+    {
+        return;
+    }
+
+    uint8 *dataRel0 = 0;
+    uint8 *dataRel1 = 0;
+    DataSettings *ds = 0;
+    Processing_GetData(&dataRel0, &dataRel1, &ds);
+
+    float dataAbs0[FPGA_MAX_POINTS];
+    float dataAbs1[FPGA_MAX_POINTS];
+
+    Math_PointsRelToVoltage(dataRel0, ds->length1channel, ds->range[A], ds->rShiftCh0, dataAbs0);
+    Math_PointsRelToVoltage(dataRel1, ds->length1channel, ds->range[B], ds->rShiftCh1, dataAbs1);
+
+    Math_CalculateMathFunction(dataAbs0, dataAbs1, ds->length1channel);
+    
+    uint8 points[FPGA_MAX_POINTS];
+    Math_PointsVoltageToRel(dataAbs0, ds->length1channel, SET_RANGE_MATH, SET_RSHIFT_MATH, points);
+
+    DrawDataChannel(points, Math, ds, grid.MathTop(), grid.MathBottom());
+
+    static const int WIDTH = 71;
+    static const int HEIGHT = 10;
+    int delta = (SHOW_STRING_NAVIGATION && MODE_DRAW_MATH_IS_TOGETHER) ? 10 : 0;
+    painter.DrawRectangleC(grid.Left(), grid.MathTop() + delta, WIDTH, HEIGHT, COLOR_FILL);
+    painter.FillRegionC(grid.Left() + 1, grid.MathTop() + 1 + delta, WIDTH - 2, HEIGHT - 2, COLOR_BACK);
+    Divider multiplier = MATH_MULTIPLIER;
+    painter.DrawTextC(grid.Left() + 2, grid.MathTop() + 1 + delta, sChannel_Range2String(SET_RANGE_MATH, multiplier), COLOR_FILL);
+    painter.DrawText(grid.Left() + 25, grid.MathTop() + 1 + delta, ":");
+    char buffer[20];
+    painter.DrawText(grid.Left() + 27, grid.MathTop() + 1 + delta, sChannel_RShift2String(SET_RSHIFT_MATH, SET_RANGE_MATH, multiplier, buffer));
+
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSpectrumChannel(const float *spectrum, Color color)
+{
+    painter.SetColor(color);
+	int gridLeft = grid.Left();
+	int gridBottom = grid.MathBottom();
+	int gridHeight = grid.MathHeight();
+    for (int i = 0; i < 256; i++) 
+    {
+        painter.DrawVLine(gridLeft + i, gridBottom, gridBottom - gridHeight * spectrum[i]);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void WriteParametersFFT(Channel chan, float freq0, float density0, float freq1, float density1)
+{
+    int x = grid.Left() + 259;
+    int y = grid.ChannelBottom() + 5;
+    int dY = 10;
+
+    char buffer[20];
+    painter.SetColor(COLOR_FILL);
+    painter.DrawText(x, y, Freq2String(freq0, false, buffer));
+    y += dY;
+    painter.DrawText(x, y, Freq2String(freq1, false, buffer));
+    if (chan == A)
+    {
+        y += dY + 2;
+    }
+    else
+    {
+        y += dY * 3 + 4;
+    }
+    painter.SetColor(ColorChannel(chan));
+    painter.DrawText(x, y, SCALE_FFT_IS_LOG ? Float2Db(density0, 4, buffer) : Float2String(density0, false, 7, buffer));
+    y += dY;
+    painter.DrawText(x, y, SCALE_FFT_IS_LOG ? Float2Db(density1, 4, buffer) : Float2String(density1, false, 7, buffer));
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DRAW_SPECTRUM(const uint8 *data, int numPoints, Channel channel)
+{
+    if (!sChannel_Enabled(channel))
+    {
+        return;
+    }
+    float dataR[FPGA_MAX_POINTS];
+    float spectrum[FPGA_MAX_POINTS];
+
+    float freq0 = 0.0f;
+    float freq1 = 0.0f;
+    float density0 = 0.0f;
+    float density1 = 0.0f;
+    int y0 = 0;
+    int y1 = 0;
+    int s = 2;
+
+    Math_PointsRelToVoltage(data, numPoints, gDSet->range[channel], channel == A ? gDSet->rShiftCh0 : gDSet->rShiftCh1, dataR);
+    Math_CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
+    DrawSpectrumChannel(spectrum, ColorChannel(channel));
+    if (!MenuIsShown() || MenuIsMinimize())
+    {
+        Color color = COLOR_FILL;
+        WriteParametersFFT(channel, freq0, density0, freq1, density1);
+        painter.DrawRectangleC(FFT_POS_CURSOR_0 + grid.Left() - s, y0 - s, s * 2, s * 2, color);
+        painter.DrawRectangle(FFT_POS_CURSOR_1 + grid.Left() - s, y1 - s, s * 2, s * 2);
+
+        painter.DrawVLine(grid.Left() + FFT_POS_CURSOR_0, grid.MathBottom(), y0 + s);
+        painter.DrawVLine(grid.Left() + FFT_POS_CURSOR_1, grid.MathBottom(), y1 + s);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawSpectrum()
+{
+    if (!ENABLED_FFT)
+    {
+        return;
+    }
+
+    painter.DrawVLineC(grid.Right(), grid.ChannelBottom() + 1, grid.MathBottom() - 1, COLOR_BACK);
+
+    if (MODE_WORK_IS_DIRECT)
+    {
+        int numPoints = sMemory_GetNumPoints(false);
+        if (numPoints < 512)
+        {
+            numPoints = 256;
+        }
+
+        if (SOURCE_FFT_IS_A)
+        {
+            DRAW_SPECTRUM(gData0, numPoints, A);
+        }
+        else if (SOURCE_FFT_IS_B)
+        {
+            DRAW_SPECTRUM(gData1, numPoints, B);
+        }
+        else
+        {
+            if (LAST_AFFECTED_CHANNEL_IS_A)
+            {
+                DRAW_SPECTRUM(gData1, numPoints, B);
+                DRAW_SPECTRUM(gData0, numPoints, A);
+            }
+            else
+            {
+                DRAW_SPECTRUM(gData0, numPoints, A);
+                DRAW_SPECTRUM(gData1, numPoints, B);
+            }
+        }
+    }
+
+    painter.DrawHLineC(grid.ChannelBottom(), grid.Left(), grid.Right(), COLOR_FILL);
+    painter.DrawHLine(grid.MathBottom(), grid.Left(), grid.Right());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawBothChannels(uint8 *data0, uint8 *data1)
+{
+	if (LAST_AFFECTED_CHANNEL_IS_B)
+    {
+        DrawDataChannel(data0, A, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(data1, B, gDSet, GRID_TOP, grid.ChannelBottom());
+    }
+    else
+    {
+        DrawDataChannel(data1, B, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(data0, A, gDSet, GRID_TOP, grid.ChannelBottom());
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawDataMemInt()
+{
+    if(gDSmemInt != 0)
+     {
+        DrawDataChannel(gData0memInt, A, gDSmemInt, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(gData1memInt, B, gDSmemInt, GRID_TOP, grid.ChannelBottom());
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawDataInModeWorkLatest()
+{
+    if (gDSmemLast != 0)
+    {
+        DrawDataChannel(gData0memLast, A, gDSmemLast, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(gData1memLast, B, gDSmemLast, GRID_TOP, grid.ChannelBottom());
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawDataInModePoint2Point()
+{
+    uint8 *data0 = 0;
+    uint8 *data1 = 0;
+    DataSettings *ds = 0;
+    Processing_GetData(&data0, &data1, &ds);
+
+    if (LAST_AFFECTED_CHANNEL_IS_B)
+    {
+        if (SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
+        {
+            DrawDataChannel(dataP2P_0, A, ds, GRID_TOP, grid.ChannelBottom());
+            DrawDataChannel(dataP2P_1, B, ds, GRID_TOP, grid.ChannelBottom());
+        }
+        else
+        {
+            DrawDataChannel(data0, A, ds, GRID_TOP, grid.ChannelBottom());
+            DrawDataChannel(data1, B, ds, GRID_TOP, grid.ChannelBottom());
+        }
+    }
+    else
+    {
+        if (SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
+        {
+            DrawDataChannel(dataP2P_1, B, ds, GRID_TOP, grid.ChannelBottom());
+            DrawDataChannel(dataP2P_0, A, ds, GRID_TOP, grid.ChannelBottom());
+        }
+        else
+        {
+            DrawDataChannel(data1, B, ds, GRID_TOP, grid.ChannelBottom());
+            DrawDataChannel(data0, A, ds, GRID_TOP, grid.ChannelBottom());
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawDataInModeSelfRecorder()
+{
+    LOG_TRACE
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+bool DrawDataInModeNormal()
+{
+    static void* prevAddr = 0;
+    bool retValue = true;
+
+    uint8 *data0 = 0;
+    uint8 *data1 = 0;
+    DataSettings *ds = 0;
+    Processing_GetData(&data0, &data1, &ds);
+
+    int16 numSignals = dataStorage.NumElementsWithSameSettings();
+    LIMITATION(numSignals, numSignals, 1, NUM_ACCUM);
+    if (numSignals == 1 || ENUM_ACCUM_IS_INFINITY || MODE_ACCUM_IS_RESET || sTime_RandomizeModeEnabled())
+    {
+        DrawBothChannels(0, 0);
+        if (prevAddr == 0 || prevAddr != ds->addrPrev)
+        {
+            gBF.numDrawingSignals++;
+            prevAddr = ds->addrPrev;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < numSignals; i++)
+        {
+            DrawBothChannels(dataStorage.GetData(A, i), dataStorage.GetData(B, i));
+        }
+    }
+
+    return retValue;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawDataMinMax()
+{
+    ModeDrawSignal modeDrawSignalOld = MODE_DRAW_SIGNAL;
+    MODE_DRAW_SIGNAL = ModeDrawSignal_Lines;
+    if (LAST_AFFECTED_CHANNEL_IS_B)
+    {
+        DrawDataChannel(dataStorage.GetLimitation(A, 0), A, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(A, 1), A, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(B, 0), B, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(B, 1), B, gDSet, GRID_TOP, grid.ChannelBottom());
+    }
+    else
+    {
+        DrawDataChannel(dataStorage.GetLimitation(B, 0), B, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(B, 1), B, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(A, 0), A, gDSet, GRID_TOP, grid.ChannelBottom());
+        DrawDataChannel(dataStorage.GetLimitation(A, 1), A, gDSet, GRID_TOP, grid.ChannelBottom());
+    }
+    MODE_DRAW_SIGNAL = modeDrawSignalOld;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static bool DrawDataNormal()
+{
+    bool retValue = true;
+    if (!dataP2PIsEmpty)
+    {
+        static const pFuncVV funcs[2] = {DrawDataInModePoint2Point, DrawDataInModeSelfRecorder};
+        funcs[(int)SELFRECORDER]();
+    }
+    else
+    {
+        retValue = DrawDataInModeNormal();
+    }
+    return retValue;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+bool DrawData()
+{
+    bool retValue = true;
+
+    if (dataStorage.AllDatas())
+    {
+
+        if (MODE_WORK_IS_MEMINT)
+        {
+            if (!MODE_SHOW_MEMINT_IS_DIRECT)
+            {
+                DrawDataMemInt();
+            }
+            if (!MODE_SHOW_MEMINT_IS_SAVED)
+            {
+                DrawDataNormal();
+            }
+        }
+        else if (MODE_WORK_IS_LATEST)
+        {
+            DrawDataInModeWorkLatest();
+        }
+        else
+        {
+            if (gMemory.showAlways == 1)
+            {
+                DrawDataMemInt();
+            }
+            retValue = DrawDataNormal();
+        }
+
+        if (NUM_MIN_MAX != 1)
+        {
+            DrawDataMinMax();
+        }
+    }
+
+    painter.DrawRectangleC(grid.Left(), GRID_TOP, grid.Width(), grid.FullHeight(), COLOR_FILL);
+
+    return retValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawTime(int x, int y)
+{
+    int dField = 10;
+    int dSeparator = 2;
+
+    PackedTime time = RTC_GetPackedTime();
+    
+    char buffer[20];
+    
+    painter.SetColor(COLOR_FILL);
+    
+    if (MODE_WORK_IS_MEMINT || MODE_WORK_IS_LATEST)
+    {
+        DataSettings *ds = MODE_WORK_IS_MEMINT ? gDSmemInt : gDSmemLast;
+
+        if (ds != 0)
+        {
+            y -= 9;
+            time.day = ds->time.day;
+            time.hours = ds->time.hours;
+            time.minutes = ds->time.minutes;
+            time.seconds = ds->time.seconds;
+            time.month = ds->time.month;
+            time.year = ds->time.year;
+            painter.DrawText(x, y, Int2String(time.day, false, 2, buffer));
+            painter.DrawText(x + dField, y, ":");
+            painter.DrawText(x + dField + dSeparator, y, Int2String(time.month, false, 2, buffer));
+            painter.DrawText(x + 2 * dField + dSeparator, y, ":");
+            painter.DrawText(x + 2 * dField + 2 * dSeparator, y, Int2String(time.year + 2000, false, 4, buffer));
+            y += 9;
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    
+    painter.DrawText(x, y, Int2String(time.hours, false, 2, buffer));
+    painter.DrawText(x + dField, y, ":");
+    painter.DrawText(x + dField + dSeparator, y, Int2String(time.minutes, false, 2, buffer));
+    painter.DrawText(x + 2 * dField + dSeparator, y, ":");
+    painter.DrawText(x + 2 * dField + 2 * dSeparator, y, Int2String(time.seconds, false, 2, buffer));
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawHiPart()
+{
+    WriteCursors();
+    DrawHiRightPart();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// shiftForPeakDet - если рисуем информацию с пикового детектора - то через shiftForPeakDet точек расположена иниформация о максимумах.
+void DrawDataInRect(int x, int width, const uint8 *data, int numElems, Channel chan, int shiftForPeakDet)
+{
+    if(numElems == 0)
+    {
+        return;
+    }
+
+    width--;
+    float elemsInColumn = (float)numElems / (float)width;
+    uint8 min[300];
+    uint8 max[300];
+
+
+    if (TBASE >= TBase_20ms && PEAKDET)
+    {
+        for (int col = 0; col < width; col++)
+        {
+            float firstElem = col * elemsInColumn;
+            float lastElem = firstElem + elemsInColumn - 1;
+            min[col] = data[(int)firstElem];
+            max[col] = data[(int)firstElem + 1];
+            for (int elem = firstElem + 2; elem <= lastElem; elem += 2)
+            {
+                SET_MIN_IF_LESS(data[elem], min[col]);
+                SET_MAX_IF_LARGER(data[elem + 1], max[col]);
+            }
+        }
+    }
+    else if (shiftForPeakDet == 0)
+    {
+        uint8 *iMin = &min[0];
+        uint8 *iMax = &max[0];
+
+        for (int col = 0; col < width; col++, iMin++, iMax++)
+        {
+            int firstElem = col * elemsInColumn;
+            int lastElem = firstElem + elemsInColumn - 1;
+            *iMin = data[firstElem];
+            *iMax = data[firstElem];
+            for (int elem = firstElem + 1; elem <= lastElem; elem++)
+            {
+                SET_MIN_IF_LESS(data[elem], *iMin);
+                SET_MAX_IF_LARGER(data[elem], *iMax);
+            }
+        }
+    }
+    else        // А здесь будет, если пик. дет. включен
+    {
+        for (int col = 0; col < width; col++)
+        {
+            float firstElem = col * elemsInColumn;
+            float lastElem = firstElem + elemsInColumn - 1;
+            min[col] = data[(int)firstElem];
+            max[col] = data[(int)firstElem + shiftForPeakDet];
+            for (int elem = firstElem + 1; elem <= lastElem; elem++)
+            {
+                SET_MIN_IF_LESS(data[elem], min[col]);
+                SET_MAX_IF_LARGER(data[elem + shiftForPeakDet], max[col]);
+            }
+        }
+    }
+
+    int bottom = 16;
+    int height = 14;
+    float scale = (float)height / (float)(MAX_VALUE - MIN_VALUE);
+
+#define ORDINATE(x) bottom - scale * LimitationInt(x - MIN_VALUE, 0, 200)
+
+#define NUM_POINTS (300 * 2)
+    uint8 points[NUM_POINTS];
+
+    points[0] = ORDINATE(max[0]);
+    points[1] = ORDINATE(min[0]);
+
+
+
+    for(int i = 1; i < width; i++)
+    {
+        int value0 = min[i] > max[i - 1] ? max[i - 1] : min[i];
+        int value1 = max[i] < min[i - 1] ? min[i - 1] : max[i];
+        points[i * 2] = ORDINATE(value1);
+        points[i * 2 + 1] = ORDINATE(value0);
+    }
+	if(width < 256)
+    {
+		painter.DrawVLineArray(x, width, points, ColorChannel(chan));
+	}
+    else
+    {
+		painter.DrawVLineArray(x, 255, points, ColorChannel(chan));
+		painter.DrawVLineArray(x + 255, width - 255, points + 255 * 2, ColorChannel(chan));
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// shiftForPeakDet - если рисуем информацию с пикового детектора - то через shiftForPeakDet точек расположена иниформация о максимумах.
+void DrawChannelInWindowMemory(int timeWindowRectWidth, int xVert0, int xVert1, int startI, int endI, const uint8 *data, int rightX, Channel chan, int shiftForPeakDet)
+{
+    if(data == dataP2P_0 && data == dataP2P_1)
+    {
+
+    }
+    else
+    {
+        DrawDataInRect(1,          xVert0 - 1,              &(data[0]),        startI,                             chan, shiftForPeakDet);
+        DrawDataInRect(xVert0 + 2, timeWindowRectWidth - 2, &(data[startI]),   281,                                chan, shiftForPeakDet);
+        DrawDataInRect(xVert1 + 2, rightX - xVert1 + 2,     &(data[endI + 1]), sMemory_GetNumPoints(false) - endI, chan, shiftForPeakDet);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Нарисовать окно памяти
+void DrawMemoryWindow(void)
+{
+    uint8 *dat0 = gData0memInt;
+    uint8 *dat1 = gData1memInt;
+    DataSettings *ds = gDSmemInt;
+    
+    if(MODE_WORK_IS_DIRECT || MODE_WORK_IS_LATEST)
+    {
+        dat0 = gData0;
+        dat1 = gData1;
+        ds = gDSet;
+    }
+    
+    int leftX = 3;
+    int top = 1;
+    int height = GRID_TOP - 3;
+    int bottom = top + height;
+
+    static const int rightXses[3] = {276, 285, 247};
+    int rightX = rightXses[MODE_WORK];
+    if (sCursors_NecessaryDrawCursors())
+    {
+        rightX = 68;
+    }
+
+    int timeWindowRectWidth = (rightX - leftX) * (282.0f / sMemory_GetNumPoints(false));
+    float scaleX = (float)(rightX - leftX + 1) / sMemory_GetNumPoints(false);
+
+    int16 shiftInMemory = SHIFT_IN_MEMORY;
+    
+    int startI = shiftInMemory;
+    int endI = startI + 281;
+
+    const int xVert0 = leftX + shiftInMemory * scaleX;
+    const int xVert1 = leftX + shiftInMemory * scaleX + timeWindowRectWidth;
+    bool showFull = set.display.showFullMemoryWindow;
+    painter.DrawRectangleC(xVert0, top + (showFull ? 0 : 1), xVert1 - xVert0, bottom - top - (showFull ? 0 : 2), COLOR_FILL);
+
+    if(!dataP2PIsEmpty)
+    {
+        dat0 = dataP2P_0;
+        dat1 = dataP2P_1;
+    }
+
+    if (showFull)
+    {
+        if (gData0 || gData1 || (!dataP2PIsEmpty))
+        {
+            Channel chanFirst = LAST_AFFECTED_CHANNEL_IS_A ? B : A;
+            Channel chanSecond = LAST_AFFECTED_CHANNEL_IS_A ? A : B;
+            const uint8 *dataFirst = LAST_AFFECTED_CHANNEL_IS_A ? dat1 : dat0;
+            const uint8 *dataSecond = LAST_AFFECTED_CHANNEL_IS_A ? dat0 : dat1;
+
+            int shiftForPeakDet = ds->peakDet == PeackDet_Disable ? 0 : ds->length1channel;
+
+            if (ChannelNeedForDraw(dataFirst, chanFirst, ds))
+            {
+                DrawChannelInWindowMemory(timeWindowRectWidth, xVert0, xVert1, startI, endI, dataFirst, rightX, chanFirst, shiftForPeakDet);
+            }
+            if (ChannelNeedForDraw(dataSecond, chanSecond, ds))
+            {
+                DrawChannelInWindowMemory(timeWindowRectWidth, xVert0, xVert1, startI, endI, dataSecond, rightX, chanSecond, shiftForPeakDet);
+            }
+        }
+    }
+    else
+    {
+        painter.DrawVLineC(leftX - 2, top, bottom, COLOR_FILL);
+        painter.DrawVLine(rightX + 2, top, bottom);
+        painter.DrawHLine((bottom + top) / 2 - 3, leftX, xVert0 - 2);
+        painter.DrawHLine((bottom + top) / 2 + 3, leftX, xVert0 - 2);
+        painter.DrawHLine((bottom + top) / 2 + 3, xVert1 + 2, rightX);
+        painter.DrawHLine((bottom + top) / 2 - 3, xVert1 + 2, rightX);
+    }
+
+    int x[] = {leftX, (rightX - leftX) / 2 + leftX + 1, rightX};
+    int x0 = x[TPOS];
+
+    // Маркер TPos
+    painter.FillRegionC(x0 - 3, 9, 6, 6, COLOR_BACK);
+    painter.DrawCharC(x0 - 3, 9, SYMBOL_TPOS_1, COLOR_FILL);
+
+    // Маркер tShift
+    float scale = (float)(rightX - leftX + 1) / ((float)sMemory_GetNumPoints(false) - (sMemory_GetNumPoints(false) == 281 ? 1 : 0));
+    float xShift = 1 + (sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, (int)gDSet->length1channel, TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet)) * scale;
+
+    painter.FillRegionC(xShift - 1, 3, 6, 6, COLOR_BACK);
+    painter.FillRegionC(xShift, 4, 4, 4, COLOR_FILL);
+    painter.SetColor(COLOR_BACK);
+    if(xShift < leftX - 2)
+    {
+        xShift = leftX - 2;
+        painter.DrawLine(xShift + 3, 5, xShift + 3, 7);
+        painter.DrawLine(xShift + 1, 6, xShift + 2, 6);
+    }
+    else if(xShift > rightX - 1)
+    {
+        xShift = rightX - 2;
+        painter.DrawLine(xShift + 1, 5, xShift + 1, 7);
+        painter.DrawLine(xShift + 2, 6, xShift + 3, 6);
+    }
+    else
+    {
+        painter.DrawLine(xShift + 1, 5, xShift + 3, 5);
+        painter.DrawLine(xShift + 2, 6, xShift + 2, 7);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::WriteCursors()
+{
+    char buffer[20];
+    int startX = 43;
+    if(MODE_WORK_IS_DIRECT)
+    {
+        startX += 29;
+    }
+    int x = startX;
+    int y1 = 0;
+    int y2 = 9;
+    if(sCursors_NecessaryDrawCursors())
+    {
+        painter.DrawVLineC(x, 1, GRID_TOP - 2, COLOR_FILL);
+        x += 3;
+        Channel source = CURS_SOURCE;
+        Color colorText = ColorChannel(source);
+        if(!CURS_CNTRL_U_IS_DISABLE(source))
+        {
+            painter.DrawTextC(x, y1, "1:", colorText);
+            painter.DrawText(x, y2, "2:");
+            x += 7;
+            painter.DrawText(x, y1, sCursors_GetCursVoltage(source, 0, buffer));
+            painter.DrawText(x, y2, sCursors_GetCursVoltage(source, 1, buffer));
+            x = startX + 49;
+            float pos0 = Math_VoltageCursor(sCursors_GetCursPosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
+            float pos1 = Math_VoltageCursor(sCursors_GetCursPosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
+            float delta = fabs(pos1 - pos0);
+            painter.DrawText(x, y1, ":dU=");
+            painter.DrawText(x + 17, y1, Voltage2String(delta, false, buffer));
+            painter.DrawText(x, y2, ":");
+            painter.DrawText(x + 10, y2, sCursors_GetCursorPercentsU(source, buffer));
+        }
+
+        x = startX + 101;
+        painter.DrawVLineC(x, 1, GRID_TOP - 2, COLOR_FILL);
+        x += 3;
+        if(!CURS_CNTRL_T_IS_DISABLE(source))
+        {
+            painter.SetColor(colorText);
+            painter.DrawText(x, y1, "1:");
+            painter.DrawText(x, y2, "2:");
+            x+=7;
+            painter.DrawText(x, y1, sCursors_GetCursorTime(source, 0, buffer));
+            painter.DrawText(x, y2, sCursors_GetCursorTime(source, 1, buffer));
+            x = startX + 153;
+            float pos0 = Math_TimeCursor(CURS_POS_T0(source), TBASE);
+            float pos1 = Math_TimeCursor(CURS_POS_T1(source) , TBASE);
+            float delta = fabs(pos1 - pos0);
+            painter.DrawText(x, y1, ":dT=");
+            char buffer[20];
+            painter.DrawText(x + 17, y1, Time2String(delta, false, buffer));
+            painter.DrawText(x, y2, ":");
+            painter.DrawText(x + 8, y2, sCursors_GetCursorPercentsT(source, buffer ));
+
+            if(CURSORS_SHOW_FREQ)
+            {
+                int width = 65;
+                int x = grid.Right() - width;
+                painter.DrawRectangleC(x, GRID_TOP, width, 12, COLOR_FILL);
+                painter.FillRegionC(x + 1, GRID_TOP + 1, width - 2, 10, COLOR_BACK);
+                painter.DrawTextC(x + 1, GRID_TOP + 2, "1/dT=", colorText);
+                char buffer[20];
+                painter.DrawText(x + 25, GRID_TOP + 2, Freq2String(1.0f / delta, false, buffer));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawHiRightPart()
+    {
+    // Синхроимпульс
+    int y = 2;
+
+    static const int xses[3] = {280, 271, 251};
+    int x = xses[MODE_WORK];
+
+    if (!MODE_WORK_IS_LATEST)
+    {
+        painter.DrawVLineC(x, 1, GRID_TOP - 2, COLOR_FILL);
+
+        x += 2;
+
+        if (gBF.trigEnable == 1)
+        {
+            painter.FillRegion(x, 1 + y, GRID_TOP - 3, GRID_TOP - 7);
+            painter.DrawTextC(x + 3, 3 + y, set.common.lang == Russian ? "СИ" : "Tr", COLOR_BACK);
+        }
+    }
+
+    // Режим работы
+    static const char *strings[][2] =
+    {
+        {"ИЗМ",     "MEAS"},
+        {"ПОСЛ",    "LAST"},
+        {"ВНТР",    "INT"}
+    };
+
+    if(!MODE_WORK_IS_DIRECT)
+    {
+        x += 18;
+        painter.DrawVLineC(x, 1, GRID_TOP - 2, COLOR_FILL);
+        x += 2;
+        painter.DrawText(set.common.lang == Russian ? x : x + 3, -1, set.common.lang == Russian ? "режим" : "mode");
+        painter.DrawStringInCenterRect(x + 1, 9, 25, 8, strings[MODE_WORK][set.common.lang]);
+    }
+    else
+    {
+        x -= 9;
+    }
+
+    if (!MODE_WORK_IS_LATEST)
+    {
+
+        x += 27;
+        painter.DrawVLineC(x, 1, GRID_TOP - 2, COLOR_FILL);
+
+        x += 2;
+        y = 1;
+        if (fpga.CurrentStateWork() == StateWorkFPGA_Work)
+        {
+            painter.Draw4SymbolsInRect(x, 1, SYMBOL_PLAY);
+        }
+        else if (fpga.CurrentStateWork() == StateWorkFPGA_Stop)
+        {
+            painter.FillRegion(x + 3, y + 3, 10, 10);
+        }
+        else if (fpga.CurrentStateWork() == StateWorkFPGA_Wait)
+        {
+            int w = 4;
+            int h = 14;
+            int delta = 4;
+            x = x + 2;
+            painter.FillRegion(x, y + 1, w, h);
+            painter.FillRegion(x + w + delta, y + 1, w, h);
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursorsRShift()
+{
+    if (!DISABLED_DRAW_MATH)
+    {
+        DrawCursorRShift(Math);
+    }
+    if(LAST_AFFECTED_CHANNEL_IS_B)
+    {
+        DrawCursorRShift(A);
+        DrawCursorRShift(B);
+    }
+    else
+    {
+        DrawCursorRShift(B);
+        DrawCursorRShift(A);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static bool NeedForClearScreen()
+{
+    int numAccum = NUM_ACCUM;
+    if (sTime_RandomizeModeEnabled() || numAccum == 1 || MODE_ACCUM_IS_NORESET || SELFRECORDER)
+    {
+        return true;
+    }
+    if (gBF.needFinishDraw == 1)
+    {
+        gBF.needFinishDraw = 0;
+        return true;
+    }
+    if (MODE_ACCUM_IS_RESET && gBF.numDrawingSignals >= numAccum)
+    {
+        gBF.numDrawingSignals = 0;
+        return true;
+    }
+    return false;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+extern uint8 *pool;
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Update()
+{
+	uint timeStart = gTimerTics;
+    if (funcOnHand != 0)
+    {
+        funcOnHand();
+        return;
+    }
+
+    bool needClear = NeedForClearScreen();
+
+    if (needClear)
+    {
+        painter.BeginScene(COLOR_BACK);
+        DrawMemoryWindow();
+        DrawFullGrid();
+    }
+
+    DrawData();
+
+    if (needClear)
+    {
+        DrawMath();
+        DrawSpectrum();
+        DrawCursors();
+        DrawHiPart();
+        DrawLowPart();
+        DrawCursorsWindow();
+        DrawCursorTrigLevel();
+        DrawCursorsRShift();
+        DrawMeasures();
+        DrawStringNavigation();
+        DrawCursorTShift();
+    }
+    
+    menu.Draw();
+
+    if (needClear)
+    {
+        DrawWarnings();
+
+        if (funcAdditionDraw)
+        {
+            funcAdditionDraw();
+        }
+    }
+
+    DrawConsole();
+
+    if (needClear)    
+    {
+        WriteValueTrigLevel();
+    }
+
+    DrawTimeForFrame(gTimerTics - timeStart);
+
+    painter.SetColor(COLOR_FILL);
+
+    painter.EndScene();
+
+    if (gMemory.needForSaveToFlashDrive == 1)
+    {
+        if (painter.SaveScreenToFlashDrive())
+        {
+            display.ShowWarningGood(FileIsSaved);
+        }
+        gMemory.needForSaveToFlashDrive = 0;
+    }
+
+    if (funcAfterDraw)
+    {
+        funcAfterDraw();
+        funcAfterDraw = 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::WriteValueTrigLevel()
+{
+    if (gBF.showLevelTrigLev == 1 && MODE_WORK_IS_DIRECT)
+    {
+        float trigLev = RSHIFT_2_ABS(TRIG_LEVEL_SOURCE, SET_RANGE(TRIG_SOURCE));     // WARN Здесь для внешней синхронизации неправильно рассчитывается уровень.
+        TrigSource trigSource = TRIG_SOURCE;
+        if (TRIG_INPUT_IS_AC && trigSource <= TrigSource_ChannelB)
+        {
+            int16 rShift = SET_RSHIFT(trigSource);
+            float rShiftAbs = RSHIFT_2_ABS(rShift, SET_RANGE(trigSource));
+            trigLev += rShiftAbs;
+        }
+        char buffer[20];
+        strcpy(buffer, LANG_RU ? "Ур синхр = " : "Trig lvl = ");
+        char bufForVolt[20];
+        strcat(buffer, Voltage2String(trigLev, true, bufForVolt));
+        int width = 96;
+        int x = (grid.Width() - width) / 2 + grid.Left();
+        int y = grid.BottomMessages() - 20;
+        painter.DrawRectangleC(x, y, width, 10, COLOR_FILL);
+        painter.FillRegionC(x + 1, y + 1, width - 2, 8, COLOR_BACK);
+        painter.DrawTextC(x + 2, y + 1, buffer, COLOR_FILL);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawGridSpectrum()
+{
+    if (SCALE_FFT_IS_LOG)
+    {
+        static const int nums[] = {4, 6, 8};
+        static const char *strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};
+        int numParts = nums[FFT_MAX_DB];
+        float scale = (float)grid.MathHeight() / numParts;
+        for (int i = 1; i < numParts; i++)
+        {
+            int y = grid.MathTop() + i * scale;
+            painter.DrawHLineC(y, grid.Left(), grid.Left() + 256, ColorGrid());
+            if (!MenuIsMinimize())
+            {
+                painter.SetColor(COLOR_FILL);
+                painter.DrawText(3, y - 4, strs[i]);
+            }
+        }
+        if (!MenuIsMinimize())
+        {
+            painter.SetColor(COLOR_FILL);
+            painter.DrawText(5, grid.MathTop() + 1, "дБ");
+        }
+    }
+    else if (SCALE_FFT_IS_LINEAR)
+    {
+        static const char *strs[] = {"1.0", "0.8", "0.6", "0.4", "0.2"};
+        float scale = (float)grid.MathHeight() / 5;
+        for (int i = 1; i < 5; i++)
+        {
+            int y = grid.MathTop() + i * scale;
+            painter.DrawHLineC(y, grid.Left(), grid.Left() + 256, ColorGrid());
+            if (!MenuIsMinimize())
+            {
+                painter.DrawTextC(5, y - 4, strs[i], COLOR_FILL);
+            }
+        }
+    }
+    painter.DrawVLineC(grid.Left() + 256, grid.MathTop(), grid.MathBottom(), COLOR_FILL);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawFullGrid()
+{
+    if (sDisplay_IsSeparate())
+    {
+        DrawGrid(grid.Left(), GRID_TOP, grid.Width(), grid.FullHeight() / 2);
+        if (ENABLED_FFT)
+        {
+            DrawGridSpectrum();
+        }
+        if (!DISABLED_DRAW_MATH)
+        {
+            DrawGrid(grid.Left(), GRID_TOP + grid.FullHeight() / 2, grid.Width(), grid.FullHeight() / 2);
+        }
+        painter.DrawHLineC(GRID_TOP + grid.FullHeight() / 2, grid.Left(), grid.Left() + grid.Width(), COLOR_FILL);
+    }
+    else
+    {
+        DrawGrid(grid.Left(), GRID_TOP, grid.Width(), grid.FullHeight());
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static int CalculateCountV(void)
+{
+    if (MODE_VIEW_SIGNALS_IS_COMPRESS)
+    {
+        if (MEAS_NUM_IS_1_5)
+        {
+            return MEAS_SOURCE_IS_A_B ? 42 : 44;
+        }
+        if (MEAS_NUM_IS_2_5)
+        {
+            return MEAS_SOURCE_IS_A_B ? 69 : 39;
+        }
+        if (MEAS_NUM_IS_3_5)
+        {
+            return MEAS_SOURCE_IS_A_B ? 54 : 68;
+        }
+    }
+
+    return 49;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static int CalculateCountH(void)
+{
+    if (MODE_VIEW_SIGNALS_IS_COMPRESS)
+    {
+        if (MEAS_NUM_IS_6_1)
+        {
+            return 73;
+        }
+        if (MEAS_NUM_IS_6_2)
+        {
+            return 83;
+        }
+    }
+    return 69;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
+{
+    uint16 masX[17];
+    masX[0] = left + 1;
+    for (int i = 1; i < 7; i++)
+    {
+        masX[i] = left + deltaX * i;
+    }
+    for (int i = 7; i < 10; i++)
+    {
+        masX[i] = centerX - 8 + i;
+    }
+    for (int i = 10; i < 16; i++)
+    {
+        masX[i] = centerX + deltaX * (i - 9);
+    }
+    masX[16] = right - 1;
+
+    painter.DrawMultiVPointLine(17, top + stepY, masX, stepY, CalculateCountV(), ColorGrid());
+
+    uint8 mas[13];
+    mas[0] = top + 1;
+    for (int i = 1; i < 5; i++)
+    {
+        mas[i] = top + deltaY * i;
+    }
+    for (int i = 5; i < 8; i++)
+    {
+        mas[i] = centerY - 6 + i;
+    }
+    for (int i = 8; i < 12; i++)
+    {
+        mas[i] = centerY + deltaY * (i - 7);
+    }
+    mas[12] = bottom - 1;
+
+    painter.DrawMultiHPointLine(13, left + stepX, mas, stepX, CalculateCountH(), ColorGrid());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
+{ 
+    uint16 masX[15];
+    masX[0] = left + 1;
+    for (int i = 1; i < 14; i++)
+    {
+        masX[i] = left + deltaX * i;
+    }
+    masX[14] = right - 1;
+    painter.DrawMultiVPointLine(15, top + stepY, masX, stepY, CalculateCountV(), ColorGrid());
+
+    uint8 mas[11];
+    mas[0] = top + 1;
+    for (int i = 1; i < 10; i++)
+    {
+        mas[i] = top + deltaY * i;
+    }
+    mas[10] = bottom - 1;
+    painter.DrawMultiHPointLine(11, left + stepX, mas, stepX, CalculateCountH(), ColorGrid());
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX, int stepY)
+{
+    painter.DrawHPointLine(centerY, left + stepX, right, stepX);
+    uint8 masY[6] = {top + 1, top + 2, centerY - 1, centerY + 1, bottom - 2, bottom - 1};
+    painter.DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, ColorGrid());
+    painter.DrawVPointLine(centerX, top + stepY, bottom, stepY, ColorGrid());
+    uint16 masX[6] = {left + 1, left + 2, centerX - 1, centerX + 1, right - 2, right - 1};
+    painter.DrawMultiVPointLine(6, top + deltaY, masX, deltaY, (bottom - top) / deltaY, ColorGrid());
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawGrid(int left, int top, int width, int height)
+{
+    int right = left + width;
+    int bottom = top + height;
+
+    painter.SetColor(COLOR_FILL);
+
+    if (top == GRID_TOP)
+    {
+        painter.DrawHLine(top, 1, left - 2);
+        painter.DrawHLine(top, right + 2, SCREEN_WIDTH - 2);
+
+        if (!MenuIsMinimize() || !MenuIsShown())
+        {
+            painter.DrawVLine(1, top + 2, bottom - 2);
+            painter.DrawVLine(318, top + 2, bottom - 2);
+        }
+    }
+
+    float deltaX = grid.DeltaX() *(float)width / width;
+    float deltaY = grid.DeltaY() * (float)height / height;
+    float stepX = deltaX / 5;
+    float stepY = deltaY / 5;
+    
+    int centerX = left + width / 2;
+    int centerY = top + height / 2;
+
+    painter.SetColor(ColorGrid());
+    if (TYPE_GRID_IS_1)
+    {
+        DrawGridType1(left, top, right, bottom, centerX, centerY, deltaX, deltaY, stepX, stepY);
+    }
+    else if (TYPE_GRID_IS_2)
+    {
+        DrawGridType2(left, top, right, bottom, deltaX, deltaY, stepX, stepY);
+    }
+    else if (TYPE_GRID_IS_3)
+    {
+        DrawGridType3(left, top, right, bottom, centerX, centerY, deltaX, deltaY, stepX, stepY);
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define  DELTA 5
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawScaleLine(int x, bool forTrigLev)
+{
+    if(ALT_MARKERS_HIDE)
+    {
+        return;
+    }
+    int width = 6;
+    int topY = GRID_TOP + DELTA;
+    int x2 = width + x + 2;
+    int bottomY  = grid.ChannelBottom() - DELTA;
+    int centerY = (grid.ChannelBottom() + GRID_TOP) / 2;
+    int levels[] =
+    {
+        topY,
+        bottomY,
+        centerY,
+        centerY - (bottomY - topY) / (forTrigLev ? 8 : 4),
+        centerY + (bottomY - topY) / (forTrigLev ? 8 : 4)
+    };
+    for(int i = 0; i < 5; i++)
+    {
+        painter.DrawLineC(x + 1, levels[i], x2 - 1, levels[i], COLOR_FILL);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursorsWindow()
+{
+    if((!MenuIsMinimize() || !MenuIsShown()) && gBF.drawRShiftMarkers == 1)
+    {
+        DrawScaleLine(2, false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursorTrigLevel()
+{
+    TrigSource chan = TRIG_SOURCE;
+    if (chan == TrigSource_Ext)
+    {
+        return;
+    }
+    int trigLev = TRIG_LEVEL(chan) + ((chan == TrigSource_Ext) ? 0 : SET_RSHIFT(chan) - RShiftZero);
+    float scale = 1.0f / ((TrigLevMax - TrigLevMin) / 2 / grid.ChannelHeight());
+    int y0 = (GRID_TOP + grid.ChannelBottom()) / 2 + scale * (TrigLevZero - TrigLevMin);
+    int y = y0 - scale * (trigLev - TrigLevMin);
+
+    if(chan != TrigSource_Ext)
+    {
+        y = (y - grid.ChannelCenterHeight()) + grid.ChannelCenterHeight();
+    }
+
+    int x = grid.Right();
+    painter.SetColor(ColorTrig());
+    if(y > grid.ChannelBottom())
+    {
+        painter.DrawChar(x + 3, grid.ChannelBottom() - 11, SYMBOL_TRIG_LEV_LOWER);
+        painter.SetPoint(x + 5, grid.ChannelBottom() - 2);
+        y = grid.ChannelBottom() - 7;
+        x--;
+    }
+    else if(y < GRID_TOP)
+    {
+        painter.DrawChar(x + 3, GRID_TOP + 2, SYMBOL_TRIG_LEV_ABOVE);
+        painter.SetPoint(x + 5, GRID_TOP + 2);
+        y = GRID_TOP + 7;
+        x--;
+    }
+    else
+    {
+        painter.DrawChar(x + 1, y - 4, SYMBOL_TRIG_LEV_NORMAL);
+    }
+    painter.SetFont(TypeFont_5);
+
+    const char simbols[3] = {'1', '2', 'В'};
+    int dY = 0;
+    
+    painter.DrawCharC(x + 5, y - 9 + dY, simbols[TRIG_SOURCE], COLOR_BACK);
+    painter.SetFont(TypeFont_8);
+
+    if (gBF.drawRShiftMarkers == 1 && !MenuIsMinimize())
+    {
+        DrawScaleLine(SCREEN_WIDTH - 11, true);
+        int left = grid.Right() + 9;
+        int height = grid.ChannelHeight() - 2 * DELTA;
+        int shiftFullMin = RShiftMin + TrigLevMin;
+        int shiftFullMax = RShiftMax + TrigLevMax;
+        scale = (float)height / (shiftFullMax - shiftFullMin);
+        int shiftFull = TRIG_LEVEL_SOURCE + (TRIG_SOURCE_IS_EXT ? 0 : SET_RSHIFT(chan));
+        int yFull = GRID_TOP + DELTA + height - scale * (shiftFull - RShiftMin - TrigLevMin) - 4;
+        painter.FillRegionC(left + 2, yFull + 1, 4, 6, ColorTrig());
+        painter.SetFont(TypeFont_5);
+        painter.DrawCharC(left + 3, yFull - 5 + dY, simbols[TRIG_SOURCE], COLOR_BACK);
+        painter.SetFont(TypeFont_8);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursorRShift(Channel chan)
+{
+    float x = grid.Right() - grid.Width() - Measure_GetDeltaGridLeft();
+
+    if (chan == Math)
+    {
+        int rShift = SET_RSHIFT_MATH;
+        float scale = (float)grid.MathHeight() / 960;
+        float y = (grid.MathTop() + grid.MathBottom()) / 2 - scale * (rShift - RShiftZero);
+        painter.DrawCharC(x - 9, y - 4, SYMBOL_RSHIFT_NORMAL, COLOR_FILL);
+        painter.DrawCharC(x - 8, y - 5, 'm', COLOR_BACK);
+        return;
+    }
+    if(!sChannel_Enabled(chan))
+    {
+        return;
+    }
+
+    int rShift = SET_RSHIFT(chan);
+ 
+    float scale = (float)grid.ChannelHeight() / (STEP_RSHIFT * 200);
+    float y = grid.ChannelCenterHeight() - scale * (rShift - RShiftZero);
+
+    float scaleFull = (float)grid.ChannelHeight() / (RShiftMax - RShiftMin) * (sService_MathEnabled() ? 0.9f : 0.91f);
+    float yFull = grid.ChannelCenterHeight() - scaleFull *(rShift - RShiftZero);
+
+    if(y > grid.ChannelBottom())
+    {
+        painter.DrawCharC(x - 7, grid.ChannelBottom() - 11, SYMBOL_RSHIFT_LOWER, ColorChannel(chan));
+        painter.SetPoint(x - 5, grid.ChannelBottom() - 2);
+        y = grid.ChannelBottom() - 7;
+        x++;
+    }
+    else if(y < GRID_TOP)
+    {
+        painter.DrawCharC(x - 7, GRID_TOP + 2, SYMBOL_RSHIFT_ABOVE, ColorChannel(chan));
+        painter.SetPoint(x - 5, GRID_TOP + 2);
+        y = GRID_TOP + 7;
+        x++;
+    }
+    else
+    {
+        painter.DrawCharC(x - 8, y - 4, SYMBOL_RSHIFT_NORMAL, ColorChannel(chan));
+        if(((chan == A) ? (gBF.showLevelRShift0 == 1) : (gBF.showLevelRShift1 == 1)) && MODE_WORK_IS_DIRECT)
+        {
+            painter.DrawDashedHLine(y, grid.Left(), grid.Right(), 7, 3, 0);
+        }
+    }
+
+    painter.SetFont(TypeFont_5);
+    int dY = 0;
+
+    if((!MenuIsMinimize() || !MenuIsShown()) && gBF.drawRShiftMarkers == 1)
+    {
+        painter.FillRegionC(4, yFull - 3, 4, 6, ColorChannel(chan));
+        painter.DrawCharC(5, yFull - 9 + dY, chan == A ? '1' : '2', COLOR_BACK);
+    }
+    painter.DrawCharC(x - 7, y - 9 + dY, chan == A ? '1' : '2', COLOR_BACK);
+    painter.SetFont(TypeFont_8);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursorTShift()
+{
+    int firstPoint = 0;
+    int lastPoint = 0;
+    sDisplay_PointsOnDisplay(&firstPoint, &lastPoint);
+
+    // Рисуем TPos
+    int shiftTPos = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, TPOS) - SHIFT_IN_MEMORY;
+    float scale = (lastPoint - firstPoint) / grid.Width();
+    int gridLeft = grid.Left();
+    int x = gridLeft + shiftTPos * scale - 3;
+    if (IntInRange(x + 3, gridLeft, grid.Right() + 1))
+    {
+        painter.Draw2SymbolsC(x, GRID_TOP - 1, SYMBOL_TPOS_2, SYMBOL_TPOS_3, COLOR_BACK, COLOR_FILL);
+    };
+
+    // Рисуем tShift
+    int shiftTShift = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet);
+    if(IntInRange(shiftTShift, firstPoint, lastPoint))
+    {
+        int x = gridLeft + shiftTShift - firstPoint - 3;
+        painter.Draw2SymbolsC(x, GRID_TOP - 1, SYMBOL_TSHIFT_NORM_1, SYMBOL_TSHIFT_NORM_2, COLOR_BACK, COLOR_FILL);
+    }
+    else if(shiftTShift < firstPoint)
+    {
+        painter.Draw2SymbolsC(gridLeft + 1, GRID_TOP, SYMBOL_TSHIFT_LEFT_1, SYMBOL_TSHIFT_LEFT_2, COLOR_BACK, COLOR_FILL);
+        painter.DrawLineC(grid.Left() + 9, GRID_TOP + 1, grid.Left() + 9, GRID_TOP + 7, COLOR_BACK);
+    }
+    else if(shiftTShift > lastPoint)
+    {
+        painter.Draw2SymbolsC(grid.Right() - 8, GRID_TOP, SYMBOL_TSHIFT_RIGHT_1, SYMBOL_TSHIFT_RIGHT_2, COLOR_BACK, COLOR_FILL);
+        painter.DrawLineC(grid.Right() - 9, GRID_TOP + 1, grid.Right() - 9, GRID_TOP + 7, COLOR_BACK);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawHorizontalCursor(int y, int xTearing)
+{
+    y += GRID_TOP;
+    if(xTearing == -1)
+    {
+        painter.DrawDashedHLine(y, grid.Left() + 2, grid.Right() - 1, 1, 1, 0);
+    }
+    else
+    {
+        painter.DrawDashedHLine(y, grid.Left() + 2, xTearing - 2, 1, 1, 0);
+        painter.DrawDashedHLine(y, xTearing + 2, grid.Right() - 1, 1, 1, 0);
+    }
+    painter.DrawRectangle(grid.Left() - 1, y - 1, 2, 2);
+    painter.DrawRectangle(grid.Right() - 1, y - 1, 2, 2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawVerticalCursor(int x, int yTearing)
+{
+    x += grid.Left();
+    if(yTearing == -1)
+    {
+        painter.DrawDashedVLine(x, GRID_TOP + 2, grid.ChannelBottom() - 1, 1, 1, 0);
+    }
+    else
+    {
+        painter.DrawDashedVLine(x, GRID_TOP + 2, yTearing - 2, 1, 1, 0);
+        painter.DrawDashedVLine(x, yTearing + 2, grid.ChannelBottom() - 1, 1, 1, 0);
+    }
+    painter.DrawRectangle(x - 1, GRID_TOP - 1, 2, 2);
+    painter.DrawRectangle(x - 1, grid.ChannelBottom() - 1, 2, 2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawCursors()
+{
+    Channel source = CURS_SOURCE;
+    painter.SetColor(ColorCursors(source));
+    if (sCursors_NecessaryDrawCursors())
+    {
+        bool bothCursors = !CURS_CNTRL_T_IS_DISABLE(source) && !CURS_CNTRL_U_IS_DISABLE(source);  // Признак того, что включены и вертикальные и 
+                                                                            // горизонтальные курсоры - надо нарисовать квадраты в местах пересечения
+        int x0 = -1;
+        int x1 = -1;
+        int y0 = -1;
+        int y1 = -1;
+
+        if (bothCursors)
+        {
+            x0 = grid.Left() + CURS_POS_T0(source);
+            x1 = grid.Left() + CURS_POS_T1(source);
+            y0 = GRID_TOP + sCursors_GetCursPosU(source, 0);
+            y1 = GRID_TOP + sCursors_GetCursPosU(source, 1);
+
+            painter.DrawRectangle(x0 - 2, y0 - 2, 4, 4);
+            painter.DrawRectangle(x1 - 2, y1 - 2, 4, 4);
+        }
+
+        CursCntrl cntrl = CURS_CNTRL_T(source);
+        if (cntrl != CursCntrl_Disable)
+        {
+            DrawVerticalCursor(CURS_POS_T0(source), y0);
+            DrawVerticalCursor(CURS_POS_T1(source), y1);
+        }
+        cntrl = CURsU_CNTRL;
+        if (cntrl != CursCntrl_Disable)
+        {
+            DrawHorizontalCursor(sCursors_GetCursPosU(source, 0), x0);
+            DrawHorizontalCursor(sCursors_GetCursPosU(source, 1), x1);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawMeasures()
+{
+    if(!SHOW_MEASURES)
+    {
+        gBF.topMeasures = GRID_BOTTOM;
+        return;
+    }
+
+    Processing_CalculateMeasures();
+
+    if(MEAS_FIELD_IS_HAND)
+    {
+        int x0 = MEAS_POS_CUR_T0 - SHIFT_IN_MEMORY + grid.Left();
+        int y0 = MEAS_POS_CUR_U0 + GRID_TOP;
+        int x1 = MEAS_POS_CUR_T1 - SHIFT_IN_MEMORY + grid.Left();
+        int y1 = MEAS_POS_CUR_U1 + GRID_TOP;
+        SortInt(&x0, &x1);
+        SortInt(&y0, &y1);
+        painter.DrawRectangleC(x0, y0, x1 - x0, y1 - y0, COLOR_FILL);
+    }
+
+    int x0 = grid.Left() - Measure_GetDeltaGridLeft();
+    int dX = Measure_GetDX();
+    int dY = Measure_GetDY();
+    int y0 = Measure_GetTopTable();
+
+    int numRows = Measure_NumRows();
+    int numCols = Measure_NumCols();
+
+    for(int str = 0; str < numRows; str++)
+    {
+        for(int elem = 0; elem < numCols; elem++)
+        {
+            int x = x0 + dX * elem;
+            int y = y0 + str * dY;
+            bool active = Measure_IsActive(str, elem) && menu.GetNameOpenedPage() == Page_SB_MeasTuneMeas;
+            Color color = active ? COLOR_BACK : COLOR_FILL;
+            Measure meas = Measure_Type(str, elem);
+            if(meas != Measure_None)
+            {
+                painter.FillRegionC(x, y, dX, dY, COLOR_BACK);
+                painter.DrawRectangleC(x, y, dX, dY, COLOR_FILL);
+                gBF.topMeasures = Math_MinFrom2Int(gBF.topMeasures, y);
+            }
+            if(active)
+            {
+                painter.FillRegionC(x + 2, y + 2, dX - 4, dY - 4, COLOR_FILL);
+            }
+            if(meas != Measure_None)
+            {
+                char buffer[20];
+                painter.DrawTextC(x + 4, y + 2, Measure_Name(str, elem), color);
+                if(meas == MEAS_MARKED)
+                {
+                    painter.FillRegionC(x + 1, y + 1, dX - 2, 9, active ? COLOR_BACK : COLOR_FILL);
+                    painter.DrawTextC(x + 4, y + 2, Measure_Name(str, elem), active ? COLOR_FILL : COLOR_BACK);
+                }
+                if(MEAS_SOURCE_IS_A)
+                {
+                    painter.DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, A, buffer), ColorChannel(A));
+                }
+                else if(MEAS_SOURCE_IS_B)
+                {
+                    painter.DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, B, buffer), ColorChannel(B));
+                }
+                else
+                {
+                    painter.DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, A, buffer), ColorChannel(A));
+                    painter.DrawTextC(x + 2, y + 20, Processing_GetStringMeasure(meas, B, buffer), ColorChannel(B));
+                }
+            }
+        }
+    }
+
+    if(menu.GetNameOpenedPage() == Page_SB_MeasTuneMeas)
+    {
+        Measure_DrawPageChoice();
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void WriteTextVoltage(Channel chan, int x, int y)
+{
+    static const char *couple[] =
+    {
+        "\x92",
+        "\x91",
+        "\x90"
+    };
+    Color color = ColorChannel(chan);
+
+    bool inverse = SET_INVERSE(chan);
+    ModeCouple modeCouple = SET_COUPLE(chan);
+    Divider multiplier = SET_DIVIDER(chan);
+    Range range = SET_RANGE(chan);
+    uint rShift = SET_RSHIFT(chan);
+    bool enable = SET_ENABLED(chan);
+
+    if (!MODE_WORK_IS_DIRECT)
+    {
+        DataSettings *ds = MODE_WORK_IS_DIRECT ? gDSet : gDSmemInt;
+        if (ds != 0)
+        {
+            inverse = (chan == A) ? ds->inverseCh0 : ds->inverseCh1;
+            modeCouple = (chan == A) ? ds->modeCouple0 : ds->modeCouple1;
+            multiplier = (chan == A) ? ds->multiplier0 : ds->multiplier1;
+            range = ds->range[chan];
+            rShift = (chan == A) ? ds->rShiftCh0 : ds->rShiftCh1;
+            enable = (chan == A) ? ds->enableCh0 : ds->enableCh1;
+        }
+    }
+
+    if(enable)
+    {
+        const int widthField = 91;
+        const int heightField = 8;
+
+        Color colorDraw = inverse ? COLOR_WHITE : color;
+        if(inverse)
+        {
+            painter.FillRegionC(x, y, widthField, heightField, color);
+        }
+
+        char buffer[100] = {0};
+
+        sprintf(buffer, "%s\xa5%s\xa5%s", (chan == A) ? (set.common.lang == Russian ? "1к" : "1c") : (set.common.lang == Russian ? "2к" : "2c"), couple[modeCouple], 
+            sChannel_Range2String(range, multiplier));
+
+        painter.DrawTextC(x + 1, y, buffer, colorDraw);
+
+        char bufferTemp[20];
+        sprintf(buffer, "\xa5%s", sChannel_RShift2String(rShift, range, multiplier, bufferTemp));
+        painter.DrawText(x + 46, y, buffer);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void WriteStringAndNumber(char *text, int16 x, int16 y, int number)
+{
+    char buffer[100];
+    painter.DrawTextC(x, y, text, COLOR_FILL);
+    if(number == 0)
+    {
+        sprintf(buffer, "-");
+    }
+    else
+    {
+        sprintf(buffer, "%d", number);
+    }
+    painter.DrawTextRelativelyRight(x + 41, y, buffer);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawLowPart()
+{
+    int y0 = SCREEN_HEIGHT - 19;
+    int y1 = SCREEN_HEIGHT - 10;
+    int x = -1;
+
+    painter.DrawHLineC(grid.ChannelBottom(), 1, grid.Left() - Measure_GetDeltaGridLeft() - 2, COLOR_FILL);
+    painter.DrawHLine(grid.FullBottom(), 1, grid.Left() - Measure_GetDeltaGridLeft() - 2);
+
+    WriteTextVoltage(A, x + 2, y0);
+
+    WriteTextVoltage(B, x + 2, y1);
+
+    painter.DrawVLineC(x + 95, GRID_BOTTOM + 2, SCREEN_HEIGHT - 2, COLOR_FILL);
+
+    x += 98;
+    char buffer[100] = {0};
+
+    TBase tBase = TBASE;
+    int16 tShift = TSHIFT;
+
+    if (!MODE_WORK_IS_DIRECT)
+    {
+        DataSettings *ds = MODE_WORK_IS_LATEST ? gDSmemLast : gDSmemInt;
+        if (ds != 0)
+        {
+            tBase = ds->tBase;
+            tShift = ds->tShift;
+        }
+    }
+
+    sprintf(buffer, "р\xa5%s", Tables_GetTBaseString(tBase));
+    painter.DrawText(x, y0, buffer);
+
+    buffer[0] = 0;
+    char bufForVal[20];
+    sprintf(buffer, "\xa5%s", fpga.GetTShiftString(tShift, bufForVal));
+    painter.DrawText(x + 35, y0, buffer);
+
+    buffer[0] = 0;
+    const char *source[3] = {"1", "2", "\x82"};
+    if (MODE_WORK_IS_DIRECT)
+    {
+        sprintf(buffer, "с\xa5\x10%s", source[TRIG_SOURCE]);
+    }
+
+    painter.DrawTextC(x, y1, buffer, ColorTrig());
+
+    buffer[0] = 0;
+    static const char *couple[] =
+    {
+        "\x92",
+        "\x91",
+        "\x92",
+        "\x92"
+    };
+    static const char *polar[] =
+    {
+        "\xa7",
+        "\xa6"
+    };
+    static const char *filtr[] =
+    {
+        "\xb5\xb6",
+        "\xb5\xb6",
+        "\xb3\xb4",
+        "\xb1\xb2"
+    };
+    if (MODE_WORK_IS_DIRECT)
+    {
+        sprintf(buffer, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
+        painter.DrawText(x + 18, y1, buffer);
+        painter.DrawChar(x + 45, y1, filtr[TRIG_INPUT][0]);
+        painter.DrawChar(x + 53, y1, filtr[TRIG_INPUT][1]);
+    }
+
+    buffer[0] = '\0';
+    const char mode[] =
+    {
+        '\xb7',
+        '\xa0',
+        '\xb0'
+    };
+    if (MODE_WORK_IS_DIRECT)
+    {
+        sprintf(buffer, "\xa5\x10%c", mode[START_MODE]);
+        painter.DrawText(x + 63, y1, buffer);
+    }
+    
+    painter.DrawVLineC(x + 79, GRID_BOTTOM + 2, SCREEN_HEIGHT - 2, COLOR_FILL);
+
+    painter.DrawHLine(GRID_BOTTOM, GRID_RIGHT + 2, SCREEN_WIDTH - 2);
+    painter.DrawHLine(grid.ChannelBottom(), GRID_RIGHT + 2, SCREEN_WIDTH - 2);
+
+    x += 82;
+    y0 = y0 - 3;
+    y1 = y1 - 6;
+    int y2 = y1 + 6;
+    painter.SetFont(TypeFont_5);
+    
+    if (MODE_WORK_IS_DIRECT)
+    {
+        WriteStringAndNumber("накопл", x, y0, NUM_ACCUM);
+        WriteStringAndNumber("усредн", x, y1, NUM_AVE);
+        WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
+    }
+
+    x += 42;
+    painter.DrawVLine(x, GRID_BOTTOM + 2, SCREEN_HEIGHT - 2);
+
+    painter.SetFont(TypeFont_8);
+
+    if (MODE_WORK_IS_DIRECT)
+    {
+        char mesFreq[20] = "\x7c=";
+        char buffer[20];
+        float freq = fpga.GetFreq();
+        if (freq == -1.0f) //-V550
+        {
+            strcat(mesFreq, "******");
+        }
+        else
+        {
+            strcat(mesFreq, Freq2String(freq, false, buffer));
+        }
+        painter.DrawText(x + 3, GRID_BOTTOM + 2, mesFreq);
+    }
+
+    DrawTime(x + 3, GRID_BOTTOM + 11);
+
+    painter.DrawVLine(x + 55, GRID_BOTTOM + 2, SCREEN_HEIGHT - 2);
+
+    painter.SetFont(TypeFont_UGO2);
+
+    // Флешка
+    if (gBF.flashDriveIsConnected == 1)
+    {
+        painter.Draw4SymbolsInRect(x + 57, GRID_BOTTOM + 2, SYMBOL_FLASH_DRIVE);
+    }
+
+    // Ethernet
+    if ((gBF.ethIsConnected == 1 || gBF.cableEthIsConnected == 1) && gTimerMS > 2000)
+    {
+        painter.Draw4SymbolsInRectC(x + 87, GRID_BOTTOM + 2, SYMBOL_ETHERNET, gBF.ethIsConnected ? COLOR_FILL : COLOR_FLASH_01);
+    }
+
+    if (gBF.connectToHost == 1 || gBF.cableVCPisConnected == 1)
+    {
+        painter.Draw4SymbolsInRectC(x + 72, GRID_BOTTOM + 2, SYMBOL_USB, gBF.connectToHost ? COLOR_FILL : COLOR_FLASH_01);
+    }
+    
+    painter.SetColor(COLOR_FILL);
+    // Пиковый детектор
+    if(!PEAKDET_IS_DISABLE)
+    {
+       painter.DrawChar(x + 38, GRID_BOTTOM + 11, '\x12');
+       painter.DrawChar(x + 46, GRID_BOTTOM + 11, '\x13');
+    }
+
+    if (MODE_WORK_IS_DIRECT)
+    {
+        painter.SetFont(TypeFont_5);
+        WriteStringAndNumber("СГЛАЖ.:", x + 57, GRID_BOTTOM + 10, sDisplay_NumPointSmoothing());
+        painter.SetFont(TypeFont_8);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawTimeForFrame(uint timeTicks)
+{
+    if(!SHOW_STATS)
+    {
+        return;
+    }
+    static char buffer[10];
+    static bool first = true;
+    static uint timeMSstartCalculation = 0;
+    static int numFrames = 0;
+    static float numMS = 0.0f;
+    if(first)
+    {
+        timeMSstartCalculation = gTimerMS;
+        first = false;
+    }
+    numMS += timeTicks / 120000.0f;
+    numFrames++;
+    
+    if((gTimerMS - timeMSstartCalculation) >= 500)
+    {
+        sprintf(buffer, "%.1fms/%d", numMS / numFrames, numFrames * 2);
+        timeMSstartCalculation = gTimerMS;
+        numMS = 0.0f;
+        numFrames = 0;
+    }
+
+    painter.DrawRectangleC(grid.Left(), grid.FullBottom() - 10, 84, 10, COLOR_FILL);
+    painter.FillRegionC(grid.Left() + 1, grid.FullBottom() - 9, 82, 8, COLOR_BACK);
+    painter.DrawTextC(grid.Left() + 2, grid.FullBottom() - 9, buffer, COLOR_FILL);
+
+    char message[20] = {0};
+    sprintf(message, "%d", dataStorage.NumElementsWithSameSettings());
+    strcat(message, "/");
+    char numAvail[10] = {0};
+    sprintf(numAvail, "%d", dataStorage.NumberAvailableEntries());
+    strcat(message, numAvail);
+    painter.DrawText(grid.Left() + 50, grid.FullBottom() - 9, message);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DisableShowLevelRShiftA()
+{
+    gBF.showLevelRShift0 = 0;
+    Timer_Disable(kShowLevelRShift0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DisableShowLevelRShiftB()
+{
+    gBF.showLevelRShift1 = 0;
+    Timer_Disable(kShowLevelRShift1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DisableShowLevelTrigLev()
+{
+    gBF.showLevelTrigLev = 0;
+    Timer_Disable(kShowLevelTrigLev);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::EnableTrigLabel(bool enable)
+{
+    gBF.trigEnable = enable ? 1 : 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ResetP2Ppoints(bool empty)
+{
+    dataP2PIsEmpty = empty;
+    lastP2Pdata = 0;
+    memset(dataP2P_0, AVE_VALUE, NUM_P2P_POINTS);
+    memset(dataP2P_1, AVE_VALUE, NUM_P2P_POINTS);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::AddPoints(uint8 data00, uint8 data01, uint8 data10, uint8 data11)
+{
+    dataP2PIsEmpty = false;
+    if (SELFRECORDER)
+    {
+        if (lastP2Pdata == NUM_P2P_POINTS)
+        {
+            memcpy(dataP2P_0, dataP2P_0 + 2, NUM_P2P_POINTS - 2);
+            memcpy(dataP2P_1, dataP2P_1 + 2, NUM_P2P_POINTS - 2);
+        }
+    }
+
+    dataP2P_0[lastP2Pdata] = data00;
+    dataP2P_1[lastP2Pdata++] = data10;
+    
+    dataP2P_0[lastP2Pdata] = data01;
+    dataP2P_1[lastP2Pdata++] = data11;
+    if (!SELFRECORDER && lastP2Pdata >= NUM_P2P_POINTS)
+    {
+        lastP2Pdata = 0;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::SetDrawMode(DrawMode mode, pFuncVV func)
+{
+    funcOnHand = mode == DrawMode_Auto ? 0 : func;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::SetAddDrawFunction(pFuncVV func)
+{
+    funcAdditionDraw = func;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::RemoveAddDrawFunction()
+{
+    funcAdditionDraw = 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Clear()
+{
+    painter.FillRegionC(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 2, COLOR_BACK);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ShiftScreen(int delta)
+{
+    LIMITATION(SHIFT_IN_MEMORY, SHIFT_IN_MEMORY + delta, 0, sMemory_GetNumPoints(false) - 282);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ChangedRShiftMarkers()
+{
+    gBF.drawRShiftMarkers = ALT_MARKERS_HIDE ? 0 : 1;
+    Timer_Enable(kRShiftMarkersAutoHide, 5000, FuncOnTimerRShiftMarkersAutoHide);
+}
+
+static void FuncOnTimerRShiftMarkersAutoHide()
+{
+    display.OnRShiftMarkersAutoHide();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::OnRShiftMarkersAutoHide()
+{
+    gBF.drawRShiftMarkers = 0;
+    Timer_Disable(kRShiftMarkersAutoHide);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+int FirstEmptyString()
+{
+    for(int i = 0; i < MAX_NUM_STRINGS; i++)
+    {
+        if(strings[i] == 0)
+        {
+            return i;
+        }
+    }
+    return MAX_NUM_STRINGS;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+int CalculateFreeSize()
+{
+    int firstEmptyString = FirstEmptyString();
+    if(firstEmptyString == 0)
+    {
+        return SIZE_BUFFER_FOR_STRINGS;
+    }
+    return SIZE_BUFFER_FOR_STRINGS - (strings[firstEmptyString - 1] - bufferForStrings) - strlen(strings[firstEmptyString - 1]) - 1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DeleteFirstString()
+{
+    if(FirstEmptyString() < 2)
+    {
+        return;
+    }
+    int delta = strlen(strings[0]) + 1;
+    int numStrings = FirstEmptyString();
+    for(int i = 1; i < numStrings; i++)
+    {
+        strings[i - 1] = strings[i] - delta;
+    }
+    for(int i = numStrings - 1; i < MAX_NUM_STRINGS; i++)
+    {
+        strings[i] = 0;
+    }
+    for(int i = 0; i < SIZE_BUFFER_FOR_STRINGS - delta; i++)
+    {
+        bufferForStrings[i] = bufferForStrings[i + delta];
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void AddString(const char *string)
+{
+    if(CONSOLE_IN_PAUSE)
+    {
+        return;
+    }
+    static int num = 0;
+    char buffer[100];
+    sprintf(buffer, "%d\x11", num++);
+    strcat(buffer, string);
+    int size = strlen(buffer) + 1;
+    while(CalculateFreeSize() < size)
+    {
+        DeleteFirstString();
+    }
+    if(!strings[0])
+    {
+        strings[0] = bufferForStrings;
+        strcpy(strings[0], buffer);
+    }
+    else
+    {
+        char *addressLastString = strings[FirstEmptyString() - 1];
+        char *address = addressLastString + strlen(addressLastString) + 1;
+        strings[FirstEmptyString()] = address;
+        strcpy(address, buffer);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::AddStringToIndicating(const char *string)
+{
+    if(FirstEmptyString() == MAX_NUM_STRINGS)
+    {
+        DeleteFirstString();
+    }
+
+    AddString(string);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::SetPauseForConsole(bool pause)
+{
+    if(pause)
+    {
+        lastStringForPause = FirstEmptyString() - 1;
+    }
+    else
+    {
+        lastStringForPause = -1;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::OneStringUp()
+{
+    if(!CONSOLE_IN_PAUSE)
+    {
+    }
+    else if(lastStringForPause > NUM_STRINGS - 1)
+    {
+        lastStringForPause--;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::OneStringDown()
+{
+    if(!CONSOLE_IN_PAUSE)
+    {
+    }
+    else if(lastStringForPause < FirstEmptyString() - 1)
+    {
+        lastStringForPause++;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawConsole()
+{
+    int count = 0;
+    painter.SetFont(sDebug_GetSizeFontForConsole() == 5 ? TypeFont_5 : TypeFont_8);
+    int height = Font_GetSize();
+
+    int lastString = FirstEmptyString() - 1;
+    int numString = NUM_STRINGS;
+    if(height == 8 && numString > 22)
+    {
+        numString = 22;
+    }
+    int delta = 0;
+    if(SHOW_STRING_NAVIGATION)
+    {
+        numString -= ((height == 8) ? 1 : 2);
+        delta = 10;
+    }
+    int firstString = lastString - numString + 1;
+    if(firstString < 0)
+    {
+        firstString = 0;
+    }
+
+    int dY = 0;
+    
+    for(int numString = firstString; numString <= lastString; numString++)
+    {
+        int width = Font_GetLengthText(strings[numString]);
+        painter.FillRegionC(grid.Left() + 1, GRID_TOP + 1 + count * (height + 1) + delta, width, height + 1, COLOR_BACK);
+        int y = GRID_TOP + 5 + count * (height + 1) - 4;
+        if(Font_GetSize() == 5)
+        {
+            y -= 3;
+        }
+        painter.DrawTextC(grid.Left() + 2, y + dY + delta, strings[numString], COLOR_FILL);
+        count++;
+    }
+
+    painter.SetFont(TypeFont_8);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ShowWarn(const char *message)
+{
+    if (warnings[0] == 0)
+    {
+        Timer_Enable(kShowMessages, 100, OnTimerShowWarning);
+    }
+    bool alreadyStored = false;
+    for (int i = 0; i < NUM_WARNINGS; i++)
+    {
+        if (warnings[i] == 0 && !alreadyStored)
+        {
+            warnings[i] = message;
+            timeWarnings[i] = gTimerMS;
+            alreadyStored = true;
+        }
+        else if (warnings[i] == message)
+        {
+            timeWarnings[i] = gTimerMS;
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnTimerShowWarning()
+{
+    uint time = gTimerMS;
+    for (int i = 0; i < NUM_WARNINGS; i++)
+    {
+        if (time - timeWarnings[i] > TIME_MESSAGES * 1000)
+        {
+            timeWarnings[i] = 0;
+            warnings[i] = 0;
+        }
+    }
+
+    int pointer = 0;
+    for (int i = 0; i < NUM_WARNINGS; i++)
+    {
+        if (warnings[i] != 0)
+        {
+            warnings[pointer] = warnings[i];
+            timeWarnings[pointer] = timeWarnings[i];
+            if (pointer != i)
+            {
+                timeWarnings[i] = 0;
+                warnings[i] = 0;
+            }
+            pointer++;
+        }
+    }
+
+    if (pointer == 0)
+    {
+        Timer_Disable(kShowMessages);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ClearFromWarnings()
+{
+    Timer_Disable(kShowMessages);
+    for (int i = 0; i < NUM_WARNINGS; i++)
+    {
+        warnings[i] = 0;
+        timeWarnings[i] = 0;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ShowWarningBad(Warning warning)
+{
+    painter.ResetFlash();
+    ShowWarn(Tables_GetWarning(warning));
+    sound.WarnBeepBad();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ShowWarningGood(Warning warning)
+{
+    painter.ResetFlash();
+    ShowWarn(Tables_GetWarning(warning));
+    sound.WarnBeepGood();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawStringInRectangle(int x, int y, char const *text)
+{
+    int width = Font_GetLengthText(text);
+    int height = 8;
+    painter.DrawRectangleC(grid.Left(), y, width + 4, height + 4, COLOR_FILL);
+    painter.DrawRectangleC(grid.Left() + 1, y + 1, width + 2, height + 2, COLOR_BACK);
+    painter.FillRegionC(grid.Left() + 2, y + 2, width, height, COLOR_FLASH_10);
+    painter.DrawTextC(grid.Left() + 3, y + 2, text, COLOR_FLASH_01);
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawWarnings()
+{
+    int delta = 12;
+    int y = grid.BottomMessages();
+    for(int i = 0; i < 10; i++)
+    {
+        if(warnings[i] != 0)
+        {
+            DrawStringInRectangle(grid.Left(), y, warnings[i]);
+            y -= delta;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::RunAfterDraw(pFuncVV func)
+{
+    funcAfterDraw = func;
+}

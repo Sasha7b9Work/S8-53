@@ -1,0 +1,186 @@
+#pragma once
+
+#include "Settings/SettingsTypes.h"
+
+
+#include <stm32f2xx_hal_def.h>
+
+#include "stm32f2xx_hal_conf.h"
+
+#include <stm32f2xx_hal_hcd.h>
+#include <stm32f2xx_hal_pcd.h>
+#include <stm32f2xx_hal_dma.h>
+#include <stm32f2xx_hal_spi.h>
+#include <stm32f2xx_hal_adc.h>
+#include <stm32f2xx_hal_dac.h>
+
+
+typedef struct
+{
+    // Ethernet
+    uint ethTimeLastEthifInput      : 32;   // Время последнего входа в процедуру ethernetif.c:ethernetif_input() Используется для определения того, что разъём ethernet подключен. Анализироваться будет в функции отрисовки значка подключения
+    uint cableEthIsConnected        : 1;    // Если 1, значит, просто подключён кабель
+    uint ethIsConnected             : 1;    // Если 1, то подсоединён клиент
+
+    // Для рисования : Display_c
+    uint showLevelRShift0           : 1;    // Нужно ли рисовать горизонтальную линию уровня смещения первого канала
+    uint showLevelRShift1           : 1;
+    uint showLevelTrigLev           : 1;    // Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации
+    uint trigEnable                 : 1;
+    uint drawRShiftMarkers          : 1;
+    uint needFinishDraw             : 1;    // Если 1, то дисплей нуждается в перерисовке
+    uint framesElapsed              : 1;
+    uint numDrawingSignals          : 8;    // Число нарисованных сигналов для режима накопления
+
+    // FPGA
+    uint FPGAtrigAutoFind           : 1;    // Установленное в 1 значение означает, что нужно производить автоматический поиск синхронизации, если выбрана соответствующая настройка.
+    uint FPGAautoFindInProgress     : 1;
+    uint FPGAtemporaryPause         : 1;
+    uint FPGAinProcessingOfRead     : 1;
+    uint FPGAcanReadData            : 1;
+    uint FPGAcritiacalSituation     : 1;
+    uint FPGAfirstAfterWrite        : 1;    // Используется в режиме рандомизатора. После записи любого параметра в альтеру
+                                            // нужно не использовать первое считанное данное с АЦП, потому что оно завышено и портит ворота
+
+    // Звук
+    uint soundIsBeep                : 1;
+    uint soundWarnIsBeep            : 1;
+    uint buttonIsPressed            : 1;    // Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак отпускания
+
+    // Панель
+    uint panelIsRunning             : 1;
+    
+    // ItemGovernor
+    uint inMoveIncrease             : 1;
+    uint inMoveDecrease             : 1;
+    uint addressGovernor            : 32;
+    uint timeStartMS                : 32;
+
+    // VCP
+    uint cableVCPisConnected            : 1;
+    uint connectToHost                  : 1;
+
+    // Flash drive
+    uint flashDriveIsConnected          : 1;
+    uint cursorInDirs                   : 1;    // Если 1, то ручка УСТАНОВКА перемещает по каталогам
+    uint needRedrawFileManager          : 2;    // Если 1, то файл-менеджер нуждается в полной перерисовке
+                                                // Если 2, то перерисовать только каталоги
+                                                // Если 3, то перерисовать только файлы
+
+    uint settingsLoaded            : 1;    // Эта переменная нужна для того, чтобы исключить ложную запись пустых настроек из-за неправильного включения прибора (при исключённом из схемы программном включении иногда сигнал от кнопки отключения питания приходит быстрее, чем программа успевает настроить настройки).
+    uint showHelpHints                  : 1;    // Если 1, то при нажатии кнопки вместо выполнения её фунции выводится подсказка о её назначении
+
+    uint showDebugMenu                  : 1;
+    
+    uint tuneTime                       : 1;    // Если 1, то после загрузки настроек нужно вызвать страницу установки текущего времени
+
+    int topMeasures                     : 9;    // Верх таблицы вывода измерений. Это значение нужно для нормального вывода сообщений на экран - чтобы они ничего не перекрывали
+} BitField;
+
+
+extern BitField gBF;
+
+#define RETURN_TO_MAIN_MENU     0
+#define RETURN_TO_LAST_MEM      1
+#define RETURN_TO_INT_MEM       2
+#define RETURN_TO_DISABLE_MENU  3
+
+
+typedef struct 
+{
+    int16   currentNumLatestSignal;                 // Текущий номер последнего сигнала в режиме ПАМЯТЬ - Последние
+    int8    currentNumIntSignal;                    // Текущий номер сигнала, сохранённого в ППЗУ
+    uint    showAlways                      : 1;    // Если 1, то показывать всегда выбранный в режиме "Внутр. ЗУ" сигнал
+    uint    runningFPGAbeforeSmallButtons   : 1;    // Здесь сохраняется информация о том, работала ли ПЛИС перед переходом в режим работы с памятью
+    uint    exitFromIntToLast               : 1;    // Если 1, то выходить из страницы внутренней памяти нужно не стандартно, а в меню последних
+    uint    exitFromModeSetNameTo           : 2;    // Куда возвращаться из окна установки имени при сохранении : 0 - в основное меню, 1 - в окно последних, 2 - в окно Внутр ЗУ, 3 - в основно окно в выключенным меню
+    uint    needForSaveToFlashDrive         : 1;    // Если 1, то нужно сохранить после отрисовки на флешку.
+} GMemory;
+
+
+extern GMemory gMemory;
+
+
+typedef enum
+{
+    StateCalibration_None,
+    StateCalibration_ADCinProgress,
+    StateCalibration_RShift0start,
+    StateCalibration_RShift0inProgress,
+    StateCalibration_RShift1start,
+    StateCalibration_RShift1inProgress,
+    StateCalibration_ErrorCalibration0,
+    StateCalibration_ErrorCalibration1
+} StateCalibration;
+
+typedef enum
+{
+    StateWorkFPGA_Stop,                              // СТОП - не занимается считыванием информации.
+    StateWorkFPGA_Wait,                              // Ждёт поступления синхроимпульса.
+    StateWorkFPGA_Work,                              // Идёт работа.
+    StateWorkFPGA_Pause                              // Это состояние, когда временно приостановлен прибор, например, для чтения данных или для записи значений регистров.
+} StateWorkFPGA;
+
+
+typedef struct
+{
+    bool needCalibration;				// Установленное в true значение означает, что необходимо произвести калибровку.
+    StateWorkFPGA stateWorkBeforeCalibration;
+    StateCalibration stateCalibration;  // Текущее состояние калибровки. Используется в процессе калибровки.
+} StateFPGA;
+
+typedef struct
+{
+    uint hours : 5;
+    uint minutes : 6;
+    uint seconds : 6;
+    uint year : 7;
+    uint month : 4;
+    uint day : 5;
+} PackedTime;
+
+typedef struct
+{
+    void*       addrNext;               // Адрес следующей записи.
+    void*       addrPrev;               // Адрес предыдущей записи.
+    uint        rShiftCh0       : 10;   // Смещение по напряжению
+    uint        rShiftCh1       : 10;
+    uint        trigLevCh0      : 10;   // Уровень синхронизации
+    int16       tShift;                 // Смещение по времени
+    ModeCouple  modeCouple1     : 2;
+    Range       range[2];               // Масштаб по напряжению обоих каналов.
+
+    uint        trigLevCh1      : 10;
+    uint        length1channel  : 11;   // Сколько занимает в байтах длина измерения одного канала
+    TBase       tBase           : 5;    // Масштаб по времени
+    ModeCouple  modeCouple0     : 2;    // Режим канала по входу
+    uint        peakDet         : 2;    // Включен ли пиковый детектор
+    uint        enableCh0       : 1;    // Включён ли канал 0
+    uint        enableCh1       : 1;    // Включен ли канал 1
+
+    uint        inverseCh0      : 1;
+    uint        inverseCh1      : 1;
+    Multiplier  multiplier0     : 1;
+    Multiplier  multiplier1     : 1;
+    PackedTime  time;
+} DataSettings;
+
+
+extern const char *gStringForHint;  // Строка подсказки, которую надо выводить в случае включённого режима подсказок.
+extern void* gItemHint;              // Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
+
+void SetItemForHint(void *item);
+
+extern StateFPGA gStateFPGA;
+
+extern uint8        *gData0;    // Указатель на данные первого канала, который надо рисовать на экране
+extern uint8        *gData1;    // Указатель на данные второго канала, который надо рисовать на экране
+extern DataSettings *gDSet;     // Указатель на параметры рисуемых сигналов
+
+extern DataSettings *gDSmemInt;       //--
+extern uint8        *gData0memInt;    // | Здесь данные из ППЗУ, которые должны выводиться на экран
+extern uint8        *gData1memInt;    //-/
+
+extern DataSettings *gDSmemLast;
+extern uint8        *gData0memLast;
+extern uint8        *gData1memLast;
