@@ -1,5 +1,3 @@
-
-
 #include "FLASH.h"
 #include "Hardware.h"
 #include "Sound.h"
@@ -8,6 +6,11 @@
 #include "Utils/GlobalFunctions.h"
 #include "Log.h"
 #include <stm32f2xx_hal.h>
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define CLEAR_FLAGS \
+__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,19 +35,18 @@ static const uint MAX_UINT = 0xffffffff;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static uint             ReadWord(uint address);
-static bool             TheFirstInclusion();
-static RecordConfig*    FindRecordConfigForWrite();
-static RecordConfig*    RecordConfigForRead();
-static void             ReadBuffer(uint address, uint *buffer, int size);
-static void             EraseSector(uint startAddress);
-static void             WriteWord(uint address, uint word);
-static void             WriteBuffer(uint address, uint *buffer, int size);
-static void             WriteBufferBytes(uint address, uint8 *buffer, int size);
-static RecordConfig*    FirstEmptyRecord();
-static RecordConfig*    FirstRecord();
-static void             EraseSectorSettings();
-
+static uint ReadWord(uint address);
+static bool TheFirstInclusion();
+static void ReadBuffer(uint address, uint *buffer, int size);
+static void EraseSector(uint startAddress);
+static void WriteWord(uint address, uint word);
+static void WriteBuffer(uint address, uint *buffer, int size);
+static void WriteBufferBytes(uint address, uint8 *buffer, int size);
+static void EraseSectorSettings();
+static RecordConfig* FirstEmptyRecord();
+static RecordConfig* FirstRecord();
+static RecordConfig* FindRecordConfigForWrite();
+static RecordConfig* RecordConfigForRead();
 static const uint startDataInfo = ADDR_SECTOR_DATA_MAIN;
 
 
@@ -61,7 +63,18 @@ static void PrepareSectorForData(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FLASH_LoadSettings(void)
 {
-    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
+    /*
+        1. Проверка на первое включение. Выполняется тем, что в первом слове сектора настроек хранится MAX_UINT, если настройки ещё не сохранялись.
+        2. Проверка на старую версию хранения настроек. Определяется тем, что в старой версии в первом слове сектора настроек хранится значение
+        MARK_OF_FILLED, а в новой - размер структуры Settings.
+        3. Если старая версия - чтение настроек и сохранение в новом формате.
+            1. Чтобы прочитать, нужно сначала найти адрес последних сохранённых настроек.
+            2. Если (адрес + sizeof(Settings) >= ADDR_SECTORSETTINGS + (1024 * 128)), то эти нстройки повреждены и нужно считывать предпоследние
+               сохранённые настройки.
+            3. FLASH_SaveSettings()
+    */
+
+    CLEAR_FLAGS;
 
     if(TheFirstInclusion())
     {
@@ -104,7 +117,8 @@ void FLASH_SaveSettings(void)
     {
         return;
     }
-    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
+
+    CLEAR_FLAGS;
 
     RecordConfig *record = FindRecordConfigForWrite();
     if (record == 0)
