@@ -247,7 +247,7 @@ void ChangeShiftScreen(int *prevTime, void(*f)(int), int16 relStep)
 
 static void SetRShift(Channel ch, int16 rShift)
 {
-    fpga.SetRShift(A, rShift);
+    fpga.SetRShift(ch, rShift);
 }
 
 void RShift0Left()
