@@ -41,12 +41,9 @@ static const uint MAX_UINT = 0xffffffff;
 static bool TheFirstInclusion();
 static void EraseSector(uint startAddress);
 static void WriteWord(uint address, uint word);
-static void WriteBuffer(uint address, uint *buffer, int size);
 static void WriteBufferBytes(uint address, uint8 *buffer, int size);
-static void EraseSectorSettings();
 static RecordConfig* FirstEmptyRecord();
 static RecordConfig* FirstRecord();
-static RecordConfig* FindRecordConfigForWrite();
 static RecordConfig* RecordConfigForRead();
 static const uint startDataInfo = ADDR_SECTOR_DATA_MAIN;
 
@@ -62,7 +59,7 @@ static void PrepareSectorForData(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FLASH_LoadSettings(void)
+void FLASH_LoadSettings(void)
 {
     /*
         1. Проверка на первое включение. Выполняется тем, что в первом слове сектора настроек хранится MAX_UINT, если настройки ещё не сохранялись.
@@ -86,17 +83,17 @@ bool FLASH_LoadSettings(void)
         set.common.workingTimeInSecs = 0;
         PrepareSectorForData();
     }
-    else if (READ_WORD(ADDR_SECTOR_SETTINGS) == MARK_OF_FILLED)     // Если старый алгоритм хранения настроек
+    
+    if (READ_WORD(ADDR_SECTOR_SETTINGS) == MARK_OF_FILLED)                                  // Если старый алгоритм хранения настроек
     {
         RecordConfig *record = RecordConfigForRead();
         if (record->sizeData + record->addrData >= (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // Если последние сохранённые настройки выходят
         {                                                                                   // за пределы сектора (глюк предыдущей версии сохранения)
             --record;                                                                       // то воспользуемся предыдущими сохранёнными настройками
         }
-        memcpy(&set.display, (const void *)record->addrData, record->sizeData);             // Считываем их
-        set.size = sizeof(set);                                                             // Сохраняем размер структуры настроек
-        //EraseSectorSettings();                                                              // Стираем сектор настроек
-        //FLASH_SaveSettings();                                                               // И сохраняем настройки в новом формате
+        memcpy(&set, (const void *)(record->addrData - 4), record->sizeData);               // Считываем их
+        EraseSector(ADDR_SECTOR_SETTINGS);                                                  // Стираем сектор настроек
+        FLASH_SaveSettings(false);                                                          // И сохраняем настройки в новом формате
     }
     else
     {
@@ -114,7 +111,6 @@ bool FLASH_LoadSettings(void)
         }
     }
     set.common.countEnables++;
-    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -126,32 +122,32 @@ void WriteAddressDataInRecord(RecordConfig *record)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FLASH_SaveSettings(void)
+void FLASH_SaveSettings(bool verifyLoadede)
 {
-    if (gBF.settingsLoaded == 0)
+    if (verifyLoadede && gBF.settingsLoaded == 0)
     {
         return;
     }
 
     CLEAR_FLAGS;
 
-    RecordConfig *record = FindRecordConfigForWrite();
-    if (record == 0)
+    set.size = sizeof(set);
+
+    uint address = ADDR_SECTOR_SETTINGS;                                        // Находим первый свободный байт
+
+    while (READ_WORD(address) != MAX_UINT)
     {
-        set.common.countErasedFlashSettings++;
-        EraseSectorSettings();
-        record = FirstRecord();
+        address += READ_WORD(address);
+    }
+                                                                                // В этой точке address указывает на первый незаписанный байт
+
+    if (address + sizeof(set) >= (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS)) // Если условие выполняется, то при записи данные выйдут за пределы
+    {                                                                           // сектора
+        EraseSector(ADDR_SECTOR_SETTINGS);                                      // В этом случае стираем сектор настроек
+        address = ADDR_SECTOR_SETTINGS;                                         // и сохранять настройки будем прямо в начало сектора
     }
 
-    set.common.workingTimeInSecs += gTimerMS / 1000;
-
-    WriteAddressDataInRecord(record);
-
-    int size = sizeof(set);
-
-    WriteWord((uint)(&record->sizeData), size);
-
-    WriteBuffer(record->addrData, (uint*)(&set), record->sizeData / 4);
+    WriteBufferBytes(address, (uint8 *)&set, sizeof(set));                      // И банально сохраняем настройки
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,21 +214,6 @@ uint CalculatFreeMemory(void)
     }
 
     return SIZE_MEMORY - (firstEmptyRecord - 1)->addrData - (firstEmptyRecord - 1)->sizeData - 4;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-RecordConfig* FindRecordConfigForWrite(void)
-{
-    RecordConfig *record = FirstEmptyRecord();
-
-    int size = sizeof(set);
-
-    if (record == 0 || CalculatFreeMemory() < size)
-    {
-        return 0;
-    }
-
-    return record;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -520,12 +501,6 @@ void EraseSector(uint startAddress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void EraseSectorSettings(void)
-{
-    EraseSector(ADDR_SECTOR_SETTINGS);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void WriteWord(uint address, uint word)
 {
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
@@ -538,27 +513,15 @@ void WriteWord(uint address, uint word)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void WriteBuffer(uint address, uint *buffer, int size)
-{
-    HAL_FLASH_Unlock();
-    for (int i = 0; i < size; i++)
-    {
-        if (HAL_FLASH_Program(TYPEPROGRAM_WORD, address, (uint64_t)(buffer[i])) != HAL_OK)
-        {
-            LOG_ERROR("Не могу записать в флеш-память");
-        }
-        address += sizeof(uint);
-    }
-    HAL_FLASH_Lock();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void WriteBufferBytes(uint address, uint8 *buffer, int size)
 {
     HAL_FLASH_Unlock();
     for (int i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, (uint64_t)(buffer[i]));
+        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, (uint64_t)(buffer[i])) != HAL_OK)
+        {
+            HARDWARE_ERROR;
+        }
         address++;
     }
     HAL_FLASH_Lock();

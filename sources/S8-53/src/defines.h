@@ -2,7 +2,7 @@
 #include <stm32f2xx_hal.h>
 
 
-#define NUM_VER "1.2"
+#define NUM_VER "1.3"
 
 
 typedef signed      char        int8;

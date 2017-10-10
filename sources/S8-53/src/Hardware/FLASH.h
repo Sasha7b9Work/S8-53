@@ -29,8 +29,8 @@
 
 #define MAX_NUM_SAVED_WAVES 23  ///< Пока ограничено количеством квадратиков, которые можно вывести в одну линию внизу сетки
 
-bool FLASH_LoadSettings();
-void FLASH_SaveSettings();
+void FLASH_LoadSettings();
+void FLASH_SaveSettings(bool verifyLoaded = false);
      
 void FLASH_GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);                    ///< Если даннные есть, соответствующий элемент массива равен true/.
 bool FLASH_ExistData(int num);
