@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "defines.h"
 #include "Settings/SettingsTypes.h"
@@ -17,11 +15,12 @@
 
 #define LIMITATION_BOUND(var, min, max)     if((var) < (min)) { (min) = (var); }; if((var) > (max)) { (max) = (var); };
 
-#define MAX_VOLTAGE_ON_SCREEN(range) (tableScalesRange[(range)] * 5)
+#define MAX_VOLTAGE_ON_SCREEN(range) (tableScalesRange[(range)] * 5.0f)
 
-#define RSHIFT_2_ABS(rShift, range) (-(RShiftZero - (rShift)) * absStepRShift[(uint)(range)])
+#define RSHIFT_2_ABS(rShift, range) (-((float)RShiftZero - (float)(rShift)) * absStepRShift[(uint)(range)])
 
-#define POINT_2_VOLTAGE(value, range, rShift)   (((value) - MIN_VALUE) * voltsInPixel[(range)] - MAX_VOLTAGE_ON_SCREEN((range)) - RSHIFT_2_ABS((rShift), (range)))
+#define POINT_2_VOLTAGE(value, range, rShift)   \
+                (((float)(value) - (float)MIN_VALUE) * voltsInPixel[(range)] - MAX_VOLTAGE_ON_SCREEN((range)) - RSHIFT_2_ABS((rShift), (range)))
 
 #define TSHIFT_2_ABS(tShift, tBase)  (absStepTShift[(tBase)] * (tShift) * 2.0f)
 
@@ -48,9 +47,12 @@ uint8   Math_GetMaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int
 uint8   Math_GetMinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
 uint8   Math_GetMaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
 uint8   Math_GetMinFromArray(const uint8 *data, int firstPoint, int lastPoint);
-
-float   Math_GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);   // ¬озвращает координату x пересечени€ линии, проход€щей через (x0, y0), (x1, y1), с горизонтальной линией, проход€щей через точку с ординатой yHorLine.
-bool    Math_FloatsIsEquals(float value0, float value1, float epsilonPart);                     // —равнивает два числа. ¬озвращает true, если числа отличаютс€ друг от друга не более, чем на epsilonPart. ѕри этом дл€ расчЄта epsilonPart используетс€ большее в смысле модул€ число.
+/// \brief ¬озвращает координату x пересечени€ линии, проход€щей через (x0, y0), (x1, y1), с горизонтальной линией, проход€щей через точку с 
+/// ординатой yHorLine.
+float   Math_GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
+/// \brief —равнивает два числа. ¬озвращает true, если числа отличаютс€ друг от друга не более, чем на epsilonPart. ѕри этом дл€ расчЄта epsilonPart 
+/// используетс€ большее в смысле модул€ число.
+bool    Math_FloatsIsEquals(float value0, float value1, float epsilonPart);
 float   Math_MinFrom3float(float value1, float value2, float value3);
 int     Math_MinInt(int val1, int val2);
 void    Math_CalculateFFT(float *data, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1);
@@ -58,9 +60,12 @@ void    Math_CalculateMathFunction(float *data0andResult, float *data1, int numP
 float   Math_RandFloat(float min, float max);
 int8    Math_AddInt8WithLimitation(int8 value, int8 delta, int8 min, int8 max);
 int     Math_Sign(int vlaue);
-int     Math_Pow10(int pow);                                                                    // ¬ычисл€ет 10**pow.
-int     Math_NumDigitsInNumber(int value);                                                      // ¬ычисл€ет число разр€дов в целом типа int.
-int     Math_FabsInt(int value);                                                                // ¬озвращает модуль value.
+/// ¬ычисл€ет 10**pow.
+int     Math_Pow10(int pow);
+/// ¬ычисл€ет число разр€дов в целом типа int.
+int     Math_NumDigitsInNumber(int value);
+/// ¬озвращает модуль value.
+int     Math_FabsInt(int value);
 
 int     LimitationInt(int value, int min, int max);
 uint8   LimitationUInt8(uint8 value, uint8 min, uint8 max);

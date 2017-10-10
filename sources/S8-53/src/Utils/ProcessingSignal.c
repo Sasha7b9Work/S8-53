@@ -168,6 +168,7 @@ void Processing_CalculateMeasures()
 float CalculateVoltageMax(Channel chan)
 {
     float max = CalculateMaxRel(chan);
+    
     EXIT_IF_ERROR_FLOAT(max);
     if(MEAS_MARKED == Measure_VoltageMax)
     {
@@ -227,7 +228,10 @@ float CalculateVoltageMaxSteady(Channel chan)
         markerHor[chan][0] = max;
     }
 
-    return (POINT_2_VOLTAGE(max, dataSet->range[chan], chan == A ? dataSet->rShiftCh0 : dataSet->rShiftCh1) * VALUE_MULTIPLIER(chan));
+    Range range = dataSet->range[chan];
+    uint rShift = chan == A ? dataSet->rShiftCh0 : dataSet->rShiftCh1;
+
+    return (POINT_2_VOLTAGE(max, range, rShift) * VALUE_MULTIPLIER(chan));
 }
 
 float CalculateVoltageVybrosPlus(Channel chan)
