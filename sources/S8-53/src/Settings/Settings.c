@@ -19,6 +19,7 @@
 
 static const Settings defaultSettings =
 {
+    0,                              // size
     // Display
     {
         5,                          // timeShowLevels
