@@ -170,13 +170,8 @@ void SetCursPosT(Channel chan, int numCur, float pos)
 extern const Page mainPage;
 
 // ÊÓĞÑÎĞÛ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strCursors =
+static const arrayItems itemsCursors =
 {
-    Item_Page, &mainPage, 0,
-    "ÊÓĞÑÎĞÛ", "CURSORS",
-    "Êóğñîğíûå èçìåğåíèÿ.",
-    "Cursor measurements.",
-    Page_Cursors,    
     (void*)&mcShow,             // ÊÓĞÑÎĞÛ - Ïîêàçûâàòü
     (void*)&mcTrackingT1U1,     // ÊÓĞÑÎĞÛ - Êóğñîğû T1,U1
     (void*)&mcTrackingT2U2,     // ÊÓĞÑÎĞÛ - Êóğñîğû T2,U2
@@ -184,7 +179,14 @@ static const PageStruct strCursors =
     (void*)&mspSet              // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ
 };
 
-const Page pCursors(&strCursors);
+const Page pCursors                ///< ÊÓĞÑÎĞÛ
+(
+    &mainPage, 0,
+    "ÊÓĞÑÎĞÛ", "CURSORS",
+    "Êóğñîğíûå èçìåğåíèÿ.",
+    "Cursor measurements.",
+    Page_Cursors, &itemsCursors
+);
 
 
 // ÊÓĞÑÎĞÛ - Ïîêàçûâàòü ------------------------------------------------------------------------------------------------------------------------------
@@ -284,25 +286,24 @@ static const Choice mcShowFreq =
 
 
 // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strSet =
+static const arrayItems itemsSet =
 {
-    Item_Page, &pCursors, 0,
+    (void*)&sbSetExit,              // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Âûõîä
+    (void*)&sbSetSource,            // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Èñòî÷íèê
+    (void*)&sbSetU,                 // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû U
+    (void*)&sbSetT,                 // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû T
+    (void*)&sbSet100,               // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
+    (void*)&sbSetPointsPercents     // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
+};
+
+static const Page mspSet
+(
+    &pCursors, 0,
     "ÓÑÒÀÍÎÂÈÒÜ", "SET",
     "Ïåğåõîä â ğåæèì êóğñîğíûõ èçìåğåíèé",
     "Switch to cursor measures",
-    Page_SB_Curs,
-    {
-        (void*)&sbSetExit,              // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Âûõîä
-        (void*)&sbSetSource,            // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Èñòî÷íèê
-        (void*)&sbSetU,                 // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû U
-        (void*)&sbSetT,                 // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû T
-        (void*)&sbSet100,               // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
-        (void*)&sbSetPointsPercents,    // ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
-    },
-    EmptyFuncVV, EmptyFuncVV, OnRotate_RegSet_Set
-};
-
-static const Page mspSet(&strSet);
+    Page_SB_Curs, &itemsSet, EmptyFuncVV, EmptyFuncVV, OnRotate_RegSet_Set
+);
 
 static void OnRotate_RegSet_Set(int angle)
 {

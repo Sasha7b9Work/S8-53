@@ -37,23 +37,23 @@ extern Page mainPage;
 
 
 // РАЗВЕРТКА //////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strTime =
+static const arrayItems itemsTime =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcSample,       // РАЗВЕРТКА - Выборка
+    (void*)&mcPeakDet,      // РАЗВЕРТКА - Пик дет
+    (void*)&mcTPos,         // РАЗВЕРТКА - To
+    (void*)&mcSelfRecorder, // РАЗВЕРТКА - Самописец
+    (void*)&mcDivRole       // РАЗВЕРТКА - Ф-ция ВР/ДЕЛ    
+};
+
+const Page pTime            ///< РАЗВЕРТКА
+(
+    &mainPage, 0,
     "РАЗВЕРТКА", "SCAN",
     "Содержит настройки развёртки.",
     "Contains scan settings.",
-    Page_Time,
-    {
-        (void*)&mcSample,       // РАЗВЕРТКА - Выборка
-        (void*)&mcPeakDet,      // РАЗВЕРТКА - Пик дет
-        (void*)&mcTPos,         // РАЗВЕРТКА - To
-        (void*)&mcSelfRecorder, // РАЗВЕРТКА - Самописец
-        (void*)&mcDivRole       // РАЗВЕРТКА - Ф-ция ВР/ДЕЛ    
-    }
-};
-
-const Page pTime(&strTime);
+    Page_Time, &itemsTime
+);
 
 // РАЗВЕРТКА - Выборка -------------------------------------------------------------------------------------------------------------------------------
 static const Choice mcSample =

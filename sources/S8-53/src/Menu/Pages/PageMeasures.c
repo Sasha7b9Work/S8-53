@@ -268,45 +268,44 @@ static const SmallButton sbExitMeasTune
 );
 
 // ИЗМЕРЕНИЯ - Настроить ///////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMeasTune =
+static const arrayItems itemsMeasTune =
 {
-    Item_Page, &pMeasures, IsActiveButtonMeasuresTune,
+    (void*)&sbExitMeasTune,
+    (void*)0,
+    (void*)0,
+    (void*)0,
+    (void*)&sbMeasTuneMarkers,
+    (void*)&sbMeasTuneSettings
+};
+
+static const Page mspMeasTune
+(
+    &pMeasures, IsActiveButtonMeasuresTune,
     "НАСТРОИТЬ", "CONFIGURE",
     "Переход в режми точной настройки количества и видов измерений",
     "Transition to rezhm of exact control of quantity and types of measurements",
-    Page_SB_MeasTuneMeas,
-    {
-        (void*)&sbExitMeasTune,
-        (void*)0,
-        (void*)0,
-        (void*)0,
-        (void*)&sbMeasTuneMarkers,
-        (void*)&sbMeasTuneSettings
-    },
-    EmptyFuncVV, EmptyFuncVV, Measure_RotateRegSet
-};
-
-static const Page mspMeasTune(&strMeasTune);
+    Page_SB_MeasTuneMeas, &itemsMeasTune, EmptyFuncVV, EmptyFuncVV, Measure_RotateRegSet
+);
 
 
 // ИЗМЕРЕНИЯ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMeasures =
+static const arrayItems itemsMeasures =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcMeasuresIsShow,
+    (void*)&mcMeasuresNumber,
+    (void*)&mcMeasuresChannels,
+    (void*)&mcMeasuresSignal,
+    (void*)&mspMeasTune    
+};
+
+const Page pMeasures            ///< ИЗМЕРЕНИЯ
+(
+    &mainPage, 0,
     "ИЗМЕРЕНИЯ", "MEASURES",
     "Автоматические измерения",
     "Automatic measurements",
-    Page_Measures,
-    {
-        (void*)&mcMeasuresIsShow,
-        (void*)&mcMeasuresNumber,
-        (void*)&mcMeasuresChannels,
-        (void*)&mcMeasuresSignal,
-        (void*)&mspMeasTune
-    }
-};
-
-const Page pMeasures(&strMeasures);
+    Page_Measures, &itemsMeasures
+);
 
 
 /** @}  @}

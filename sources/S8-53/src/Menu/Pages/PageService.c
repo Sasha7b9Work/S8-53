@@ -95,28 +95,28 @@ static void        OnPress_Information_Exit();
 extern Page mainPage;
 
 // СЕРВИС ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageStruct strService =
+static const arrayItems itemsService =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&bResetSettings,             // СЕРВИС - Сброс настроек
+    (void*)&bAutoSearch,                // СЕРВИС - Поиск сигнала
+    (void*)&ppCalibrator,               // СЕРВИС - КАЛИБРАТОР
+    (void*)&ppMath,                     // СЕРВИС - МАТЕМАТИКА
+    (void*)&ppEthernet,                 // СЕРВИС - ETHERNET
+    (void*)&cSound,                     // СЕРВИС - Звук
+    (void*)&cLang,                      // СЕРВИС - Язык
+    (void*)&tTime,                      // СЕРВИС - Время
+    (void*)&cModeLongPressButtonTrig,   // СЕРВИС - Реж длит СИНХР
+    (void*)&ppInformation               // СЕРВИС - ИНФОРМАЦИЯ
+};
+
+const Page pService                     ///< СЕРВИС
+(
+    &mainPage, 0,
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
-    Page_Service,
-    {
-        (void*)&bResetSettings,             // СЕРВИС - Сброс настроек
-        (void*)&bAutoSearch,                // СЕРВИС - Поиск сигнала
-        (void*)&ppCalibrator,               // СЕРВИС - КАЛИБРАТОР
-        (void*)&ppMath,                     // СЕРВИС - МАТЕМАТИКА
-        (void*)&ppEthernet,                 // СЕРВИС - ETHERNET
-        (void*)&cSound,                     // СЕРВИС - Звук
-        (void*)&cLang,                      // СЕРВИС - Язык
-        (void*)&tTime,                      // СЕРВИС - Время
-        (void*)&cModeLongPressButtonTrig,   // СЕРВИС - Реж длит СИНХР
-        (void*)&ppInformation               // СЕРВИС - ИНФОРМАЦИЯ
-    }
-};
-
-const Page pService(&strService);
+    Page_Service, &itemsService
+);
 
 // СЕРВИС - Сброс настроек ---------------------------------------------------------------------------------------------------------------------------
 static const Button bResetSettings
@@ -176,20 +176,20 @@ static void OnPress_AutoSearch(void)
 };
 
 // СЕРВИС - КАЛИБРАТОР ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strCalibrator =
+static const arrayItems itemsCalibrator =
 {
-    Item_Page, &pService, 0,
+    (void*)&cCalibrator_Mode,       // СЕРВИС - КАЛИБРАТОР - Калибратор
+    (void*)&cCalibrator_Calibrate   // СЕРВИС - КАЛИБРАТОР - Калибровать
+};
+
+static const Page ppCalibrator
+(
+    &pService, 0,
     "КАЛИБРАТОР", "CALIBRATOR",
     "Управлением калибратором и калибровка осциллографа",
     "Control of the calibrator and calibration of an oscillograph",
-    Page_ServiceCalibrator,
-    {
-        (void*)&cCalibrator_Mode,       // СЕРВИС - КАЛИБРАТОР - Калибратор
-        (void*)&cCalibrator_Calibrate   // СЕРВИС - КАЛИБРАТОР - Калибровать
-    }
-};
-
-static const Page ppCalibrator(&strCalibrator);
+    Page_ServiceCalibrator, &itemsCalibrator
+);
 
 // СЕРВИС - КАЛИБРАТОР - Калибратор ------------------------------------------------------------------------------------------------------------------
 static const Choice cCalibrator_Mode =
@@ -229,41 +229,40 @@ static void OnPress_Calibrator_Calibrate(void)
 }
 
 // СЕРВИС - МАТЕМАТИКА ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMath =
+static const arrayItems itemsMath =
 {
-    Item_Page, &pService, 0,
+    (void*)&pppMath_Function,     // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ
+    (void*)&pppMath_FFT           // СЕРВИС - МАТЕМАТИКА - СПЕКТР
+};
+
+static const Page ppMath
+(
+    &pService, 0,
     "МАТЕМАТИКА", "MATH",
     "Математические функции и БПФ",
     "Mathematical functions and FFT",
-    Page_Math,
-    {
-        (void*)&pppMath_Function,     // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ
-        (void*)&pppMath_FFT           // СЕРВИС - МАТЕМАТИКА - СПЕКТР
-    }
-};
-
-static const Page ppMath(&strMath);
+    Page_Math, &itemsMath
+);
 
 // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMath_Function =
+static const arrayItems itemsMath_Function =
 {
-    Item_Page, &ppMath, IsActive_Math_Function,
+    (void*)&sbMath_Function_Exit,       // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Выход
+    (void*)&sbMath_Function_ModeDraw,   // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Экран
+    (void*)&sbMath_Function_Type,       // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Вид
+    (void*)&sbMath_Function_ModeRegSet, // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Режим ручки УСТАНОВКА
+    (void*)&sbMath_Function_RangeA,     // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 1-го канала
+    (void*)&sbMath_Function_RangeB      // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 2-го канала    
+};
+
+static const Page pppMath_Function
+(
+    &ppMath, IsActive_Math_Function,
     "ФУНКЦИЯ", "FUNCTION",
     "Установка и выбор математической функции - сложения или умножения",
     "Installation and selection of mathematical functions - addition or multiplication",
-    Page_SB_MathFunction,
-    {
-        (void*)&sbMath_Function_Exit,       // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Выход
-        (void*)&sbMath_Function_ModeDraw,   // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Экран
-        (void*)&sbMath_Function_Type,       // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Вид
-        (void*)&sbMath_Function_ModeRegSet, // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Режим ручки УСТАНОВКА
-        (void*)&sbMath_Function_RangeA,     // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 1-го канала
-        (void*)&sbMath_Function_RangeB      // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 2-го канала    
-    },
-    OnPress_Math_Function, EmptyFuncVV, OnRegSet_Math_Function
-};
-
-static const Page pppMath_Function(&strMath_Function);
+    Page_SB_MathFunction, &itemsMath_Function, OnPress_Math_Function, EmptyFuncVV, OnRegSet_Math_Function
+);
 
 static bool IsActive_Math_Function(void)
 {
@@ -545,25 +544,24 @@ static void Draw_Math_Function_RangeB(int x, int y)
 }
 
 // СЕРВИС - МАТЕМАТИКА - СПЕКТР //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMath_FFT =
+static const arrayItems itemsMath_FFT =
 {
-    Item_Page, &ppMath, IsActive_Math_FFT,
+    (void*)&cMath_FFT_Enable,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Отображение
+    (void*)&cMath_FFT_Scale,        // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Шкала
+    (void*)&cMath_FFT_Source,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Источник
+    (void*)&cMath_FFT_Window,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Окно
+    (void*)&ppppMath_FFT_Cursors,   // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ
+    (void*)&cMath_FFT_Limit         // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Диапазон
+};
+
+static const Page pppMath_FFT
+(
+    &ppMath, IsActive_Math_FFT,
     "СПЕКТР", "SPECTRUM",
     "Отображение спектра входного сигнала",
     "Mapping the input signal spectrum",
-    Page_MathFFT,
-    {
-        (void*)&cMath_FFT_Enable,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Отображение
-        (void*)&cMath_FFT_Scale,        // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Шкала
-        (void*)&cMath_FFT_Source,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Источник
-        (void*)&cMath_FFT_Window,       // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Окно
-        (void*)&ppppMath_FFT_Cursors,   // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ
-        (void*)&cMath_FFT_Limit         // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Диапазон
-    },
-    OnPress_Math_FFT
-};
-
-static const Page pppMath_FFT(&strMath_FFT);
+    Page_MathFFT, &itemsMath_FFT, OnPress_Math_FFT
+);
 
 static bool IsActive_Math_FFT(void)
 {
@@ -646,25 +644,24 @@ static const Choice cMath_FFT_Window =
 };
 
 // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ ------------------------------------------------------------------------------------------------------------
-static const PageStruct strMath_FFT_Cursors =
+static const arrayItems itemsMath_FFT_Cursors =
 {
-    Item_Page, &pppMath_FFT, IsActive_Math_FFT_Cursors,
+    (void*)&cMath_FFT_Cursors_Exit,     // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ - Выход
+    (void*)&cMath_FFT_Cursors_Source,   // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ - Источник
+    (void*)0,
+    (void*)0,
+    (void*)0,
+    (void*)0
+};
+
+static const Page ppppMath_FFT_Cursors
+(
+    &pppMath_FFT, IsActive_Math_FFT_Cursors,
     "КУРСОРЫ", "CURSORS",
     "Включает курсоры для измерения параметров спектра",
     "Includes cursors to measure the parameters of the spectrum",
-    Page_SB_MathCursorsFFT,
-    {
-        (void*)&cMath_FFT_Cursors_Exit,     // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ - Выход
-        (void*)&cMath_FFT_Cursors_Source,   // СЕРВИС - МАТЕМАТИКА - СПЕКТР - КУРСОРЫ - Источник
-        (void*)0,
-        (void*)0,
-        (void*)0,
-        (void*)0
-    },
-    EmptyFuncVV, EmptyFuncVV, OnRegSet_Math_FFT_Cursors
-};
-
-static const Page ppppMath_FFT_Cursors(&strMath_FFT_Cursors);
+    Page_SB_MathCursorsFFT, &itemsMath_FFT_Cursors, EmptyFuncVV, EmptyFuncVV, OnRegSet_Math_FFT_Cursors
+);
 
 static bool IsActive_Math_FFT_Cursors(void)
 {
@@ -735,23 +732,23 @@ static bool IsActive_Math_FFT_Limit(void)
 }
 
 // СЕРВИС - ETHERNET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strEthernet =
+static const arrayItems itemsEthernet =
 {
-    Item_Page, &pService, 0,
+    (void*)&cEthernet_Enable,       // СЕРВИС - ETHERNET - Ethernet
+    (void*)&ipEthernet_IP,          // СЕРВИС - ETHERNET - IP адрес
+    (void*)&ipEthernet_Mask,        // СЕРВИС - ETHERNET - Маска подсети
+    (void*)&ipEthernet_Gateway,     // СЕРВИС - ETHERNET - Шлюз
+    (void*)&macEthernet_MAC         // СЕРВИС - ETHERNET - Физ адрес
+};
+
+static const Page ppEthernet
+(
+    &pService, 0,
     "ETHERNET", "ETHERNET",
     "Настройки ethernet",
     "Settings of ethernet",
-    Page_ServiceEthernet,
-    {
-        (void*)&cEthernet_Enable,       // СЕРВИС - ETHERNET - Ethernet
-        (void*)&ipEthernet_IP,          // СЕРВИС - ETHERNET - IP адрес
-        (void*)&ipEthernet_Mask,        // СЕРВИС - ETHERNET - Маска подсети
-        (void*)&ipEthernet_Gateway,     // СЕРВИС - ETHERNET - Шлюз
-        (void*)&macEthernet_MAC         // СЕРВИС - ETHERNET - Физ адрес
-    }
-};
-
-static const Page ppEthernet(&strEthernet);
+    Page_ServiceEthernet, &itemsEthernet
+);
 
 // СЕРВИС - ETHERNET - Ethernet ----------------------------------------------------------------------------------------------------------------------
 static const Choice cEthernet_Enable =
@@ -923,25 +920,24 @@ static const Choice cModeLongPressButtonTrig =
 };
 
 // СЕРВИС - ИНФОРМАЦИЯ -------------------------------------------------------------------------------------------------------------------------------
-static const PageStruct strInformation =
+static const arrayItems itemsInformation =
 {
-    Item_Page, &pService, 0,
+    (void*)&sbInformation_Exit, // СЕРВИС - ИНФОРМАЦИЯ - Выход
+    (void*)0,
+    (void*)0,
+    (void*)0,
+    (void*)0,
+    (void*)0
+};
+
+static const Page ppInformation
+(
+    &pService, 0,
     "ИНФОРМАЦИЯ", "INFORMATION",
     "Выводит на экран идентификационные данные осциллографа",
     "Displays identification data of the oscilloscope",
-    Page_SB_Information,
-    {
-        (void*)&sbInformation_Exit, // СЕРВИС - ИНФОРМАЦИЯ - Выход
-        (void*)0,
-        (void*)0,
-        (void*)0,
-        (void*)0,
-        (void*)0
-    },
-    OnPress_Information, EmptyFuncVV, EmptyFuncVI
-};
-
-static const Page ppInformation(&strInformation);
+    Page_SB_Information, &itemsInformation, OnPress_Information, EmptyFuncVV, EmptyFuncVI
+);
 
 static void OnPress_Information(void)
 {

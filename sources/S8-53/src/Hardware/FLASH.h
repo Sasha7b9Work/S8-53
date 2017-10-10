@@ -24,7 +24,6 @@
 
 /// Настройки
 #define ADDR_SECTOR_SETTINGS    ((uint)0x080E0000)  ///< Base @ of Sector 11, 128 Kbytes
-#define SIZE_SECTOR_SETTINGS    (128 * 1024)
 
 
 #define MAX_NUM_SAVED_WAVES 23  ///< Пока ограничено количеством квадратиков, которые можно вывести в одну линию внизу сетки

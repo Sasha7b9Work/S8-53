@@ -115,36 +115,36 @@ public:
 #define TITLE(item) ((item)->titleHint[LANG])
 #define HINT(item) ((item)->titleHint[2 + LANG])
 
+typedef void * pVOID;
+typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 struct PageStruct
 {
-    ControlStruct   str;
-    NamePage        name;
-    const void     *items[MAX_NUM_ITEMS_IN_PAGE];
-    pFuncVV         funcOnPress;
-    pFuncVV         funcOnDraw;
-    pFuncVI         funcRegSetSB;
+    COMMON_PART_MENU_ITEM
+    NamePage            name;
+    const arrayItems    items;
+    pFuncVV             funcOnPress;
+    pFuncVV             funcOnDraw;
+    pFuncVI             funcRegSetSB;
 };
 
 /// Описывает страницу меню.
 class Page : public     Control
 {
 public:
-    NamePage    name;                               // Имя из перечисления NamePage
-    const void* items[MAX_NUM_ITEMS_IN_PAGE];       // Здесь указатели на пункты этой страницы (в обычной странице)
-                                                    // для страницы малых кнопок  здесь хранятся 6 указателей на SmallButton : 0 - B_Menu, 1...5 - B_F1...B_F5
-    pFuncVV     funcOnPress;                        // Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV     funcOnDraw;                         // Будет вызываться после отрисовки кнопок
-    pFuncVI     funcRegSetSB;                       // В странице малых кнопок вызывается при повороте ручки установка
+    NamePage            name;                               // Имя из перечисления NamePage
+    const arrayItems   *items;                              // Здесь указатели на пункты этой страницы (в обычной странице)
+                                                            // для страницы малых кнопок  здесь хранятся 6 указателей на SmallButton : 0 - B_Menu, 1...5 - B_F1...B_F5
+    pFuncVV             funcOnPress;                        // Будет вызываться при нажатии на свёрнутую страницу
+    pFuncVV             funcOnDraw;                         // Будет вызываться после отрисовки кнопок
+    pFuncVI             funcRegSetSB;                       // В странице малых кнопок вызывается при повороте ручки установка
 
-    Page(const PageStruct *pageStruct);
+    //Page(PageStruct *pageStruct);
     
-    /*
     Page(const Page *keeper_, pFuncBV funcOfActive_,
          const char *titleRU, const char *titleEN, const char *hintRU, const char *hintEN, NamePage name_,
          const arrayItems *items_, pFuncVV funcOnPress_ = 0, pFuncVV funcOnDraw_ = 0, pFuncVI funcRegSetSB_ = 0);
-         */
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -19,7 +19,6 @@
 
 static const Settings defaultSettings =
 {
-    0,
     // Display
     {
         5,                          // timeShowLevels
@@ -367,7 +366,7 @@ const SmallButton* GetSmallButton(PanelButton button)
     if(MenuIsMinimize() && button >= B_Menu && button <= B_F5)
     {
         Page *page = (Page *)menu.OpenedItem();
-        SmallButton *sb = (SmallButton *)page->items[button - B_Menu];
+        SmallButton *sb = (SmallButton *)(*page->items)[button - B_Menu];
         return sb;
     }
     return NULL;

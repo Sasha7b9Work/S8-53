@@ -71,28 +71,28 @@ static void OnChanged_Settings_AutoHide(bool autoHide);     ///< Âûçûâàåòñÿ ïðè 
 // ÄÈÑÏËÅÉ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern Page mainPage;
 
-static const PageStruct strDisplay =
+static const arrayItems itemsDisplay =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcMapping,              // ÄÈÑÏËÅÉ - Îòîáðàæåíèå
+    (void*)&mspAccumulation,        // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ
+    (void*)&mspAveraging,           // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ
+    (void*)&mcMinMax,               // ÄÈÑÏËÅÉ - Ìèí Ìàêñ
+    (void*)&mcSmoothing,            // ÄÈÑÏËÅÉ - Ñãëàæèâàíèå
+    (void*)&mcRefreshFPS,           // ÄÈÑÏËÅÉ - ×àñòîòà îáíîâë
+    (void*)&mspGrid,                // ÄÈÑÏËÅÉ - ÑÅÒÊÀ
+    (void*)&mcTypeShift,            // ÄÈÑÏËÅÉ - Ñìåùåíèå
+    (void*)&mspSettings             // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ
+    //(void*)&mcDisplMemoryWindow,  // ÄÈÑÏËÅÉ - Îêíî ïàìÿòè
+};
+
+const Page pDisplay                 ///< ÄÈÑÏËÅÉ
+(
+    &mainPage, 0,
     "ÄÈÑÏËÅÉ", "DISPLAY",
     "Ñîäåðæèò íàñòðîéêè îòîáðàæåíèÿ äèñïëåÿ.",
     "Contains settings of display of the display.",
-    Page_Display,
-    {
-        (void*)&mcMapping,              // ÄÈÑÏËÅÉ - Îòîáðàæåíèå
-        (void*)&mspAccumulation,        // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ
-        (void*)&mspAveraging,           // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ
-        (void*)&mcMinMax,               // ÄÈÑÏËÅÉ - Ìèí Ìàêñ
-        (void*)&mcSmoothing,            // ÄÈÑÏËÅÉ - Ñãëàæèâàíèå
-        (void*)&mcRefreshFPS,           // ÄÈÑÏËÅÉ - ×àñòîòà îáíîâë
-        (void*)&mspGrid,                // ÄÈÑÏËÅÉ - ÑÅÒÊÀ
-        (void*)&mcTypeShift,            // ÄÈÑÏËÅÉ - Ñìåùåíèå
-        (void*)&mspSettings             // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ
-        //(void*)&mcDisplMemoryWindow,  // ÄÈÑÏËÅÉ - Îêíî ïàìÿòè
-    }
-};
-
-const Page pDisplay(&strDisplay);
+    Page_Display, &itemsDisplay
+);
 
 
 // ÄÈÑÏËÅÉ - Îòîáðàæåíèå -----------------------------------------------------------------------------------------------------------------------------
@@ -113,21 +113,21 @@ static const Choice mcMapping =
 
 
 // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strAccumulation =
+static const arrayItems itemsAccumulation =
 {
-    Item_Page, &pDisplay, IsActive_Accumulation,
+    (void*)&mcAccumulation_Number,  // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
+    (void*)&mcAccumulation_Mode,    // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
+    (void*)&mcAccumulation_Clear    // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü    
+};
+
+static const Page mspAccumulation
+(
+    &pDisplay, IsActive_Accumulation,
     "ÍÀÊÎÏËÅÍÈÅ", "ACCUMULATION",
     "Íàñòðîéêè ðåæèìà îòîáðàæåíèÿ ïîñëåäíèõ ñèãíàëîâ íà ýêðàíå.",
     "Mode setting signals to display the last screen.",
-    Page_DisplayAccumulation,
-    {
-        (void*)&mcAccumulation_Number,  // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
-        (void*)&mcAccumulation_Mode,    // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
-        (void*)&mcAccumulation_Clear    // ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü    
-    }
-};
-    
-static const Page mspAccumulation(&strAccumulation);
+    Page_DisplayAccumulation, &itemsAccumulation
+);
 
 static bool IsActive_Accumulation(void)
 {
@@ -211,20 +211,20 @@ void OnPress_Accumulation_Clear(void)
 
 
 // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strAveraging =
+static const arrayItems itemsAveraging =
 {
-    Item_Page, &pDisplay, IsActive_Averaging,
+    (void*)&mcAveraging_Number, // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ - Êîëè÷åñòâî
+    (void*)&mcAveraging_Mode    // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ - Ðåæèì    
+};
+
+static const Page mspAveraging
+(
+    &pDisplay, IsActive_Averaging,
     "ÓÑÐÅÄÍÅÍÈÅ", "AVERAGE",
     "Íàñòðîéêè ðåæèìà óñðåäíåíèÿ ïî ïîñëåäíèì èçìåðåíèÿì.",
     "Settings of the mode of averaging on the last measurements.",
-    Page_DisplayAverage,
-    {
-        (void*)&mcAveraging_Number, // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ - Êîëè÷åñòâî
-        (void*)&mcAveraging_Mode    // ÄÈÑÏËÅÉ - ÓÑÐÅÄÍÅÍÈÅ - Ðåæèì    
-    }
-};
-
-static const Page mspAveraging(&strAveraging);
+    Page_DisplayAverage, &itemsAveraging
+);
 
 static bool IsActive_Averaging(void)
 {
@@ -376,20 +376,20 @@ void OnChanged_RefreshFPS(bool active)
 
 
 // ÄÈÑÏËÅÉ - ÑÅÒÊÀ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strGrid =
+static const arrayItems itemsGrid =
 {
-    Item_Page, &pDisplay, 0,
+    (void*)&mcGrid_Type,        // ÄÈÑÏËÅÉ - ÑÅÒÊÀ - Òèï
+    (void*)&mgGrid_Brightness   // ÄÈÑÏËÅÉ - ÑÅÒÊÀ - ßðêîñòü
+};
+
+static const Page mspGrid
+(
+    &pDisplay, 0,
     "ÑÅÒÊÀ", "GRID",
     "Ñîäåðæèò íàñòðîéêè îòîáðàæåíèÿ êîîðäèíàòíîé ñåòêè.",
     "Contains settings of display of a coordinate grid.",
-    Page_DisplayGrid,
-    {
-        (void*)&mcGrid_Type,        // ÄÈÑÏËÅÉ - ÑÅÒÊÀ - Òèï
-        (void*)&mgGrid_Brightness   // ÄÈÑÏËÅÉ - ÑÅÒÊÀ - ßðêîñòü
-    }
-};
-
-static const Page mspGrid(&strGrid);
+    Page_DisplayGrid, &itemsGrid
+);
 
 
 // ÄÈÑÏËÅÉ - ÑÅÒÊÀ - Òèï -----------------------------------------------------------------------------------------------------------------------------
@@ -456,46 +456,46 @@ static const Choice mcTypeShift =
 
 
 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strSettings =
+static const arrayItems itemsSettings =
 {
-    Item_Page, &pDisplay, 0,
+    (void*)&mspSettings_Colors,                 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ
+    (void*)&mgSettings_Brightness,              // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ßðêîñòü
+    (void*)&mgSettings_Levels,                  // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Óðîâíè
+    (void*)&mgSettings_TimeMessages,            // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Âðåìÿ
+    (void*)&mcSettings_ShowStringNavigation,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñòðîêà ìåíþ
+    (void*)&mcSettings_ShowAltMarkers,          // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Äîï. ìàðêåðû
+    (void*)&mcSettings_AutoHide                 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñêðûâàòü
+};
+
+static const Page mspSettings
+(
+    &pDisplay, 0,
     "ÍÀÑÒÐÎÉÊÈ", "SETTINGS",
     "Äîïîëíèòåëüíûå íàñòðîéêè äèñïëåÿ",
     "Additional display settings",
-    Page_ServiceDisplay,
-    {
-        (void*)&mspSettings_Colors,                 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ
-        (void*)&mgSettings_Brightness,              // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ßðêîñòü
-        (void*)&mgSettings_Levels,                  // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Óðîâíè
-        (void*)&mgSettings_TimeMessages,            // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Âðåìÿ
-        (void*)&mcSettings_ShowStringNavigation,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñòðîêà ìåíþ
-        (void*)&mcSettings_ShowAltMarkers,          // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Äîï. ìàðêåðû
-        (void*)&mcSettings_AutoHide                 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñêðûâàòü
-    }
-};
-
-static const Page mspSettings(&strSettings);
+    Page_ServiceDisplay, &itemsSettings
+);
 
 
 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strSettings_Colors =
+static const arrayItems itemsSettings_Colors =
 {
-    Item_Page, &mspSettings, 0,
+    (void*)&mcSettings_Colors_Scheme,       // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Öâåòîâàÿ ñõåìà
+    (void*)&mgcSettings_Colors_ChannelA,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 1
+    (void*)&mgcSettings_Colors_ChannelB,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
+    (void*)&mgcSettings_Colors_Grid,        // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
+    //(void*)&mgcColorChannel0alt,          // TODO Ýòî äëÿ äîïîëíèòåëüíîãî öâåòà ïåðâîãî êàíàëà - äëÿ íàêîïëåíèÿ, íàïðèìåð.
+    //(void*)&mgcColorChannel1alt,          // TODO Ýòî äëÿ äîï. öâåòà âòîðîãî êàíàëà - äëÿ íàêîïëåíèÿ, íàïðèìåð.    
+};
+
+static const Page mspSettings_Colors
+(
+    &mspSettings, 0,
     "ÖÂÅÒÀ", "COLORS",
     "Âûáîð öâåòîâ äèñïëåÿ",
     "The choice of colors display",
-    Page_ServiceDisplayColors,
-    {
-        (void*)&mcSettings_Colors_Scheme,       // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Öâåòîâàÿ ñõåìà
-        (void*)&mgcSettings_Colors_ChannelA,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 1
-        (void*)&mgcSettings_Colors_ChannelB,    // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
-        (void*)&mgcSettings_Colors_Grid,        // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
-        //(void*)&mgcColorChannel0alt,          // TODO Ýòî äëÿ äîïîëíèòåëüíîãî öâåòà ïåðâîãî êàíàëà - äëÿ íàêîïëåíèÿ, íàïðèìåð.
-        //(void*)&mgcColorChannel1alt,          // TODO Ýòî äëÿ äîï. öâåòà âòîðîãî êàíàëà - äëÿ íàêîïëåíèÿ, íàïðèìåð.    
-    }
-};
-
-static const Page mspSettings_Colors(&strSettings_Colors);
+    Page_ServiceDisplayColors, &itemsSettings_Colors
+);
 
 
 // ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Öâåòîâàÿ ñõåìà ------------------------------------------------------------------------------------------------------

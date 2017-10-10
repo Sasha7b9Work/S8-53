@@ -83,7 +83,8 @@ void* Menu::OpenedItem()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void* Menu::Item(const Page *page, int numElement)
 {
-    return (void *)page->items[numElement + (PageIsSB(page) ? 1 : 0)];
+    const arrayItems &array = (*page->items);
+    return array[numElement + (PageIsSB(page) ? 1 : 0)];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -374,7 +375,7 @@ void Menu::ShortPressOnPageItem(Page *page, int numItem)
     NamePage namePage = page->name;
     if (namePage >= Page_SB_Curs)
     {
-        SmallButton *sb = (SmallButton *)page->items[numItem];
+        SmallButton *sb = (SmallButton*)(*page->items)[numItem];
         if (sb && sb->funcOnPress)
         {
             sb->funcOnPress();
@@ -397,5 +398,5 @@ bool Menu::PageIsSB(const Page *page)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 SmallButton* Menu::SmallButonFromPage(Page *page, int numButton)
 {
-    return (SmallButton *)page->items[numButton];
+    return (SmallButton *)(*page->items)[numButton];
 }

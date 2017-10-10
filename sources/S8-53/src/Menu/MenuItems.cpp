@@ -37,20 +37,11 @@ Control::Control(TypeItem type_, const Page* keeper_, pFuncBV funcOfActive_, con
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
 Page::Page(const Page *keeper_, pFuncBV funcOfActive_, const char *titleRU, const char *titleEN, const char *hintRU, const char *hintEN, 
            NamePage name_, const arrayItems *items_, pFuncVV funcOnPress_, pFuncVV funcOnDraw_, pFuncVI funcRegSetSB_) :
     Control(Item_Page, keeper_, funcOfActive_, titleRU, titleEN, hintRU, hintEN),
     name(name_), items(items_), funcOnPress(funcOnPress_), funcOnDraw(funcOnDraw_), funcRegSetSB(funcRegSetSB_)
 {
-}
-*/
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Page::Page(const PageStruct *str) : Control(&str->str), name(str->name), funcOnPress(str->funcOnPress), funcOnDraw(str->funcOnDraw),
-    funcRegSetSB(str->funcRegSetSB)
-{
-    memcpy(items, str->items, MAX_NUM_ITEMS_IN_PAGE * sizeof(void*));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

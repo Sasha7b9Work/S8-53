@@ -1116,25 +1116,24 @@ static const SmallButton sbExitMemLast
 );
 
 // Память - Последние /////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strMemLast =
+static const arrayItems itemsMemLast =
 {
-    Item_Page, &pMemory, 0,
+    (void*)&sbExitMemLast,
+    (void*)0,
+    (void*)&sbMemLastNext,
+    (void*)&sbMemLastPrev,
+    (void*)&sbMemLastIntEnter,
+    (void*)&sbMemLastSaveToFlash
+};
+
+static const Page mspMemLast
+(
+    &pMemory, 0,
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",
-    Page_SB_MemLatest,
-    {
-        (void*)&sbExitMemLast,
-        (void*)0,
-        (void*)&sbMemLastNext,
-        (void*)&sbMemLastPrev,
-        (void*)&sbMemLastIntEnter,
-        (void*)&sbMemLastSaveToFlash
-    },
-    OnPressMemoryLatest, FuncDrawingAdditionSPageMemoryLast, RotateSB_MemLast
-};
-
-static const Page mspMemLast(&strMemLast);
+    Page_SB_MemLatest, &itemsMemLast, OnPressMemoryLatest, FuncDrawingAdditionSPageMemoryLast, RotateSB_MemLast
+);
 
 static void PressSB_SetMask_Exit()
 {
@@ -1150,25 +1149,24 @@ static const SmallButton sbExitSetMask
 );
 
 // Память - ВНЕШН ЗУ - Маска ////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strSetMask =
+static const arrayItems itemsSetMask =
 {
-    Item_Page, &mspMemoryExt, IsActiveMemoryExtSetMask,
+    (void*)&sbExitSetMask,
+    (void*)&sbSetMaskDelete,
+    (void*)0,
+    (void*)0,
+    (void*)&sbSetMaskBackspace,
+    (void*)&sbSetMaskInsert
+};
+
+static const Page mspSetMask
+(
+    &mspMemoryExt, IsActiveMemoryExtSetMask,
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
-    Page_SB_MemExtSetMask,
-    {
-        (void*)&sbExitSetMask,
-        (void*)&sbSetMaskDelete,
-        (void*)0,
-        (void*)0,
-        (void*)&sbSetMaskBackspace,
-        (void*)&sbSetMaskInsert
-    },
-    EmptyFuncVV, OnPressMemoryExtMask, OnMemExtSetMaskRegSet
-};
-
-static const Page mspSetMask(&strSetMask);
+    Page_SB_MemExtSetMask, &itemsSetMask, EmptyFuncVV, OnPressMemoryExtMask, OnMemExtSetMaskRegSet
+);
 
 // ПАМЯТЬ - ВНЕШН ЗУ - Каталог ///////////////////////////////////////////////////////////////////////////////
 void OnPressMemoryExtFileManager()
@@ -1199,45 +1197,44 @@ const SmallButton sbExitFileManager
     DrawSB_Exit
 );
 
-static const PageStruct strFileManager =
+static const arrayItems itemsFileManager =
 {
-    Item_Page, &mspMemoryExt, FuncOfActiveExtMemFolder,
+    (void*)&sbExitFileManager,
+    (void*)&sbFileManagerTab,
+    (void*)0,
+    (void*)0,
+    (void*)&sbFileManagerLevelUp,
+    (void*)&sbFileManagerLevelDown
+};
+
+static const Page mspFileManager
+(
+    &mspMemoryExt, FuncOfActiveExtMemFolder,
     "КАТАЛОГ", "DIRECTORY",
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
-    Page_SB_FileManager,
-    {
-        (void*)&sbExitFileManager,
-        (void*)&sbFileManagerTab,
-        (void*)0,
-        (void*)0,
-        (void*)&sbFileManagerLevelUp,
-        (void*)&sbFileManagerLevelDown
-    },
-    OnPressMemoryExtFileManager, EmptyFuncVV, FM_RotateRegSet
-};
-
-static const Page mspFileManager(&strFileManager);
+    Page_SB_FileManager, &itemsFileManager, OnPressMemoryExtFileManager, EmptyFuncVV, FM_RotateRegSet
+);
 
 // ПАМЯТЬ - ВНЕШН ЗУ /////////////////////////////////////////////////////////////////
-static const PageStruct strMemoryExt =
+static const arrayItems itemsMemoryExt =
 {
-    Item_Page, &pMemory, 0,
+    (void*)&mspFileManager,
+    (void*)&mcMemoryExtName,
+    (void*)&mspSetMask,
+    (void*)&mcMemoryExtModeSave,
+    (void*)&mcMemoryExtModeBtnMemory,
+    (void*)&mcMemoryExtAutoConnectFlash
+};
+
+static const Page mspMemoryExt
+(
+    &pMemory, 0,
     "ВНЕШН ЗУ", "EXT STORAGE",
     "Работа с внешним запоминающим устройством.",
     "Work with external storage device.",
-    Page_MemoryExt,
-    {
-        (void*)&mspFileManager,
-        (void*)&mcMemoryExtName,
-        (void*)&mspSetMask,
-        (void*)&mcMemoryExtModeSave,
-        (void*)&mcMemoryExtModeBtnMemory,
-        (void*)&mcMemoryExtAutoConnectFlash
-    }
-};
-
-static const Page mspMemoryExt(&strMemoryExt);
+    Page_MemoryExt, &itemsMemoryExt
+);
 
 // ПАМЯТЬ - Внутр ЗУ ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -1249,25 +1246,24 @@ void OnPressMemoryInt()
     FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
 }
 
-static const PageStruct strMemInt =
+static const arrayItems itemsMemInt =
 {
-    Item_Page, &pMemory, 0,
+    (void*)&sbExitMemInt,
+    (void*)&sbMemIntShowSignalAlways,
+    (void*)&sbMemIntModeShow,
+    (void*)0,
+    (void*)&sbMemIntSave,
+    (void*)&sbMemIntSaveToFlash
+};
+
+static const Page mspMemInt
+(
+    &pMemory, 0,
     "ВНУТР ЗУ", "INT STORAGE",
     "Переход в режим работы с внутренней памятью",
     "Transition to an operating mode with internal memory",
-    Page_SB_MemInt,
-    {
-        (void*)&sbExitMemInt,
-        (void*)&sbMemIntShowSignalAlways,
-        (void*)&sbMemIntModeShow,
-        (void*)0,
-        (void*)&sbMemIntSave,
-        (void*)&sbMemIntSaveToFlash
-    },
-    OnPressMemoryInt, FuncAdditionDrawingSPageMemoryInt, FuncOnRegSetMemInt
-};
-
-static const Page mspMemInt(&strMemInt);
+    Page_SB_MemInt, &itemsMemInt, OnPressMemoryInt, FuncAdditionDrawingSPageMemoryInt, FuncOnRegSetMemInt
+);
 
 // Страница вызывается при выбранном ручном режиме задания имени файла перед сохранением на флешку ///////////////
 static void OnMemExtSetNameRegSet(int angle)
@@ -1275,43 +1271,42 @@ static void OnMemExtSetNameRegSet(int angle)
     OnMemExtSetMaskNameRegSet(angle, sizeof(symbolsAlphaBet) / 4 - 7);
 }
 
-static const PageStruct strSetName =
+static const arrayItems itemsSetName =
 {
-    Item_None, 0, 0,
+    (void*)&sbExitSetName,
+    (void*)&sbSetNameDelete,
+    (void*)0,
+    (void*)&sbSetNameBackspace,
+    (void*)&sbSetNameInsert,
+    (void*)&sbSetNameSave
+};
+
+static const Page mpSetName
+(
+    0, 0,
     "", "",
     "", 
     "",
-    Page_SB_MemExtSetName,
-    {
-        (void*)&sbExitSetName,
-        (void*)&sbSetNameDelete,
-        (void*)0,
-        (void*)&sbSetNameBackspace,
-        (void*)&sbSetNameInsert,
-        (void*)&sbSetNameSave
-    },
-    EmptyFuncVV, EmptyFuncVV, OnMemExtSetNameRegSet
-};
-
-static const Page mpSetName(&strSetName);
+    Page_SB_MemExtSetName, &itemsSetName, EmptyFuncVV, EmptyFuncVV, OnMemExtSetNameRegSet
+);
 
 // ПАМЯТЬ /////////////////////////////////////////////////////////////////////////////
-const PageStruct setMemory =
+static const arrayItems itemsMemory =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcMemoryNumPoints,
+    (void*)&mspMemLast,
+    (void*)&mspMemInt,
+    (void*)&mspMemoryExt
+};
+
+const Page pMemory              ///< ПАМЯТЬ
+(
+    &mainPage, 0,
     "ПАМЯТЬ", "MEMORY",
     "Работа с внешней и внутренней памятью.",
     "Working with external and internal memory.",
-    Page_Memory,
-    {
-        (void*)&mcMemoryNumPoints,
-        (void*)&mspMemLast,
-        (void*)&mspMemInt,
-        (void*)&mspMemoryExt
-    }
-};
-
-const Page pMemory(&setMemory);
+    Page_Memory, &itemsMemory
+);
 
 
 /** @}  @}

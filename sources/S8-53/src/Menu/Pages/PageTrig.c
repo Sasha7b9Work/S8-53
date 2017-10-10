@@ -34,23 +34,23 @@ static void   OnPress_AutoFind_Search();
 extern const Page mainPage;
 
 // СИНХР /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strTrig =
+static const arrayItems itemsTrig =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcMode,         // СИНХР - Режим
+    (void*)&mcSource,       // СИНХР - Источник
+    (void*)&mcPolarity,     // СИНХР - Полярность
+    (void*)&mcInput,        // СИНХР - Вход
+    (void*)&mpAutoFind      // СИНХР - ПОИСК
+};
+
+const Page pTrig              ///< СИНХР
+(
+    &mainPage, 0,
     "СИНХР", "TRIG",
     "Содержит настройки синхронизации.",
     "Contains synchronization settings.",
-    Page_Trig,
-    {
-        (void*)&mcMode,         // СИНХР - Режим
-        (void*)&mcSource,       // СИНХР - Источник
-        (void*)&mcPolarity,     // СИНХР - Полярность
-        (void*)&mcInput,        // СИНХР - Вход
-        (void*)&mpAutoFind      // СИНХР - ПОИСК
-    }
-};
-
-const Page pTrig(&strTrig);
+    Page_Trig, &itemsTrig
+);
 
 
 // СИНХР - Режим -------------------------------------------------------------------------------------------------------------------------------------
@@ -172,20 +172,20 @@ static void OnChanged_Input(bool active)
 
 
 // СИНХР - ПОИСК -------------------------------------------------------------------------------------------------------------------------------------
-static const PageStruct strAutoFind =
+static const arrayItems itemsAutoFind =
 {
-    Item_Page, &pTrig, 0,
+    (void*)&mcAutoFind_Mode,     // СИНХР - ПОИСК - Режим
+    (void*)&mbAutoFind_Search     // СИНХР - ПОИСК - Найти    
+};
+
+static const Page mpAutoFind
+(
+    &pTrig, 0,
     "ПОИСК", "SEARCH",
     "Управление автоматическим поиском уровня синхронизации.",
     "Office of the automatic search the trigger level.",
-    Page_TrigAuto,
-    {
-        (void*)&mcAutoFind_Mode,     // СИНХР - ПОИСК - Режим
-        (void*)&mbAutoFind_Search     // СИНХР - ПОИСК - Найти    
-    }
-};
-
-static const Page mpAutoFind(&strAutoFind);
+    Page_TrigAuto, &itemsAutoFind
+);
 
 
 // СИНХР - ПОИСК - Режим -----------------------------------------------------------------------------------------------------------------------------

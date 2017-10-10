@@ -142,29 +142,29 @@ extern const Page pTrig;
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-const PageStruct strMainPage =
+static const arrayItems itemsMainPage =
 {
-    Item_None, 0, 0,
+    (void*)&pDisplay,
+    (void*)&pChanA,
+    (void*)&pChanB,
+    (void*)&pTrig,
+    (void*)&pTime,
+    (void*)&pCursors,
+    (void*)&pMemory,
+    (void*)&pMeasures,
+    (void*)&pService,
+    (void*)&mpHelp,
+    (void*)&pDebug
+};
+
+const Page mainPage
+(
+    0, 0,
     "лемч", "MENU",
     "",
     "",
-    Page_MainPage,
-    {
-        (void*)&pDisplay,
-        (void*)&pChanA,
-        (void*)&pChanB,
-        (void*)&pTrig,
-        (void*)&pTime,
-        (void*)&pCursors,
-        (void*)&pMemory,
-        (void*)&pMeasures,
-        (void*)&pService,
-        (void*)&mpHelp,
-        (void*)&pDebug
-    }
-};
-
-const Page mainPage(&strMainPage);
+    Page_MainPage, &itemsMainPage
+);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------

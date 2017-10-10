@@ -1,3 +1,5 @@
+
+
 #include "FLASH.h"
 #include "Hardware.h"
 #include "Sound.h"
@@ -6,11 +8,6 @@
 #include "Utils/GlobalFunctions.h"
 #include "Log.h"
 #include <stm32f2xx_hal.h>
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CLEAR_FLAGS \
-__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,25 +26,25 @@ static const uint ADDR_FIRST_SET = ADDR_ARRAY_POINTERS + SIZE_ARRAY_POINTERS_IN_
 static const uint SIZE_MEMORY = 1024 * 1024 + 0x08000000;
 
 
-// Признак того, что запись в этоу область флэш уже производилась. Если нулевое слово области (данных, ресурсов или настроек) имеет это значение, 
-// запись уже была произведена как минимум один раз
+// Признак того, что запись в этоу область флэш уже производилась. Если нулевое слово области (данных, ресурсов или настроек) имеет это значение, запись уже была произведена как минимум один раз
 static const uint MARK_OF_FILLED = 0x1234;
 static const uint MAX_UINT = 0xffffffff;
 
-#define READ_WORD(address) (*((volatile uint*)(address)))
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool TheFirstInclusion();
-static void EraseSector(uint startAddress);
-static void WriteWord(uint address, uint word);
-static void WriteBuffer(uint address, uint *buffer, int size);
-static void WriteBufferBytes(uint address, uint8 *buffer, int size);
-static void EraseSectorSettings();
-static RecordConfig* FirstEmptyRecord();
-static RecordConfig* FirstRecord();
-static RecordConfig* FindRecordConfigForWrite();
-static RecordConfig* RecordConfigForRead();
+static uint             ReadWord(uint address);
+static bool             TheFirstInclusion();
+static RecordConfig*    FindRecordConfigForWrite();
+static RecordConfig*    RecordConfigForRead();
+static void             ReadBuffer(uint address, uint *buffer, int size);
+static void             EraseSector(uint startAddress);
+static void             WriteWord(uint address, uint word);
+static void             WriteBuffer(uint address, uint *buffer, int size);
+static void             WriteBufferBytes(uint address, uint8 *buffer, int size);
+static RecordConfig*    FirstEmptyRecord();
+static RecordConfig*    FirstRecord();
+static void             EraseSectorSettings();
+
 static const uint startDataInfo = ADDR_SECTOR_DATA_MAIN;
 
 
@@ -64,53 +61,28 @@ static void PrepareSectorForData(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FLASH_LoadSettings(void)
 {
-    /*
-        1. Проверка на первое включение. Выполняется тем, что в первом слове сектора настроек хранится MAX_UINT, если настройки ещё не сохранялись.
-        2. Проверка на старую версию хранения настроек. Определяется тем, что в старой версии в первом слове сектора настроек хранится значение
-        MARK_OF_FILLED, а в новой - размер структуры Settings (раньше этого поля не было в структуре Settings).
-        3. Если старая версия - чтение настроек и сохранение в новом формате.
-            1. Чтобы прочитать, нужно сначала найти адрес последних сохранённых настроек.
-            2. Если (адрес + sizeof(Settings) >= ADDR_SECTORSETTINGS + (1024 * 128)), то эти нстройки повреждены и нужно считывать предпоследние
-               сохранённые настройки.
-            3. Когда нашли адрес последних действующих настроек, читаем их по адресу &set.display, записываем в set.size полный размер структуры
-            Settings и вызываем Flash_SaveSettings().
-    */
+    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
 
-    CLEAR_FLAGS;
-
-    if(TheFirstInclusion())                                         // Если это первое включение
-    {                                                               // то делаем предварительные приготовления
+    if(TheFirstInclusion())
+    {
         set.common.countErasedFlashSettings = 0;
         set.common.countEnables = 0;
         set.common.countErasedFlashData = 0;
         set.common.workingTimeInSecs = 0;
+        EraseSectorSettings();
         PrepareSectorForData();
-    }
-    else if (READ_WORD(ADDR_SECTOR_SETTINGS) == MARK_OF_FILLED)     // Если старый алгоритм хранения настроек
-    {
-        RecordConfig *record = RecordConfigForRead();
-        if (record->sizeData + record->addrData >= (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // Если последние сохранённые настройки выходят
-        {                                                                                   // за пределы сектора (глюк предыдущей версии сохранения)
-            --record;                                                                       // то воспользуемся предыдущими сохранёнными настройками
-        }
-        memcpy(&set.display, (const void *)record->addrData, record->sizeData);             // Считываем их
-        set.size = sizeof(set);                                                             // Сохраняем размер структуры настроек
-        EraseSectorSettings();                                                              // Стираем сектор настроек
-        FLASH_SaveSettings();                                                               // И сохраняем настройки в новом формате
     }
     else
     {
-        uint addressPrev = 0;
-        uint address = ADDR_SECTOR_SETTINGS;
-        while (READ_WORD(address) != MAX_UINT)  // Пока по этому адресу есть значение, отличное от (-1) (сюда производилась запись)
+        RecordConfig *record = RecordConfigForRead();
+        int size = sizeof(set);
+        if (record && size == record->sizeData)
         {
-            addressPrev = address;              // сохраняем этот адрес
-            address += READ_WORD(address);      // И переходим к следующему прибавлением значения, хранящегося по этому адресу (первый элемент
-        }                                       // структуры Settings - её размер. Все настройки хранятся последовательно в памяти, одна структура
-                                                // за другой
-        if (addressPrev != 0)                   // Если по этому адресу что-то записано
-        {
-            memcpy(&set, (const void *)addressPrev, READ_WORD(addressPrev));    // Счтываем сохранённые настройки
+            uint addrData = record->addrData;
+            uint *addrSet = (uint*)(&set);
+            int numWodsForCopy = record->sizeData / 4;
+            ReadBuffer(addrData, addrSet, numWodsForCopy);
+            return true;
         }
     }
     set.common.countEnables++;
@@ -132,8 +104,7 @@ void FLASH_SaveSettings(void)
     {
         return;
     }
-
-    CLEAR_FLAGS;
+    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
 
     RecordConfig *record = FindRecordConfigForWrite();
     if (record == 0)
@@ -155,9 +126,15 @@ void FLASH_SaveSettings(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+uint ReadWord(uint address)
+{
+    return(*((volatile uint*)address));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool TheFirstInclusion(void)
 {
-    return READ_WORD(ADDR_SECTOR_SETTINGS) == MAX_UINT;
+    return ReadWord(ADDR_SECTOR_SETTINGS) != MARK_OF_FILLED;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,7 +158,7 @@ RecordConfig *FirstRecord(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool RecordExist(void)
 {
-    return READ_WORD(ADDR_ARRAY_POINTERS) != MAX_UINT;
+    return ReadWord(ADDR_ARRAY_POINTERS) != MAX_UINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -236,6 +213,21 @@ RecordConfig* FindRecordConfigForWrite(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+static uint *addr = 0;
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void ReadBuffer(uint address, uint *buffer, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        addr = ((uint*)address);
+        //buffer[i] = *((uint*)address);
+        buffer[i] = *addr;
+        address += 4;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static uint FindAddressNextDataInfo(void)
 {
     uint addressNextInfo = startDataInfo + MAX_NUM_SAVED_WAVES * 4;
@@ -261,7 +253,7 @@ void FLASH_GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
-        existData[i] = READ_WORD(address + i * 4) != 0;
+        existData[i] = ReadWord(address + i * 4) != 0;
     }
 }
 
@@ -269,7 +261,7 @@ void FLASH_GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES])
 bool FLASH_ExistData(int num)
 {
     uint address = FindActualDataInfo();
-    return READ_WORD(address + num * 4) != 0;
+    return ReadWord(address + num * 4) != 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,7 +330,7 @@ static void CompactMemory(void)
 
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
-        uint addrDataOld = READ_WORD(addressDataInfo + i * 4);
+        uint addrDataOld = ReadWord(addressDataInfo + i * 4);
         if (addrDataOld != 0)
         {
             uint addrDataNew = addrDataOld + 1024 * 128;
@@ -434,7 +426,7 @@ void FLASH_SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1)
         }
         else
         {
-            WriteWord(addressForWrite, READ_WORD(addrDataInfo + i * 4));
+            WriteWord(addressForWrite, ReadWord(addrDataInfo + i * 4));
         }
     }
 }
@@ -443,7 +435,7 @@ void FLASH_SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1)
 bool FLASH_GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1)
 {
     uint addrDataInfo = FindActualDataInfo();
-    if (READ_WORD(addrDataInfo + 4 * num) == 0)
+    if (ReadWord(addrDataInfo + 4 * num) == 0)
     {
         *ds = 0;
         *data0 = 0;
@@ -451,7 +443,7 @@ bool FLASH_GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1)
         return false;
     }
 
-    uint addrDS = READ_WORD(addrDataInfo + 4 * num);
+    uint addrDS = ReadWord(addrDataInfo + 4 * num);
 
     uint addrData0 = 0;
     uint addrData1 = 0;
@@ -523,6 +515,7 @@ void EraseSector(uint startAddress)
 void EraseSectorSettings(void)
 {
     EraseSector(ADDR_SECTOR_SETTINGS);
+    WriteWord(ADDR_SECTOR_SETTINGS, MARK_OF_FILLED);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

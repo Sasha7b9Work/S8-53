@@ -71,13 +71,8 @@ extern const Page mainPage;
 
 
 // КАНАЛ 1 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strChanA =
+static const arrayItems itemsChanA =
 {
-    Item_Page, &mainPage, 0,
-    "КАНАЛ 1", "CHANNEL 1",
-    "Содержит настройки канала 1.",
-    "Contains settings of the channel 1.",
-    Page_Channel0,
     (void*)&mcInputA,       // КАНАЛ 1 - Вход
     (void*)&mcCoupleA,      // КАНАЛ 1 - Связь
     (void*)&mcFiltrA,       // КАНАЛ 1 - Фильтр
@@ -85,7 +80,14 @@ static const PageStruct strChanA =
     (void*)&mcMultiplierA   // КАНАЛ 1 - Множитель
 };
 
-const Page pChanA(&strChanA);
+const Page pChanA           ///< КАНАЛ 1
+(
+    &mainPage, 0,
+    "КАНАЛ 1", "CHANNEL 1",
+    "Содержит настройки канала 1.",
+    "Contains settings of the channel 1.",
+    Page_Channel0, &itemsChanA
+);
 
 
 // КАНАЛ 1 - Вход ------------------------------------------------------------------------------------------------------------------------------------
@@ -196,13 +198,8 @@ static const Choice mcMultiplierA =
 
 
 // КАНАЛ 2 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strChanB =
+static const arrayItems itemsChanB =
 {
-    Item_Page, &mainPage, 0,
-    "КАНАЛ 2", "CHANNEL 2",
-    "Содержит настройки канала 2.",
-    "Contains settings of the channel 2.",
-    Page_Channel1,
     (void*)&mcInputB,       // КАНАЛ 2 - Вход
     (void*)&mcCoupleB,      // КАНАЛ 2 - Связь
     (void*)&mcFiltrB,       // КАНАЛ 2 - Фильтр
@@ -210,7 +207,14 @@ static const PageStruct strChanB =
     (void*)&mcMultiplierB   // КАНАЛ 2 - Множитель
 };
 
-const Page pChanB(&strChanB);
+const Page pChanB
+(
+    &mainPage, 0,
+    "КАНАЛ 2", "CHANNEL 2",
+    "Содержит настройки канала 2.",
+    "Contains settings of the channel 2.",
+    Page_Channel1, &itemsChanB
+);
 
 
 // КАНАЛ 2 - Вход ------------------------------------------------------------------------------------------------------------------------------------

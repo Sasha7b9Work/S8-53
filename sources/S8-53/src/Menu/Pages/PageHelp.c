@@ -100,25 +100,24 @@ const SmallButton sbExitHelp
     DrawSB_Exit
 );
 
-static const PageStruct strHelp =
+static const arrayItems itemsHelp =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&sbExitHelp,
+    (void*)&sbHelpParagraphEnter,
+    (void*)&sbHelpParagraphLeave,
+    (void*)0,
+    (void*)&sbHelpParagraphPrev,
+    (void*)&sbHelpParagraphNext    
+};
+
+static const Page mpHelp            ///< ÏÎÌÎÙÜ
+(
+    &mainPage, 0,
     "ÏÎÌÎÙÜ", "HELP",
     "Îòêðûòü ðàçäåëû ïîìîùè",
     "To open sections of the help",
-    Page_SB_Help,
-    {
-        (void*)&sbExitHelp,
-        (void*)&sbHelpParagraphEnter,
-        (void*)&sbHelpParagraphLeave,
-        (void*)0,
-        (void*)&sbHelpParagraphPrev,
-        (void*)&sbHelpParagraphNext
-    },
-    EmptyFuncVV, HelpContent_Draw, OnHelpRegSet
-};
-
-static const Page mpHelp(&strHelp);
+    Page_SB_Help, &itemsHelp, EmptyFuncVV, HelpContent_Draw, OnHelpRegSet
+);
 
 
 /** @}  @}

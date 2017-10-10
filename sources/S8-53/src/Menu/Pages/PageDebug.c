@@ -111,26 +111,26 @@ extern Page mainPage;
 
 
 // ÎÒËÀÄÊÀ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strDebug =
+static const arrayItems itemsDebug =
 {
-    Item_Page, &mainPage, 0,
+    (void*)&mcStats,            // ÎÒËÀÄÊÀ - Ñòàòèñòèêà
+    (void*)&mpConsole,          // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
+    (void*)&mpADC,              // ÎÒËÀÄÊÀ - ÀÖÏ
+    (void*)&mpRandomizer,       // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ
+    (void*)&mcSizeSettings,     // ÎÒËÀÄÊÀ - Ğàçìåğ íàñòğîåê
+    (void*)&mbSaveFirmware      // ÎÒËÀÄÊÀ - Ñîõğ. ïğîøèâêó
+    //(void*)&ppSerialNumber     // ÎÒËÀÄÊÀ - Ñ/Í
+    //(void*)&mspDebugInformation
+};
+
+const Page pDebug
+(
+    &mainPage, 0,
     "ÎÒËÀÄÊÀ", "DEBUG",
     "",
     "",
-    Page_Debug,
-    {
-        (void*)&mcStats,            // ÎÒËÀÄÊÀ - Ñòàòèñòèêà
-        (void*)&mpConsole,          // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
-        (void*)&mpADC,              // ÎÒËÀÄÊÀ - ÀÖÏ
-        (void*)&mpRandomizer,       // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ
-        (void*)&mcSizeSettings,     // ÎÒËÀÄÊÀ - Ğàçìåğ íàñòğîåê
-        (void*)&mbSaveFirmware      // ÎÒËÀÄÊÀ - Ñîõğ. ïğîøèâêó
-        //(void*)&ppSerialNumber     // ÎÒËÀÄÊÀ - Ñ/Í
-        //(void*)&mspDebugInformation
-    }
-};
-
-const Page pDebug(&strDebug);
+    Page_Debug, &itemsDebug
+);
 
 // ÎÒËÀÄÊÀ - Ñòàòèñòèêà ------------------------------------------------------------------------------------------------------------------------------
 static const Choice mcStats =
@@ -150,21 +150,21 @@ static const Choice mcStats =
 
 
 // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strConsole =
+static const arrayItems itemsConsole =
 {
-    Item_Page, &pDebug, 0,
+    (void*)&mgConsole_NumStrings,   // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ×èñëî ñòğîê
+    (void*)&mcConsole_SizeFont,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ğàçìåğ øğèôòà
+    (void*)&mpConsole_Registers     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ
+};
+
+static const Page mpConsole
+(
+    &pDebug, 0,
     "ÊÎÍÑÎËÜ", "CONSOLE",
     "",
     "",
-    Page_DebugConsole,
-    {
-        (void*)&mgConsole_NumStrings,   // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ×èñëî ñòğîê
-        (void*)&mcConsole_SizeFont,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ğàçìåğ øğèôòà
-        (void*)&mpConsole_Registers     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ
-    }
-};
-
-static const Page mpConsole(&strConsole);
+    Page_DebugConsole, &itemsConsole
+);
 
 // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ×èñëî ñòğîê -------------------------------------------------------------------------------------------------------------------
 static const Governor mgConsole_NumStrings
@@ -194,30 +194,30 @@ static const Choice mcConsole_SizeFont =
 
 
 // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strConsole_Registers =
+static const arrayItems itemsConsole_Registers =
 {
-    Item_Page, &mpConsole, 0,
+    (void*)&mcConsole_Registers_ShowAll,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïîêàçûâàòü âñå
+    (void*)&mcConsole_Registers_RD_FL,      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - RD_FL
+    (void*)&mcConsole_Registers_RShiftA,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñì. 1ê
+    (void*)&mcConsole_Registers_RShiftB,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñì. 2ê
+    (void*)&mcConsole_Registers_TrigLev,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñèíõğ.
+    (void*)&mcConsole_Registers_RangeA,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂÎËÜÒ/ÄÅË 1
+    (void*)&mcConsole_Registers_RangeB,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂÎËÜÒ/ÄÅË 2
+    (void*)&mcConsole_Registers_TrigParam,  // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. ñèíõğ.
+    (void*)&mcConsole_Registers_ChanParamA, // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. êàí. 1
+    (void*)&mcConsole_Registers_ChanParamB, // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. êàí. 2
+    (void*)&mcConsole_Registers_TBase,      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂĞÅÌß/ÄÅË
+    (void*)&mcConsole_Registers_tShift      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ò ñì.
+};
+
+static const Page mpConsole_Registers
+(
+    &mpConsole, 0,
     "ĞÅÃÈÑÒĞÛ", "REGISTERS",
     "",
     "",
-    Page_DebugShowRegisters,
-    {
-        (void*)&mcConsole_Registers_ShowAll,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïîêàçûâàòü âñå
-        (void*)&mcConsole_Registers_RD_FL,      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - RD_FL
-        (void*)&mcConsole_Registers_RShiftA,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñì. 1ê
-        (void*)&mcConsole_Registers_RShiftB,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñì. 2ê
-        (void*)&mcConsole_Registers_TrigLev,    // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - U ñèíõğ.
-        (void*)&mcConsole_Registers_RangeA,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂÎËÜÒ/ÄÅË 1
-        (void*)&mcConsole_Registers_RangeB,     // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂÎËÜÒ/ÄÅË 2
-        (void*)&mcConsole_Registers_TrigParam,  // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. ñèíõğ.
-        (void*)&mcConsole_Registers_ChanParamA, // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. êàí. 1
-        (void*)&mcConsole_Registers_ChanParamB, // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïàğàì. êàí. 2
-        (void*)&mcConsole_Registers_TBase,      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - ÂĞÅÌß/ÄÅË
-        (void*)&mcConsole_Registers_tShift      // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ò ñì.
-    }
-};
-
-static const Page mpConsole_Registers(&strConsole_Registers);
+    Page_DebugShowRegisters, &itemsConsole_Registers
+);
 
 // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ĞÅÃÈÑÒĞÛ - Ïîêàçûâàòü âñå -----------------------------------------------------------------------------------------------------
 static const Choice mcConsole_Registers_ShowAll =
@@ -418,39 +418,39 @@ static const Choice mcConsole_Registers_tShift =
 
 
 // ÎÒËÀÄÊÀ - ÀÖÏ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strADC =
+static const arrayItems itemsADC =
 {
-    Item_Page, &pDebug, 0,
+    (void*)&mpADC_Balance,      // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ
+    (void*)&mpADC_Stretch,      // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ
+    (void*)&mpADC_AltRShift     // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
+    //, (void*)&mspDebugADCaltShift
+};
+
+static const Page mpADC
+(
+    &pDebug, 0,
     "ÀÖÏ", "ADC",
     "",
     "",
-    Page_DebugADC,
-    {
-        (void*)&mpADC_Balance,      // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ
-        (void*)&mpADC_Stretch,      // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ
-        (void*)&mpADC_AltRShift     // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
-        //, (void*)&mspDebugADCaltShift
-    }
-};
-
-static const Page mpADC(&strADC);
+    Page_DebugADC, &itemsADC
+);
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strADC_Balance =
+static const arrayItems itemsADC_Balance =
 {
-    Item_Page, &mpADC, 0,
+    (void*)&mcADC_Balance_Mode,     // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ğåæèì
+    (void*)&mgADC_Balance_ShiftA,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
+    (void*)&mgADC_Balance_ShiftB    // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
+};
+
+static const Page mpADC_Balance
+(
+    &mpADC, 0,
     "ÁÀËÀÍÑ", "BALANCE",
     "",
     "",
-    Page_DebugADCbalance,
-    {
-        (void*)&mcADC_Balance_Mode,     // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ğåæèì
-        (void*)&mgADC_Balance_ShiftA,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
-        (void*)&mgADC_Balance_ShiftB    // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
-    }
-};
-
-static const Page mpADC_Balance(&strADC_Balance);
+    Page_DebugADCbalance, &itemsADC_Balance
+);
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ğåæèì --------------------------------------------------------------------------------------------------------------------
 static const Choice mcADC_Balance_Mode =
@@ -531,21 +531,21 @@ static void OnChanged_ADC_Balance_ShiftB(void)
 
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strADC_Stretch =
+static const arrayItems itemsADC_Stretch =
 {
-    Item_Page, &mpADC, 0,
+    (void*)&mcADC_Stretch_Mode,     // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Ğåæèì
+    (void*)&mgADC_Stretch_ADC_A,    // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Êîıôô. 1ê
+    (void*)&mgADC_Stretch_ADC_B     // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Êîıôô. 2ê    
+};
+
+static const Page mpADC_Stretch
+(
+    &mpADC, 0,
     "ĞÀÑÒßÆÊÀ", "STRETCH",
     "",
     "",
-    Page_DebugADCstretch,
-    {
-        (void*)&mcADC_Stretch_Mode,     // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Ğåæèì
-        (void*)&mgADC_Stretch_ADC_A,    // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Êîıôô. 1ê
-        (void*)&mgADC_Stretch_ADC_B     // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Êîıôô. 2ê    
-    }
-};
-
-static const Page mpADC_Stretch(&strADC_Stretch);
+    Page_DebugADCstretch, &itemsADC_Stretch
+);
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ĞÀÑÒßÆÊÀ - Ğåæèì ------------------------------------------------------------------------------------------------------------------
 static const Choice mcADC_Stretch_Mode =
@@ -626,25 +626,25 @@ static void OnChanged_ADC_Stretch_ADC_B(void)
 }
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strADC_AltRShift =
+static const arrayItems itemsADC_AltRShift =
 {
-    Item_Page, &mpADC, 0,
+    (void*)&mbADC_AltRShift_Reset,          // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáğîñ
+    (void*)&mbADC_AltRShift_2mV_DC_A,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 2ìÂ ïîñò
+    (void*)&mbADC_AltRShift_2mV_DC_B,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 2ìÂ ïîñò
+    (void*)&mbADC_AltRShift_5mV_DC_A,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 5ìÂ ïîñò
+    (void*)&mbADC_AltRShift_5mV_DC_B,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò
+    (void*)&mbADC_AltRShift_10mV_DC_A,      // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
+    (void*)&mbADC_AltRShift_10mV_DC_B       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò    
+};
+
+static const Page mpADC_AltRShift
+(
+    &mpADC, 0,
     "ÄÎÏ ÑÌÅÙ", "ADD RSHFIT",
     "",
     "",
-    Page_DebugADCrShift,
-    {
-        (void*)&mbADC_AltRShift_Reset,          // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáğîñ
-        (void*)&mbADC_AltRShift_2mV_DC_A,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 2ìÂ ïîñò
-        (void*)&mbADC_AltRShift_2mV_DC_B,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 2ìÂ ïîñò
-        (void*)&mbADC_AltRShift_5mV_DC_A,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 5ìÂ ïîñò
-        (void*)&mbADC_AltRShift_5mV_DC_B,       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò
-        (void*)&mbADC_AltRShift_10mV_DC_A,      // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
-        (void*)&mbADC_AltRShift_10mV_DC_B       // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò    
-    }
-};
-
-static const Page mpADC_AltRShift(&strADC_AltRShift);
+    Page_DebugADCrShift, &itemsADC_AltRShift
+);
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáğîñ ------------------------------------------------------------------------------------------------------------------
 static const Button mbADC_AltRShift_Reset
@@ -743,21 +743,21 @@ static const Governor mbADC_AltRShift_10mV_DC_B
 
 
 // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strRandomizer =
+static const arrayItems itemsRandomizer =
 {
-    Item_Page, &pDebug, 0,
+    (void*)&mgRandomizer_SamplesForGates,   // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - Âûá-ê/âîğîòà
+    (void*)&mgRandomizer_AltTShift0,        // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - tShift äîï.
+    (void*)&mgRandomizer_Average            // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - Óñğåäí.
+};
+
+static const Page mpRandomizer
+(
+    &pDebug, 0,
     "ĞÀÍÄ-ÒÎĞ", "RANDOMIZER",
     "",
     "",
-    Page_DebugRandomizer,
-    {
-        (void*)&mgRandomizer_SamplesForGates,   // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - Âûá-ê/âîğîòà
-        (void*)&mgRandomizer_AltTShift0,        // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - tShift äîï.
-        (void*)&mgRandomizer_Average            // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - Óñğåäí.
-    }
-};
-
-static const Page mpRandomizer(&strRandomizer);
+    Page_DebugRandomizer, &itemsRandomizer
+);
 
 // ÎÒËÀÄÊÀ - ĞÀÍÄ-ÒÎĞ - Âûá-ê/âîğîòà -----------------------------------------------------------------------------------------------------------------
 static const Governor mgRandomizer_SamplesForGates
@@ -861,25 +861,24 @@ static void OnPress_SaveFirmware(void)
 
 
 // ÎÒËÀÄÊÀ - Ñ/Í /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const PageStruct strSerialNumber =
+static const arrayItems itemsSerialNumber =
 {
-    Item_Page, &pDebug, 0,
+    (void*)&bSerialNumber_Exit,     // ÎÒËÀÄÊÀ - Ñ/Í - Âûõîä
+    (void*)&bSerialNumber_Change,   // ÎÒËÀÄÊÀ - Ñ/Í - Ïåğåéòè
+    (void*)0,
+    (void*)0,
+    (void*)0,
+    (void*)&bSerialNumber_Save      // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõğàíèòü    
+};
+
+static const Page ppSerialNumber
+(
+    &pDebug, 0,
     "Ñ/Í", "S/N",
     "Çàïèñü ñåğèéíîãî íîìåğà â OTP-ïàìÿòü. ÂÍÈÌÀÍÈÅ!!! ÎÒP-ïàìÿòü - ïàìÿòü ñ îäíîêğàòíîé çàïèñüş.",
     "Serial number recording in OTP-memory. ATTENTION!!! OTP memory is a one-time programming memory.",
-    Page_SB_SerialNumber,
-    {
-        (void*)&bSerialNumber_Exit,     // ÎÒËÀÄÊÀ - Ñ/Í - Âûõîä
-        (void*)&bSerialNumber_Change,   // ÎÒËÀÄÊÀ - Ñ/Í - Ïåğåéòè
-        (void*)0,
-        (void*)0,
-        (void*)0,
-        (void*)&bSerialNumber_Save      // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõğàíèòü    
-    },
-    OnPress_SerialNumber, 0, OnRegSet_SerialNumber
-};
-
-static const Page ppSerialNumber(&strSerialNumber);
+    Page_SB_SerialNumber, &itemsSerialNumber, OnPress_SerialNumber, 0, OnRegSet_SerialNumber
+);
 
 static void OnPress_SerialNumber(void)
 {

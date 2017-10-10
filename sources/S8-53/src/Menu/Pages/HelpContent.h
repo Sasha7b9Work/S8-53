@@ -1,5 +1,6 @@
 #pragma once
-#include "defines.h"
+#include "../../defines.h"
+
 
 void HelpContent_Draw();
 void HelpContent_NextParagraph();
