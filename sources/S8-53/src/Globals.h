@@ -22,6 +22,9 @@ extern ADC_HandleTypeDef handleADC;
 extern DAC_HandleTypeDef handleDAC;
 
 
+#define SETTINGS_IS_LOADED  (gBF.settingsLoaded)
+
+
 typedef struct
 {
     // Ethernet

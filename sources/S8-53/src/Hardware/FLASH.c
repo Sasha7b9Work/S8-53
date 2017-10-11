@@ -93,7 +93,7 @@ void FLASH_LoadSettings(void)
         }
         memcpy(&set, (const void *)(record->addrData - 4), record->sizeData);               // Считываем их
         EraseSector(ADDR_SECTOR_SETTINGS);                                                  // Стираем сектор настроек
-        FLASH_SaveSettings(false);                                                          // И сохраняем настройки в новом формате
+        FLASH_SaveSettings(true);                                                          // И сохраняем настройки в новом формате
     }
     else
     {
@@ -105,6 +105,7 @@ void FLASH_LoadSettings(void)
             address += READ_WORD(address);      // И переходим к следующему прибавлением значения, хранящегося по этому адресу (первый элемент
         }                                       // структуры Settings - её размер. Все настройки хранятся последовательно в памяти, одна структура
                                                 // за другой
+        
         if (addressPrev != 0)                   // Если по этому адресу что-то записано
         {
             memcpy(&set, (const void *)addressPrev, READ_WORD(addressPrev));    // Счтываем сохранённые настройки
@@ -124,7 +125,7 @@ void WriteAddressDataInRecord(RecordConfig *record)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FLASH_SaveSettings(bool verifyLoadede)
 {
-    if (verifyLoadede && gBF.settingsLoaded == 0)
+    if (!verifyLoadede && !SETTINGS_IS_LOADED)
     {
         return;
     }

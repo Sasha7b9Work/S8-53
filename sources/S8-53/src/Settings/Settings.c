@@ -296,7 +296,7 @@ void Settings_Load(bool _default)
     menu.SetAutoHide(true);
     display.ChangedRShiftMarkers();
 
-    gBF.settingsLoaded = 1;
+    SETTINGS_IS_LOADED = 1;
 }
 
 void Settings_Save()
