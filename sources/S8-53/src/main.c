@@ -67,7 +67,7 @@ int main(void)
 
         if (!WelcomeScreen_Run())
         {
-            display.Update();                   // Рисуем экран.
+            display.Update();               // Рисуем экран.
         }
 
         menu.UpdateInput();                 // Обновляем состояние меню

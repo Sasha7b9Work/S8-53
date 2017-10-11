@@ -12,7 +12,7 @@ void Hardware_Init();
 }
 #endif
     
-uint Hardware_CalculateCRC32();
+uint Hardware_CalculateCRC32(uint address = 0x08020000, uint numBytes = 128 * 1024 * 3 / 4);
 
 
 // #define HARDWARE_ERROR HardwareErrorHandler(__FILE__, __FUNCTION__, __LINE__);

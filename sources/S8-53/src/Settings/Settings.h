@@ -224,6 +224,7 @@ typedef struct
     SettingsCommon      common;             ///< системные настройки.
     SettingsMenu        menu;               ///< состояние меню.
     SettingsDebug       debug;              ///< настройки режима отладки       (меню ОТЛАДКА).
+    uint                crc32;              ///< контрольная сумма. Используется для проверки корректности сохранённых настроек
     //int temp[5];
 } Settings;
 
@@ -231,8 +232,10 @@ extern Settings set;
 
 void Settings_Load(bool _default);      ///< \brief Загрузить настройки. Если _default == true, загружаются настройки по умолчанию, иначе пытается 
                                         ///< загрузить настройки из ПЗУ, а в случае неудачи - тоже настройки по умолчанию.
-void Settings_Save();               ///< Сохранить настройки во флеш-память.
-bool Settings_DebugModeEnable();    ///< Возвращает true, если включён режим отладки.
+void Settings_Save();                   ///< Сохранить настройки во флеш-память.
+bool Settings_DebugModeEnable();        ///< Возвращает true, если включён режим отладки.
+/// Возвращает true, если значение, записанное в 
+bool CheckSumIsCorrect();
 
 
 /** @}

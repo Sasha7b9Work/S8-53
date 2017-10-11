@@ -248,26 +248,30 @@ static void LoadDefaultColors()
 
 void Settings_Load(bool _default)
 {
-    uint16 rShiftAdd[2][RangeSize][2];
-    for (int chan = 0; chan < 2; chan++)
+    FLASH_LoadSettings();
+
+    if (_default)                                                               // Если нужно сбросить настройки
     {
-        for (int i = 0; i < RangeSize; i++)
+        uint16 rShiftAdd[2][RangeSize][2];                                      // Сначала сохраняем несбрасываемые настройки
+        for (int chan = 0; chan < 2; chan++)
         {
-            for (int j = 0; j < 2; j++)
+            for (int i = 0; i < RangeSize; i++)
             {
-                rShiftAdd[chan][i][j] = set.chan[chan].rShiftAdd[i][j];
+                for (int j = 0; j < 2; j++)
+                {
+                    rShiftAdd[chan][i][j] = set.chan[chan].rShiftAdd[i][j];
+                }
             }
         }
-    }
 
-    int16  balanceADC0 = BALANCE_ADC_A;
-    int16  balanceADC1 = BALANCE_ADC_B;
-    int16  numAverageForRand = NUM_AVE_FOR_RAND;
-    BalanceADCtype balanceType = BALANCE_ADC_TYPE;
-    memcpy((void*)&set, (void*)(&defaultSettings), sizeof(set));
-    if (_default)
-    {
-        for (int chan = 0; chan < 2; chan++)
+        int16  balanceADC0 = BALANCE_ADC_A;
+        int16  balanceADC1 = BALANCE_ADC_B;
+        int16  numAverageForRand = NUM_AVE_FOR_RAND;
+        BalanceADCtype balanceType = BALANCE_ADC_TYPE;
+
+        memcpy((void*)&set, (void*)(&defaultSettings), sizeof(set));            // Потом заполняем значениями по умолчанию
+
+        for (int chan = 0; chan < 2; chan++)                                    // И восстанавливаем несбрасываемые настройки
         {
             for (int i = 0; i < RangeSize; i++)
             {
@@ -282,10 +286,8 @@ void Settings_Load(bool _default)
         NUM_AVE_FOR_RAND = numAverageForRand;
         BALANCE_ADC_TYPE = balanceType;
     }
-    else
-    {
-        FLASH_LoadSettings();
-    }
+
+
     fpga.LoadSettings();
     fpga.SetNumSignalsInSec(sDisplay_NumSignalsInS());
     panel.EnableLEDChannel0(sChannel_Enabled(A));
