@@ -248,6 +248,8 @@ static void LoadDefaultColors()
 
 void Settings_Load(bool _default)
 {
+    set = defaultSettings;
+    
     FLASH_LoadSettings();
 
     if (_default)                                                               // Если нужно сбросить настройки
