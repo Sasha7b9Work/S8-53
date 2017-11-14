@@ -84,7 +84,11 @@ void FLASH_LoadSettings(void)
         PrepareSectorForData();
     }
     
-    if (READ_WORD(ADDR_SECTOR_SETTINGS) == MARK_OF_FILLED)                                  // Если старый алгоритм хранения настроек
+    if(READ_WORD(ADDR_SECTOR_SETTINGS) == 0x12345)
+    {
+        EraseSector(ADDR_SECTOR_SETTINGS);
+    }
+    else if (READ_WORD(ADDR_SECTOR_SETTINGS) == MARK_OF_FILLED)                             // Если старый алгоритм хранения настроек
     {
         RecordConfig *record = RecordConfigForRead();
         if (record->sizeData + record->addrData >= (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // Если последние сохранённые настройки выходят
@@ -93,7 +97,7 @@ void FLASH_LoadSettings(void)
         }
         memcpy(&set, (const void *)(record->addrData - 4), record->sizeData);               // Считываем их
         EraseSector(ADDR_SECTOR_SETTINGS);                                                  // Стираем сектор настроек
-        FLASH_SaveSettings(true);                                                          // И сохраняем настройки в новом формате
+        FLASH_SaveSettings(true);                                                           // И сохраняем настройки в новом формате
     }
     else
     {
