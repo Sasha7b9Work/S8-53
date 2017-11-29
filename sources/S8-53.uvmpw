@@ -9,13 +9,11 @@
 
   <project>
     <PathAndName>.\S8-53\S8-53.uvprojx</PathAndName>
-    <NodeIsExpanded>1</NodeIsExpanded>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\S8-53\Bootloader\BootloaderS8-53.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
-    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>
