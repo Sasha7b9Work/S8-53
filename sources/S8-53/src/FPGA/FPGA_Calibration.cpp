@@ -559,5 +559,5 @@ float CalculateKoeffCalibration(Channel chan)
     {
         return ERROR_VALUE_FLOAT;
     }
-    return retValue;
+    return retValue * 1.004f;
 }
