@@ -12,6 +12,8 @@
 *.suo
 *.uvgu*.*
 
+JLink*.*
+
 bins/*
 
 sources/.vs/*
@@ -24,6 +26,7 @@ sources/S8-53/Listings/*
 sources/S8-53/Objects/*
 sources/S8-53/Bootloader/Listings/*
 sources/S8-53/Bootloader/Objects/*
+
 
 sources/Tests/TestDisplay/stm32/Listings/*
 sources/Tests/TestDisplay/stm32/Objects/*
