@@ -793,12 +793,14 @@ bool Menu::NeedForFireSetLED()    // Возвращает true, если лампочка УСТАНОВКА до
         return false;
     }
     NamePage name = GetNameOpenedPage();
+
     if (
         name == Page_SB_MathCursorsFFT      || 
         name == Page_SB_MeasTuneMeas        || 
         name == Page_SB_MemLatest           || 
         name == Page_SB_MemInt              ||
-        (name == Page_SB_MathFunction && !DISABLED_DRAW_MATH)
+        (name == Page_SB_MathFunction && !DISABLED_DRAW_MATH) ||
+        name == Page_SB_Curs && sCursors_NecessaryDrawCursors()
         )
     {
         return true;

@@ -440,7 +440,6 @@
     <ClInclude Include="..\..\S8-53\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="src\cmsis_gcc.h" />
     <ClInclude Include="..\..\S8-53\src\defines.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -590,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_crc.h">
       <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cmsis_gcc.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
