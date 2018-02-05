@@ -6,6 +6,7 @@
 #include "Pages/PageMemory.h"
 #include "Display/DisplayTypes.h"
 #include "MenuItems.h"
+#include "Menu/Pages/PageMeasures.h"
 #include "defines.h"
 #include "MenuItemsLogic.h"
 #include "Tables.h"
@@ -794,12 +795,17 @@ bool Menu::NeedForFireSetLED()    // Возвращает true, если лампочка УСТАНОВКА до
     }
     NamePage name = GetNameOpenedPage();
 
+    if (name == Page_SB_MeasTuneMeas && MEAS_NUM == MN_1 && !PageMeasures::choiceMeasuresIsActive)
+    {
+        return false;
+    }
+
     if (
-        name == Page_SB_MathCursorsFFT                      ||
-        (name == Page_SB_MeasTuneMeas && MEAS_NUM != MN_1)  ||
-        name == Page_SB_MemLatest                           || 
-        name == Page_SB_MemInt                              ||
-        (name == Page_SB_MathFunction && !DISABLED_DRAW_MATH) ||
+        name == Page_SB_MathCursorsFFT                          ||
+        name == Page_SB_MeasTuneMeas                            ||
+        name == Page_SB_MemLatest                               || 
+        name == Page_SB_MemInt                                  ||
+        (name == Page_SB_MathFunction && !DISABLED_DRAW_MATH)   ||
         name == Page_SB_Curs && sCursors_NecessaryDrawCursors()
         )
     {

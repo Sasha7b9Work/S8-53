@@ -1481,6 +1481,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\HelpContentPages.h</FilePath>
             </File>
+            <File>
+              <FileName>PageMeasures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

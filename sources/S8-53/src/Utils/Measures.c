@@ -1,6 +1,7 @@
 #include "Measures.h"
 #include "GlobalFunctions.h"
 #include "Math.h"
+#include "Menu/Pages/PageMeasures.h"
 #include "../Settings/SettingsTypes.h"
 #include "../Settings/Settings.h"
 #include "../Display/Display.h"
@@ -46,9 +47,8 @@ static const StructMeasure measures[Measure_NumMeasures] =
     {"‘аза\xa6",    '\xe5'}
 };
 
-static int8 posActive = 0;                   // ѕозици€ активного измерени€ (на котором курсор)
-static bool pageChoiceIsActive = false;     // ≈сли true - раскрыта страница выбора измерени€
-static int8 posOnPageChoice = 0;             // ѕозици€ курсора на странице выбора измерени€
+static int8 posActive = 0;                  // ѕозици€ активного измерени€ (на котором курсор)
+static int8 posOnPageChoice = 0;            // ѕозици€ курсора на странице выбора измерени€
 
 bool Measure_IsActive(int row, int col)
 {
@@ -167,7 +167,7 @@ void Measure_RotateRegSet(int angle)
     {
         return;
     }
-    if (pageChoiceIsActive)
+    if (PageMeasures::choiceMeasuresIsActive)
     {
         posOnPageChoice += Math_Sign(currentAngle);
         sound.RegulatorSwitchRotate();
@@ -214,8 +214,8 @@ void Measure_RotateRegSet(int angle)
 
 void Measure_ShorPressOnSmallButtonSettings()
 {
-    pageChoiceIsActive = !pageChoiceIsActive;
-    if(pageChoiceIsActive)
+    PageMeasures::choiceMeasuresIsActive = !PageMeasures::choiceMeasuresIsActive;
+    if(PageMeasures::choiceMeasuresIsActive)
     {
         posOnPageChoice = MEASURE(posActive);
     }
@@ -235,7 +235,7 @@ void Measure_ShortPressOnSmallButonMarker()
 
 void Measure_DrawPageChoice()
 {
-    if(!pageChoiceIsActive)
+    if(!PageMeasures::choiceMeasuresIsActive)
     {
         return;
     }

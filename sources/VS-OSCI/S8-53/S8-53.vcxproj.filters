@@ -593,6 +593,9 @@
     <ClInclude Include="src\cmsis_gcc.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\S8-53\src\Display\font\font5.inc">
