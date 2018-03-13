@@ -12,7 +12,7 @@ copy font8display.inc ..\src\Display\font
 copy fontUGOdisplay.inc ..\src\Display\font
 copy fontUGO2display.inc ..\src\Display\font
 
-copy font5display.inc ..\Display\fonts
-copy font8display.inc ..\Display\fonts
-copy fontUGOdisplay.inc ..\Display\fonts
-copy fontUGO2display.inc ..\Display\fonts
+copy font5display.inc ..\Display\src\fonts
+copy font8display.inc ..\Display\src\fonts
+copy fontUGOdisplay.inc ..\Display\src\fonts
+copy fontUGO2display.inc ..\Display\src\fonts

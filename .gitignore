@@ -10,6 +10,7 @@
 *.tre
 *.scvd
 *.suo
+*.tmp
 *.uvgu*.*
 
 JLink*.*

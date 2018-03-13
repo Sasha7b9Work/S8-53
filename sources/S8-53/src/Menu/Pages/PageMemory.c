@@ -705,9 +705,18 @@ static void DrawSB_MemInt_ModeShow_Saved(int x, int y)
 
 static void DrawSB_MemInt_ModeShow_Both(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_MEM_INT_SHOW_BOTH);
-    painter.SetFont(TypeFont_8);
+    ++y;
+
+    painter.DrawRectangle(x + 2, y + 5, 4, 7);
+
+    painter.DrawRectangle(x + 8, y + 8, 4, 4);
+    painter.DrawVLine(x + 8, y + 8, y + 5);
+    painter.DrawHLine(y + 5, x + 8, x + 12);
+
+    painter.DrawVLine(x + 14, y + 6, y + 12);
+    painter.DrawVLine(x + 17, y + 5, y + 12);
+    painter.DrawHLine(y + 9, x + 14, x + 17);
+    painter.DrawHLine(y + 5, x + 15, x + 17);
 }
 
 static void DrawSB_MemInt_ModeShow(int x, int y)
