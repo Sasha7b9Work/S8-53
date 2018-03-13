@@ -629,13 +629,13 @@ static void FuncOnRegSetMemInt(int delta)
     sound.RegulatorSwitchRotate();
     if (delta < 0)
     {
-        CircleDecreaseInt8(&gMemory.currentNumIntSignal, 0, MAX_NUM_SAVED_WAVES - 1);
+        CircleDecreaseInt8(&CURRENT_NUM_INT_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
     else if (delta > 0)
     {
-        CircleIncreaseInt8(&gMemory.currentNumIntSignal, 0, MAX_NUM_SAVED_WAVES - 1);
+        CircleIncreaseInt8(&CURRENT_NUM_INT_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
-    FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
+    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     painter.ResetFlash();
 }
 
@@ -766,7 +766,7 @@ static const SmallButton sbMemIntModeShow
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void PressSB_MemInt_Delete()
 {
-
+    FLASH_DeleteData(CURRENT_NUM_INT_SIGNAL);
 }
 
 static void DrawSB_MemInt_Delete(int x, int y)
