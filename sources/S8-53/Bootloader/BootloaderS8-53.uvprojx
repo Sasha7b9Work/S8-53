@@ -466,11 +466,6 @@
               <FilePath>..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\ff_gen_drv.h</FilePath>
             </File>
             <File>
-              <FileName>00readme.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\00readme.txt</FilePath>
-            </File>
-            <File>
               <FileName>unicode.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\option\unicode.c</FilePath>
