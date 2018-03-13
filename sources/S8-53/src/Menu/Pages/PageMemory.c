@@ -818,6 +818,7 @@ void PressSB_MemInt_Exit()
     }
     else
     {
+        MODE_WORK = ModeWork_Direct;
         menu.ShortPressOnPageItem(menu.PagePointerFromName(Page_SB_MemInt), 0);
     }
 }
