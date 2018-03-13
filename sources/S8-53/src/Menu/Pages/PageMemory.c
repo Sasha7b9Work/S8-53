@@ -674,8 +674,10 @@ extern const Page mspMemInt;
 
 static const arrayHints hintsMemIntShowSignalAlways =
 {
-    {DrawSB_MemInt_ShowSignalAllways_Yes, "показывать выбранный сигнал из внутренней памяти поверх текущего",                               "to show the chosen signal from internal memory over the current"},
-    {DrawSB_MemInt_ShowSignalAllways_No,  "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством", "the signal from internal memory is visible only in an operating mode with an internal memory"}
+    {DrawSB_MemInt_ShowSignalAllways_Yes, "показывать выбранный сигнал из внутренней памяти поверх текущего",
+                                          "to show the chosen signal from internal memory over the current"},
+    {DrawSB_MemInt_ShowSignalAllways_No,  "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством",
+                                          "the signal from internal memory is visible only in an operating mode with an internal memory"}
 };
 
 static const SmallButton sbMemIntShowSignalAlways
@@ -689,6 +691,7 @@ static const SmallButton sbMemIntShowSignalAlways
     &hintsMemIntShowSignalAlways
 );
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawSB_MemInt_ModeShow_Direct(int x, int y)
 {
     painter.SetFont(TypeFont_UGO2);
@@ -760,6 +763,30 @@ static const SmallButton sbMemIntModeShow
     &hintsMemIntModeShow
 );
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void PressSB_MemInt_Delete()
+{
+
+}
+
+static void DrawSB_MemInt_Delete(int x, int y)
+{
+    painter.SetFont(TypeFont_UGO2);
+    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+    painter.SetFont(TypeFont_8);
+}
+
+static const SmallButton sbMemIntDelete
+(
+    &mspMemInt, 0,
+    "Удалить сигнал", "Delete signal",
+    "Удалить сигнал",
+    "Delete signal",
+    PressSB_MemInt_Delete,
+    DrawSB_MemInt_Delete
+);
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 const SmallButton sbMemIntSave
 (
     &mspMemInt, 0,
@@ -1260,7 +1287,7 @@ static const arrayItems itemsMemInt =
     (void*)&sbExitMemInt,
     (void*)&sbMemIntShowSignalAlways,
     (void*)&sbMemIntModeShow,
-    (void*)0,
+    (void*)&sbMemIntDelete,
     (void*)&sbMemIntSave,
     (void*)&sbMemIntSaveToFlash
 };
