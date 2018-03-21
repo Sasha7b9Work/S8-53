@@ -1,6 +1,7 @@
 #include "Settings.h"
 #include "Hardware/FLASH.H"
 #include "Display/Display.h"
+#include "Display/Painter.h"
 #include "Panel/Panel.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Types.h"
@@ -236,15 +237,6 @@ static const Settings defaultSettings =
 
 Settings set;
 
-/*
-static void LoadDefaultColors() 
-{
-    for(int color = 0; color < NUM_COLORS; color++) 
-    {
-        set.display.colors[color] = defaultSettings.display.colors[color];
-    }
-}
-*/
 
 void Settings_Load(bool _default)
 {
@@ -287,6 +279,14 @@ void Settings_Load(bool _default)
         BALANCE_ADC_B = balanceADC1;
         NUM_AVE_FOR_RAND = numAverageForRand;
         BALANCE_ADC_TYPE = balanceType;
+
+        // Восстанавливаем цвета
+        for (int color = 0; color < NUM_COLORS; color++)
+        {
+            set.display.colors[color] = defaultSettings.display.colors[color];
+        }
+
+        painter.LoadPalette();
     }
 
 
