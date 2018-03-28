@@ -92,7 +92,9 @@ BitField gBF =
 
     0,  // tuneTime
 
-    GRID_BOTTOM // topMeasures
+    GRID_BOTTOM, // topMeasures
+ 
+    0   // needOpenFileManager
 };
 
 

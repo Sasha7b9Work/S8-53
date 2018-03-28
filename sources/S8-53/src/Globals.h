@@ -22,7 +22,8 @@ extern ADC_HandleTypeDef handleADC;
 extern DAC_HandleTypeDef handleDAC;
 
 
-#define SETTINGS_IS_LOADED  (gBF.settingsLoaded)
+#define SETTINGS_IS_LOADED      (gBF.settingsLoaded)
+#define NEED_OPEN_FILE_MANAGER  (gBF.needOpenFileMananger)
 
 
 typedef struct
@@ -91,6 +92,7 @@ typedef struct
 
     int topMeasures                 : 9;    // Верх таблицы вывода измерений. Это значение нужно для нормального вывода сообщений на экран - чтобы 
                                             // они ничего не перекрывали
+    uint needOpenFileMananger       : 1;    // Если 1, то нужно открыть файловый менеджер (сработало автоподключение)
 } BitField;
 
 

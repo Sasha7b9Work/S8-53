@@ -56,6 +56,12 @@ void Menu::UpdateInput(void)
     ProcessingPressButton();
     ProcessingReleaseButton();
     SwitchSetLED();
+
+    if(NEED_OPEN_FILE_MANAGER)
+    {
+        OnPressMemoryExtFileManager();
+        NEED_OPEN_FILE_MANAGER = 0;
+    }
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -761,7 +767,7 @@ void Menu::ChangeStateFlashDrive()
     }
     else if(FLASH_AUTOCONNECT)
     {
-        OnPressMemoryExtFileManager();
+        NEED_OPEN_FILE_MANAGER = 1;
     }
 }
 
