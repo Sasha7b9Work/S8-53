@@ -111,6 +111,13 @@ static void DrawFiles(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+bool FM_FileIsExist(char name[255])
+{
+    flashDrive.GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
+    
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawNameCurrentDir(int left, int top)
 {
     painter.SetColor(COLOR_FILL);
@@ -371,14 +378,14 @@ bool FM_GetNameForNewFile(char name[255])
 
         while (*ch)
         {
-            if (*ch >= 0x30)
+            if (*ch >= 0x30)        // Если текстовый символ
             {
-                *wr = *ch;
+                *wr = *ch;          // то записываем его в имя файла
                 wr++;
             }
             else
             {
-                if (*ch == 0x07)
+                if (*ch == 0x07)    // Если здесь надо записать порядковый номер
                 {
                     number++;
                     strcpy(wr, Int2String(number, false, *(ch + 1), buffer));
