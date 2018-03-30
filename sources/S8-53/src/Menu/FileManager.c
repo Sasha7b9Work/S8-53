@@ -113,8 +113,20 @@ static void DrawFiles(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FM_FileIsExist(char name[255])
 {
+    char nameFile[255];
     flashDrive.GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
-    
+    StructForReadDir sfrd;
+    if(flashDrive.GetNameFile(currentDir, 0, nameFile, &sfrd))
+    {
+        while(flashDrive.GetNextNameFile(nameFile, &sfrd))
+        {
+            if(strcmp(name + 2, nameFile) == 0)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -342,8 +354,9 @@ void FM_RotateRegSet(int angle)
 bool FM_GetNameForNewFile(char name[255])
 {
     char buffer[20];
+    int number = 1;
 
-    static int number = 0;
+LabelNextNumber:
 
     strcpy(name, currentDir);
     strcat(name, "\\");
@@ -387,7 +400,6 @@ bool FM_GetNameForNewFile(char name[255])
             {
                 if (*ch == 0x07)    // ≈сли здесь надо записать пор€дковый номер
                 {
-                    number++;
                     strcpy(wr, Int2String(number, false, *(ch + 1), buffer));
                     wr += strlen(buffer);
                     ch++;
@@ -408,6 +420,12 @@ bool FM_GetNameForNewFile(char name[255])
         *(wr + 1) = '\0';
 
         strcat(name, MODE_SAVE_SIGNAL_IS_BMP ? "bmp" : "txt");
+
+        if(FM_FileIsExist(name))
+        {
+            number++;
+            goto LabelNextNumber;
+        }
 
         return true;
     }
