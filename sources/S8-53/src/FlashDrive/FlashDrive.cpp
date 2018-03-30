@@ -9,6 +9,7 @@
 #include <usbh_msc.h>
 #include "ffconf.h"
 #include "Hardware/Hardware.h"
+#include "Hardware/RTC.h"
 #include "FlashDrive.h"
 
 
@@ -325,6 +326,7 @@ bool FlashDrive::OpenNewFileForWrite(const char* fullPathToFile, StructForWrite 
     {
         return false;
     }
+    strcpy(structForWrite->name, fullPathToFile);
     structForWrite->sizeData = 0;
     return true;
 }
@@ -370,5 +372,12 @@ bool FlashDrive::CloseFile(StructForWrite *structForWrite)
         }
     }
     f_close(&structForWrite->fileObj);
+
+    FILINFO fno;
+    PackedTime time = RTC_GetPackedTime();
+    fno.fdate = (WORD)(((time.year + 20) * 512) | (time.month * 32) | time.day);
+    fno.ftime = (WORD)((time.hours * 2048) | (time.minutes * 32) | (time.seconds / 2));
+    f_utime(structForWrite->name, &fno);
+
     return true;
 }
