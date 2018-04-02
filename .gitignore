@@ -48,3 +48,7 @@ sources/VS-OSCI/S8-53_LAN/bin/*
 sources/VS-OSCI/S8-53_LAN/obj/*
 sources/VS-OSCI/S8-53_USB/bin/*
 sources/VS-OSCI/S8-53_USB/obj/*
+sources/VS-OSCI/S8-53_ConsoleLAN/bin/*
+sources/VS-OSCI/S8-53_ConsoleLAN/obj/*
+sources/VS-OSCI/S8-53_ConsoleUSB/bin/*
+sources/VS-OSCI/S8-53_ConsoleUSB/obj/*

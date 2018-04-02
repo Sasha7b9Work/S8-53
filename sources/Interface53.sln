@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S8-53_USB", "VS-OSCI\S8-53_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S8-53_LAN", "VS-OSCI\S8-53_LAN\S8-53_LAN.csproj", "{A6A3DFB8-AA70-4406-9198-4DED6188B2AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S8-53_ConsoleLAN", "VS-OSCI\S8-53_ConsoleLAN\S8-53_ConsoleLAN.csproj", "{7415BA66-9F74-4E36-8C7C-1911FF5CEF41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S8-53_ConsoleUSB", "VS-OSCI\S8-53_ConsoleUSB\S8-53_ConsoleUSB.csproj", "{6DBF6657-520B-4421-B9DA-323AC641F0C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{A6A3DFB8-AA70-4406-9198-4DED6188B2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6A3DFB8-AA70-4406-9198-4DED6188B2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6A3DFB8-AA70-4406-9198-4DED6188B2AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7415BA66-9F74-4E36-8C7C-1911FF5CEF41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7415BA66-9F74-4E36-8C7C-1911FF5CEF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7415BA66-9F74-4E36-8C7C-1911FF5CEF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7415BA66-9F74-4E36-8C7C-1911FF5CEF41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBF6657-520B-4421-B9DA-323AC641F0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBF6657-520B-4421-B9DA-323AC641F0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBF6657-520B-4421-B9DA-323AC641F0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBF6657-520B-4421-B9DA-323AC641F0C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
