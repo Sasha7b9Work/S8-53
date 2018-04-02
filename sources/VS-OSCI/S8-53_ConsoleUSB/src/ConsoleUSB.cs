@@ -40,6 +40,9 @@ namespace S8_53_ConsoleUSB
             commands.Enqueue(new Command("help", 
                 "список доступных команд", 
                 CommandWriteHelp));
+            commands.Enqueue(new Command("?",
+                "список доступных команд",
+                CommandWriteHelp));
 
             CommandGetPorts();
 
@@ -156,19 +159,25 @@ namespace S8_53_ConsoleUSB
             }
             else
             {
-                for (int i = 0; i < namesPorts.Length; i++)
+                if (args.Length > 1)                            // Если есть аргументы, будем подключаться к указанному порту
                 {
-                    if (args[1] == namesPorts[i])
+                    for (int i = 0; i < namesPorts.Length; i++)
                     {
-                        if (port.Open(i))
+                        if (args[1] == namesPorts[i])
                         {
-                            WriteLine("Устройство подключено к порту " + args[1]);
-                        }
-                        else
-                        {
-                            WriteLine("Ошибка!!! Не погу подключить устройство");
+                            if (port.Open(i))
+                            {
+                                WriteLine("Устройство подключено к порту " + args[1]);
+                                return;
+                            }
+                            else
+                            {
+                                WriteLine("Ошибка!!! Не погу подключить устройство на порту " + args[1]);
+                                return;
+                            }
                         }
                     }
+
                 }
             }
         }
