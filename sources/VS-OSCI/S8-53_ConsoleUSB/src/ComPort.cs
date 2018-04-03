@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace S8_53_ConsoleUSB
 {
-
+    /*
     public class RecievedEventArgs : EventArgs {
 
         public byte[] data;
@@ -19,6 +19,7 @@ namespace S8_53_ConsoleUSB
             this.numBytes = numBytes;
         }
     }
+    */
 
     class ComPort {
 
@@ -31,16 +32,40 @@ namespace S8_53_ConsoleUSB
         private static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
-        
-        private TypeDisplay typeDisplay = TypeDisplay.None;
+        private ConsoleUSB.FuncOnReceive funcOnReceive = null;
 
-        public ComPort () {
+        public ComPort ()
+        {
             port = new SerialPort();
             port.ReadTimeout = 100;
             port.BaudRate = 125000;
+
+            port.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+        }
+
+        public void SetCallbackOnReceive()
+        {
+            
+        }
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (IsOpen())
+            {
+                SerialPort sp = (SerialPort)sender;
+                if (sp != null)
+                {
+                    string indata = sp.ReadExisting();
+                    if (funcOnReceive != null)
+                    {
+                        funcOnReceive(indata);
+                    }
+                }
+            }
         }
         
         public void Stop() {
+            funcOnReceive = null;
             port.Close();
         }
 
@@ -59,8 +84,7 @@ namespace S8_53_ConsoleUSB
                     SendString("REQUEST ?");
                     answer = ReadLine();
                     port.Close();
-                    bool retValue = (answer == "S8-53" || answer == "S8-53/1");
-                    return retValue;
+                    return (answer == "S8-53" || answer == "S8-53/1");
                 }
             } catch(SystemException) {
                 port.Close();
@@ -102,42 +126,24 @@ namespace S8_53_ConsoleUSB
             return null;
         }
 
-        public void OnlyOpen(int numPort) {
-            port.PortName = ports[numPort];
-            port.Open();
-        }
-
-        public void OnlyClose() {
-            port.Close();
-        }
-
-        public bool Open(int numPort)
+        public bool Connect(int numPort, ConsoleUSB.FuncOnReceive func)
         {
             try
             {
                 port.PortName = ports[numPort];
                 port.Open();
-                if(port.IsOpen)
-                {
-                    SendString("REQUEST ?");
-                    string answer = ReadLine();
-                    if(answer == "S8-53")
-                    {
-                        typeDisplay = TypeDisplay.Monochrome;
-                    }
-                    else if(answer == "S8-53/1")
-                    {
-                        typeDisplay = TypeDisplay.Color;
-                    }
-                    else
-                    {
-                        typeDisplay = TypeDisplay.None;
-                    }
-                }
             }
             catch(SystemException)
             {
                 port.Close();
+            }
+            if(port.IsOpen)
+            {
+                funcOnReceive = func;
+            }
+            else
+            {
+                funcOnReceive = null;
             }
             return port.IsOpen;
         }

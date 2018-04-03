@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace Controller_S8_53 {
 
+    /*
     public class RecievedEventArgs : EventArgs {
 
         public byte[] data;
@@ -18,6 +19,7 @@ namespace Controller_S8_53 {
             this.numBytes = numBytes;
         }
     }
+    */
 
     class ComPort {
 
