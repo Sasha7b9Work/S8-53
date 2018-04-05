@@ -14,5 +14,3 @@ bool TCPSocket_Init(void (*funcConnect)(void), void (*funcReciever)(const char *
 bool TCPSocket_Send(const char *buffer, uint length);
 
 void TCPSocket_SendFormatString(char *format, ...);
-
-void ETH_SendFormatString(char *format, ...);

@@ -26,10 +26,7 @@ namespace S8_53_ConsoleLAN
 
         ~SocketTCP()
         {
-            if(socket != null)
-            {
-                socket.Close();
-            }
+            Disconnect();
         }
 
         public bool IsConnected()
@@ -67,10 +64,6 @@ namespace S8_53_ConsoleLAN
                 if (!socket.Connected)
                 {
                     Disconnect();
-                }
-                else
-                {
-                    SendString("REQUEST ?");
                 }
             }
             catch (Exception e)
@@ -111,7 +104,7 @@ namespace S8_53_ConsoleLAN
         {
             if (socket.Connected)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(data);
+                byte[] bytes = Encoding.UTF8.GetBytes(":" + data + "\x0d");
                 socket.Send(bytes);
                 Console.WriteLine("Длина посылки " + bytes.Length + ' ' + bytes[0] + ' ' + bytes[1]);
             }
@@ -122,7 +115,7 @@ namespace S8_53_ConsoleLAN
             try
             {
                 StateObject state = (StateObject)ar.AsyncState;
-                if (socket.Connected)
+                if (socket != null && socket.Connected)
                 {
                     int bytesRead = socket.EndReceive(ar);
 
@@ -151,9 +144,12 @@ namespace S8_53_ConsoleLAN
 
         public void Disconnect()
         {
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
-            socket = null;
+            if (socket != null)
+            {
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+                socket = null;
+            }
         }
 
         public bool DeviceExistOnAddress(string ip, int port)

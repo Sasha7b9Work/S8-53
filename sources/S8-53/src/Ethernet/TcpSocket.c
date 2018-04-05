@@ -26,11 +26,6 @@ struct State
 void(*SocketFuncConnect)(void) = 0;                                 // this function will be called every time a new connection
 void(*SocketFuncReciever)(const char *buffer, uint length) = 0;     // this function will be called when a message is recieved from any client
 
-void ETH_SendFormatString(char *format, ...)
-{
-
-}
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CloseConnection(struct tcp_pcb *tpcb, struct State *ss)

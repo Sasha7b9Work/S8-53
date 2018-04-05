@@ -37,12 +37,6 @@ static void FuncReceiver(const char *buffer, uint length)
 #define SIZE_BUFFER_TCP 128
     static char data[SIZE_BUFFER_TCP];
 
-    memset(data, 0, SIZE_BUFFER_TCP);
-    memcpy(data, buffer, length);
-
-    TCPSocket_Send(data, length);
-
-    return;
     for (uint i = 0; i < length; i++)
     {
         if (0 == sizeData && buffer[0] != ':')
@@ -52,7 +46,7 @@ static void FuncReceiver(const char *buffer, uint length)
 
         data[sizeData] = buffer[i];
         sizeData++;
-        if (sizeData > 2 && data[sizeData - 1] == '\x0a' && data[sizeData - 2] == '\x0d')
+        if (sizeData > 2 && data[sizeData - 1] == '\x0d')
         {
             SCPI_ParseNewCommand((uint8*)&data[1]);
             sizeData = 0;

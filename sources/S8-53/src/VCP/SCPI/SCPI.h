@@ -28,7 +28,7 @@
     }                                                   \
     if (CLIENT_LAN_IS_CONNECTED)                        \
     {                                                   \
-        ETH_SendFormatString(__VA_ARGS__);              \
+        TCPSocket_SendFormatString(__VA_ARGS__);        \
     }
 
 #define ENTER_PARSE_FUNC(funcName)                      \
