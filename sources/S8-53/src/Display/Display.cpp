@@ -2141,9 +2141,9 @@ void Display::DrawLowPart()
     }
 
     // Ethernet
-    if ((gBF.ethIsConnected == 1 || gBF.cableEthIsConnected == 1) && gTimerMS > 2000)
+    if ((CLIENT_LAN_IS_CONNECTED || CABLE_LAN_IS_CONNECTED) && gTimerMS > 2000)
     {
-        painter.Draw4SymbolsInRectC(x + 87, GRID_BOTTOM + 2, SYMBOL_ETHERNET, gBF.ethIsConnected ? COLOR_FILL : COLOR_FLASH_01);
+        painter.Draw4SymbolsInRectC(x + 87, GRID_BOTTOM + 2, SYMBOL_ETHERNET, CLIENT_LAN_IS_CONNECTED ? COLOR_FILL : COLOR_FLASH_01);
     }
 
     if (gBF.connectToHost == 1 || gBF.cableVCPisConnected == 1)

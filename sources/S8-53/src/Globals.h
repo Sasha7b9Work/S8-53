@@ -24,6 +24,8 @@ extern DAC_HandleTypeDef handleDAC;
 
 #define SETTINGS_IS_LOADED      (gBF.settingsLoaded)
 #define NEED_OPEN_FILE_MANAGER  (gBF.needOpenFileMananger)
+#define CLIENT_LAN_IS_CONNECTED (gBF.clientLANisConnected)
+#define CABLE_LAN_IS_CONNECTED  (gBF.cableLANisConnected)
 
 
 typedef struct
@@ -31,8 +33,8 @@ typedef struct
     // Ethernet
     uint ethTimeLastEthifInput      : 32;   // Время последнего входа в процедуру ethernetif.c:ethernetif_input() Используется для определения того, 
                                             // что разъём ethernet подключен. Анализироваться будет в функции отрисовки значка подключения
-    uint cableEthIsConnected        : 1;    // Если 1, значит, просто подключён кабель
-    uint ethIsConnected             : 1;    // Если 1, то подсоединён клиент
+    uint cableLANisConnected        : 1;    // Если 1, значит, просто подключён кабель
+    uint clientLANisConnected       : 1;    // Если 1, то подсоединён клиент
 
     // Для рисования : display.c
     uint showLevelRShift0           : 1;    // Нужно ли рисовать горизонтальную линию уровня смещения первого канала

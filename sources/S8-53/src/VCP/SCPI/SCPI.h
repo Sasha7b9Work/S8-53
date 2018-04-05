@@ -26,7 +26,7 @@
     {                                                   \
         VCP_SendFormatStringAsynch(__VA_ARGS__);        \
     }                                                   \
-    if (gBF.ethIsConnected == 1)                        \
+    if (CLIENT_LAN_IS_CONNECTED)                        \
     {                                                   \
         ETH_SendFormatString(__VA_ARGS__);              \
     }

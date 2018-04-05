@@ -26,9 +26,6 @@ struct State
 void(*SocketFuncConnect)(void) = 0;                                 // this function will be called every time a new connection
 void(*SocketFuncReciever)(const char *buffer, uint length) = 0;     // this function will be called when a message is recieved from any client
 
-bool gEthIsConnected = false;                                       // Если true, то подсоединён клиент
-
-
 void ETH_SendFormatString(char *format, ...)
 {
 
@@ -38,7 +35,7 @@ void ETH_SendFormatString(char *format, ...)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CloseConnection(struct tcp_pcb *tpcb, struct State *ss)
 {
-    gEthIsConnected = false;
+    CLIENT_LAN_IS_CONNECTED = 0;
     tcp_arg(tpcb, NULL);
     tcp_sent(tpcb, NULL);
     tcp_recv(tpcb, NULL);
@@ -230,6 +227,7 @@ err_t CallbackOnRecieve(void *_arg, struct tcp_pcb *_tpcb, struct pbuf *_p, err_
         ss->p = NULL;
         pbuf_free(_p);
         ret_err = ERR_OK;
+        CloseConnection(_tpcb, ss);
     }
     else
     {
@@ -253,7 +251,7 @@ void CallbackOnError(void *_arg, err_t _err)
     {
         mem_free(ss);
     }
-    gEthIsConnected = false;
+    CLIENT_LAN_IS_CONNECTED = 1;
 }
 
 
@@ -326,7 +324,7 @@ err_t CallbackOnAccept(void *_arg, struct tcp_pcb *_newPCB, err_t _err)
             {
                 pcbClient = _newPCB;
                 SocketFuncConnect();
-                gEthIsConnected = true;
+                CLIENT_LAN_IS_CONNECTED = 1;
             }
         }
 

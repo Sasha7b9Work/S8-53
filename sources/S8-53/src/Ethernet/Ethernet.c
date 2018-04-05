@@ -24,6 +24,9 @@ static struct netif gnetif;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void FuncConnect(void)
 {
+    volatile int i = 0;
+
+    //TCPSocket_Send("Test String", 5);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +79,7 @@ void Ethernet_Update(uint timeMS)
 
     do 
     {
-        gBF.cableEthIsConnected = gTimerMS - gEthTimeLastEthifInput <= 1500;
+        CABLE_LAN_IS_CONNECTED = gTimerMS - gEthTimeLastEthifInput <= 1500;
 
         ethernetif_input(&gnetif);
         sys_check_timeouts();

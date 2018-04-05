@@ -15,8 +15,4 @@ bool TCPSocket_Send(const char *buffer, uint length);
 
 void TCPSocket_SendFormatString(char *format, ...);
 
-
 void ETH_SendFormatString(char *format, ...);
-
-
-extern bool gEthIsConnected;
