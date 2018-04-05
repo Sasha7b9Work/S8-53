@@ -24,6 +24,14 @@ namespace S8_53_ConsoleLAN
 
         private String response = String.Empty;
 
+        ~SocketTCP()
+        {
+            if(socket != null)
+            {
+                socket.Close();
+            }
+        }
+
         public bool IsConnected()
         {
             return (socket == null) ? false : socket.Connected;
@@ -58,9 +66,7 @@ namespace S8_53_ConsoleLAN
 
                 if (!socket.Connected)
                 {
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Close();
-                    socket = null;
+                    Disconnect();
                 }
                 else
                 {
@@ -116,18 +122,24 @@ namespace S8_53_ConsoleLAN
             try
             {
                 StateObject state = (StateObject)ar.AsyncState;
-                int bytesRead = socket.EndReceive(ar);
+                if (socket.Connected)
+                {
+                    int bytesRead = socket.EndReceive(ar);
 
-                if(bytesRead > 0)
-                {
-                    state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                    socket.BeginReceive(state.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(ReceiveCallback), state);
-                }
-                else
-                {
-                    if(state.sb.Length > 1)
+                    if (bytesRead > 0)
                     {
-                        response = state.sb.ToString();
+                        state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+                        Console.WriteLine(state.sb.ToString());
+
+                        Receive();
+                    }
+                    else
+                    {
+                        if (state.sb.Length > 1)
+                        {
+                            response = state.sb.ToString();
+                            Console.WriteLine(response);
+                        }
                     }
                 }
             }
@@ -139,7 +151,9 @@ namespace S8_53_ConsoleLAN
 
         public void Disconnect()
         {
+            socket.Shutdown(SocketShutdown.Both);
             socket.Close();
+            socket = null;
         }
 
         public bool DeviceExistOnAddress(string ip, int port)

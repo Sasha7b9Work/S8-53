@@ -37,7 +37,7 @@ namespace S8_53_ConsoleLAN
 
             //WriteLine("Жду команду. Для получения помощи наберите \"help\" или \"?\"");
 
-            CommandConnect();
+            //CommandConnect();
 
             while (isRun)
             {
@@ -53,13 +53,13 @@ namespace S8_53_ConsoleLAN
         {
             string[] args = line.Split(' ');
 
-            if (socket.IsConnected())                                      // Если устройство подключено
+            if (socket.IsConnected())                               // Если устройство подключено
             {
-                if(args[0] == "disconnect")                             // То сначала проверяем на команду отключения
+                if(args[0] == "disconnect")                         // То сначала проверяем на команду отключения
                 {
                     CommandDisconnect(args);
                 }
-                else                                                    // А потом посылаем сообщение устройству
+                else                                                // А потом посылаем сообщение устройству
                 {
                     socket.SendString(line);
                 }

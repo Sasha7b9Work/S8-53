@@ -247,11 +247,16 @@ void CallbackOnError(void *_arg, err_t _err)
     struct State *ss;
     LWIP_UNUSED_ARG(_err);
     ss = (struct State *)_arg;
-    if (ss != NULL)
+
+    pcbClient = 0;
+
+    if (ss)
     {
         mem_free(ss);
     }
-    CLIENT_LAN_IS_CONNECTED = 1;
+    //tcp_close(tpcb);
+
+    CLIENT_LAN_IS_CONNECTED = 0;
 }
 
 
