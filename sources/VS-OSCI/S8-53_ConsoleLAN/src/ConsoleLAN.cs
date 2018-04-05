@@ -19,8 +19,8 @@ namespace S8_53_ConsoleLAN
 
         private bool isRun = true;
 
-        private String promptRecv = "S8-53 USB > ";     // Так выводится принятое сообщение
-        private String promptSend = "S8-53 USB < ";     // Так выводится приглашение к набору
+        private String promptRecv = "S8-53 LAN > ";     // Так выводится принятое сообщение
+        private String promptSend = "S8-53 LAN < ";     // Так выводится приглашение к набору
         private String emptyPrompt = "            ";
 
         private Queue<Command> commands = new Queue<Command>();
@@ -35,7 +35,7 @@ namespace S8_53_ConsoleLAN
             commands.Enqueue(new Command("help",       "список доступных команд",      CommandWriteHelp));
             commands.Enqueue(new Command("?",          "список доступных команд",      CommandWriteHelp));
 
-            WriteLine("Жду команду. Для получения помощи наберите \"help\" или \"?\"");
+            //WriteLine("Жду команду. Для получения помощи наберите \"help\" или \"?\"");
 
             CommandConnect();
 
@@ -53,7 +53,7 @@ namespace S8_53_ConsoleLAN
         {
             string[] args = line.Split(' ');
 
-            if (socket.IsConnect())                                      // Если устройство подключено
+            if (socket.IsConnected())                                      // Если устройство подключено
             {
                 if(args[0] == "disconnect")                             // То сначала проверяем на команду отключения
                 {
@@ -136,49 +136,26 @@ namespace S8_53_ConsoleLAN
 
         private void CommandConnect(string[] args = null)
         {
-            if (socket.IsConnect())
+            if (socket.IsConnected())
             {
                 WriteLine("Сначала отсоедините действующее устройство (команда disconnect)");
             }
             else
             {
-                if (args != null && args.Length > 1)                            // Если есть аргументы, будем подключаться к указанному порту
+                if(socket.Connect(ipAddress, port))
                 {
-                    for (int i = 0; i < namesPorts.Length; i++)
-                    {
-                        if (args[1] == namesPorts[i])
-                        {
-                            if (socket.Connect("192.168.1.200", 7))
-                            {
-                                WriteLine("Устройство подключено к " + args[1]);
-                                return;
-                            }
-                        }
-                    }
-
-                    WriteError("Не погу подключить устройство на порту " + args[1]);
-                    return;
+                    WriteLine("Устройство подключено к " + ipAddress + ":" + port.ToString());
                 }
                 else
                 {
-                    for(int i = 0; i < namesPorts.Length; i++)
-                    {
-                        if(socket.DeviceConnectToPort(i))
-                        {
-                            if (port.Connect(i, DataReceivedHandler))
-                            {
-                                WriteLine("Устройство поключено к " + namesPorts[i] + ". Для отключения наберите \"disconnect\"");
-                            }
-                            return;
-                        }
-                    }
+                    WriteError("Ввведите адрес удалённой точки");
                 }
             }
         }
 
         private void CommandDisconnect(string[] arg = null)
         {
-            port.Stop();
+            socket.Disconnect();
             WriteLine("Устройство отключено");
         }
 
