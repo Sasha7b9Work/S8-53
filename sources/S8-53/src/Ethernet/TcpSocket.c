@@ -183,8 +183,8 @@ err_t CallbackOnRecieve(void *_arg, struct tcp_pcb *_tpcb, struct pbuf *_p, err_
             // first data chunk in _p->payload
             ss->state = S_RECIEVED;
             // store reference to incoming pbuf (chain)
-            ss->p = _p;
-            Send(_tpcb, ss);
+            //ss->p = _p;
+            // Send(_tpcb, ss);
             ret_err = ERR_OK;
         }
     }
@@ -325,6 +325,7 @@ err_t CallbackOnAccept(void *_arg, struct tcp_pcb *_newPCB, err_t _err)
                 pcbClient = _newPCB;
                 SocketFuncConnect();
                 CLIENT_LAN_IS_CONNECTED = 1;
+                s->state = S_RECIEVED;
             }
         }
 
