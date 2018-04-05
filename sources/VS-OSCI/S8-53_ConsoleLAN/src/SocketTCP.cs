@@ -22,14 +22,11 @@ namespace S8_53_ConsoleLAN
     {
         private Socket socket = null;
 
+        private String response = String.Empty;
+
         public bool IsConnected()
         {
             return (socket == null) ? false : socket.Connected;
-        }
-
-        public void SendString(string data)
-        {
-
         }
 
         public bool Connect(String ip, int port)
@@ -59,15 +56,15 @@ namespace S8_53_ConsoleLAN
 
                 while (time.Elapsed.TotalMilliseconds < 1000.0 && !socket.Connected) { };
 
-                if (socket.Connected)
-                {
-                
-                }
-                else
+                if (!socket.Connected)
                 {
                     socket.Shutdown(SocketShutdown.Both);
                     socket.Close();
                     socket = null;
+                }
+                else
+                {
+                    SendString("REQUEST ?");
                 }
             }
             catch (Exception e)
@@ -82,6 +79,7 @@ namespace S8_53_ConsoleLAN
         {
             try
             {
+                Receive();
             }
             catch (Exception e)
             {
@@ -89,20 +87,64 @@ namespace S8_53_ConsoleLAN
             }
         }
 
-        public bool Disconnect()
+        private void Receive()
         {
-            return false;
-            //socket.Shutdown();
+            try
+            {
+                StateObject state = new StateObject();
+                state.workSocket = socket;
+                socket.BeginReceive(state.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(ReceiveCallback), state);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void SendString(string data)
+        {
+            if (socket.Connected)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(data);
+                socket.Send(bytes);
+                Console.WriteLine("Длина посылки " + bytes.Length + ' ' + bytes[0] + ' ' + bytes[1]);
+            }
+        }
+
+        private void ReceiveCallback(IAsyncResult ar)
+        {
+            try
+            {
+                StateObject state = (StateObject)ar.AsyncState;
+                int bytesRead = socket.EndReceive(ar);
+
+                if(bytesRead > 0)
+                {
+                    state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+                    socket.BeginReceive(state.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(ReceiveCallback), state);
+                }
+                else
+                {
+                    if(state.sb.Length > 1)
+                    {
+                        response = state.sb.ToString();
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void Disconnect()
+        {
+            socket.Close();
         }
 
         public bool DeviceExistOnAddress(string ip, int port)
         {
             return false;
-        }
-
-        public string AddressRemote()
-        {
-            return socket.RemoteEndPoint.Serialize().ToString();
         }
     }
 }
