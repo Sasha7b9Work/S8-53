@@ -24,6 +24,8 @@ namespace S8_53_ConsoleLAN
 
         private String response = String.Empty;
 
+        private ConsoleLAN.FuncOnReceive funcOnReceive = null;
+
         ~SocketTCP()
         {
             Disconnect();
@@ -34,8 +36,10 @@ namespace S8_53_ConsoleLAN
             return (socket == null) ? false : socket.Connected;
         }
 
-        public bool Connect(String ip, int port)
+        public bool Connect(String ip, int port, ConsoleLAN.FuncOnReceive func)
         {
+            funcOnReceive = func;
+
             String[] bytes = ip.Split('.');
 
             byte[] addressBytes = new byte[4];
@@ -102,11 +106,10 @@ namespace S8_53_ConsoleLAN
 
         public void SendString(string data)
         {
-            if (socket.Connected)
+            if (socket != null && socket.Connected)
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(":" + data + "\x0d");
                 socket.Send(bytes);
-                Console.WriteLine("Длина посылки " + bytes.Length + ' ' + bytes[0] + ' ' + bytes[1]);
             }
         }
 
@@ -122,8 +125,7 @@ namespace S8_53_ConsoleLAN
                     if (bytesRead > 0)
                     {
                         state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                        Console.WriteLine(state.sb.ToString());
-
+                        funcOnReceive(state.sb.ToString());
                         Receive();
                     }
                     else

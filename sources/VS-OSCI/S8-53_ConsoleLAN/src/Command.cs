@@ -12,9 +12,9 @@ namespace S8_53_ConsoleLAN
 
         public String comment;
 
-        private ConsoleUSB.FuncOnCommand func;
+        private ConsoleLAN.FuncOnCommand func;
 
-        public Command(String n, String c, ConsoleUSB.FuncOnCommand f)
+        public Command(String n, String c, ConsoleLAN.FuncOnCommand f)
         {
             name = n;
             comment = c;

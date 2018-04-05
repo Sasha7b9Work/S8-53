@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace S8_53_ConsoleLAN
 {
-    public class ConsoleUSB
+    public class ConsoleLAN
     {
         private string ipAddress = "192.168.1.200";
+
         private int port = 7;
 
         // Указатель на функцию - обработчик консольной команды
@@ -142,7 +143,7 @@ namespace S8_53_ConsoleLAN
             }
             else
             {
-                if(socket.Connect(ipAddress, port))
+                if(socket.Connect(ipAddress, port, CallbackOnReceive))
                 {
                     WriteLine("Устройство подключено к " + ipAddress + ":" + port.ToString());
                 }
@@ -151,6 +152,11 @@ namespace S8_53_ConsoleLAN
                     WriteError("Ввведите адрес удалённой точки");
                 }
             }
+        }
+
+        private void CallbackOnReceive(string data)
+        {
+            WriteLine(data);
         }
 
         private void CommandDisconnect(string[] arg = null)

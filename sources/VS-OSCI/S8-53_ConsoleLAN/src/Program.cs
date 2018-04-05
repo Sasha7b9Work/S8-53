@@ -10,7 +10,7 @@ namespace S8_53_ConsoleLAN
     {
         static void Main(string[] args)
         {
-            ConsoleUSB console = new ConsoleUSB();
+            ConsoleLAN console = new ConsoleLAN();
             console.Run();
         }
     }
