@@ -22,12 +22,14 @@ namespace S8_53_ConsoleUSB
 
         private Queue<Command> commands = new Queue<Command>();
 
-        private ComPort port = new ComPort();
+        private LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
 
         private string[] namesPorts;
 
         public void Run()
         {
+            port.ReceiveEvent += DataReceivedHandler;
+
             commands.Enqueue(new Command("ports",      "список доступных портов",      CommandGetPorts));
             commands.Enqueue(new Command("connect",    "подключиться заданному порту", CommandConnect));
             commands.Enqueue(new Command("disconnect", "отключиться от порта",         CommandDisconnect));
@@ -177,7 +179,7 @@ namespace S8_53_ConsoleUSB
                     {
                         if (args[1] == namesPorts[i])
                         {
-                            if (port.Connect(i, DataReceivedHandler))
+                            if (port.Connect(i, true))
                             {
                                 WriteLine("Устройство подключено к " + args[1]);
                                 return;
@@ -194,7 +196,7 @@ namespace S8_53_ConsoleUSB
                     {
                         if(port.DeviceConnectToPort(i))
                         {
-                            if (port.Connect(i, DataReceivedHandler))
+                            if (port.Connect(i, true))
                             {
                                 WriteLine("Устройство поключено к " + namesPorts[i] + ". Для отключения наберите \"disconnect\"");
                             }
@@ -211,9 +213,11 @@ namespace S8_53_ConsoleUSB
             WriteLine("Устройство отключено");
         }
 
-        public void DataReceivedHandler(string data)
+        public void DataReceivedHandler(object sender, EventArgs args)
         {
-            WriteLine(data);
+            Console.Write("\r");
+            WriteLine(((LibraryS8_53.EventArgsReceiveComPort)args).data);
+            Console.Write(promptSend);
         }
     }
 }

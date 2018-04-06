@@ -8,6 +8,16 @@ using System.IO.Ports;
 
 namespace LibraryS8_53
 {
+    public class EventArgsReceiveComPort : EventArgs
+    {
+        public string data;
+
+        public EventArgsReceiveComPort(string data)
+        {
+            this.data = data;
+        }
+    }
+
     public class ComPort
     {
 
@@ -21,14 +31,17 @@ namespace LibraryS8_53
         private static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
-
-        private TypeDisplay typeDisplay = TypeDisplay.None;
+        // Если true, то будет включён обработчик события SerialPort
+        private bool dataReceivedHandlerEnable = false;
+        public event EventHandler<EventArgs> ReceiveEvent;
 
         public ComPort()
         {
             port = new SerialPort();
             port.ReadTimeout = 100;
             port.BaudRate = 125000;
+
+            port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
         }
 
         public void Stop()
@@ -119,8 +132,10 @@ namespace LibraryS8_53
             port.Close();
         }
 
-        public bool Open(int numPort)
+        public bool Connect(int numPort, bool handlerEnable)
         {
+            dataReceivedHandlerEnable = handlerEnable;
+
             try
             {
                 port.PortName = ports[numPort];
@@ -131,15 +146,9 @@ namespace LibraryS8_53
                     string answer = ReadLine();
                     if (answer == "S8-53")
                     {
-                        typeDisplay = TypeDisplay.Monochrome;
                     }
                     else if (answer == "S8-53/1")
                     {
-                        typeDisplay = TypeDisplay.Color;
-                    }
-                    else
-                    {
-                        typeDisplay = TypeDisplay.None;
                     }
                 }
             }
@@ -160,6 +169,25 @@ namespace LibraryS8_53
         public bool IsOpen()
         {
             return port.IsOpen;
+        }
+
+        private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
+        {
+            if(IsOpen() && dataReceivedHandlerEnable)
+            {
+                SerialPort sp = (SerialPort)sender;
+                if(sp != null)
+                {
+                    string indata = sp.ReadExisting();
+
+                    EventHandler<EventArgs> handler = ReceiveEvent;
+
+                    if(handler != null)
+                    {
+                        handler(null, new EventArgsReceiveComPort(indata));
+                    }
+                }
+            }
         }
     }
 }

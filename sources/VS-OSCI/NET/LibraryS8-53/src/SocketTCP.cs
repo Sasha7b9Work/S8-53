@@ -18,12 +18,12 @@ namespace LibraryS8_53
         public StringBuilder sb = new StringBuilder();
     }
 
-    public class EventArgsReceive : EventArgs
+    public class EventArgsReceiveSocketTCP : EventArgs
     {
         public String data;
-        public EventArgsReceive(String data_)
+        public EventArgsReceiveSocketTCP(String data)
         {
-            data = data_;
+            this.data = data;
         }
     }
 
@@ -140,7 +140,7 @@ namespace LibraryS8_53
                         {
                             state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
                             String data = state.sb.ToString();
-                            handler(null, new EventArgsReceive(data.Substring(0, data.Length - 2)));
+                            handler(null, new EventArgsReceiveSocketTCP(data.Substring(0, data.Length - 2)));
                         }
 
 

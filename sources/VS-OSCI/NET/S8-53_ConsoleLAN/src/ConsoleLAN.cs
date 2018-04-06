@@ -166,7 +166,7 @@ namespace S8_53_ConsoleLAN
         public void DataReceivedHandler(object sender, EventArgs args)
         {
             Console.Write("\r");
-            WriteLine(((LibraryS8_53.EventArgsReceive)args).data);
+            WriteLine(((LibraryS8_53.EventArgsReceiveSocketTCP)args).data);
             Console.Write(promptSend);
         }
     }

@@ -77,7 +77,7 @@ namespace S8_53_USB {
                 needForDisconnect = true;
                 btnConnect.Text = "Подкл";
             } else {
-                if(port.Open(cbPorts.SelectedIndex)) {
+                if(port.Connect(cbPorts.SelectedIndex, false)) {
                     btnConnect.Text = "Откл";
                     port.SendString("DISPLAY:AUTOSEND 1");
                     display.StartDrawing(port.GetSerialPort());

@@ -122,8 +122,6 @@ namespace Client
                 }
                 Send(client, ":" + data + "\x0d\x0a");
             };
-            
-            return 0;
         }
     }
 }

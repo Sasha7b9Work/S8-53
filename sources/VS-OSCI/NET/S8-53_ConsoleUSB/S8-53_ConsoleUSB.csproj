@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibraryS8-53">
+      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Command.cs" />
-    <Compile Include="src\ComPort.cs" />
     <Compile Include="src\ConsoleUSB.cs" />
     <Compile Include="src\Program.cs" />
   </ItemGroup>
