@@ -82,7 +82,10 @@ namespace S8_53_ConsoleLAN
         {
             try
             {
-                Receive();
+                if (socket != null && socket.Connected)
+                {
+                    Receive();
+                }
             }
             catch (Exception e)
             {
@@ -125,7 +128,8 @@ namespace S8_53_ConsoleLAN
                     if (bytesRead > 0)
                     {
                         state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                        funcOnReceive(state.sb.ToString());
+                        String data = state.sb.ToString();
+                        funcOnReceive(data.Substring(0, data.Length - 2));
                         Receive();
                     }
                     else
@@ -146,11 +150,18 @@ namespace S8_53_ConsoleLAN
 
         public void Disconnect()
         {
-            if (socket != null)
+            try
             {
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
-                socket = null;
+                if (socket != null)
+                {
+                    //socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
+                    socket = null;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
 

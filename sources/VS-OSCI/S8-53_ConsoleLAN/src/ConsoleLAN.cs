@@ -9,6 +9,8 @@ namespace S8_53_ConsoleLAN
 {
     public class ConsoleLAN
     {
+        private Logger logger = new Logger("log.txt");
+
         private string ipAddress = "192.168.1.200";
 
         private int port = 7;
@@ -45,8 +47,6 @@ namespace S8_53_ConsoleLAN
                 String command = ReadLine();
 
                 ParseCommand(command);
-
-                Console.WriteLine();
             }
         }
 
@@ -156,7 +156,9 @@ namespace S8_53_ConsoleLAN
 
         private void CallbackOnReceive(string data)
         {
+            Console.Write("\r");
             WriteLine(data);
+            Console.Write(promptSend);
         }
 
         private void CommandDisconnect(string[] arg = null)
