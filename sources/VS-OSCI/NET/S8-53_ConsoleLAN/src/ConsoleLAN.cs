@@ -18,7 +18,7 @@ namespace S8_53_ConsoleLAN
         // Указатель на функцию - обработчик консольной команды
         public delegate void FuncOnCommand(string[] args);
 
-        public delegate void FuncOnReceive(string data);
+        //public delegate void FuncOnReceive(string data);
 
         private bool isRun = true;
 
@@ -32,6 +32,8 @@ namespace S8_53_ConsoleLAN
 
         public void Run()
         {
+            socket.ReceiveEvent += DataReceivedHandler;
+
             commands.Enqueue(new Command("connect",    "подключиться заданному порту", CommandConnect));
             commands.Enqueue(new Command("disconnect", "отключиться от порта",         CommandDisconnect));
             commands.Enqueue(new Command("exit",       "выход",                        CommandExit));
@@ -143,7 +145,7 @@ namespace S8_53_ConsoleLAN
             }
             else
             {
-                if(socket.Connect(ipAddress, port, CallbackOnReceive))
+                if(socket.Connect(ipAddress, port))
                 {
                     WriteLine("Устройство подключено к " + ipAddress + ":" + port.ToString());
                 }
@@ -154,22 +156,17 @@ namespace S8_53_ConsoleLAN
             }
         }
 
-        private void CallbackOnReceive(string data)
-        {
-            Console.Write("\r");
-            WriteLine(data);
-            Console.Write(promptSend);
-        }
-
         private void CommandDisconnect(string[] arg = null)
         {
             socket.Disconnect();
             WriteLine("Устройство отключено");
         }
 
-        public void DataReceivedHandler(string data)
+        public void DataReceivedHandler(object sender, EventArgs args)
         {
-            WriteLine(data);
+            Console.Write("\r");
+            WriteLine(((EventArgsReceive)args).data);
+            Console.Write(promptSend);
         }
     }
 }

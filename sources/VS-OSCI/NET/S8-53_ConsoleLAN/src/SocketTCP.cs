@@ -18,13 +18,24 @@ namespace S8_53_ConsoleLAN
         public StringBuilder sb = new StringBuilder();
     }
 
+    public class EventArgsReceive : EventArgs
+    {
+        public String data;
+        public EventArgsReceive(String data_)
+        {
+            data = data_;
+        }
+    }
+
     class SocketTCP
     {
         private Socket socket = null;
 
         private String response = String.Empty;
 
-        private ConsoleLAN.FuncOnReceive funcOnReceive = null;
+        //private ConsoleLAN.FuncOnReceive funcOnReceive = null;
+
+        public event EventHandler<EventArgs> ReceiveEvent;
 
         ~SocketTCP()
         {
@@ -36,15 +47,13 @@ namespace S8_53_ConsoleLAN
             return (socket == null) ? false : socket.Connected;
         }
 
-        public bool Connect(String ip, int port, ConsoleLAN.FuncOnReceive func)
+        public bool Connect(String ip, int port)
         {
-            funcOnReceive = func;
-
             String[] bytes = ip.Split('.');
 
             byte[] addressBytes = new byte[4];
 
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 addressBytes[i] = (byte)Int32.Parse(bytes[i]);
             }
@@ -127,9 +136,16 @@ namespace S8_53_ConsoleLAN
 
                     if (bytesRead > 0)
                     {
-                        state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                        String data = state.sb.ToString();
-                        funcOnReceive(data.Substring(0, data.Length - 2));
+                        EventHandler<EventArgs> handler = ReceiveEvent;
+
+                        if(handler != null)
+                        {
+                            state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+                            String data = state.sb.ToString();
+                            handler(null, new EventArgsReceive(data.Substring(0, data.Length - 2)));
+                        }
+
+
                         Receive();
                     }
                     else
@@ -142,7 +158,7 @@ namespace S8_53_ConsoleLAN
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -158,7 +174,7 @@ namespace S8_53_ConsoleLAN
                     socket = null;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
