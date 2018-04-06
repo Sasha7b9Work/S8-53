@@ -14,7 +14,7 @@ namespace S8_53_USB {
     public partial class MainForm : Form {
 
         private bool needForDisconnect = false;
-        private ComPort port = new ComPort();
+        private LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
 
         private Queue<string> commands = new Queue<string>();
