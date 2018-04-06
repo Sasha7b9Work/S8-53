@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace S8_53_ConsoleLAN
 {
     public class ConsoleLAN
@@ -28,7 +29,7 @@ namespace S8_53_ConsoleLAN
 
         private Queue<Command> commands = new Queue<Command>();
 
-        private SocketTCP socket = new SocketTCP();
+        private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
 
         public void Run()
         {
@@ -165,7 +166,7 @@ namespace S8_53_ConsoleLAN
         public void DataReceivedHandler(object sender, EventArgs args)
         {
             Console.Write("\r");
-            WriteLine(((EventArgsReceive)args).data);
+            WriteLine(((LibraryS8_53.EventArgsReceive)args).data);
             Console.Write(promptSend);
         }
     }

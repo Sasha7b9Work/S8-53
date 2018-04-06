@@ -18,13 +18,22 @@ namespace LibraryS8_53
         public StringBuilder sb = new StringBuilder();
     }
 
-    class SocketTCP
+    public class EventArgsReceive : EventArgs
+    {
+        public String data;
+        public EventArgsReceive(String data_)
+        {
+            data = data_;
+        }
+    }
+
+    public class SocketTCP
     {
         private Socket socket = null;
 
         private String response = String.Empty;
 
-        private ConsoleLAN.FuncOnReceive funcOnReceive = null;
+        public event EventHandler<EventArgs> ReceiveEvent;
 
         ~SocketTCP()
         {
@@ -36,10 +45,8 @@ namespace LibraryS8_53
             return (socket == null) ? false : socket.Connected;
         }
 
-        public bool Connect(String ip, int port, ConsoleLAN.FuncOnReceive fun)
+        public bool Connect(String ip, int port)
         {
-            funcOnReceive = func;
-
             String[] bytes = ip.Split('.');
 
             byte[] addressBytes = new byte[4];
@@ -127,9 +134,16 @@ namespace LibraryS8_53
 
                     if (bytesRead > 0)
                     {
-                        state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                        String data = state.sb.ToString();
-                        funcOnReceive(data.Substring(0, data.Length - 2));
+                        EventHandler<EventArgs> handler = ReceiveEvent;
+
+                        if (handler != null)
+                        {
+                            state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+                            String data = state.sb.ToString();
+                            handler(null, new EventArgsReceive(data.Substring(0, data.Length - 2)));
+                        }
+
+
                         Receive();
                     }
                     else
