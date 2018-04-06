@@ -59,34 +59,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCPSocket.cs" />
-    <Compile Include="Display.cs">
+    <Compile Include="src\TCPSocket.cs" />
+    <Compile Include="src\Display.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Display.Designer.cs">
+    <Compile Include="src\Display.Designer.cs">
       <DependentUpon>Display.cs</DependentUpon>
     </Compile>
-    <Compile Include="Governor.cs">
+    <Compile Include="src\Governor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Governor.Designer.cs">
+    <Compile Include="src\Governor.Designer.cs">
       <DependentUpon>Governor.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="src\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Display.resx">
+    <EmbeddedResource Include="src\Display.resx">
       <DependentUpon>Display.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Governor.resx">
+    <EmbeddedResource Include="src\Governor.resx">
       <DependentUpon>Governor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

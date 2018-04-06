@@ -1,5 +1,5 @@
-﻿namespace Controller_S8_53 {
-    partial class Display {
+﻿namespace S8_53_USB {
+    partial class Governor {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,33 +23,24 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.pbDisplay = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDisplay)).BeginInit();
             this.SuspendLayout();
             // 
-            // pbDisplay
-            // 
-            this.pbDisplay.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pbDisplay.Location = new System.Drawing.Point(2, 2);
-            this.pbDisplay.Name = "pbDisplay";
-            this.pbDisplay.Size = new System.Drawing.Size(640, 480);
-            this.pbDisplay.TabIndex = 0;
-            this.pbDisplay.TabStop = false;
-            // 
-            // Display
+            // Governor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pbDisplay);
-            this.Name = "Display";
-            this.Size = new System.Drawing.Size(644, 484);
-            ((System.ComponentModel.ISupportInitialize)(this.pbDisplay)).EndInit();
+            this.Name = "Governor";
+            this.Size = new System.Drawing.Size(55, 56);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Governor_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Governor_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.Governor_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Governor_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Governor_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Governor_MouseUp);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pbDisplay;
     }
 }

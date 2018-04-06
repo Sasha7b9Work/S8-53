@@ -6,7 +6,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Drawing;
 
-namespace Controller_S8_53 {
+namespace S8_53_USB {
 
     /*
     public class RecievedEventArgs : EventArgs {

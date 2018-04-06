@@ -59,49 +59,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComPort.cs" />
-    <Compile Include="Display.cs">
+    <Compile Include="src\ComPort.cs" />
+    <Compile Include="src\Display.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Display.Designer.cs">
+    <Compile Include="src\Display.Designer.cs">
       <DependentUpon>Display.cs</DependentUpon>
     </Compile>
-    <Compile Include="Governor.cs">
+    <Compile Include="src\Governor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Governor.Designer.cs">
+    <Compile Include="src\Governor.Designer.cs">
       <DependentUpon>Governor.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineEditID.cs">
+    <Compile Include="src\LineEditID.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LineEditID.Designer.cs">
+    <Compile Include="src\LineEditID.Designer.cs">
       <DependentUpon>LineEditID.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="src\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextBoxIP.cs">
+    <Compile Include="src\TextBoxIP.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TextBoxIP.Designer.cs">
+    <Compile Include="src\TextBoxIP.Designer.cs">
       <DependentUpon>TextBoxIP.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Display.resx">
+    <EmbeddedResource Include="src\Display.resx">
       <DependentUpon>Display.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Governor.resx">
+    <EmbeddedResource Include="src\Governor.resx">
       <DependentUpon>Governor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LineEditID.resx">
+    <EmbeddedResource Include="src\LineEditID.resx">
       <DependentUpon>LineEditID.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,7 +114,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TextBoxIP.resx">
+    <EmbeddedResource Include="src\TextBoxIP.resx">
       <DependentUpon>TextBoxIP.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
