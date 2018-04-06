@@ -154,7 +154,6 @@ namespace S8_53_ConsoleLAN
             {
                 if (socket != null)
                 {
-                    //socket.Shutdown(SocketShutdown.Both);
                     socket.Close();
                     socket = null;
                 }

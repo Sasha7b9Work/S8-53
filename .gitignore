@@ -52,3 +52,5 @@ sources/VS-OSCI/S8-53_ConsoleLAN/bin/*
 sources/VS-OSCI/S8-53_ConsoleLAN/obj/*
 sources/VS-OSCI/S8-53_ConsoleUSB/bin/*
 sources/VS-OSCI/S8-53_ConsoleUSB/obj/*
+sources/VS-OSCI/S8-53_Interface/bin/*
+sources/VS-OSCI/S8-53_Interface/obj/*
