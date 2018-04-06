@@ -14,35 +14,24 @@
 
 JLink*.*
 
-bins/*
-
 sources/.vs/*
 
 doc/doxygen/BootS8-53/*
 doc/doxygen/S8-53/*
-doc/doxygen/TestDisplay/*
 
 sources/S8-53/Listings/*
 sources/S8-53/Objects/*
 sources/S8-53/Bootloader/Listings/*
 sources/S8-53/Bootloader/Objects/*
 
-
 sources/Tests/TestDisplay/stm32/Listings/*
 sources/Tests/TestDisplay/stm32/Objects/*
 sources/Tests/TestDisplay/VS2015/TestDisplay/Debug/*
 
 sources/VS-OSCI/Boot53/Debug/*
-sources/VS-OSCI/BootloaderS8-53/Debug/*
-sources/VS-OSCI/Client/Client/bin/*
-sources/VS-OSCI/Client/Client/obj/*
-sources/VS-OSCI/ControllerETH/bin/*
-sources/VS-OSCI/ControllerETH/obj/*
-sources/VS-OSCI/ControllerUSB/bin/*
-sources/VS-OSCI/ControllerUSB/obj/*
 sources/VS-OSCI/Display/Debug/*
 sources/VS-OSCI/S8-53/Debug/*
-sources/VS-OSCI/NET/S8-53/BootloaderS8-53/Debug/*
+
 sources/VS-OSCI/NET/S8-53_LAN/bin/*
 sources/VS-OSCI/NET/S8-53_LAN/obj/*
 sources/VS-OSCI/NET/S8-53_USB/bin/*
