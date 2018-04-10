@@ -16,7 +16,12 @@ namespace S8_53_USB {
     public partial class MainForm : Form {
 
         private bool needForDisconnect = false;
+
+        // Этот порт используется для соединения по USB
         private LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
+        // Этот сокет используется для соединения по LAN
+        private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
+
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
 
         private Queue<string> commands = new Queue<string>();
@@ -74,23 +79,34 @@ namespace S8_53_USB {
             cbPorts.SelectedIndex = ports.Length - 1;
         }
 
-        private void btnConnect_Click(object sender, EventArgs e) {
-            if(port.IsOpen()) {
-                needForDisconnect = true;
-                btnConnect.Text = "Подкл";
-            } else {
-                if(port.Connect(cbPorts.SelectedIndex, false)) {
-                    btnConnect.Text = "Откл";
+        private void btnConnectUSB_Click(object sender, EventArgs e)
+        {
+            if (port.IsOpen())                                  // Если порт открыт - идёт обмен с прибором
+            {
+                needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
+                btnConnectUSB.Text = "Подкл";
+            }
+            else
+            {
+                if (port.Connect(cbPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
+                {
+                    btnConnectUSB.Text = "Откл";
                     port.SendString("DISPLAY:AUTOSEND 1");
                     display.StartDrawing(port.GetSerialPort());
                     needForDisconnect = false;
+                    tabControl1.Enabled = false;
                 }
             }
         }
 
+        private void buttonConnectLAN_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnConnect.Enabled = port.DeviceConnectToPort(cbPorts.SelectedIndex);
+            btnConnectUSB.Enabled = port.DeviceConnectToPort(cbPorts.SelectedIndex);
         }
 
         private void OnEndFrameEvent(object sender, EventArgs e)
@@ -110,5 +126,11 @@ namespace S8_53_USB {
             }
         }
 
+        private void MainForm_Closed(object sender, EventArgs e)
+        {
+            // Закрывать порт непосредственно по закрытии формы нельзя, чтобы поток не завис.
+            needForDisconnect = true;           // Поэтому устанавливаем признако того, что порт надо закрыть
+            while(port.IsOpen()) { }            // И ждём пока это произойдёт
+        }
     }
 }

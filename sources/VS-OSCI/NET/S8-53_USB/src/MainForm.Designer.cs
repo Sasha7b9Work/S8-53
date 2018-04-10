@@ -44,9 +44,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.btnConnect = new System.Windows.Forms.Button();
+            this.btnConnectUSB = new System.Windows.Forms.Button();
             this.cbPorts = new System.Windows.Forms.ComboBox();
             this.btnUpdatePorts = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonConnectLAN = new System.Windows.Forms.Button();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
+            this.textBoxIP = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.govTBase = new ControlLibraryS8_53.Governor();
             this.govRange1 = new ControlLibraryS8_53.Governor();
             this.govSet = new ControlLibraryS8_53.Governor();
@@ -56,14 +64,6 @@
             this.govRShift1 = new ControlLibraryS8_53.Governor();
             this.govRShift0 = new ControlLibraryS8_53.Governor();
             this.display = new ControlLibraryS8_53.Display();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -292,16 +292,16 @@
             this.btnStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnStart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // btnConnect
+            // btnConnectUSB
             // 
-            this.btnConnect.Enabled = false;
-            this.btnConnect.Location = new System.Drawing.Point(183, 14);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(56, 32);
-            this.btnConnect.TabIndex = 2;
-            this.btnConnect.Text = "Подкл";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnConnectUSB.Enabled = false;
+            this.btnConnectUSB.Location = new System.Drawing.Point(186, 14);
+            this.btnConnectUSB.Name = "btnConnectUSB";
+            this.btnConnectUSB.Size = new System.Drawing.Size(56, 32);
+            this.btnConnectUSB.TabIndex = 2;
+            this.btnConnectUSB.Text = "Подкл";
+            this.btnConnectUSB.UseVisualStyleBackColor = true;
+            this.btnConnectUSB.Click += new System.EventHandler(this.btnConnectUSB_Click);
             // 
             // cbPorts
             // 
@@ -321,6 +321,90 @@
             this.btnUpdatePorts.Text = "Обновить";
             this.btnUpdatePorts.UseVisualStyleBackColor = true;
             this.btnUpdatePorts.Click += new System.EventHandler(this.btnUpdatePorts_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(115, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Порт";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "IP";
+            // 
+            // buttonConnectLAN
+            // 
+            this.buttonConnectLAN.Enabled = false;
+            this.buttonConnectLAN.Location = new System.Drawing.Point(186, 14);
+            this.buttonConnectLAN.Name = "buttonConnectLAN";
+            this.buttonConnectLAN.Size = new System.Drawing.Size(56, 32);
+            this.buttonConnectLAN.TabIndex = 3;
+            this.buttonConnectLAN.Text = "Подкл";
+            this.buttonConnectLAN.UseVisualStyleBackColor = true;
+            this.buttonConnectLAN.Click += new System.EventHandler(this.buttonConnectLAN_Click);
+            // 
+            // textBoxPort
+            // 
+            this.textBoxPort.Location = new System.Drawing.Point(149, 19);
+            this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.Size = new System.Drawing.Size(28, 20);
+            this.textBoxPort.TabIndex = 1;
+            this.textBoxPort.Text = "7";
+            // 
+            // textBoxIP
+            // 
+            this.textBoxIP.Location = new System.Drawing.Point(23, 19);
+            this.textBoxIP.Name = "textBoxIP";
+            this.textBoxIP.Size = new System.Drawing.Size(88, 20);
+            this.textBoxIP.TabIndex = 0;
+            this.textBoxIP.Text = "192.168.1.200";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(726, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(257, 85);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.cbPorts);
+            this.tabPage1.Controls.Add(this.btnConnectUSB);
+            this.tabPage1.Controls.Add(this.btnUpdatePorts);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(249, 59);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "USB";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.textBoxIP);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.textBoxPort);
+            this.tabPage2.Controls.Add(this.buttonConnectLAN);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(249, 59);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Ethernet";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // govTBase
             // 
@@ -417,89 +501,6 @@
             this.display.Size = new System.Drawing.Size(644, 484);
             this.display.TabIndex = 0;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(115, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Порт";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "IP";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(188, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 32);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Подкл";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(149, 19);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(28, 20);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "7";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(23, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(88, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "192.168.1.200";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(726, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(257, 85);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.tabControl1.TabIndex = 9;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.cbPorts);
-            this.tabPage1.Controls.Add(this.btnConnect);
-            this.tabPage1.Controls.Add(this.btnUpdatePorts);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(249, 59);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "USB";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(249, 59);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ethernet";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,6 +542,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 520);
             this.Name = "MainForm";
             this.Text = "C8-54 USB Пульт оператора";
+            this.Closed += new System.EventHandler(this.MainForm_Closed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -582,14 +584,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Button btnConnectUSB;
         private System.Windows.Forms.Button btnUpdatePorts;
         private System.Windows.Forms.ComboBox cbPorts;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonConnectLAN;
+        private System.Windows.Forms.TextBox textBoxPort;
+        private System.Windows.Forms.TextBox textBoxIP;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
