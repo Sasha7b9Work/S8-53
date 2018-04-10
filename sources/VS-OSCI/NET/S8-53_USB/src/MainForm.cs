@@ -109,5 +109,6 @@ namespace S8_53_USB {
                 display.StartDrawing(port.GetSerialPort());
             }
         }
+
     }
 }

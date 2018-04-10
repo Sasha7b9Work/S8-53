@@ -47,15 +47,26 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.cbPorts = new System.Windows.Forms.ComboBox();
             this.btnUpdatePorts = new System.Windows.Forms.Button();
-            this.govTBase = new  ControlLibraryS8_53.Governor();
+            this.govTBase = new ControlLibraryS8_53.Governor();
             this.govRange1 = new ControlLibraryS8_53.Governor();
-            this.govSet = new    ControlLibraryS8_53.Governor();
-            this.govRange0 = new  ControlLibraryS8_53.Governor();
+            this.govSet = new ControlLibraryS8_53.Governor();
+            this.govRange0 = new ControlLibraryS8_53.Governor();
             this.govTrigLev = new ControlLibraryS8_53.Governor();
-            this.govTShift = new  ControlLibraryS8_53.Governor();
+            this.govTShift = new ControlLibraryS8_53.Governor();
             this.govRShift1 = new ControlLibraryS8_53.Governor();
             this.govRShift0 = new ControlLibraryS8_53.Governor();
             this.display = new ControlLibraryS8_53.Display();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnMenu
@@ -284,7 +295,7 @@
             // btnConnect
             // 
             this.btnConnect.Enabled = false;
-            this.btnConnect.Location = new System.Drawing.Point(924, 12);
+            this.btnConnect.Location = new System.Drawing.Point(183, 14);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(56, 32);
             this.btnConnect.TabIndex = 2;
@@ -295,7 +306,7 @@
             // cbPorts
             // 
             this.cbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPorts.Location = new System.Drawing.Point(740, 20);
+            this.cbPorts.Location = new System.Drawing.Point(10, 20);
             this.cbPorts.Name = "cbPorts";
             this.cbPorts.Size = new System.Drawing.Size(84, 21);
             this.cbPorts.TabIndex = 0;
@@ -303,7 +314,7 @@
             // 
             // btnUpdatePorts
             // 
-            this.btnUpdatePorts.Location = new System.Drawing.Point(840, 12);
+            this.btnUpdatePorts.Location = new System.Drawing.Point(100, 14);
             this.btnUpdatePorts.Name = "btnUpdatePorts";
             this.btnUpdatePorts.Size = new System.Drawing.Size(72, 32);
             this.btnUpdatePorts.TabIndex = 1;
@@ -406,14 +417,95 @@
             this.display.Size = new System.Drawing.Size(644, 484);
             this.display.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(115, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Порт";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "IP";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(188, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 32);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Подкл";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(149, 19);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(28, 20);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "7";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(23, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(88, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "192.168.1.200";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(726, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(257, 85);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.cbPorts);
+            this.tabPage1.Controls.Add(this.btnConnect);
+            this.tabPage1.Controls.Add(this.btnUpdatePorts);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(249, 59);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "USB";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(249, 59);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Ethernet";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 493);
-            this.Controls.Add(this.cbPorts);
-            this.Controls.Add(this.btnUpdatePorts);
-            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -449,6 +541,10 @@
             this.MinimumSize = new System.Drawing.Size(1000, 520);
             this.Name = "MainForm";
             this.Text = "C8-54 USB Пульт оператора";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,7 +585,14 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnUpdatePorts;
         private System.Windows.Forms.ComboBox cbPorts;
-
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
