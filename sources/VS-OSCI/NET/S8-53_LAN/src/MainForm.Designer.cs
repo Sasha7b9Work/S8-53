@@ -45,14 +45,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.govTBase = new Controller_S8_53.Governor();
-            this.govRange1 = new Controller_S8_53.Governor();
-            this.govSet = new Controller_S8_53.Governor();
-            this.govRange0 = new Controller_S8_53.Governor();
-            this.govTrigLev = new Controller_S8_53.Governor();
-            this.govTShift = new Controller_S8_53.Governor();
-            this.govRShift1 = new Controller_S8_53.Governor();
-            this.govRShift0 = new Controller_S8_53.Governor();
+            this.govTBase = new   ControlLibraryS8_53.Governor();
+            this.govRange1 = new  ControlLibraryS8_53.Governor();
+            this.govSet = new     ControlLibraryS8_53.Governor();
+            this.govRange0 = new  ControlLibraryS8_53.Governor();
+            this.govTrigLev = new ControlLibraryS8_53.Governor();
+            this.govTShift = new  ControlLibraryS8_53.Governor();
+            this.govRShift1 = new ControlLibraryS8_53.Governor();
+            this.govRShift0 = new ControlLibraryS8_53.Governor();
             this.display = new ControlLibraryS8_53.Display();
             this.SuspendLayout();
             // 
@@ -295,7 +295,7 @@
             this.govTBase.Name = "govTBase";
             this.govTBase.Size = new System.Drawing.Size(40, 40);
             this.govTBase.TabIndex = 3;
-            this.govTBase.TypeGovernor = Controller_S8_53.TypeGov.Big;
+            this.govTBase.TypeGovernor = ControlLibraryS8_53.TypeGov.Big;
             this.govTBase.ValueToSend = "TBASE";
             this.govTBase.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govTBase.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -306,7 +306,7 @@
             this.govRange1.Name = "govRange1";
             this.govRange1.Size = new System.Drawing.Size(40, 40);
             this.govRange1.TabIndex = 3;
-            this.govRange1.TypeGovernor = Controller_S8_53.TypeGov.Big;
+            this.govRange1.TypeGovernor = ControlLibraryS8_53.TypeGov.Big;
             this.govRange1.ValueToSend = "RANGE2";
             this.govRange1.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govRange1.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -317,7 +317,7 @@
             this.govSet.Name = "govSet";
             this.govSet.Size = new System.Drawing.Size(25, 25);
             this.govSet.TabIndex = 3;
-            this.govSet.TypeGovernor = Controller_S8_53.TypeGov.Small;
+            this.govSet.TypeGovernor = ControlLibraryS8_53.TypeGov.Small;
             this.govSet.ValueToSend = "SET";
             this.govSet.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govSet.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -328,7 +328,7 @@
             this.govRange0.Name = "govRange0";
             this.govRange0.Size = new System.Drawing.Size(40, 40);
             this.govRange0.TabIndex = 3;
-            this.govRange0.TypeGovernor = Controller_S8_53.TypeGov.Big;
+            this.govRange0.TypeGovernor = ControlLibraryS8_53.TypeGov.Big;
             this.govRange0.ValueToSend = "RANGE1";
             this.govRange0.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govRange0.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -339,7 +339,7 @@
             this.govTrigLev.Name = "govTrigLev";
             this.govTrigLev.Size = new System.Drawing.Size(25, 25);
             this.govTrigLev.TabIndex = 1;
-            this.govTrigLev.TypeGovernor = Controller_S8_53.TypeGov.Small;
+            this.govTrigLev.TypeGovernor = ControlLibraryS8_53.TypeGov.Small;
             this.govTrigLev.ValueToSend = "TRIGLEV";
             this.govTrigLev.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govTrigLev.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -350,7 +350,7 @@
             this.govTShift.Name = "govTShift";
             this.govTShift.Size = new System.Drawing.Size(25, 25);
             this.govTShift.TabIndex = 1;
-            this.govTShift.TypeGovernor = Controller_S8_53.TypeGov.Small;
+            this.govTShift.TypeGovernor = ControlLibraryS8_53.TypeGov.Small;
             this.govTShift.ValueToSend = "TSHIFT";
             this.govTShift.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govTShift.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -361,7 +361,7 @@
             this.govRShift1.Name = "govRShift1";
             this.govRShift1.Size = new System.Drawing.Size(25, 25);
             this.govRShift1.TabIndex = 1;
-            this.govRShift1.TypeGovernor = Controller_S8_53.TypeGov.Small;
+            this.govRShift1.TypeGovernor = ControlLibraryS8_53.TypeGov.Small;
             this.govRShift1.ValueToSend = "RSHIFT2";
             this.govRShift1.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govRShift1.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -372,7 +372,7 @@
             this.govRShift0.Name = "govRShift0";
             this.govRShift0.Size = new System.Drawing.Size(25, 25);
             this.govRShift0.TabIndex = 1;
-            this.govRShift0.TypeGovernor = Controller_S8_53.TypeGov.Small;
+            this.govRShift0.TypeGovernor = ControlLibraryS8_53.TypeGov.Small;
             this.govRShift0.ValueToSend = "RSHIFT1";
             this.govRShift0.RotateLeft += new System.EventHandler<System.EventArgs>(this.governor_RotateLeft);
             this.govRShift0.RotateRight += new System.EventHandler<System.EventArgs>(this.governor_RotateRight);
@@ -433,9 +433,9 @@
         #endregion
 
         private ControlLibraryS8_53.Display display;
-        private Governor govRShift0;
+        private ControlLibraryS8_53.Governor govRShift0;
         private System.Windows.Forms.Button btnMenu;
-        private Governor govRange0;
+        private ControlLibraryS8_53.Governor govRange0;
         private System.Windows.Forms.Button btnF1;
         private System.Windows.Forms.Button btnF2;
         private System.Windows.Forms.Button btnF3;
@@ -451,12 +451,12 @@
         private System.Windows.Forms.Button btnChannel1;
         private System.Windows.Forms.Button btnTime;
         private System.Windows.Forms.Button btnTrig;
-        private Governor govRShift1;
-        private Governor govTShift;
-        private Governor govTrigLev;
-        private Governor govRange1;
-        private Governor govTBase;
-        private Governor govSet;
+        private ControlLibraryS8_53.Governor govRShift1;
+        private ControlLibraryS8_53.Governor govTShift;
+        private ControlLibraryS8_53.Governor govTrigLev;
+        private ControlLibraryS8_53.Governor govRange1;
+        private ControlLibraryS8_53.Governor govTBase;
+        private ControlLibraryS8_53.Governor govSet;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

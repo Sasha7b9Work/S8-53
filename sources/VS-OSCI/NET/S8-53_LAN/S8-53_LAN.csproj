@@ -66,12 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\TCPSocket.cs" />
-    <Compile Include="src\Governor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\Governor.Designer.cs">
-      <DependentUpon>Governor.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,9 +74,6 @@
     </Compile>
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="src\Governor.resx">
-      <DependentUpon>Governor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
