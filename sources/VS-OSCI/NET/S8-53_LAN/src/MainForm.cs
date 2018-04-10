@@ -15,9 +15,10 @@ namespace Controller_S8_53
 
     public partial class MainForm : Form
     {
-
+        private string ipAddress = "192.168.1.200";
+        private int port = 7;
         private bool needForDisconnect = false;
-        private TCPSocket tcpSocket = new TCPSocket();
+        private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
 
         private Queue<string> commands = new Queue<string>();
@@ -76,7 +77,7 @@ namespace Controller_S8_53
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (tcpSocket.IsOpen())
+            if (socket.Connect(ipAddress, port))
             {
                 needForDisconnect = true;
                 btnConnect.Text = "Подкл";
@@ -87,7 +88,7 @@ namespace Controller_S8_53
                 {
                     btnConnect.Text = "Откл";
                     tcpSocket.SendString("DISPLAY:AUTOSEND 1");
-                    display.StartDrawing(tcpSocket.GetSocket());
+                    display.StartDrawing(tcpSocket);
                     needForDisconnect = false;
                 }
             }

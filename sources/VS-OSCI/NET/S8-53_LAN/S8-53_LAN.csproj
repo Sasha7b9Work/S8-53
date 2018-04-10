@@ -7,8 +7,8 @@
     <ProjectGuid>{A6A3DFB8-AA70-4406-9198-4DED6188B2AF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ControllerETH</RootNamespace>
-    <AssemblyName>ControllerETH</AssemblyName>
+    <RootNamespace>S8_53_LAN</RootNamespace>
+    <AssemblyName>S8-53_LAN</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -49,6 +49,9 @@
   <ItemGroup>
     <Reference Include="ControlLibrary">
       <HintPath>..\ControlLibrary\bin\Release\ControlLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlLibraryS8_53">
+      <HintPath>..\ControlLibrary\bin\Release\ControlLibraryS8_53.dll</HintPath>
     </Reference>
     <Reference Include="LibraryS8-53">
       <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
