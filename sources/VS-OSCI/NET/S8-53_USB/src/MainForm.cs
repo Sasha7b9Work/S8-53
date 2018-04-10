@@ -94,7 +94,6 @@ namespace S8_53_USB {
                     port.SendString("DISPLAY:AUTOSEND 1");
                     display.StartDrawing(port.GetSerialPort());
                     needForDisconnect = false;
-                    tabControl1.Enabled = false;
                 }
             }
         }
@@ -131,6 +130,18 @@ namespace S8_53_USB {
             // Закрывать порт непосредственно по закрытии формы нельзя, чтобы поток не завис.
             needForDisconnect = true;           // Поэтому устанавливаем признако того, что порт надо закрыть
             while(port.IsOpen()) { }            // И ждём пока это произойдёт
+        }
+
+        // Активировать/деактивировать элементы управления, отвечающие за связь по USB
+       private void EnableControlsUSB(bool enbale)
+        {
+
+        }
+
+        // Активировать/деактивировать элементы управления, отвечающие за свять по LAN
+        private void EnableControlLAN(bool enable)
+        {
+
         }
     }
 }
