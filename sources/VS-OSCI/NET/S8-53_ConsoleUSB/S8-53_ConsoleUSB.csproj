@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LibraryS8-53">
-      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
+      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8_53.dll</HintPath>
     </Reference>
     <Reference Include="LibraryS8_53">
       <HintPath>..\LibraryS8-53\bin\Release\LibraryS8_53.dll</HintPath>

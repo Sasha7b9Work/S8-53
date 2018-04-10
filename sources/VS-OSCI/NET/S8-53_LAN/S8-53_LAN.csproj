@@ -47,18 +47,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ControlLibrary">
-      <HintPath>..\ControlLibrary\bin\Release\ControlLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ControlLibraryS8_53">
-      <HintPath>..\ControlLibrary\bin\Release\ControlLibraryS8_53.dll</HintPath>
-    </Reference>
-    <Reference Include="LibraryS8-53">
-      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
-    </Reference>
-    <Reference Include="LibraryS8_53">
-      <HintPath>..\ControlLibrary\bin\Release\LibraryS8_53.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -132,6 +120,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ControlLibraryS8-53\ControlLibraryS8-53.csproj">
+      <Project>{8f90645a-b5c2-4881-a684-67a634578722}</Project>
+      <Name>ControlLibraryS8-53</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryS8-53\LibraryS8-53.csproj">
+      <Project>{99fafeef-151b-4355-8bcf-d36bbe29d92f}</Project>
+      <Name>LibraryS8-53</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
