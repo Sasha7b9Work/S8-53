@@ -65,12 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Display.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\Display.Designer.cs">
-      <DependentUpon>Display.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\LineEditID.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,9 +85,6 @@
     <Compile Include="src\TextBoxIP.Designer.cs">
       <DependentUpon>TextBoxIP.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="src\Display.resx">
-      <DependentUpon>Display.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\LineEditID.resx">
       <DependentUpon>LineEditID.cs</DependentUpon>
     </EmbeddedResource>

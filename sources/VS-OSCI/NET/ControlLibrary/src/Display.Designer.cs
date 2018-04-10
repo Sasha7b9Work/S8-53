@@ -1,4 +1,4 @@
-﻿namespace S8_53_USB {
+﻿namespace ControlLibraryS8_53 {
     partial class Display {
         /// <summary> 
         /// Required designer variable.

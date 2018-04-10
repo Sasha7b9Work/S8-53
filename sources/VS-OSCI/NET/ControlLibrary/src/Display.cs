@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 
-namespace S8_53_USB
+namespace ControlLibraryS8_53
 {
     public partial class Display : UserControl
     {

@@ -55,7 +55,7 @@
             this.govTShift = new  ControlLibraryS8_53.Governor();
             this.govRShift1 = new ControlLibraryS8_53.Governor();
             this.govRShift0 = new ControlLibraryS8_53.Governor();
-            this.display = new S8_53_USB.Display();
+            this.display = new ControlLibraryS8_53.Display();
             this.SuspendLayout();
             // 
             // btnMenu
@@ -456,7 +456,7 @@
 
         #endregion
 
-        private Display display;
+        private ControlLibraryS8_53.Display display;
         private ControlLibraryS8_53.Governor govRShift0;
         private System.Windows.Forms.Button btnMenu;
         private ControlLibraryS8_53.Governor govRange0;
