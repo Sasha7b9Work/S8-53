@@ -44,9 +44,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.btnConnectUSB = new System.Windows.Forms.Button();
-            this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.btnUpdatePorts = new System.Windows.Forms.Button();
+            this.buttonConnectUSB = new System.Windows.Forms.Button();
+            this.comboBoxPorts = new System.Windows.Forms.ComboBox();
+            this.buttonUpdatePorts = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonConnectLAN = new System.Windows.Forms.Button();
@@ -292,35 +292,35 @@
             this.btnStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnStart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // btnConnectUSB
+            // buttonConnectUSB
             // 
-            this.btnConnectUSB.Enabled = false;
-            this.btnConnectUSB.Location = new System.Drawing.Point(186, 14);
-            this.btnConnectUSB.Name = "btnConnectUSB";
-            this.btnConnectUSB.Size = new System.Drawing.Size(56, 32);
-            this.btnConnectUSB.TabIndex = 2;
-            this.btnConnectUSB.Text = "Подкл";
-            this.btnConnectUSB.UseVisualStyleBackColor = true;
-            this.btnConnectUSB.Click += new System.EventHandler(this.btnConnectUSB_Click);
+            this.buttonConnectUSB.Enabled = false;
+            this.buttonConnectUSB.Location = new System.Drawing.Point(186, 14);
+            this.buttonConnectUSB.Name = "buttonConnectUSB";
+            this.buttonConnectUSB.Size = new System.Drawing.Size(56, 32);
+            this.buttonConnectUSB.TabIndex = 2;
+            this.buttonConnectUSB.Text = "Подкл";
+            this.buttonConnectUSB.UseVisualStyleBackColor = true;
+            this.buttonConnectUSB.Click += new System.EventHandler(this.btnConnectUSB_Click);
             // 
-            // cbPorts
+            // comboBoxPorts
             // 
-            this.cbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPorts.Location = new System.Drawing.Point(10, 20);
-            this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(84, 21);
-            this.cbPorts.TabIndex = 0;
-            this.cbPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
+            this.comboBoxPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPorts.Location = new System.Drawing.Point(10, 20);
+            this.comboBoxPorts.Name = "comboBoxPorts";
+            this.comboBoxPorts.Size = new System.Drawing.Size(84, 21);
+            this.comboBoxPorts.TabIndex = 0;
+            this.comboBoxPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
             // 
-            // btnUpdatePorts
+            // buttonUpdatePorts
             // 
-            this.btnUpdatePorts.Location = new System.Drawing.Point(100, 14);
-            this.btnUpdatePorts.Name = "btnUpdatePorts";
-            this.btnUpdatePorts.Size = new System.Drawing.Size(72, 32);
-            this.btnUpdatePorts.TabIndex = 1;
-            this.btnUpdatePorts.Text = "Обновить";
-            this.btnUpdatePorts.UseVisualStyleBackColor = true;
-            this.btnUpdatePorts.Click += new System.EventHandler(this.btnUpdatePorts_Click);
+            this.buttonUpdatePorts.Location = new System.Drawing.Point(104, 14);
+            this.buttonUpdatePorts.Name = "buttonUpdatePorts";
+            this.buttonUpdatePorts.Size = new System.Drawing.Size(72, 32);
+            this.buttonUpdatePorts.TabIndex = 1;
+            this.buttonUpdatePorts.Text = "Обновить";
+            this.buttonUpdatePorts.UseVisualStyleBackColor = true;
+            this.buttonUpdatePorts.Click += new System.EventHandler(this.btnUpdatePorts_Click);
             // 
             // label6
             // 
@@ -358,6 +358,7 @@
             this.textBoxPort.Size = new System.Drawing.Size(28, 20);
             this.textBoxPort.TabIndex = 1;
             this.textBoxPort.Text = "7";
+            this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
             // 
             // textBoxIP
             // 
@@ -366,6 +367,7 @@
             this.textBoxIP.Size = new System.Drawing.Size(88, 20);
             this.textBoxIP.TabIndex = 0;
             this.textBoxIP.Text = "192.168.1.200";
+            this.textBoxIP.TextChanged += new System.EventHandler(this.textBoxIP_TextChanged);
             // 
             // tabControl1
             // 
@@ -380,9 +382,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.cbPorts);
-            this.tabPage1.Controls.Add(this.btnConnectUSB);
-            this.tabPage1.Controls.Add(this.btnUpdatePorts);
+            this.tabPage1.Controls.Add(this.comboBoxPorts);
+            this.tabPage1.Controls.Add(this.buttonConnectUSB);
+            this.tabPage1.Controls.Add(this.buttonUpdatePorts);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -584,9 +586,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button btnConnectUSB;
-        private System.Windows.Forms.Button btnUpdatePorts;
-        private System.Windows.Forms.ComboBox cbPorts;
+        private System.Windows.Forms.Button buttonConnectUSB;
+        private System.Windows.Forms.Button buttonUpdatePorts;
+        private System.Windows.Forms.ComboBox comboBoxPorts;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonConnectLAN;

@@ -74,54 +74,104 @@ namespace S8_53_USB {
 
         private void btnUpdatePorts_Click(object sender, EventArgs e) {
             string[] ports = port.GetPorts();
-            cbPorts.Items.Clear();
-            cbPorts.Items.AddRange(ports);
-            cbPorts.SelectedIndex = ports.Length - 1;
+            comboBoxPorts.Items.Clear();
+            comboBoxPorts.Items.AddRange(ports);
+            comboBoxPorts.SelectedIndex = ports.Length - 1;
         }
 
         private void btnConnectUSB_Click(object sender, EventArgs e)
         {
-            if (port.IsOpen())                                  // Если порт открыт - идёт обмен с прибором
+            if (port.IsOpen())                                  // Если порт открыт - идёт обмен с прибором. Будем отключать
             {
+                buttonConnectUSB.Text = "Подкл";
+                comboBoxPorts.Enabled = true;
+                buttonUpdatePorts.Enabled = true;
                 needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
-                btnConnectUSB.Text = "Подкл";
+
+                EnableControlLAN(true);
             }
             else
             {
-                if (port.Connect(cbPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
+                if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
-                    btnConnectUSB.Text = "Откл";
+                    needForDisconnect = false;
+                    EnableControlLAN(false);
+                    comboBoxPorts.Enabled = false;
+                    buttonUpdatePorts.Enabled = false;
+
+                    buttonConnectUSB.Text = "Откл";
                     port.SendString("DISPLAY:AUTOSEND 1");
                     display.StartDrawing(port.GetSerialPort());
-                    needForDisconnect = false;
                 }
             }
         }
 
         private void buttonConnectLAN_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (socket.IsConnected())
+                {
+                    buttonConnectLAN.Text = "Подкл";
+                    textBoxIP.Enabled = true;
+                    buttonUpdatePorts.Enabled = true;
+                    needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
 
+                    EnableControlsUSB(true);
+                }
+                else
+                {
+                    if (socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
+                    {
+
+                    }
+                }
+            }
+            catch(Exception)
+            {
+
+            }
         }
 
         private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnConnectUSB.Enabled = port.DeviceConnectToPort(cbPorts.SelectedIndex);
+            buttonConnectUSB.Enabled = port.DeviceConnectToPort(comboBoxPorts.SelectedIndex);
         }
 
         private void OnEndFrameEvent(object sender, EventArgs e)
         {
-            if (needForDisconnect)
+            if (port.IsOpen())                                      // Если идёт обмен по USB
             {
-                port.Stop();
-            }
-            else
-            {
-                while (commands.Count != 0)
+                if (needForDisconnect)
                 {
-                    port.SendString(commands.Dequeue());
+                    port.Stop();
                 }
-                port.SendString("DISPLAY:AUTOSEND 2");
-                display.StartDrawing(port.GetSerialPort());
+                else
+                {
+                    while (commands.Count != 0)
+                    {
+                        port.SendString(commands.Dequeue());
+                    }
+                    port.SendString("DISPLAY:AUTOSEND 2");
+                    display.StartDrawing(port.GetSerialPort());
+                }
+            }
+            else                                                    // Если обмен идёт по LAN
+            {
+                if(needForDisconnect)
+                {
+                    socket.Disconnect();
+                    EnableControlsUSB(true);
+                }
+                else
+                {
+                    while(commands.Count != 0)
+                    {
+                        socket.SendString(commands.Dequeue());
+                    }
+                    socket.SendString("DISPLAY:AUTOSEND 2");
+                    //display.StartDrawing();
+                }
             }
         }
 
@@ -133,15 +183,34 @@ namespace S8_53_USB {
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB
-       private void EnableControlsUSB(bool enbale)
+       private void EnableControlsUSB(bool enable)
         {
-
+            cbPorts_SelectedIndexChanged(null, null);
+            buttonUpdatePorts.Enabled = enable;
+            buttonConnectUSB.Enabled = enable;
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за свять по LAN
         private void EnableControlLAN(bool enable)
         {
+            textBoxIP.Enabled = enable;
+            textBoxPort.Enabled = enable;
+            OnChangedAddressIP();
+        }
 
+        private void OnChangedAddressIP()
+        {
+
+        }
+
+        private void textBoxIP_TextChanged(object sender, EventArgs e)
+        {
+            OnChangedAddressIP();
+        }
+
+        private void textBoxPort_TextChanged(object sender, EventArgs e)
+        {
+            OnChangedAddressIP();
         }
     }
 }
