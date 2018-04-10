@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ControlLibraryS8_53;
+//using ControlLibraryS8_53;
 
 namespace Controller_S8_53
 {
@@ -45,7 +45,7 @@ namespace Controller_S8_53
             mapButtons.Add(btnF4, "4");
             mapButtons.Add(btnF5, "5");
 
-            Display.EndFrameEvent += OnEndFrameEvent;
+            ControlLibraryS8_53.Display.EndFrameEvent += OnEndFrameEvent;
 
             btnConnect_Click(null, new EventArgs());
         }
@@ -62,12 +62,12 @@ namespace Controller_S8_53
 
         private void governor_RotateLeft(object sender, EventArgs e)
         {
-            commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " LEFT");
+            commands.Enqueue("GOV:" + ((ControlLibraryS8_53.Governor)sender).ValueToSend + " LEFT");
         }
 
         private void governor_RotateRight(object sender, EventArgs e)
         {
-            commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " RIGHT");
+            commands.Enqueue("GOV:" + ((ControlLibraryS8_53.Governor)sender).ValueToSend + " RIGHT");
         }
 
         private string StringToSendForButton(object btn)
@@ -84,11 +84,11 @@ namespace Controller_S8_53
             }
             else
             {
-                if (tcpSocket.Open())
+                if (socket.Connect(ipAddress, port))
                 {
                     btnConnect.Text = "Откл";
-                    tcpSocket.SendString("DISPLAY:AUTOSEND 1");
-                    display.StartDrawing(tcpSocket);
+                    socket.SendString("DISPLAY:AUTOSEND 1");
+                    display.StartDrawing(socket);
                     needForDisconnect = false;
                 }
             }
@@ -98,16 +98,16 @@ namespace Controller_S8_53
         {
             if (needForDisconnect)
             {
-                tcpSocket.Stop();
+                socket.Disconnect();
             }
             else
             {
                 while (commands.Count != 0)
                 {
-                    tcpSocket.SendString(commands.Dequeue());
+                    socket.SendString(commands.Dequeue());
                 }
-                tcpSocket.SendString("DISPLAY:AUTOSEND 2");
-                display.StartDrawing(tcpSocket.GetSocket());
+                socket.SendString("DISPLAY:AUTOSEND 2");
+                display.StartDrawing(socket);
             }
         }
     }

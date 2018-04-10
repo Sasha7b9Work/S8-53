@@ -50,8 +50,14 @@
     <Reference Include="ControlLibrary">
       <HintPath>..\ControlLibrary\bin\Release\ControlLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ControlLibraryS8_53">
+      <HintPath>..\ControlLibrary\bin\Release\ControlLibraryS8_53.dll</HintPath>
+    </Reference>
     <Reference Include="LibraryS8-53">
       <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
+    </Reference>
+    <Reference Include="LibraryS8_53">
+      <HintPath>..\ControlLibrary\bin\Release\LibraryS8_53.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

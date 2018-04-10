@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Net;
 using System.Net.Sockets;
+//using LibraryS8_53;
 
 namespace ControlLibraryS8_53
 {
@@ -444,7 +445,7 @@ namespace ControlLibraryS8_53
             processThread.Start();
         }
 
-        public void StartDrawing(Socket socket)
+        public void StartDrawing(LibraryS8_53.SocketTCP socket)
         {
 
         }
