@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Controller_S8_53 {
+namespace S8_53_LAN {
     public partial class LineEditID : UserControl {
         public LineEditID() {
             InitializeComponent();
@@ -27,13 +27,13 @@ namespace Controller_S8_53 {
 
         private void tb2_KeyPress(object sender, KeyPressEventArgs e) {
             if(e.KeyChar == (char)Keys.Return) {
-                tb3.Focus();
+                //tb3.Focus();
             }
         }
 
         private void tb3_KeyPress(object sender, KeyPressEventArgs e) {
             if(e.KeyChar == (char)Keys.Return) {
-                tb4.Focus();
+                //tb4.Focus();
             }
         }
 

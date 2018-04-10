@@ -1,4 +1,4 @@
-﻿namespace Controller_S8_53 {
+﻿namespace S8_53_LAN {
     partial class LineEditID {
         /// <summary> 
         /// Required designer variable.

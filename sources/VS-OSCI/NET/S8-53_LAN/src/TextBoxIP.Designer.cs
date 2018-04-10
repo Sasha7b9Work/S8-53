@@ -1,4 +1,4 @@
-﻿namespace S8_53_USB
+﻿namespace S8_53_LAN
 {
     partial class TextBoxIP
     {

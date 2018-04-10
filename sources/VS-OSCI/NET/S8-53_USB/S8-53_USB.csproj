@@ -65,12 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\LineEditID.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\LineEditID.Designer.cs">
-      <DependentUpon>LineEditID.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,15 +73,6 @@
     </Compile>
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\TextBoxIP.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="src\TextBoxIP.Designer.cs">
-      <DependentUpon>TextBoxIP.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="src\LineEditID.resx">
-      <DependentUpon>LineEditID.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,9 +86,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="src\TextBoxIP.resx">
-      <DependentUpon>TextBoxIP.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

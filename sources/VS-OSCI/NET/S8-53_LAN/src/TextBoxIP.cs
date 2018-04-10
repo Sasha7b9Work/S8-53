@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace S8_53_USB
+namespace S8_53_LAN
 {
 
     public class TextBoxIntValue : TextBox
