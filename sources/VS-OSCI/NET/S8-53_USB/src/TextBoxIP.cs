@@ -15,7 +15,7 @@ namespace S8_53_USB
     {
         private int maxValue = 0;
 
-        public event EventHandler<EventArgs> FieldFilled;
+        //public event EventHandler<EventArgs> FieldFilled;
 
         public TextBoxIntValue(int maxValue)
         {

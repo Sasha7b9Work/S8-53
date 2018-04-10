@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ControlLibraryS8_53;
+
 namespace S8_53_USB {
 
     public partial class MainForm : Form {

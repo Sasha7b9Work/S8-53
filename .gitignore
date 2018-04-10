@@ -45,3 +45,5 @@ sources/VS-OSCI/NET/S8-53_Interface/bin/*
 sources/VS-OSCI/NET/S8-53_Interface/obj/*
 sources/VS-OSCI/NET/LibraryS8-53/bin/*
 sources/VS-OSCI/NET/LibraryS8-53/obj/*
+sources/VS-OSCI/NET/ControlLibrary/bin/*
+sources/VS-OSCI/NET/ControlLibrary/obj/*

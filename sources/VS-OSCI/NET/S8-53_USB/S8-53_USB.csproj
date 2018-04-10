@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlLibrary">
+      <HintPath>..\ControlLibrary\bin\Release\ControlLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="LibraryS8-53">
       <HintPath>..\LibraryS8-53\bin\Release\LibraryS8-53.dll</HintPath>
     </Reference>
@@ -67,12 +70,6 @@
     </Compile>
     <Compile Include="src\Display.Designer.cs">
       <DependentUpon>Display.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Governor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\Governor.Designer.cs">
-      <DependentUpon>Governor.cs</DependentUpon>
     </Compile>
     <Compile Include="src\LineEditID.cs">
       <SubType>UserControl</SubType>
@@ -96,9 +93,6 @@
     </Compile>
     <EmbeddedResource Include="src\Display.resx">
       <DependentUpon>Display.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Governor.resx">
-      <DependentUpon>Governor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\LineEditID.resx">
       <DependentUpon>LineEditID.cs</DependentUpon>

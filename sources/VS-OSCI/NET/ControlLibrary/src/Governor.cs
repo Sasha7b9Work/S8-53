@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace S8_53_USB {
+namespace ControlLibraryS8_53 {
 
     public enum TypeGov : short {
         Small,
