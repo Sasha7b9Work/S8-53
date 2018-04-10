@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ControlLibraryS8_53
 {
@@ -440,6 +442,11 @@ namespace ControlLibraryS8_53
             port = port_;
             running = true;
             processThread.Start();
+        }
+
+        public void StartDrawing(Socket socket)
+        {
+
         }
 
         private static void SendEndFrameEvent()

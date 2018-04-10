@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControlLibraryS8_53;
 
 namespace Controller_S8_53
 {
@@ -86,7 +87,7 @@ namespace Controller_S8_53
                 {
                     btnConnect.Text = "Откл";
                     tcpSocket.SendString("DISPLAY:AUTOSEND 1");
-                    display.StartDrawing(tcpSocket);
+                    display.StartDrawing(tcpSocket.GetSocket());
                     needForDisconnect = false;
                 }
             }
@@ -105,7 +106,7 @@ namespace Controller_S8_53
                     tcpSocket.SendString(commands.Dequeue());
                 }
                 tcpSocket.SendString("DISPLAY:AUTOSEND 2");
-                display.StartDrawing(tcpSocket);
+                display.StartDrawing(tcpSocket.GetSocket());
             }
         }
     }

@@ -36,6 +36,11 @@ namespace Controller_S8_53
         {
         }
 
+        public Socket GetSocket()
+        {
+            return client;
+        }
+
         public void Stop()
         {
             if (client.Connected)
