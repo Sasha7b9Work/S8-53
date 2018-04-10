@@ -18,16 +18,8 @@ namespace LibraryS8_53
         }
     }
 
-    public class ComPort
+    public class ComPort : Interface
     {
-
-        enum TypeDisplay
-        {
-            None,
-            Color,
-            Monochrome
-        };
-
         private static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
@@ -44,7 +36,7 @@ namespace LibraryS8_53
             port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
         }
 
-        public void Stop()
+        public override void Stop()
         {
             port.Close();
         }
@@ -78,7 +70,7 @@ namespace LibraryS8_53
             return false;
         }
 
-        public void SendByte(byte data)
+        public override void SendByte(byte data)
         {
             if (port.IsOpen)
             {
@@ -88,7 +80,7 @@ namespace LibraryS8_53
             }
         }
 
-        public void SendString(string str)
+        public override void SendString(string str)
         {
             mutex.WaitOne();
 

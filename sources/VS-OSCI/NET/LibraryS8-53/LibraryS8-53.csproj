@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="src\ComPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Interface.cs" />
     <Compile Include="src\SocketTCP.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
