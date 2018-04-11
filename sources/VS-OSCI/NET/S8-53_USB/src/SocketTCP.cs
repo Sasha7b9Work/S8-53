@@ -12,7 +12,6 @@ namespace LibraryS8_53
 {
     public class StateObject
     {
-        public Socket workSocket = null;
         public const int BUFFER_SIZE = 256;
         public byte[] buffer = new byte[BUFFER_SIZE];
         public StringBuilder sb = new StringBuilder();
@@ -105,7 +104,6 @@ namespace LibraryS8_53
             try
             {
                 StateObject state = new StateObject();
-                state.workSocket = socket;
                 socket.BeginReceive(state.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(ReceiveCallback), state);
             }
             catch (Exception e)
@@ -181,6 +179,16 @@ namespace LibraryS8_53
         public bool DeviceExistOnAddress(string ip, int port)
         {
             return false;
+        }
+
+        public int BytesToRead()
+        {
+            return 0;
+        }
+
+        public void Read(byte[] buffer, int numBytes)
+        {
+
         }
     }
 }

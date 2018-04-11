@@ -14,14 +14,11 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Net;
 using System.Net.Sockets;
-//using LibraryS8_53;
 
 namespace ControlLibraryS8_53
 {
     public partial class Display : UserControl
     {
-
-        private static bool needForEndDrawing = false;
 
         enum Command : byte
         {
@@ -112,7 +109,7 @@ namespace ControlLibraryS8_53
 
         private static SerialPort port;
 
-        //private static LibraryS8_53.SocketTCP socket;
+        private static LibraryS8_53.SocketTCP socket;
 
         private static int currentFont = 0;
 
@@ -416,10 +413,7 @@ namespace ControlLibraryS8_53
                     Console.WriteLine("Неизвестная команда " + command);
                 }
             }
-            if (needForEndDrawing == false)
-            {
-                SendEndFrameEvent();
-            }
+            SendEndFrameEvent();
         }
 
         private static byte[] recData = new byte[0];
@@ -427,18 +421,37 @@ namespace ControlLibraryS8_53
 
         private static int int8()
         {
-            if(pointer < recData.Length)
+            if (modeRun == ModeRun.USB)
             {
-                return recData[pointer++];
+                if (pointer < recData.Length)
+                {
+                    return recData[pointer++];
+                }
+                while (port.BytesToRead == 0)
+                {
+                };
+                int length = port.BytesToRead;
+                recData = new byte[length];
+                port.Read(recData, 0, length);
+                pointer = 1;
+                return recData[0];
             }
-            while(port.BytesToRead == 0)
+            else if(modeRun == ModeRun.LAN)
             {
-            };
-            int length = port.BytesToRead;
-            recData = new byte[length];
-            port.Read(recData, 0, length);
-            pointer = 1;
-            return recData[0];
+                if(pointer < recData.Length)
+                {
+                    return recData[pointer++];
+                }
+                while(socket.BytesToRead() == 0)
+                {
+                };
+                int length = socket.BytesToRead();
+                recData = new byte[length];
+                socket.Read(recData, length);
+                pointer = 1;
+                return recData[0];
+            }
+            return 0;
         }
 
         private static int int16()
@@ -454,9 +467,12 @@ namespace ControlLibraryS8_53
             processThread.Start();
         }
 
-        public void StartDrawing(LibraryS8_53.SocketTCP socket)
+        public void StartDrawing(LibraryS8_53.SocketTCP socket_)
         {
-
+            processThread = new Thread(Processing);
+            socket = socket_;
+            modeRun = ModeRun.LAN;
+            processThread.Start();
         }
 
         private static void SendEndFrameEvent()

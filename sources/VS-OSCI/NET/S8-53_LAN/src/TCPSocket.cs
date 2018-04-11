@@ -11,7 +11,6 @@ using System.Net.Sockets;
 
 public class StateObject
 {
-    public Socket workSocket = null;
     public const int BufferSize = 1024 * 100;
     public byte[] buffer = new byte[BufferSize];
     public StringBuilder sb = new StringBuilder();
@@ -31,15 +30,6 @@ namespace Controller_S8_53
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
         private static List<byte> recvBuffer = new List<byte>();   // Здесь будут храниться считанные байты
-
-        public TCPSocket()
-        {
-        }
-
-        public Socket GetSocket()
-        {
-            return client;
-        }
 
         public void Stop()
         {
@@ -159,7 +149,6 @@ namespace Controller_S8_53
                 }
 
                 StateObject state = new StateObject();
-                state.workSocket = client;
 
                 client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReceiveCallback), state);
             }
