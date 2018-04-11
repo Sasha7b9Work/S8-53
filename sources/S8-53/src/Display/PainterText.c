@@ -2,6 +2,7 @@
 #include "Log.h"
 #include "Painter.h"
 #include "Font/font.h"
+#include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
@@ -30,33 +31,24 @@ void Painter::SetFont(TypeFont typeFont)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::LoadFont(TypeFont typeFont)
 {
-    const uchar *bytes = 0;
-    if (typeFont == TypeFont_5)
-    {
-        bytes = font5display;
-    }
-    else if (typeFont == TypeFont_8)
-    {
-        bytes = font8display;
-    }
-    else if (typeFont == TypeFont_UGO)
-    {
-        bytes = fontUGOdisplay;
-    }
-    else if (typeFont == TypeFont_UGO2)
-    {
-        bytes = fontUGO2display;
-    }
-    uint8 command[3084];
+    uint8 *pFont = (uint8 *)fonts[typeFont];
+
+    uint8 command[2 + 4];
     command[0] = LOAD_FONT;
     command[1] = typeFont;
-    for (int i = 0; i < 3080; i++)
+    *(uint*)(command + 2) = fonts[typeFont]->height;
+    painter.SendToVCP(command, 2 + 4);
+
+    //painter.SendToVCP(pFont + 4, sizeof(Font) - 4);
+
+    pFont += 4;
+
+    for(int i = 0; i < 256; i++)
     {
-        command[2 + i] = bytes[i];
+        painter.SendToVCP(pFont, sizeof(Symbol));
+        pFont += sizeof(Symbol);
+        Timer_PauseOnTicks(10000);
     }
-    //Painter_SendToDisplay(command, 3084);
-    painter.SendToVCP(command, 2);
-    painter.SendToVCP((uint8*)(fonts[typeFont]), sizeof(Font));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,7 @@ namespace ControlLibraryS8_53
 {
     public partial class Display : UserControl
     {
+        private static int count = 0;
 
         enum Command : byte
         {
@@ -213,24 +214,27 @@ namespace ControlLibraryS8_53
 
         private static void DrawText(int x, int y, char[] str)
         {
-            for(int numSymbol = 0; numSymbol < str.Length; numSymbol++)
+            if (currentFont == 1)
             {
-                int symbol = (int)str[numSymbol];
-                int height = fonts[currentFont].height;
-                int width = fonts[currentFont].symbols[symbol].width;
-
-                for(int row = 0; row < height; row++)
+                for (int numSymbol = 0; numSymbol < str.Length; numSymbol++)
                 {
-                    for(int col = 0; col < width; col++)
+                    int symbol = (int)str[numSymbol];
+                    int height = fonts[currentFont].height;
+                    int width = fonts[currentFont].symbols[symbol].width;
+
+                    for (int row = 0; row < height; row++)
                     {
-                        if(GetBit(fonts[currentFont].symbols[symbol].bytes[row], col + (8 - width)) == 1)
+                        for (int col = 0; col < width; col++)
                         {
-                            SetPoint(x + (width - col), y + row);
+                            if (GetBit(fonts[currentFont].symbols[symbol].bytes[row], col + (8 - width)) == 1)
+                            {
+                                SetPoint(x + (width - col), y + row);
+                            }
                         }
                     }
-                }
 
-                x += width + 1;
+                    x += width + 1;
+                }
             }
         }
 
@@ -259,7 +263,7 @@ namespace ControlLibraryS8_53
 
                 if((Command)command == Command.SET_COLOR)
                 {
-                    //Console.WriteLine("SetColor");
+                    Console.WriteLine("SetColor");
                     SetColor((uint)int8());
                 }
                 else if((Command)command == Command.SET_PALETTE)
@@ -369,30 +373,50 @@ namespace ControlLibraryS8_53
                 }
                 else if((Command)command == Command.LOAD_FONT)
                 {
-                    //Console.WriteLine("LOAD_FONT");
+                    count++;
+                    Console.WriteLine("LOAD_FONT");
+                    if (count == 2)
+                    {
+                        Console.WriteLine("- 1");
+                    }
+                    int counter = 0;
+                    //Console.Write(0 + " ");
                     int typeFont = int8();
+                    //Console.Write(1 + " ");
                     if (typeFont < 4)
                     {
                         fonts[typeFont] = new MyFont();
                         fonts[typeFont].height = int8();
+                        //Console.Write(2 + " ");
+                        counter++;
                         int8();
+                        //Console.Write(3 + " ");
+                        counter++;
                         int8();
+                        Console.Write(4 + " ");
+                        counter++;
                         int8();
+                        Console.Write(5 + " ");
+                        counter++;
                         for (int i = 0; i < 256; i++)
                         {
                             fonts[typeFont].symbols[i] = new Symbol();
                             fonts[typeFont].symbols[i].width = int8();
+                            Console.Write(6 + " ");
+                            counter++;
                             for (int j = 0; j < 8; j++)
                             {
                                 fonts[typeFont].symbols[i].bytes[j] = int8();
+                                counter++;
+                                Console.Write(7 + " ");
                             }
                         }
                     }
-                    //Console.WriteLine("EXIT                               LOAD_FONT");
+                    Console.WriteLine("EXIT________LOAD_FONT");
                 }
                 else if((Command)command == Command.SET_FONT)
                 {
-                    //Console.WriteLine("SET_FONT");
+                    Console.WriteLine("SET_FONT");
                     currentFont = int8();
                 }
                 else if((Command)command == Command.DRAW_TEXT)

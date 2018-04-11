@@ -67,6 +67,8 @@ namespace LibraryS8_53
 
                 socket = new Socket(remoteEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
+                socket.ReceiveBufferSize = 100 * 1024;
+
                 connectDone.Reset();
 
                 socket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), socket);
