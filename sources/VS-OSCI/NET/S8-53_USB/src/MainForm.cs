@@ -141,6 +141,9 @@ namespace S8_53_USB {
                             comboBoxPorts.Enabled = false;
                             buttonUpdatePorts.Enabled = false;
                             buttonConnectUSB.Enabled = false;
+
+                            socket.SendString("DISPLAY:AUTOSEND 1");
+                            display.StartDrawing(socket);
                         }
                         else
                         {

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "SCPI.h"
 #include "Globals.h"
 #include "VCP/VCP.h"
@@ -70,6 +71,9 @@ LEAVE_PARSE_FUNC
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Process_AUTOSEND(uint8 *buffer)
 {
+    static int counter = 0;
+    counter++;
+    
     static const MapElement map[] =
     {
         {"1", 1},
@@ -77,8 +81,22 @@ void Process_AUTOSEND(uint8 *buffer)
         {0}
     };
     ENTER_ANALYSIS
-        if (1 == value)         { painter.SendFrame(true); }
-        else if (2 == value)    { painter.SendFrame(false); } 
+        if (1 == value)
+        {
+            if(counter < 10)
+            {
+            //LOG_WRITE("Send 1");
+            }
+            painter.SendFrame(true);
+        }
+        else if (2 == value)
+        {
+            if(counter < 10)
+            {
+            //LOG_WRITE("Send 2");
+            }
+            painter.SendFrame(false);
+        }
     LEAVE_ANALYSIS
 }
 

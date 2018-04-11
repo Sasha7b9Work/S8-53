@@ -32,6 +32,18 @@ static void FuncConnect(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncReceiver(const char *buffer, uint length)
 {
+    static int counter = 0;
+    counter++;
+    
+    if(counter < 18)
+    {
+        char *data = (char *)malloc(length + 2);
+        memcpy(data, buffer, length);
+        data[length] = '_';
+        data[length + 1] = 0;
+        LOG_WRITE(data);
+    }
+    
     SCPI_AddNewData((uint8 *)buffer, length);
 }
 

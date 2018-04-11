@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "SCPI.h"
 #include "commonSCPI.h"
 #include "controlSCPI.h"
@@ -27,6 +28,19 @@ static int pointer = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SCPI_AddNewData(uint8 *data, uint length)
 {
+    /*
+    static int counter = 0;
+    counter++;
+    if(counter < 10)
+    {
+        char *buf = (char *)malloc(length + 2);
+        memcpy(buf, data, length);
+        buf[length + 1] = 0;
+        buf[length] = 'E';
+        LOG_WRITE(buf);
+    }
+    */
+    
     memcpy(&buffer[pointer], data, length);
     pointer += length;
 

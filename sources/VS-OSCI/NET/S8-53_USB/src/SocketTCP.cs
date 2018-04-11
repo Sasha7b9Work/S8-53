@@ -67,6 +67,8 @@ namespace LibraryS8_53
 
                 socket = new Socket(remoteEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
+                connectDone.Reset();
+
                 socket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), socket);
 
                 connectDone.WaitOne(1000);
@@ -95,7 +97,7 @@ namespace LibraryS8_53
 
         private void ConnectCallback(IAsyncResult ar)
         {
-            socket.EndConnect(ar);
+            //socket.EndConnect(ar);
             connectDone.Set();
         }
 
@@ -199,6 +201,7 @@ namespace LibraryS8_53
                 if (socket != null)
                 {
                     socket.Disconnect(false);
+                    socket.Close();
                     socket = null;
                 }
             }
@@ -215,12 +218,12 @@ namespace LibraryS8_53
 
         public int BytesToRead()
         {
-            return 0;
+            return socket.Available;
         }
 
         public void Read(byte[] buffer, int numBytes)
         {
-
+            socket.Receive(buffer, numBytes, SocketFlags.None);
         }
     }
 }

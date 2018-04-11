@@ -17,8 +17,8 @@
         if (value < 255) {
 
 #define LEAVE_ANALYSIS   }                              \
-        else SCPI_SEND(":DATA ERROR")                   \
-        }
+        else {LOG_WRITE("Error");}                      \
+    }
 
 
 #define SCPI_SEND(...)                                  \

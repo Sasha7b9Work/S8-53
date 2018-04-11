@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/Map.h"

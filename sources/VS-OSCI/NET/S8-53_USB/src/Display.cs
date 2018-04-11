@@ -448,6 +448,9 @@ namespace ControlLibraryS8_53
                 int length = socket.BytesToRead();
                 recData = new byte[length];
                 socket.Read(recData, length);
+
+                //string symbols = Encoding.ASCII.GetString(recData);
+
                 pointer = 1;
                 return recData[0];
             }

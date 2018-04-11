@@ -3,6 +3,7 @@
 #include "Painter.h"
 #include "font/Font.h"
 #include "Log.h"
+#include "Ethernet/TcpSocket.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "VCP/VCP.h"
@@ -163,6 +164,7 @@ void Painter::SendToVCP(uint8 *pointer, int size)
     if(stateTransmit == StateTransmit_InProcess)
     {
         VCP_SendDataSynch(pointer, size);
+        TCPSocket_Send((const char *)pointer, size);
     }
 }
 
