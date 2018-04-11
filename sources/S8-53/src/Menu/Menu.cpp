@@ -48,6 +48,59 @@ static const PanelButton sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS] = {B_F5
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Menu::OpenFileManager()
+{
+    angleRegSet = 0;
+    for(int i = 0; i < 10; i++)
+    {
+        ShortPressureButton(B_Menu);
+        UpdateInput();
+        //display.Update();
+    }
+
+    if(!MenuIsShown())
+    {
+        ShortPressureButton(B_Menu);
+        UpdateInput();
+        //display.Update();
+    }
+
+    for(int i = 0; i < 10; i++)
+    {
+        RotateRegSetLeft();
+        UpdateInput();
+        //display.Update();
+    }
+    
+    angleRegSet = 0;
+
+    RotateRegSetRight();
+    UpdateInput();
+    RotateRegSetRight();
+    UpdateInput();
+    RotateRegSetRight();
+    UpdateInput();
+    //display.Update();
+    
+    angleRegSet = 0;
+
+    ShortPressureButton(B_F2);
+    UpdateInput();
+    //display.Update();
+
+    ShortPressureButton(B_F4);
+    UpdateInput();
+    //display.Update();
+
+    RotateRegSetLeft();
+    UpdateInput();
+    //display.Update();
+
+    ShortPressureButton(B_F1);
+    UpdateInput();
+    display.Update();
+}
+
 void Menu::UpdateInput(void)
 {
     ProcessingShortPressureButton();
@@ -56,11 +109,11 @@ void Menu::UpdateInput(void)
     ProcessingPressButton();
     ProcessingReleaseButton();
     SwitchSetLED();
-
+    
     if(NEED_OPEN_FILE_MANAGER)
     {
-        OnPressMemoryExtFileManager();
         NEED_OPEN_FILE_MANAGER = 0;
+        OpenFileManager();       
     }
 };
 

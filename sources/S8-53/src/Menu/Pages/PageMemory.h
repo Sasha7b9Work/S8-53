@@ -7,3 +7,4 @@
 void    ChangeC_Memory_NumPoints(bool active);
 void    OnPressMemoryExtFileManager();
 void    Memory_SaveSignalToFlashDrive();
+extern const void *pMspFileManager;

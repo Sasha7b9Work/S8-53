@@ -1247,6 +1247,8 @@ static const arrayItems itemsFileManager =
     (void*)&sbFileManagerLevelDown
 };
 
+const void *pMspFileManager = (const void *)&mspFileManager;
+
 static const Page mspFileManager
 (
     &mspMemoryExt, FuncOfActiveExtMemFolder,

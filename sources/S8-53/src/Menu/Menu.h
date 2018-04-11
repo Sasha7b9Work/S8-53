@@ -171,6 +171,8 @@ private:
     int ItemOpenedPosY(void *item);
 
     void* RetLastOpened(Page *_page, TypeItem *_type);
+    
+    void OpenFileManager();
 };
 
 extern Menu menu;
