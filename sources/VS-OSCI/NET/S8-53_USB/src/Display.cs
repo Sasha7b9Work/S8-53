@@ -42,6 +42,13 @@ namespace ControlLibraryS8_53
             LOAD_FONT = 19
         };
 
+        enum ModeRun : byte
+        {
+            STOP = 0,
+            USB = 1,
+            LAN = 2
+        };
+
         [DllImport("gdi32")]
         private extern static int SetDIBitsToDevice(HandleRef hDC, int xDest, int yDest, int dwWidth, int dwHeight, int XSrc, int YSrc, int uStartScan,
             int cScanLines, ref int lpvBits, ref BITMAPINFO lpbmi, uint fuColorUse);
@@ -105,9 +112,11 @@ namespace ControlLibraryS8_53
 
         private static SerialPort port;
 
+        //private static LibraryS8_53.SocketTCP socket;
+
         private static int currentFont = 0;
 
-        private static bool running = false;
+        private static ModeRun modeRun = ModeRun.STOP;
 
         static public event EventHandler<EventArgs> EndFrameEvent;
 
@@ -247,7 +256,7 @@ namespace ControlLibraryS8_53
 
         private static void Processing()
         {
-            while(running)
+            while(modeRun != ModeRun.STOP)
             {
                 byte command = (byte)int8();
 
@@ -270,7 +279,7 @@ namespace ControlLibraryS8_53
                 {
                     //Console.WriteLine("EndScene");
                     EndScene();
-                    running = false;
+                    modeRun = ModeRun.STOP;
                 }
                 else if((Command)command == Command.DRAW_HLINE)
                 {
@@ -441,7 +450,7 @@ namespace ControlLibraryS8_53
         {
             processThread = new Thread(Processing);
             port = port_;
-            running = true;
+            modeRun = ModeRun.USB;
             processThread.Start();
         }
 

@@ -50,6 +50,8 @@ namespace S8_53_USB {
             Display.EndFrameEvent += OnEndFrameEvent;
 
             btnUpdatePorts_Click(null, null);
+
+            buttonConnectLAN.Enabled = true;
         }
 
         private void button_MouseDown(object sender, MouseEventArgs e) {
@@ -88,14 +90,14 @@ namespace S8_53_USB {
                 buttonUpdatePorts.Enabled = true;
                 needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
 
-                EnableControlLAN(true);
+                EnableControlsLAN(true);
             }
             else
             {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
                     needForDisconnect = false;
-                    EnableControlLAN(false);
+                    EnableControlsLAN(false);
                     comboBoxPorts.Enabled = false;
                     buttonUpdatePorts.Enabled = false;
 
@@ -110,20 +112,40 @@ namespace S8_53_USB {
         {
             try
             {
-                if (socket.IsConnected())
-                {
-                    buttonConnectLAN.Text = "Подкл";
-                    textBoxIP.Enabled = true;
-                    buttonUpdatePorts.Enabled = true;
-                    needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
-
-                    EnableControlsUSB(true);
-                }
-                else
+                if(buttonConnectLAN.Text == "Проверить")                                // Если мы не знаем, есть ли подключение к данному адресу
                 {
                     if (socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
+                        socket.Disconnect();
+                        buttonConnectLAN.Text = "Подкл";
+                    }
+                }
+                else                                                                    // А здесь уже известно, что устройство на том адресе есть
+                {
+                    if(socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
+                    {
+                        buttonConnectLAN.Text = "Подкл";
+                        textBoxIP.Enabled = true;
+                        buttonUpdatePorts.Enabled = true;
+                        needForDisconnect = true;
+                        EnableControlsUSB(true);
+                    }
+                    else                                                                // А по этой ветке подключаемся
+                    {
+                        if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
+                        {
+                            buttonConnectLAN.Text = "Откл";
+                            textBoxIP.Enabled = false;
+                            textBoxPort.Enabled = false;
 
+                            comboBoxPorts.Enabled = false;
+                            buttonUpdatePorts.Enabled = false;
+                            buttonConnectUSB.Enabled = false;
+                        }
+                        else
+                        {
+                            buttonConnectLAN.Text = "Проверить";
+                        }
                     }
                 }
             }
@@ -170,7 +192,7 @@ namespace S8_53_USB {
                         socket.SendString(commands.Dequeue());
                     }
                     socket.SendString("DISPLAY:AUTOSEND 2");
-                    //display.StartDrawing();
+                    display.StartDrawing(socket);
                 }
             }
         }
@@ -178,29 +200,31 @@ namespace S8_53_USB {
         private void MainForm_Closed(object sender, EventArgs e)
         {
             // Закрывать порт непосредственно по закрытии формы нельзя, чтобы поток не завис.
-            needForDisconnect = true;           // Поэтому устанавливаем признако того, что порт надо закрыть
-            while(port.IsOpen()) { }            // И ждём пока это произойдёт
+            needForDisconnect = true;                           // Поэтому устанавливаем признако того, что порт надо закрыть
+            while(port.IsOpen() || socket.IsConnected()) { }    // И ждём пока это произойдёт
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB
        private void EnableControlsUSB(bool enable)
         {
-            cbPorts_SelectedIndexChanged(null, null);
+            if (enable)
+            {
+                cbPorts_SelectedIndexChanged(null, null);
+            }
+            comboBoxPorts.Enabled = enable;
             buttonUpdatePorts.Enabled = enable;
-            buttonConnectUSB.Enabled = enable;
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за свять по LAN
-        private void EnableControlLAN(bool enable)
+        private void EnableControlsLAN(bool enable)
         {
             textBoxIP.Enabled = enable;
             textBoxPort.Enabled = enable;
-            OnChangedAddressIP();
         }
 
         private void OnChangedAddressIP()
         {
-
+            buttonConnectLAN.Text = "Проверить";
         }
 
         private void textBoxIP_TextChanged(object sender, EventArgs e)
