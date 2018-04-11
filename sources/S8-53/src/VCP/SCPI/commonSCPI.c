@@ -42,5 +42,5 @@ void Process_AUTOSCALE(uint8 *buffer)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Process_REQUEST(uint8 *buffer)
 {
-    VCP_SendFormatStringAsynch("S8-53/1");
+    SCPI_SEND("S8-53/1");
 }

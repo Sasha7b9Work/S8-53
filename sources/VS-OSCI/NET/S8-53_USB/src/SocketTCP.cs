@@ -28,11 +28,15 @@ namespace LibraryS8_53
 
     public class SocketTCP
     {
+        private Mutex mutex = new Mutex();
+
         private Socket socket = null;
 
         private String response = String.Empty;
 
         public event EventHandler<EventArgs> ReceiveEvent;
+
+        private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
         ~SocketTCP()
         {
@@ -65,15 +69,20 @@ namespace LibraryS8_53
 
                 socket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), socket);
 
-                Stopwatch time = new Stopwatch();
+                connectDone.WaitOne(1000);
 
-                time.Start();
-
-                while (time.Elapsed.TotalMilliseconds < 1000.0 && !socket.Connected) { };
-
-                if (!socket.Connected)
+                if(!socket.Connected)
                 {
-                    Disconnect();
+                    return false;
+                }
+
+                SendString("REQUEST ?");
+                string answer = ReadString();
+                if(answer != "S8-53/1")
+                {
+                    socket.Disconnect(false);
+                    socket.Close();
+                    return false;
                 }
             }
             catch (Exception e)
@@ -81,22 +90,13 @@ namespace LibraryS8_53
                 Console.WriteLine(e.ToString());
             }
 
-            return socket != null;
+            return socket != null && socket.Connected;
         }
 
         private void ConnectCallback(IAsyncResult ar)
         {
-            try
-            {
-                if (socket != null && socket.Connected)
-                {
-                    Receive();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            socket.EndConnect(ar);
+            connectDone.Set();
         }
 
         private void Receive()
@@ -114,11 +114,43 @@ namespace LibraryS8_53
 
         public void SendString(string data)
         {
-            if (socket != null && socket.Connected)
+            mutex.WaitOne();
+
+            if (socket.Connected)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(":" + data + "\x0d");
-                socket.Send(bytes);
+                byte[] byteData = Encoding.ASCII.GetBytes(":" + data + "\x0d");
+                socket.Send(byteData);
             }
+
+            mutex.ReleaseMutex();
+        }
+
+        private string ReadString()
+        {
+            byte[] byteData = new byte[500];
+
+            string line = "";
+
+            try
+            {
+                int size = socket.Receive(byteData);
+
+                byte[] buffer = new byte[size];
+
+                for (int i = 0; i < size; i++)
+                {
+                    buffer[i] = byteData[i];
+                }
+
+                line = Encoding.ASCII.GetString(buffer);
+                return line.Substring(0, line.Length - 2);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return line;
         }
 
         private void ReceiveCallback(IAsyncResult ar)
@@ -166,7 +198,7 @@ namespace LibraryS8_53
             {
                 if (socket != null)
                 {
-                    socket.Close();
+                    socket.Disconnect(false);
                     socket = null;
                 }
             }

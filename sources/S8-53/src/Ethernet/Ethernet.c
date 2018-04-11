@@ -32,32 +32,7 @@ static void FuncConnect(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncReceiver(const char *buffer, uint length)
 {
-    static int sizeData = 0;
-
-#define SIZE_BUFFER_TCP 128
-    static char data[SIZE_BUFFER_TCP];
-
-    for (uint i = 0; i < length; i++)
-    {
-        if (0 == sizeData && buffer[0] != ':')
-        {
-            continue;
-        }
-
-        data[sizeData] = buffer[i];
-        sizeData++;
-        if (sizeData > 2 && data[sizeData - 1] == '\x0d')
-        {
-            SCPI_ParseNewCommand((uint8*)&data[1]);
-            sizeData = 0;
-        }
-        if (sizeData == SIZE_BUFFER_TCP)
-        {
-            LOG_ERROR("Переполнение приёмного буфера ЕTH");
-            sizeData = 0;
-            break;
-        }
-    }
+    SCPI_AddNewData((uint8 *)buffer, length);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
