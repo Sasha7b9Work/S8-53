@@ -834,7 +834,7 @@ static const Button mbSaveFirmware
 
 static bool IsActive_SaveFirmware(void)
 {
-    return gBF.flashDriveIsConnected;
+    return FLASH_DRIVE_IS_CONNECTED == 1;
 }
 
 static void OnPress_SaveFirmware(void)

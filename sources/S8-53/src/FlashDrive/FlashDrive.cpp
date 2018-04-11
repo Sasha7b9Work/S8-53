@@ -53,7 +53,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id)
         case HOST_USER_SELECT_CONFIGURATION:
             break;
         case HOST_USER_CLASS_ACTIVE:
-            gBF.flashDriveIsConnected = 1;
+            FLASH_DRIVE_IS_CONNECTED = 1;
             FM_Init();
             menu.ChangeStateFlashDrive();
             if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0) != FR_OK)
@@ -67,7 +67,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id)
             f_mount(NULL, (TCHAR const*)"", 0);
             break;
         case HOST_USER_DISCONNECTION:
-            gBF.flashDriveIsConnected = 0;
+            FLASH_DRIVE_IS_CONNECTED = 0;
             menu.ChangeStateFlashDrive();
             break;
         default:

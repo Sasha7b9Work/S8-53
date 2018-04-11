@@ -22,10 +22,11 @@ extern ADC_HandleTypeDef handleADC;
 extern DAC_HandleTypeDef handleDAC;
 
 
-#define SETTINGS_IS_LOADED      (gBF.settingsLoaded)
-#define NEED_OPEN_FILE_MANAGER  (gBF.needOpenFileMananger)
-#define CLIENT_LAN_IS_CONNECTED (gBF.clientLANisConnected)
-#define CABLE_LAN_IS_CONNECTED  (gBF.cableLANisConnected)
+#define SETTINGS_IS_LOADED       (gBF.settingsLoaded)
+#define NEED_OPEN_FILE_MANAGER   (gBF.needOpenFileMananger)
+#define CLIENT_LAN_IS_CONNECTED  (gBF.clientLANisConnected)
+#define CABLE_LAN_IS_CONNECTED   (gBF.cableLANisConnected)
+#define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
 
 
 typedef struct

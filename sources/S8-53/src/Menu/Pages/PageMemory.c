@@ -146,7 +146,7 @@ void DrawSB_MemLast_IntEnter(int x, int y)
 
 void DrawSB_MemLast_SaveToFlash(int x, int y)
 {
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         painter.SetFont(TypeFont_UGO2);
         painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
@@ -156,7 +156,7 @@ void DrawSB_MemLast_SaveToFlash(int x, int y)
 
 static void DrawSB_MemExtSetNameSave(int x, int y)
 {
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         painter.SetFont(TypeFont_UGO2);
         painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
@@ -194,7 +194,7 @@ static void PressSB_SetName_Exit()
 
 static void PressSB_MemExtSetNameSave()
 {
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         PressSB_SetName_Exit();
         gMemory.needForSaveToFlashDrive = 1;
@@ -576,7 +576,7 @@ void PressSB_MemInt_SaveToIntMemory()
 
 void DrawSB_MemInt_SaveToFlashDrive(int x, int y)
 {
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         painter.SetFont(TypeFont_UGO2);
         painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
@@ -1106,7 +1106,7 @@ void DrawSetMask()
 
 void Memory_SaveSignalToFlashDrive()
 {
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         if (FILE_NAMING_MODE_IS_HAND)
         {
@@ -1208,14 +1208,17 @@ static const Page mspSetMask
 // œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” -  ‡Ú‡ÎÓ„ ///////////////////////////////////////////////////////////////////////////////
 void OnPressMemoryExtFileManager()
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_FileManager);
-    display.SetDrawMode(DrawMode_Hand, FM_Draw);
-    gBF.needRedrawFileManager = 1;
+    if(FLASH_DRIVE_IS_CONNECTED)
+    {
+        menu.OpenPageAndSetItCurrent(Page_SB_FileManager);
+        display.SetDrawMode(DrawMode_Hand, FM_Draw);
+        gBF.needRedrawFileManager = 1;
+    }
 }
 
 bool FuncOfActiveExtMemFolder()
 {
-    return gBF.flashDriveIsConnected == 1;
+    return FLASH_DRIVE_IS_CONNECTED == 1;
 }
 
 static void PressSB_FM_Exit()

@@ -2135,7 +2135,7 @@ void Display::DrawLowPart()
     painter.SetFont(TypeFont_UGO2);
 
     // Флешка
-    if (gBF.flashDriveIsConnected == 1)
+    if (FLASH_DRIVE_IS_CONNECTED)
     {
         painter.Draw4SymbolsInRect(x + 57, GRID_BOTTOM + 2, SYMBOL_FLASH_DRIVE);
     }

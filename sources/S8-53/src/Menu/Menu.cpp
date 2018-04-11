@@ -337,7 +337,7 @@ void Menu::ProcessingShortPressureButton()
 {
     if(shortPressureButton != B_Empty)
     {
-        if (shortPressureButton == B_Memory && MODE_BTN_MEMORY_IS_SAVE && gBF.flashDriveIsConnected == 1)
+        if (shortPressureButton == B_Memory && MODE_BTN_MEMORY_IS_SAVE && FLASH_DRIVE_IS_CONNECTED == 1)
         {
             gMemory.exitFromModeSetNameTo = MenuIsShown() ? RETURN_TO_MAIN_MENU : RETURN_TO_DISABLE_MENU;
             Memory_SaveSignalToFlashDrive();
@@ -758,7 +758,7 @@ void Menu::ExecuteFuncForLongPressureOnItem(void *item)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ChangeStateFlashDrive()
 {
-    if(gBF.flashDriveIsConnected == 0)
+    if(FLASH_DRIVE_IS_CONNECTED == 0)
     {
         if(GetNameOpenedPage() == Page_SB_FileManager)
         {
