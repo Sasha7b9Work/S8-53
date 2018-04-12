@@ -140,7 +140,10 @@ namespace ControlLibraryS8_53
         {
             InitializeComponent();
 
+            InitFont5();
             InitFont8();
+            InitFontUGO();
+            InitFontUGO2();
 
             bmi = new BITMAPINFO
             {
@@ -429,10 +432,7 @@ namespace ControlLibraryS8_53
                     {
                         str[i] = (char)int8();
                     }
-                    if (currentFont == 1)
-                    {
-                        DrawText(x0, y0, str);
-                    }
+                    DrawText(x0, y0, str);
                 }
                 else
                 {

@@ -263,3 +263,6 @@ namespace ControlLibraryS8_53
 			font.symbols[253] = new Symbol(0, new int[8] { 0, 0, 0, 0, 0, 0, 0, 0  });
 			font.symbols[254] = new Symbol(0, new int[8] { 0, 0, 0, 0, 0, 0, 0, 0  });
 			font.symbols[255] = new Symbol(0, new int[8] { 0, 0, 0, 0, 0, 0, 0, 0  });
+}
+}
+}

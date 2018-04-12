@@ -1,4 +1,4 @@
-import os
+﻿import os
 from struct import *
 
 def WriteByte(num_byte, file):
@@ -56,14 +56,27 @@ outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
 outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
 outputDisplay.write("/* Height */                       0x08, 0x00,\n")
 
+outputInterface = open("fontUGO2.cs", "w")             # Этот шрифт будет использоваться в клиентской программе на PC
+outputInterface.write("namespace ControlLibraryS8_53\n")
+outputInterface.write("{\n")
+outputInterface.write("\tpartial class Display\n")
+outputInterface.write("\t{\n")
+outputInterface.write("\t\tprivate void InitFontUGO2()\n")
+outputInterface.write("\t\t{\n")
+outputInterface.write("\t\t\tfonts[3] = new MyFont();\n")
+outputInterface.write("\t\t\tMyFont font = fonts[3];\n")
+outputInterface.write("\t\t\tfont.height = 8;\n")
+
 outTmpTable = open("table.map", "w")
 outTmpMap = open("map.tmp", "w")
 
 for num_symbol in range(256):
     output.write("/*" + str(num_symbol) + "*/")
+    outputInterface.write("\t\t\tfont.symbols[" + str(num_symbol) + "] = new Symbol(")
     outTmpTable.write("\n/* " + str(num_symbol) + " */\t        ")
     
     output.write("\t\t{ " + str(CalculateWidth(num_symbol)) + ", { ")
+    outputInterface.write(str(CalculateWidth(num_symbol)) + ", new int[8] { ")
     outTmpTable.write(str(CalculateWidth(num_symbol)) + ", ")
     offset = 8 + 4 * 256 + num_symbol * 8
     outTmpTable.write(str(offset & 0xff) + ", " + str((offset >> 8) & 0xff) + ", " + str((offset >> 16) & 0xff) + ",")
@@ -72,16 +85,20 @@ for num_symbol in range(256):
     
     for num_byte in range(8):
         WriteByte(num_symbol * 8 + num_byte, output)
+        WriteByte(num_symbol * 8 + num_byte, outputInterface)
         WriteReverseByte(num_symbol * 8 + num_byte, outTmpMap)
         if not (num_byte == 7 and num_symbol == 255):
             outTmpMap.write(",")
         if num_byte != 7:
-           output.write(",") 
+            outputInterface.write(",")
+            output.write(",") 
         output.write("\t")
+        outputInterface.write(" ")
 
     outTmpMap.write("\n")
     
     output.write("} " + "}")
+    outputInterface.write(" });\n")
     if num_symbol != 255:
         output.write(",")
     output.write("\t\n")
@@ -105,6 +122,11 @@ for line in lines:
 
 output.close()
 outputDisplay.close();
+
+outputInterface.write("}\n")
+outputInterface.write("}\n")
+outputInterface.write("}\n")
+outputInterface.close();
 
 input = open("fontUGO.inc")
 #print(input.read())

@@ -125,6 +125,11 @@ for line in lines:
 output.close()
 outputDisplay.close();
 
+outputInterface.write("}\n")
+outputInterface.write("}\n")
+outputInterface.write("}\n")
+outputInterface.close();
+
 input = open("fontUGO.inc")
 #print(input.read())
 input.close()

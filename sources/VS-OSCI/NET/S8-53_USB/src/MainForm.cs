@@ -160,7 +160,10 @@ namespace S8_53_USB {
 
         private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            buttonConnectUSB.Enabled = port.DeviceConnectToPort(comboBoxPorts.SelectedIndex);
+            if (comboBoxPorts.Enabled)
+            {
+                buttonConnectUSB.Enabled = port.DeviceConnectToPort(comboBoxPorts.SelectedIndex);
+            }
         }
 
         private void OnEndFrameEvent(object sender, EventArgs e)
@@ -186,7 +189,7 @@ namespace S8_53_USB {
                 if(needForDisconnect)
                 {
                     socket.Disconnect();
-                    EnableControlsUSB(true);
+                    //EnableControlsUSB(true);
                 }
                 else
                 {

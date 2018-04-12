@@ -64,7 +64,16 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Display.Designer.cs" />
+    <Compile Include="src\font5.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\font8.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\fontUGO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\fontUGO2.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Governor.cs">
