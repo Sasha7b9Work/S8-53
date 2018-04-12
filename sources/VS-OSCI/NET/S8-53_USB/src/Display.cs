@@ -19,8 +19,6 @@ namespace ControlLibraryS8_53
 {
     public partial class Display : UserControl
     {
-        static int recvBytes = 0;
-
         enum Command : byte
         {
             SET_COLOR = 1,
@@ -260,33 +258,33 @@ namespace ControlLibraryS8_53
 
                 if((Command)command == Command.SET_COLOR)
                 {
-                    Console.WriteLine("SetColor");
+                    //Console.WriteLine("SetColor");
                     SetColor((uint)int8());
                 }
                 else if((Command)command == Command.SET_PALETTE)
                 {
-                    Console.WriteLine("SetPalette");
+                    //Console.WriteLine("SetPalette");
                     SetPalette((byte)int8(), (ushort)int16());
                 }
                 else if((Command)command == Command.FILL_REGION)
                 {
-                    Console.WriteLine("FillRegion");
+                    //Console.WriteLine("FillRegion");
                     FillRegion(int16(), int8(), int16(), int8());
                 }
                 else if((Command)command == Command.END_SCENE)
                 {
-                    Console.WriteLine("EndScene");
+                    //Console.WriteLine("EndScene");
                     EndScene();
                     modeRun = ModeRun.STOP;
                 }
                 else if((Command)command == Command.DRAW_HLINE)
                 {
-                    Console.WriteLine("DrawHLine");
+                    //Console.WriteLine("DrawHLine");
                     DrawHLine(int8(), int16(), int16());
                 }
                 else if((Command)command == Command.DRAW_VLINE)
                 {
-                    Console.WriteLine("DrawVLine");
+                    //Console.WriteLine("DrawVLine");
                     DrawVLine(int16(), int8(), int8());
                 }
                 else if((Command)command == Command.SET_POINT)
@@ -298,12 +296,12 @@ namespace ControlLibraryS8_53
                 {
                     int x0 = int16();
 
-                    Console.WriteLine("DRAW_SIGNAL_POINTS");
+                    //Console.WriteLine("DRAW_SIGNAL_POINTS");
                     for(int i = 0; i < 281; i++)
                     {
                         SetPoint(x0 + i, int8());
                     }
-                    Console.WriteLine("EXIT                   DRAW_SIGNAL_POINTS");
+                    //Console.WriteLine("EXIT                   DRAW_SIGNAL_POINTS");
                 }
                 else if((Command)command == Command.DRAW_SIGNAL_LINES)
                 {
@@ -311,18 +309,18 @@ namespace ControlLibraryS8_53
 
                     int prevX = int8();
 
-                    Console.WriteLine("DRAW_SIGNAL_LINES");
+                    //Console.WriteLine("DRAW_SIGNAL_LINES");
                     for(int i = 0; i < 280; i++)
                     {
                         int nextX = int8();
                         DrawVLine(x0 + i, prevX, nextX);
                         prevX = nextX;
                     }
-                    Console.WriteLine("EXIT                     DRAW_SIGNAL_LINES");
+                    //Console.WriteLine("EXIT                     DRAW_SIGNAL_LINES");
                 }
                 else if((Command)command == Command.DRAW_MULTI_HPOINT_LINES_2)
                 {
-                    Console.WriteLine("DRAW_MULTI_HPOINT_LINES_2");
+                    //Console.WriteLine("DRAW_MULTI_HPOINT_LINES_2");
                     int numLines = int8();
                     int x0 = int16();
                     int numPoints = int8();
@@ -336,11 +334,11 @@ namespace ControlLibraryS8_53
                             SetPoint(x0 + dX * point, y);
                         }
                     }
-                    Console.WriteLine("EXIT                          DRAW_MULTI_HPOINT_LINES_2");
+                    //Console.WriteLine("EXIT                          DRAW_MULTI_HPOINT_LINES_2");
                 }
                 else if((Command)command == Command.DRAW_MULTI_VPOINT_LINES)
                 {
-                    Console.WriteLine("DRAW_MULTI_VPOINT_LINES");
+                    //Console.WriteLine("DRAW_MULTI_VPOINT_LINES");
                     int numLines = int8();
                     int y0 = int8();
                     int numPoints = int8();
@@ -355,22 +353,40 @@ namespace ControlLibraryS8_53
                             SetPoint(x, y0 + dY * point);
                         }
                     }
-                    Console.WriteLine("EXIT                           DRAW_MULTI_VPOINT_LIINES");
+                    //Console.WriteLine("EXIT                           DRAW_MULTI_VPOINT_LIINES");
                 }
                 else if((Command)command == Command.DRAW_VLINES_ARRAY)
                 {
-                    Console.WriteLine("DRAW_VLINES_ARRAY");
+                    //Console.WriteLine("DRAW_VLINES_ARRAY");
                     int x0 = int16();
                     int numLines = int8();
                     for(int i = 0; i < numLines; i++)
                     {
                         DrawVLine(x0 + i, int8(), int8());
                     }
-                    Console.WriteLine("EXIT                              DRAW_VLINES_ARRAY");
+                    //Console.WriteLine("EXIT                              DRAW_VLINES_ARRAY");
                 }
                 else if((Command)command == Command.LOAD_FONT)
                 {
-                    Console.WriteLine("LOAD_FONT");
+                    //Console.WriteLine("LOAD_FONT");
+
+                    int8();
+                    int8();
+                    int8();
+                    int8();
+                    int8();
+
+                    for(int i = 0; i < 256; i++)
+                    {
+                        int8();
+                        for(int j = 0; j < 256; j++)
+                        {
+                            int8();
+                        }
+                    }
+
+                    /*
+
                     int typeFont = int8();
                     if (typeFont < 4)
                     {
@@ -389,16 +405,18 @@ namespace ControlLibraryS8_53
                             }
                         }
                     }
-                    Console.WriteLine("EXIT________LOAD_FONT");
+
+                    */
+                    //Console.WriteLine("EXIT________LOAD_FONT");
                 }
                 else if((Command)command == Command.SET_FONT)
                 {
-                    Console.WriteLine("SET_FONT");
+                    //Console.WriteLine("SET_FONT");
                     currentFont = int8();
                 }
                 else if((Command)command == Command.DRAW_TEXT)
                 {
-                    Console.WriteLine("DRAW_TEXT");
+                    //Console.WriteLine("DRAW_TEXT");
                     int x0 = int16();
                     int y0 = int8();
                     int numSymbols = int8();
@@ -407,7 +425,7 @@ namespace ControlLibraryS8_53
                     {
                         str[i] = (char)int8();
                     }
-                    DrawText(x0, y0, str);
+                    //DrawText(x0, y0, str);
                 }
                 else
                 {
@@ -419,9 +437,11 @@ namespace ControlLibraryS8_53
 
         private static byte[] recData = new byte[0];
         private static int pointer = 1;
+        private static int recvBytes = 0;
 
         private static int int8()
         {
+            //Console.WriteLine("Принимаю байт");
             if (modeRun == ModeRun.USB)
             {
                 if (pointer < recData.Length)
@@ -439,17 +459,10 @@ namespace ControlLibraryS8_53
             }
             else if(modeRun == ModeRun.LAN)
             {
-                if(pointer < recData.Length)
-                {
-                    return recData[pointer++];
-                }
-                while(socket.BytesToRead() == 0)
-                {
-                };
-                int length = socket.BytesToRead();
-                recData = new byte[length];
-                socket.Read(recData, length);
-                pointer = 1;
+                recData = new byte[1];
+                socket.Read(recData, 1);
+                ++recvBytes;
+                Console.WriteLine("Принято " + recvBytes + " байт");
                 return recData[0];
             }
             return 0;

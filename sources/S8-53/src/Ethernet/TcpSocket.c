@@ -7,7 +7,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct tcp_pcb *pcbClient = 0;      // 0, если клиент не приконнекчен
+static struct tcp_pcb *pcbClient = 0;      // 0, если клиент не приконнекчен
 
 enum States
 {
@@ -406,6 +406,7 @@ bool TCPSocket_Send(const char *buffer, uint length)
         struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, length, PBUF_POOL);
         tcpBuffer->flags = 1;
         pbuf_take(tcpBuffer, buffer, length);
+        transmitBytes += length;
         struct State *ss = (struct State*)mem_malloc(sizeof(struct State));
         ss->p = tcpBuffer;
         Send(pcbClient, ss);

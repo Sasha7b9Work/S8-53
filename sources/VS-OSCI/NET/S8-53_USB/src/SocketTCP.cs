@@ -225,7 +225,12 @@ namespace LibraryS8_53
 
         public void Read(byte[] buffer, int numBytes)
         {
-            socket.Receive(buffer, numBytes, SocketFlags.None);
+            int recvBytes = socket.Receive(buffer, numBytes, SocketFlags.None);
+
+            if(recvBytes != numBytes)
+            {
+                Console.WriteLine("Error");
+            }
         }
 
         public Socket GetSocket()

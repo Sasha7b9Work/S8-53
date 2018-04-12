@@ -3,6 +3,7 @@
 #include "Painter.h"
 #include "font/Font.h"
 #include "Log.h"
+#include "Ethernet/Ethernet.h"
 #include "Ethernet/TcpSocket.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
@@ -517,10 +518,10 @@ void Painter::BeginScene(Color color)
         if(needForLoadFontsAndPalette) 
         {
             LoadPalette();
-            LoadFont(TypeFont_5);
+            //LoadFont(TypeFont_5);
             LoadFont(TypeFont_8);
-            LoadFont(TypeFont_UGO);
-            LoadFont(TypeFont_UGO2);
+            //LoadFont(TypeFont_UGO);
+            //LoadFont(TypeFont_UGO2);
         }
     }
 
@@ -538,6 +539,14 @@ void Painter::RunDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(bool endScene)
 {
+
+    if(transmitBytes)
+    {
+        volatile int temp = transmitBytes;
+    }
+
+
+
     if (gBF.framesElapsed != 1)
     {
         gBF.framesElapsed = 1;
