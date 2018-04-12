@@ -37,6 +37,7 @@ static PanelButton longPressureButton = B_Empty;    ///< Если произошло длинное 
 static PanelButton pressButton = B_Empty;           ///< При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
 static PanelButton releaseButton = B_Empty;         ///< При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки события отпускания кнопки.
 static int angleRegSet = 0;                         ///< Угол, на который нужно повернуть ручку УСТАНОВКА - величина означает количество щелчков, знак - направление - "-" - влево, "+" - вправо
+static const int stepAngleRegSet = 2;
 static void* itemUnderKey = 0;                      ///< Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, если ни одна кнопка не нажата.
 
 /// Обработка события таймера автоматического сокрытия меню.
@@ -55,50 +56,55 @@ void Menu::OpenFileManager()
     {
         ShortPressureButton(B_Menu);
         UpdateInput();
-        //display.Update();
+        display.Update(false);
     }
-
+    
     if(!MenuIsShown())
     {
         ShortPressureButton(B_Menu);
         UpdateInput();
-        //display.Update();
+        display.Update(false);
     }
 
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < 5 * stepAngleRegSet + 1; i++)
     {
         RotateRegSetLeft();
         UpdateInput();
-        //display.Update();
+        display.Update(false);
     }
     
     angleRegSet = 0;
 
-    RotateRegSetRight();
-    UpdateInput();
-    RotateRegSetRight();
-    UpdateInput();
-    RotateRegSetRight();
-    UpdateInput();
-    //display.Update();
+    for(int i = 0; i < 2 * stepAngleRegSet + 1; i++)
+    {
+        RotateRegSetRight();
+        UpdateInput();
+        display.Update(false);
+    }
     
     angleRegSet = 0;
 
     ShortPressureButton(B_F2);
     UpdateInput();
-    //display.Update();
+    display.Update(false);
 
     ShortPressureButton(B_F4);
     UpdateInput();
-    //display.Update();
-
-    RotateRegSetLeft();
-    UpdateInput();
-    //display.Update();
-
-    ShortPressureButton(B_F1);
-    UpdateInput();
-    display.Update();
+    display.Update(false);
+   
+    for(int i = 0; i < stepAngleRegSet + 1; i++)
+    {
+        RotateRegSetLeft();
+        UpdateInput();
+        display.Update(false);
+    }
+       
+    for(int i = 0; i < 2; i++)
+    {
+        ShortPressureButton(B_F1);
+        UpdateInput();
+        display.Update(false);
+    }
 }
 
 void Menu::UpdateInput(void)
@@ -506,10 +512,9 @@ void Menu::ProcessingRegulatorSet(void)
     {
         void *item = CurrentItem();
         TypeItem type = TypeMenuItem(item);
-        static const int step = 2;
         if (TypeMenuItem(OpenedItem()) == Item_Page && (type == Item_ChoiceReg || type == Item_Governor || type == Item_IP || type == Item_MAC))
         {
-            if (angleRegSet > step || angleRegSet < -step)
+            if (angleRegSet > stepAngleRegSet || angleRegSet < -stepAngleRegSet)
             {
                 ChangeItem(item, angleRegSet);
                 angleRegSet = 0;

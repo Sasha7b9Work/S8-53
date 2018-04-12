@@ -536,7 +536,7 @@ void Painter::RunDisplay()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::EndScene()
+void Painter::EndScene(bool endScene)
 {
     if (gBF.framesElapsed != 1)
     {
@@ -545,8 +545,12 @@ void Painter::EndScene()
     }
     uint8 command[4];
     command[0] = END_SCENE;
-    SendToDisplay(command, 4);
-    SendToVCP(command, 1);
+
+    if (endScene)
+    {
+        SendToDisplay(command, 4);
+        SendToVCP(command, 1);
+    }
     if (stateTransmit == StateTransmit_InProcess)
     {
         VCP_Flush();

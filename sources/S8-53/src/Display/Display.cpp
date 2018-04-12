@@ -1240,7 +1240,7 @@ extern uint8 *pool;
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Update()
+void Display::Update(bool endScene)
 {
 	uint timeStart = gTimerTics;
     if (funcOnHand != 0)
@@ -1298,7 +1298,7 @@ void Display::Update()
 
     painter.SetColor(COLOR_FILL);
 
-    painter.EndScene();
+    painter.EndScene(endScene);
 
     if (gMemory.needForSaveToFlashDrive == 1)
     {

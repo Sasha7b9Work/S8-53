@@ -13,7 +13,7 @@ public:
 
     void BeginScene(Color color);
 
-    void EndScene();
+    void EndScene(bool endScene = true);
 
     void SendFrame(bool first);
 

@@ -10,7 +10,7 @@ class Display
 public:
     void Init();
 
-    void Update();
+    void Update(bool endScene = true);
 
     void RotateRShift(Channel channel);
 
