@@ -76,22 +76,42 @@ namespace ControlLibraryS8_53
 
         public class Symbol
         {
+            public int width;
+            public int[] bytes;
             public Symbol()
             {
                 bytes = new int[8];
             }
-            public int width;
-            public int []bytes;
+
+            public Symbol(int width_, int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7)
+            {
+                width = width_;
+                bytes = new int[8];
+                bytes[0] = x0;
+                bytes[1] = x1;
+                bytes[2] = x2;
+                bytes[3] = x3;
+                bytes[4] = x4;
+                bytes[5] = x5;
+                bytes[6] = x6;
+                bytes[7] = x7;
+            }
+
+            public Symbol(int width_, int[] bytes_)
+            {
+                width = width_;
+                bytes = bytes_;
+            }
         }
 
         public class MyFont 
         {
+            public int height;
+            public Symbol[] symbols;
             public MyFont()
             {
                 symbols = new Symbol[256];
             }
-            public int height;
-            public Symbol []symbols;
         }
 
         private static MyFont []fonts = new MyFont[4];
@@ -119,6 +139,8 @@ namespace ControlLibraryS8_53
         public Display()
         {
             InitializeComponent();
+
+            InitFont8();
 
             bmi = new BITMAPINFO
             {
@@ -370,23 +392,6 @@ namespace ControlLibraryS8_53
                 {
                     //Console.WriteLine("LOAD_FONT");
 
-                    int8();
-                    int8();
-                    int8();
-                    int8();
-                    int8();
-
-                    for(int i = 0; i < 256; i++)
-                    {
-                        int8();
-                        for(int j = 0; j < 256; j++)
-                        {
-                            int8();
-                        }
-                    }
-
-                    /*
-
                     int typeFont = int8();
                     if (typeFont < 4)
                     {
@@ -405,8 +410,7 @@ namespace ControlLibraryS8_53
                             }
                         }
                     }
-
-                    */
+                    
                     //Console.WriteLine("EXIT________LOAD_FONT");
                 }
                 else if((Command)command == Command.SET_FONT)
@@ -425,7 +429,10 @@ namespace ControlLibraryS8_53
                     {
                         str[i] = (char)int8();
                     }
-                    //DrawText(x0, y0, str);
+                    if (currentFont == 1)
+                    {
+                        DrawText(x0, y0, str);
+                    }
                 }
                 else
                 {
@@ -437,7 +444,6 @@ namespace ControlLibraryS8_53
 
         private static byte[] recData = new byte[0];
         private static int pointer = 1;
-        private static int recvBytes = 0;
 
         private static int int8()
         {
@@ -461,8 +467,6 @@ namespace ControlLibraryS8_53
             {
                 recData = new byte[1];
                 socket.Read(recData, 1);
-                ++recvBytes;
-                Console.WriteLine("Принято " + recvBytes + " байт");
                 return recData[0];
             }
             return 0;

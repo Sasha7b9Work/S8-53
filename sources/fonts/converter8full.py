@@ -1,4 +1,4 @@
-import os
+﻿import os
 from struct import *
 
 def WriteByte(num_byte, file):
@@ -50,10 +50,10 @@ data = input.read()
 input.close()
 symbols = unpack("2048b", data)
 
-output = open("font8.inc", "w")                   # Fonts for black display
+output = open("font8.inc", "w")                     # Этот шрифт будет использоваться программой STM32
 output.write("#include \"font.h\"\nconst Font font8 = {\n\t8, {\n")
 
-outputDisplay = open("font8display.inc", "w")     # Font for color display
+outputDisplay = open("font8display.inc", "w")       # Этот шрифт будет использоваться дисплеем
 outputDisplay.write("/* Main font height 8 */\n\n")
 outputDisplay.write("const BYTE font8display[" + str(8 + 256 * 8 + 256 * 4) + "] = {\n\n")
 outputDisplay.write("/* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,\n")
@@ -61,14 +61,27 @@ outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
 outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
 outputDisplay.write("/* Height */                       0x08, 0x00,\n")
 
+outputInterface = open("font8.cs", "w")             # Этот шрифт будет использоваться в клиентской программе на PC
+outputInterface.write("namespace ControlLibraryS8_53\n")
+outputInterface.write("{\n")
+outputInterface.write("\tpartial class Display\n")
+outputInterface.write("\t{\n")
+outputInterface.write("\t\tprivate void InitFont8()\n")
+outputInterface.write("\t\t{\n")
+outputInterface.write("\t\t\tfonts[1] = new MyFont();\n")
+outputInterface.write("\t\t\tMyFont font = fonts[1];\n")
+outputInterface.write("\t\t\tfont.height = 8;\n")
+
 outTmpTable = open("table.tmp", "w")
 outTmpMap = open("map.tmp", "w")
 
 for num_symbol in range(256):
     output.write("/*" + str(num_symbol) + "*/")
+    outputInterface.write("\t\t\tfont.symbols[" + str(num_symbol) + "] = new Symbol(")
     outTmpTable.write("\n/*  " + str(num_symbol) + "  */\t        ")
     
     output.write("\t\t{ " + str(CalculateWidth(num_symbol)) + ", { ")
+    outputInterface.write(str(CalculateWidth(num_symbol)) + ", new int[8] { ")
     outTmpTable.write(str(CalculateWidth(num_symbol)) + ", ")
     offset = 8 + 4 * 256 + num_symbol * 8
     outTmpTable.write(str(offset & 0xff) + ", " + str((offset >> 8) & 0xff) + ", " + str((offset >> 16) & 0xff) + ",")
@@ -77,16 +90,20 @@ for num_symbol in range(256):
     
     for num_byte in range(8):
         WriteByte(num_symbol * 8 + num_byte, output)
+        WriteByte(num_symbol * 8 + num_byte, outputInterface)
         WriteReverseByte(num_symbol * 8 + num_byte, outTmpMap)
         if not (num_byte == 7 and num_symbol == 255):
             outTmpMap.write(",")
         if num_byte != 7:
-           output.write(",") 
+           output.write(",")
+           outputInterface.write(",")
         output.write("\t")
+        outputInterface.write(" ")
         
     outTmpMap.write("\n")
         
     output.write("} " + "}")
+    outputInterface.write(" });\n")
     if num_symbol != 255:
         output.write(",")
     output.write("\t\n")
@@ -107,9 +124,14 @@ outTmpMap = open("map.tmp")
 lines = outTmpMap.readlines()
 for line in lines:
     outputDisplay.write(line)
+    
+outputInterface.write("}\n")
+outputInterface.write("}\n")
+outputInterface.write("}\n")
 
 output.close()
 outputDisplay.close()
+outputInterface.close();
 
 input = open("font8.inc")
 #print(input.read())

@@ -519,7 +519,7 @@ void Painter::BeginScene(Color color)
         {
             LoadPalette();
             //LoadFont(TypeFont_5);
-            LoadFont(TypeFont_8);
+            //LoadFont(TypeFont_8);
             //LoadFont(TypeFont_UGO);
             //LoadFont(TypeFont_UGO2);
         }
