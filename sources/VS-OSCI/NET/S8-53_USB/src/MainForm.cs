@@ -49,7 +49,7 @@ namespace S8_53_USB {
 
             Display.EndFrameEvent += OnEndFrameEvent;
 
-            btnUpdatePorts_Click(null, null);
+            buttonUpdatePorts_Click(null, null);
 
             buttonConnectLAN.Enabled = true;
         }
@@ -74,14 +74,14 @@ namespace S8_53_USB {
             return mapButtons[(Button)btn];
         }
 
-        private void btnUpdatePorts_Click(object sender, EventArgs e) {
+        private void buttonUpdatePorts_Click(object sender, EventArgs e) {
             string[] ports = port.GetPorts();
             comboBoxPorts.Items.Clear();
             comboBoxPorts.Items.AddRange(ports);
             comboBoxPorts.SelectedIndex = ports.Length - 1;
         }
 
-        private void btnConnectUSB_Click(object sender, EventArgs e)
+        private void buttonConnectUSB_Click(object sender, EventArgs e)
         {
             if (port.IsOpen())                                  // Если порт открыт - идёт обмен с прибором. Будем отключать
             {
@@ -90,14 +90,20 @@ namespace S8_53_USB {
                 buttonUpdatePorts.Enabled = true;
                 needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
 
-                EnableControlsLAN(true);
+                textBoxIP.Enabled = true;
+                textBoxPort.Enabled = true;
+                buttonConnectLAN.Enabled = true;
             }
             else
             {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
                     needForDisconnect = false;
-                    EnableControlsLAN(false);
+
+                    textBoxIP.Enabled = false;
+                    textBoxPort.Enabled = false;
+                    buttonConnectLAN.Enabled = false;
+
                     comboBoxPorts.Enabled = false;
                     buttonUpdatePorts.Enabled = false;
 
@@ -112,43 +118,28 @@ namespace S8_53_USB {
         {
             try
             {
-                if(buttonConnectLAN.Text == "Проверить")                                // Если мы не знаем, есть ли подключение к данному адресу
+                if(socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
                 {
-                    if (socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
-                    {
-                        socket.Disconnect();
-                        buttonConnectLAN.Text = "Подкл";
-                    }
+                    buttonConnectLAN.Text = "Подкл";
+                    textBoxIP.Enabled = true;
+                    buttonUpdatePorts.Enabled = true;
+                    needForDisconnect = true;
+                    EnableControlsUSB(true);
                 }
-                else                                                                    // А здесь уже известно, что устройство на том адресе есть
+                else                                                                // А по этой ветке подключаемся
                 {
-                    if(socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
+                    if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
-                        buttonConnectLAN.Text = "Подкл";
-                        textBoxIP.Enabled = true;
-                        buttonUpdatePorts.Enabled = true;
-                        needForDisconnect = true;
-                        EnableControlsUSB(true);
-                    }
-                    else                                                                // А по этой ветке подключаемся
-                    {
-                        if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
-                        {
-                            buttonConnectLAN.Text = "Откл";
-                            textBoxIP.Enabled = false;
-                            textBoxPort.Enabled = false;
+                        buttonConnectLAN.Text = "Откл";
+                        textBoxIP.Enabled = false;
+                        textBoxPort.Enabled = false;
 
-                            comboBoxPorts.Enabled = false;
-                            buttonUpdatePorts.Enabled = false;
-                            buttonConnectUSB.Enabled = false;
+                        comboBoxPorts.Enabled = false;
+                        buttonUpdatePorts.Enabled = false;
+                        buttonConnectUSB.Enabled = false;
 
-                            socket.SendString("DISPLAY:AUTOSEND 1");
-                            display.StartDrawing(socket);
-                        }
-                        else
-                        {
-                            buttonConnectLAN.Text = "Проверить";
-                        }
+                        socket.SendString("DISPLAY:AUTOSEND 1");
+                        display.StartDrawing(socket);
                     }
                 }
             }
@@ -189,7 +180,6 @@ namespace S8_53_USB {
                 if(needForDisconnect)
                 {
                     socket.Disconnect();
-                    //EnableControlsUSB(true);
                 }
                 else
                 {
@@ -219,28 +209,6 @@ namespace S8_53_USB {
             }
             comboBoxPorts.Enabled = enable;
             buttonUpdatePorts.Enabled = enable;
-        }
-
-        // Активировать/деактивировать элементы управления, отвечающие за свять по LAN
-        private void EnableControlsLAN(bool enable)
-        {
-            textBoxIP.Enabled = enable;
-            textBoxPort.Enabled = enable;
-        }
-
-        private void OnChangedAddressIP()
-        {
-            buttonConnectLAN.Text = "Проверить";
-        }
-
-        private void textBoxIP_TextChanged(object sender, EventArgs e)
-        {
-            OnChangedAddressIP();
-        }
-
-        private void textBoxPort_TextChanged(object sender, EventArgs e)
-        {
-            OnChangedAddressIP();
         }
     }
 }

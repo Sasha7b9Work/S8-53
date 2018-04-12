@@ -76,27 +76,15 @@ void Process_AUTOSEND(uint8 *buffer)
     
     static const MapElement map[] =
     {
-        {"1", 1},
-        {"2", 2},
+        {"1", 1},       // Этот запрос для запроса первого фрейма с палитрой и шрифтами
+        {"2", 2},       // Этот запрос для запроса последующих фреймов
+        {"3", 3},       // Этот запрос для запроса первого фрейма без палитры и шрифтов
         {0}
     };
     ENTER_ANALYSIS
-        if (1 == value)
-        {
-            if(counter < 10)
-            {
-            //LOG_WRITE("Send 1");
-            }
-            painter.SendFrame(true);
-        }
-        else if (2 == value)
-        {
-            if(counter < 10)
-            {
-            //LOG_WRITE("Send 2");
-            }
-            painter.SendFrame(false);
-        }
+        if (1 == value)      { painter.SendFrame(true);  }
+        else if (2 == value) { painter.SendFrame(false); }
+        else if (3 == value) { painter.SendFrame(true, true); }
     LEAVE_ANALYSIS
 }
 

@@ -14,8 +14,8 @@ public:
     void BeginScene(Color color);
 
     void EndScene(bool endScene = true);
-
-    void SendFrame(bool first);
+    // По умолчанию запрашиваем первый фрейм с шрифтами
+    void SendFrame(bool first, bool noFonts = false);
 
     void ResetFlash();
 

@@ -30,10 +30,14 @@ static enum StateTransmit
     StateTransmit_InProcess
 } stateTransmit = StateTransmit_Free;
 
+static bool noFonts = false;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Painter::SendFrame(bool first)
+void Painter::SendFrame(bool first, bool noFonts_)
 {
+    noFonts = noFonts_;
+
     if (stateTransmit == StateTransmit_Free)
     {
         stateTransmit = (first ? StateTransmit_NeedForTransmitFirst : StateTransmit_NeedForTransmitSecond);
@@ -518,10 +522,13 @@ void Painter::BeginScene(Color color)
         if(needForLoadFontsAndPalette) 
         {
             LoadPalette();
-            //LoadFont(TypeFont_5);
-            //LoadFont(TypeFont_8);
-            //LoadFont(TypeFont_UGO);
-            //LoadFont(TypeFont_UGO2);
+            if(!noFonts)                // Если был запрос на загрузку шрифтов
+            {
+                LoadFont(TypeFont_5);
+                LoadFont(TypeFont_8);
+                LoadFont(TypeFont_UGO);
+                LoadFont(TypeFont_UGO2);
+            }
         }
     }
 

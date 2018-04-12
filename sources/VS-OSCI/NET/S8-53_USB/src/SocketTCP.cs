@@ -203,7 +203,7 @@ namespace LibraryS8_53
                 if (socket != null)
                 {
                     socket.Disconnect(false);
-                    socket.Close();
+                    //socket.Close();
                     socket = null;
                 }
             }

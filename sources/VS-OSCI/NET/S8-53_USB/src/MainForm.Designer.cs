@@ -301,7 +301,7 @@
             this.buttonConnectUSB.TabIndex = 2;
             this.buttonConnectUSB.Text = "Подкл";
             this.buttonConnectUSB.UseVisualStyleBackColor = true;
-            this.buttonConnectUSB.Click += new System.EventHandler(this.btnConnectUSB_Click);
+            this.buttonConnectUSB.Click += new System.EventHandler(this.buttonConnectUSB_Click);
             // 
             // comboBoxPorts
             // 
@@ -320,7 +320,7 @@
             this.buttonUpdatePorts.TabIndex = 1;
             this.buttonUpdatePorts.Text = "Обновить";
             this.buttonUpdatePorts.UseVisualStyleBackColor = true;
-            this.buttonUpdatePorts.Click += new System.EventHandler(this.btnUpdatePorts_Click);
+            this.buttonUpdatePorts.Click += new System.EventHandler(this.buttonUpdatePorts_Click);
             // 
             // label6
             // 
@@ -345,9 +345,9 @@
             this.buttonConnectLAN.Enabled = false;
             this.buttonConnectLAN.Location = new System.Drawing.Point(186, 14);
             this.buttonConnectLAN.Name = "buttonConnectLAN";
-            this.buttonConnectLAN.Size = new System.Drawing.Size(70, 32);
+            this.buttonConnectLAN.Size = new System.Drawing.Size(56, 32);
             this.buttonConnectLAN.TabIndex = 3;
-            this.buttonConnectLAN.Text = "Проверить";
+            this.buttonConnectLAN.Text = "Подкл";
             this.buttonConnectLAN.UseVisualStyleBackColor = true;
             this.buttonConnectLAN.Click += new System.EventHandler(this.buttonConnectLAN_Click);
             // 
@@ -358,7 +358,6 @@
             this.textBoxPort.Size = new System.Drawing.Size(28, 20);
             this.textBoxPort.TabIndex = 1;
             this.textBoxPort.Text = "7";
-            this.textBoxPort.TextChanged += new System.EventHandler(this.textBoxPort_TextChanged);
             // 
             // textBoxIP
             // 
@@ -367,7 +366,6 @@
             this.textBoxIP.Size = new System.Drawing.Size(88, 20);
             this.textBoxIP.TabIndex = 0;
             this.textBoxIP.Text = "192.168.1.200";
-            this.textBoxIP.TextChanged += new System.EventHandler(this.textBoxIP_TextChanged);
             // 
             // tabControl1
             // 
