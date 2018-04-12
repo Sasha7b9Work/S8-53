@@ -88,6 +88,7 @@ void Send(struct tcp_pcb *_tpcb, struct State *_ss)
         else
         {
             // other probler
+            volatile err_t err_ = wr_err;
         }
     }
 }
