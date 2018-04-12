@@ -29,22 +29,52 @@ static void FuncConnect(void)
     //TCPSocket_Send("Test String", 5);
 }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *GetStringFromBuffer(const char *buffer, uint length, char *string)
+{
+    memcpy(string, buffer, length);
+    string[length] = 'E';
+    string[length + 1] = '\0';
+    return string;
+}
+
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncReceiver(const char *buffer, uint length)
 {
-    static int counter = 0;
-    counter++;
+    /*
+    const char *pBuffer = buffer;
     
-    if(counter < 18)
+    static char prevSymbol = 0;
+    
+    if(prevSymbol == 'K' && buffer[1] == 'D')
     {
-        char *data = (char *)malloc(length + 2);
-        memcpy(data, buffer, length);
-        data[length] = '_';
-        data[length + 1] = 0;
-        LOG_WRITE(data);
+        prevSymbol = 'K';
     }
     
+    char string[100];
+
+    LOG_WRITE(GetStringFromBuffer(buffer, length, string));
+
+    int count = 0;
+    for(int i = 0; i < length; i++)
+    {
+        if(buffer[i] == ':')
+        {
+            ++count;
+        }
+
+        if(count == 2)
+        {
+            count = 2;
+        }
+    }
+    */
+    
     SCPI_AddNewData((uint8 *)buffer, length);
+    
+    //prevSymbol = pBuffer[1];
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------

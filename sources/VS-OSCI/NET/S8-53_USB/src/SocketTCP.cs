@@ -116,8 +116,19 @@ namespace LibraryS8_53
             }
         }
 
+        public void ClearRecvBuffer()
+        {
+            while (socket.Available > 0)
+            {
+                int size = socket.Available;
+                byte[] buffer = new byte[size];
+                socket.Receive(buffer, size, SocketFlags.None);
+            }
+        }
+
         public void SendString(string data)
         {
+            Console.WriteLine("Засылаю " + data);
             mutex.WaitOne();
 
             if (socket.Connected)
@@ -129,7 +140,7 @@ namespace LibraryS8_53
             mutex.ReleaseMutex();
         }
 
-        private string ReadString()
+        public string ReadString()
         {
             byte[] byteData = new byte[500];
 

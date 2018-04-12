@@ -160,6 +160,9 @@ namespace S8_53_USB {
             }
         }
 
+        private int countCommands = 0;
+        private ManualResetEvent waitForSend = new ManualResetEvent(false);
+
         private void OnEndFrameEvent(object sender, EventArgs e)
         {
             if (port.IsOpen())                                      // Если идёт обмен по USB
@@ -172,8 +175,12 @@ namespace S8_53_USB {
                 {
                     while (commands.Count != 0)
                     {
+                        Thread.Sleep(10);
                         port.SendString(commands.Dequeue());
+                        Thread.Sleep(10);
                     }
+                    Thread.Sleep(10);
+                    display.ClearRecvData();
                     port.SendString("DISPLAY:AUTOSEND 2");
                     display.StartDrawing(port.GetSerialPort());
                 }
@@ -188,8 +195,13 @@ namespace S8_53_USB {
                 {
                     while(commands.Count != 0)
                     {
+                        Thread.Sleep(50);
                         socket.SendString(commands.Dequeue());
+                        Thread.Sleep(50);
                     }
+
+                    Thread.Sleep(50);
+                    display.ClearRecvData();
                     socket.SendString("DISPLAY:AUTOSEND 2");
                     display.StartDrawing(socket);
                 }

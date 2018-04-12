@@ -445,6 +445,11 @@ namespace ControlLibraryS8_53
         private static byte[] recData = new byte[0];
         private static int pointer = 1;
 
+        public void ClearRecvData()
+        {
+            recData = new byte[0];
+        }
+
         private static int int8()
         {
             //Console.WriteLine("Принимаю байт");

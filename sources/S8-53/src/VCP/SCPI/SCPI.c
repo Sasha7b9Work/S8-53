@@ -26,21 +26,8 @@ static int pointer = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SCPI_AddNewData(uint8 *data, uint length)
+static void Processing (uint8 *data, uint length)
 {
-    /*
-    static int counter = 0;
-    counter++;
-    if(counter < 10)
-    {
-        char *buf = (char *)malloc(length + 2);
-        memcpy(buf, data, length);
-        buf[length + 1] = 0;
-        buf[length] = 'E';
-        LOG_WRITE(buf);
-    }
-    */
-    
     memcpy(&buffer[pointer], data, length);
     pointer += length;
 
@@ -77,6 +64,12 @@ label_another:
             }
         }
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SCPI_AddNewData(uint8 *data, uint length)
+{
+    Processing(data, length);
 }
 
 
