@@ -122,6 +122,7 @@ namespace S8_53_USB {
                 {
                     buttonConnectLAN.Text = "Подкл";
                     textBoxIP.Enabled = true;
+                    textBoxPort.Enabled = true;
                     buttonUpdatePorts.Enabled = true;
                     needForDisconnect = true;
                     EnableControlsUSB(true);
@@ -130,6 +131,8 @@ namespace S8_53_USB {
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
+                        needForDisconnect = false;
+
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
                         textBoxPort.Enabled = false;
@@ -138,7 +141,7 @@ namespace S8_53_USB {
                         buttonUpdatePorts.Enabled = false;
                         buttonConnectUSB.Enabled = false;
 
-                        socket.SendString("DISPLAY:AUTOSEND 1");
+                        socket.SendString("DISPLAY:AUTOSEND 3");
                         display.StartDrawing(socket);
                     }
                 }
