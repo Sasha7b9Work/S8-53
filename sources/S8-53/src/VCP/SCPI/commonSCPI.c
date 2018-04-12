@@ -1,13 +1,14 @@
 #include "defines.h"
 #include "SCPI.h"
 #include "commonSCPI.h"
+#include "Hardware/Hardware.h"
 #include "VCP/VCP.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Process_IDN(uint8 *buffer)
 {
-    SCPI_SEND("*IDN : Type S8-53/1 : Manufacturer MNIPI : Software ver. 1.0")
+    SCPI_SEND("MNIPI,S8-53/1,V%S,%X", NUM_VER, Hardware_CalculateCRC32());
 }
 
 

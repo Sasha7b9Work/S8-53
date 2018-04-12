@@ -12,7 +12,7 @@ namespace S8_53_ConsoleLAN
     {
         private Logger logger = new Logger("log.txt");
 
-        private string ipAddress = "192.168.100.5";
+        private string ipAddress = "192.168.1.200";
 
         private int port = 7;
 

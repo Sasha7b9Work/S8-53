@@ -227,5 +227,10 @@ namespace LibraryS8_53
         {
             socket.Receive(buffer, numBytes, SocketFlags.None);
         }
+
+        public Socket GetSocket()
+        {
+            return socket;
+        }
     }
 }
