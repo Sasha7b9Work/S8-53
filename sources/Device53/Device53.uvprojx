@@ -1002,11 +1002,6 @@
               <FilePath>.\src\Display\Grid.h</FilePath>
             </File>
             <File>
-              <FileName>Math3D.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Math3D.c</FilePath>
-            </File>
-            <File>
               <FileName>Math3D.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Math3D.h</FilePath>
@@ -1055,6 +1050,11 @@
               <FileName>PainterMem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\PainterMem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math3D.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Math3D.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1117,24 +1117,24 @@
           <GroupName>Ethernet</GroupName>
           <Files>
             <File>
-              <FileName>Ethernet.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Ethernet\Ethernet.c</FilePath>
-            </File>
-            <File>
               <FileName>Ethernet.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ethernet\Ethernet.h</FilePath>
             </File>
             <File>
-              <FileName>TcpSocket.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Ethernet\TcpSocket.c</FilePath>
-            </File>
-            <File>
               <FileName>TcpSocket.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ethernet\TcpSocket.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ethernet\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TcpSocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ethernet\TcpSocket.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1652,11 +1652,6 @@
               <FilePath>.\src\Settings\SettingsDebug.cpp</FilePath>
             </File>
             <File>
-              <FileName>SettingsMeasures.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsMeasures.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsMeasures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsMeasures.h</FilePath>
@@ -1680,6 +1675,11 @@
               <FileName>SettingsTime.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\SettingsTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1797,9 +1797,9 @@
               <FilePath>.\src\VCP\VCP.h</FilePath>
             </File>
             <File>
-              <FileName>VCP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\VCP.c</FilePath>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\VCP.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1807,24 +1807,9 @@
           <GroupName>VCP/SCPI</GroupName>
           <Files>
             <File>
-              <FileName>channelSCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\channelSCPI.c</FilePath>
-            </File>
-            <File>
-              <FileName>commonSCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\commonSCPI.c</FilePath>
-            </File>
-            <File>
               <FileName>commonSCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\VCP\SCPI\commonSCPI.h</FilePath>
-            </File>
-            <File>
-              <FileName>controlSCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\controlSCPI.c</FilePath>
             </File>
             <File>
               <FileName>controlSCPI.h</FileName>
@@ -1832,29 +1817,44 @@
               <FilePath>.\src\VCP\SCPI\controlSCPI.h</FilePath>
             </File>
             <File>
-              <FileName>displaySCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\displaySCPI.c</FilePath>
-            </File>
-            <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\VCP\SCPI\SCPI.h</FilePath>
             </File>
             <File>
-              <FileName>trigSCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\trigSCPI.c</FilePath>
-            </File>
-            <File>
-              <FileName>tbaseSCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\tbaseSCPI.c</FilePath>
-            </File>
-            <File>
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\VCP\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>channelSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\channelSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>commonSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\commonSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>controlSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\controlSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>displaySCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\displaySCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>tbaseSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\tbaseSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>trigSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\trigSCPI.cpp</FilePath>
             </File>
           </Files>
         </Group>

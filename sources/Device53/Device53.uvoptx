@@ -1655,18 +1655,6 @@
     <File>
       <GroupNumber>6</GroupNumber>
       <FileNumber>120</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Math3D.c</PathWithFileName>
-      <FilenameWithoutPath>Math3D.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>6</GroupNumber>
-      <FileNumber>121</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1678,7 +1666,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>122</FileNumber>
+      <FileNumber>121</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1690,7 +1678,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>123</FileNumber>
+      <FileNumber>122</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1702,7 +1690,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>124</FileNumber>
+      <FileNumber>123</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1714,7 +1702,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>125</FileNumber>
+      <FileNumber>124</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1726,7 +1714,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>126</FileNumber>
+      <FileNumber>125</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1738,7 +1726,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>127</FileNumber>
+      <FileNumber>126</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1750,7 +1738,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>128</FileNumber>
+      <FileNumber>127</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1762,7 +1750,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>129</FileNumber>
+      <FileNumber>128</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1774,13 +1762,25 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>130</FileNumber>
+      <FileNumber>129</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Display\PainterMem.cpp</PathWithFileName>
       <FilenameWithoutPath>PainterMem.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>6</GroupNumber>
+      <FileNumber>130</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Display\Math3D.cpp</PathWithFileName>
+      <FilenameWithoutPath>Math3D.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1916,25 +1916,13 @@
 
   <Group>
     <GroupName>Ethernet</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>141</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ethernet\Ethernet.c</PathWithFileName>
-      <FilenameWithoutPath>Ethernet.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>8</GroupNumber>
-      <FileNumber>142</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1946,25 +1934,37 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>143</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Ethernet\TcpSocket.c</PathWithFileName>
-      <FilenameWithoutPath>TcpSocket.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>8</GroupNumber>
-      <FileNumber>144</FileNumber>
+      <FileNumber>142</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Ethernet\TcpSocket.h</PathWithFileName>
       <FilenameWithoutPath>TcpSocket.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>8</GroupNumber>
+      <FileNumber>143</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ethernet\Ethernet.cpp</PathWithFileName>
+      <FilenameWithoutPath>Ethernet.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>8</GroupNumber>
+      <FileNumber>144</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Ethernet\TcpSocket.cpp</PathWithFileName>
+      <FilenameWithoutPath>TcpSocket.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2939,18 +2939,6 @@
     <File>
       <GroupNumber>15</GroupNumber>
       <FileNumber>221</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Settings\SettingsMeasures.c</PathWithFileName>
-      <FilenameWithoutPath>SettingsMeasures.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>15</GroupNumber>
-      <FileNumber>222</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2962,7 +2950,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>223</FileNumber>
+      <FileNumber>222</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2974,7 +2962,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>224</FileNumber>
+      <FileNumber>223</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2986,7 +2974,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>225</FileNumber>
+      <FileNumber>224</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2998,13 +2986,25 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>226</FileNumber>
+      <FileNumber>225</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Settings\SettingsTime.cpp</PathWithFileName>
       <FilenameWithoutPath>SettingsTime.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>15</GroupNumber>
+      <FileNumber>226</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Settings\SettingsMeasures.cpp</PathWithFileName>
+      <FilenameWithoutPath>SettingsMeasures.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3260,7 +3260,7 @@
 
   <Group>
     <GroupName>VCP</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3279,12 +3279,12 @@
     <File>
       <GroupNumber>17</GroupNumber>
       <FileNumber>248</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\VCP.c</PathWithFileName>
-      <FilenameWithoutPath>VCP.c</FilenameWithoutPath>
+      <PathWithFileName>.\src\VCP\VCP.cpp</PathWithFileName>
+      <FilenameWithoutPath>VCP.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3299,30 +3299,6 @@
     <File>
       <GroupNumber>18</GroupNumber>
       <FileNumber>249</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\channelSCPI.c</PathWithFileName>
-      <FilenameWithoutPath>channelSCPI.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>18</GroupNumber>
-      <FileNumber>250</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\commonSCPI.c</PathWithFileName>
-      <FilenameWithoutPath>commonSCPI.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>18</GroupNumber>
-      <FileNumber>251</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3334,19 +3310,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>252</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\controlSCPI.c</PathWithFileName>
-      <FilenameWithoutPath>controlSCPI.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>18</GroupNumber>
-      <FileNumber>253</FileNumber>
+      <FileNumber>250</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3358,19 +3322,7 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>254</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\displaySCPI.c</PathWithFileName>
-      <FilenameWithoutPath>displaySCPI.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>18</GroupNumber>
-      <FileNumber>255</FileNumber>
+      <FileNumber>251</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3382,25 +3334,73 @@
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
-      <FileNumber>256</FileNumber>
-      <FileType>1</FileType>
+      <FileNumber>252</FileNumber>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\trigSCPI.c</PathWithFileName>
-      <FilenameWithoutPath>trigSCPI.c</FilenameWithoutPath>
+      <PathWithFileName>.\src\VCP\SCPI\SCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>SCPI.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>18</GroupNumber>
+      <FileNumber>253</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\VCP\SCPI\channelSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>channelSCPI.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>18</GroupNumber>
+      <FileNumber>254</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\VCP\SCPI\commonSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>commonSCPI.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>18</GroupNumber>
+      <FileNumber>255</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\VCP\SCPI\controlSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>controlSCPI.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>18</GroupNumber>
+      <FileNumber>256</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\VCP\SCPI\displaySCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>displaySCPI.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>18</GroupNumber>
       <FileNumber>257</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\tbaseSCPI.c</PathWithFileName>
-      <FilenameWithoutPath>tbaseSCPI.c</FilenameWithoutPath>
+      <PathWithFileName>.\src\VCP\SCPI\tbaseSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>tbaseSCPI.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3411,8 +3411,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\VCP\SCPI\SCPI.cpp</PathWithFileName>
-      <FilenameWithoutPath>SCPI.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\VCP\SCPI\trigSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>trigSCPI.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
