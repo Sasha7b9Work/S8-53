@@ -37,6 +37,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{414d7f3c-51cf-4470-b9de-b6c8d8152d4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VS_DEF">
+      <UniqueIdentifier>{cefcecba-47f1-4650-a9f1-d3afc7760f21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Loader53\src\Display\Colors.c">
@@ -343,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Loader53\src\main.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\core_cm3.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\stdint.h">
+      <Filter>VS_DEF</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

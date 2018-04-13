@@ -1,7 +1,5 @@
 #pragma once
-
-
-#include "../../defines.h"
+#include "defines.h"
 
 
 typedef struct

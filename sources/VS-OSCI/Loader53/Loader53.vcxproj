@@ -42,8 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\S8-53\Bootloader\src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\S8-53\Bootloader\src\libs;$(IncludePath)</IncludePath>
-    <OutDir>.\Debug</OutDir>
+    <IncludePath>..\VS_DEF;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\Loader53\src\libs;..\..\Loader53\src;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include</IncludePath>
+    <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;STM32F207xx;_MS_VS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4820</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4100;4820</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
       <AdditionalIncludeDirectories>..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -190,6 +190,8 @@
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers\usbh_diskio.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\ff.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\ff_gen_drv.h" />
+    <ClInclude Include="..\VS_DEF\core_cm3.h" />
+    <ClInclude Include="..\VS_DEF\stdint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Loader53\src\Display\font\font5.inc" />

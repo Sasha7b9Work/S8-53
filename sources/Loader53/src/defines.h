@@ -1,14 +1,20 @@
 #pragma once
 
+typedef unsigned char      uint8;
+typedef unsigned int       uint;
+typedef signed char        int8;
+typedef unsigned short int uint16;
+typedef signed short int   int16;
+typedef unsigned char      uchar;
+
+#ifdef WIN32
+
+#define __IO
+
+#endif
+
 #include <stm32f2xx_hal.h>
 #include "globals.h"
-
-typedef unsigned char uint8;
-typedef unsigned int uint;
-typedef signed char int8;
-typedef unsigned short int uint16;
-typedef signed short int int16;
-typedef unsigned char uchar;
 
 #ifndef __cplusplus
 typedef unsigned char bool;
