@@ -55,6 +55,9 @@
     <Filter Include="HAL">
       <UniqueIdentifier>{3210115b-0d60-46e4-8194-3c5111056155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VS_DEF">
+      <UniqueIdentifier>{337c3946-5321-4756-b193-bd20e9b26888}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device53\src\Display\Colors.c">
@@ -595,6 +598,27 @@
     </ClInclude>
     <ClInclude Include="..\..\Device53\src\Menu\Pages\PageMeasures.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\string.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\math.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\stdint.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\ctype.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\inttypes.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\limits.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\cmsis_gcc.h">
+      <Filter>VS_DEF</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

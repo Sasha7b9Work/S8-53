@@ -1,5 +1,3 @@
-
-
 #include "Math3D.h"
 #include <string.h>
 #include <math.h>

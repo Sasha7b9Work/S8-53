@@ -353,6 +353,13 @@
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h" />
+    <ClInclude Include="..\VS_DEF\cmsis_gcc.h" />
+    <ClInclude Include="..\VS_DEF\ctype.h" />
+    <ClInclude Include="..\VS_DEF\inttypes.h" />
+    <ClInclude Include="..\VS_DEF\limits.h" />
+    <ClInclude Include="..\VS_DEF\math.h" />
+    <ClInclude Include="..\VS_DEF\stdint.h" />
+    <ClInclude Include="..\VS_DEF\string.h" />
     <ClInclude Include="src\cmsis_gcc.h" />
   </ItemGroup>
   <ItemGroup>
@@ -416,8 +423,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\S8-53\src;..\..\Device53\src\libs;..\..\Device53\src\libs\USB;..\..\Device53\src\libs\FatFS;..\..\Device53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\Device53\src\VCP\USBD;..\..\Device53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common;$(IncludePath)</IncludePath>
-    <OutDir>.</OutDir>
+    <IncludePath>D:\Projects\stm32\S8-53_new\sources\VS-OSCI\VS_DEF;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\Device53\src;..\..\Device53\src\libs;..\..\Device53\src\libs\USB;..\..\Device53\src\libs\FatFS;..\..\Device53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\Device53\src\VCP\USBD;..\..\Device53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common</IncludePath>
+    <OutDir>.\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -427,9 +434,9 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
       <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4996</DisableSpecificWarnings>
