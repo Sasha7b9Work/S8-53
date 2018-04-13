@@ -242,7 +242,7 @@ void Measure_DrawPageChoice()
 
     bool num61or62 = MEAS_NUM_IS_6_1 || MEAS_NUM_IS_6_2;
 
-    int x = num61or62 ? (grid.Right() - 3 * GRID_WIDTH / 5) : grid.Left();
+    int x = num61or62 ? (Grid::Right() - 3 * GRID_WIDTH / 5) : Grid::Left();
     int y = GRID_TOP;
     int dX = GRID_WIDTH / 5;
     int dY = 22;

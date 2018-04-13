@@ -4,31 +4,28 @@
 class Grid
 {
 public:
-    int Left();
-    int Right();
-    int Width();
-    float DeltaY();
-    float DeltaX();
+    static int Left();
+    static int Right();
+    static int Width();
+    static float DeltaY();
+    static float DeltaX();
 
-    int WidthInCells();
+    static int WidthInCells();
 
-    int FullBottom();
-    int FullHeight();
-    int FullCenterHeight();
+    static int FullBottom();
+    static int FullHeight();
+    static int FullCenterHeight();
 
-    int ChannelBottom();
-    int ChannelHeight();
-    int ChannelCenterHeight();
+    static int ChannelBottom();
+    static int ChannelHeight();
+    static int ChannelCenterHeight();
 
-    int MathHeight();
-    int MathBottom();
-    int MathTop();
+    static int MathHeight();
+    static int MathBottom();
+    static int MathTop();
 
-    int BottomMessages();
+    static int BottomMessages();
 
 private:
-    int SignalWidth();
+    static int SignalWidth();
 };
-
-
-extern Grid grid;

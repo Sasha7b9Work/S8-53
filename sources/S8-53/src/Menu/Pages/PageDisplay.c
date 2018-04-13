@@ -387,7 +387,7 @@ static const Page mspGrid
     &pDisplay, 0,
     "СЕТКА", "GRID",
     "Содержит настройки отображения координатной сетки.",
-    "Contains settings of display of a coordinate grid.",
+    "Contains settings of display of a coordinate Grid::",
     Page_DisplayGrid, &itemsGrid
 );
 
@@ -399,7 +399,7 @@ static const Choice mcGrid_Type =
     {
         "Тип", "Type",
         "Выбор типа сетки.",
-        "Choice like grid."
+        "Choice like Grid::"
     },
     {
         {"Тип 1",   "Type 1"},
@@ -416,7 +416,7 @@ static const Governor mgGrid_Brightness
     &mspGrid, 0,
     "Яркость", "Brightness",
     "Устанавливает яркость сетки.",
-    "Adjust the brightness of the grid.",
+    "Adjust the brightness of the Grid::",
     &BRIGHTNESS_GRID, 0, 100, OnChanged_Grid_Brightness, BeforeDraw_Grid_Brightness
 );
 

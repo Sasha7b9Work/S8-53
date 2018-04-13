@@ -55,11 +55,11 @@ void ChangeC_Memory_NumPoints(bool active)
         }
         else if(TPOS_IS_CENTER)
         {
-            SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) / 2 - grid.Width() / 2;
+            SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) / 2 - Grid::Width() / 2;
         }
         else if(TPOS_IS_RIGHT)
         {
-            SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) - grid.Width() - 2;
+            SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) - Grid::Width() - 2;
         }
     }
     fpga.SetTShift(TSHIFT);
@@ -130,11 +130,11 @@ static void FuncDrawingAdditionSPageMemoryLast()
     
     int width = 40;
     int height = 10;
-    Painter::FillRegionC(grid.Right() - width, GRID_TOP, width, height, COLOR_BACK);
-    Painter::DrawRectangleC(grid.Right() - width, GRID_TOP, width, height, COLOR_FILL);
-    Painter::DrawText(grid.Right() - width + 2, GRID_TOP + 1, Int2String(gMemory.currentNumLatestSignal + 1, false, 3, buffer));
-    Painter::DrawText(grid.Right() - width + 17, GRID_TOP + 1, "/");
-    Painter::DrawText(grid.Right() - width + 23, GRID_TOP + 1, Int2String(dataStorage.AllDatas(), false, 3, buffer));
+    Painter::FillRegionC(Grid::Right() - width, GRID_TOP, width, height, COLOR_BACK);
+    Painter::DrawRectangleC(Grid::Right() - width, GRID_TOP, width, height, COLOR_FILL);
+    Painter::DrawText(Grid::Right() - width + 2, GRID_TOP + 1, Int2String(gMemory.currentNumLatestSignal + 1, false, 3, buffer));
+    Painter::DrawText(Grid::Right() - width + 17, GRID_TOP + 1, "/");
+    Painter::DrawText(Grid::Right() - width + 23, GRID_TOP + 1, Int2String(dataStorage.AllDatas(), false, 3, buffer));
 }
 
 void DrawSB_MemLast_IntEnter(int x, int y)
@@ -588,8 +588,8 @@ static void DrawMemoryWave(int num, bool exist)
 {
     char buffer[20];
     
-    int x = grid.Left() + 2 + num * 12;
-    int y = grid.FullBottom() - 10;
+    int x = Grid::Left() + 2 + num * 12;
+    int y = Grid::FullBottom() - 10;
     int width = 12;
     Painter::FillRegionC(x, y, width, 10, num == gMemory.currentNumIntSignal ? COLOR_FLASH_10 : COLOR_BACK);
     Painter::DrawRectangleC(x, y, width, 10, COLOR_FILL);
@@ -961,9 +961,9 @@ const Choice mcMemoryExtModeSave =
     
 void DrawSetName()
 {
-    int x0 = grid.Left() + 40;
+    int x0 = Grid::Left() + 40;
     int y0 = GRID_TOP + 60;
-    int width = grid.Width() - 80;
+    int width = Grid::Width() - 80;
     int height = 80;
 
     Painter::DrawRectangleC(x0, y0, width, height, COLOR_FILL);
@@ -1037,9 +1037,9 @@ static void DrawFileMask(int x, int y)
 
 void DrawSetMask()
 {
-    int x0 = grid.Left() + 40;
+    int x0 = Grid::Left() + 40;
     int y0 = GRID_TOP + 20;
-    int width = grid.Width() - 80;
+    int width = Grid::Width() - 80;
     int height = 160;
 
     Painter::DrawRectangleC(x0, y0, width, height, COLOR_FILL);

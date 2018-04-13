@@ -175,7 +175,7 @@ void FM_Draw(void)
         Painter::BeginScene(COLOR_BACK);
         menu.Draw();
         Painter::DrawRectangleC(0, 0, width, 239, COLOR_FILL);
-        Painter::FillRegionC(left, top, grid.Width() - 2, grid.FullHeight() - 2, COLOR_BACK);
+        Painter::FillRegionC(left, top, Grid::Width() - 2, Grid::FullHeight() - 2, COLOR_BACK);
         flashDrive.GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
         Painter::DrawVLineC(left2col, top + 16, 239, COLOR_FILL);

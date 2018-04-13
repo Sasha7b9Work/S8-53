@@ -126,15 +126,15 @@ void OnChanged_PeakDet(bool active)
         }
         if (PEAKDET_IS_DISABLE)
         {
-            int centerX = SHIFT_IN_MEMORY + grid.Width() / 2;
-            SHIFT_IN_MEMORY = centerX * 2 - grid.Width() / 2;
+            int centerX = SHIFT_IN_MEMORY + Grid::Width() / 2;
+            SHIFT_IN_MEMORY = centerX * 2 - Grid::Width() / 2;
             ENUM_POINTS = set.time.oldNumPoints;
             ChangeC_Memory_NumPoints(true);
         }
         else if (PEAKDET_IS_ENABLE)
         {
-            int centerX = SHIFT_IN_MEMORY + grid.Width() / 2;
-            LIMITATION(SHIFT_IN_MEMORY, centerX / 2 - grid.Width() / 2, 0, sMemory_GetNumPoints(false) - grid.Width());
+            int centerX = SHIFT_IN_MEMORY + Grid::Width() / 2;
+            LIMITATION(SHIFT_IN_MEMORY, centerX / 2 - Grid::Width() / 2, 0, sMemory_GetNumPoints(false) - Grid::Width());
             ChangeC_Memory_NumPoints(true);
         }
     }
