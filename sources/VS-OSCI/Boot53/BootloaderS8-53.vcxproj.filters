@@ -36,99 +36,99 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Display\Colors.c">
+    <ClCompile Include="..\..\Loader53\src\Display\Colors.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Display\Display.c">
+    <ClCompile Include="..\..\Loader53\src\Display\Display.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Display\Painter.c">
+    <ClCompile Include="..\..\Loader53\src\Display\Painter.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Display\PainterText.c">
+    <ClCompile Include="..\..\Loader53\src\Display\PainterText.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Display\font\Font.c">
+    <ClCompile Include="..\..\Loader53\src\Display\font\Font.c">
       <Filter>Display\fonts</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\FlashDrive\FlashDrive.c">
+    <ClCompile Include="..\..\Loader53\src\FlashDrive\FlashDrive.c">
       <Filter>FlashDrive</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Hardware\FLASH.c">
+    <ClCompile Include="..\..\Loader53\src\Hardware\FLASH.c">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Hardware\FSMC.c">
+    <ClCompile Include="..\..\Loader53\src\Hardware\FSMC.c">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Hardware\Hardware.c">
+    <ClCompile Include="..\..\Loader53\src\Hardware\Hardware.c">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Hardware\Timer.c">
+    <ClCompile Include="..\..\Loader53\src\Hardware\Timer.c">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Settings\Settings.c">
+    <ClCompile Include="..\..\Loader53\src\Settings\Settings.c">
       <Filter>Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Panel\Controls.c">
+    <ClCompile Include="..\..\Loader53\src\Panel\Controls.c">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Panel\Panel.c">
+    <ClCompile Include="..\..\Loader53\src\Panel\Panel.c">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Panel\PanelFunctions.c">
+    <ClCompile Include="..\..\Loader53\src\Panel\PanelFunctions.c">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Utils\GlobalFunctions.c">
+    <ClCompile Include="..\..\Loader53\src\Utils\GlobalFunctions.c">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\Utils\Math.c">
+    <ClCompile Include="..\..\Loader53\src\Utils\Math.c">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\main.c" />
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal.c">
+    <ClCompile Include="..\..\Loader53\src\main.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_cortex.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_cortex.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_dma.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_dma.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_flash.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_flash.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_flash_ex.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_flash_ex.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_gpio.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_gpio.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_hcd.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_hcd.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_rcc.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_rcc.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_spi.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_spi.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_sram.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_sram.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_tim.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_tim.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_tim_ex.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_tim_ex.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_fsmc.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_fsmc.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_usb.c">
+    <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_usb.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\globals.c" />
-    <ClCompile Include="..\..\..\S8-53\Bootloader\src\defines.c" />
+    <ClCompile Include="..\..\Loader53\src\globals.c" />
+    <ClCompile Include="..\..\Loader53\src\defines.c" />
     <ClCompile Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_hal_msp.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -182,108 +182,108 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\Colors.h">
+    <ClInclude Include="..\..\Loader53\src\Display\Colors.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\Display.h">
+    <ClInclude Include="..\..\Loader53\src\Display\Display.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\DisplayTypes.h">
+    <ClInclude Include="..\..\Loader53\src\Display\DisplayTypes.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\Painter.h">
+    <ClInclude Include="..\..\Loader53\src\Display\Painter.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\PainterC.h">
+    <ClInclude Include="..\..\Loader53\src\Display\PainterC.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\PainterText.h">
+    <ClInclude Include="..\..\Loader53\src\Display\PainterText.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Hardware\FSMC.h">
+    <ClInclude Include="..\..\Loader53\src\Hardware\FSMC.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Display\font\Font.h">
+    <ClInclude Include="..\..\Loader53\src\Display\font\Font.h">
       <Filter>Display\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\FlashDrive\FlashDrive.h">
+    <ClInclude Include="..\..\Loader53\src\FlashDrive\FlashDrive.h">
       <Filter>FlashDrive</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Hardware\FLASH.h">
+    <ClInclude Include="..\..\Loader53\src\Hardware\FLASH.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Hardware\Hardware.h">
+    <ClInclude Include="..\..\Loader53\src\Hardware\Hardware.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Hardware\Timer.h">
+    <ClInclude Include="..\..\Loader53\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Settings\Settings.h">
+    <ClInclude Include="..\..\Loader53\src\Settings\Settings.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Settings\SettingsTypes.h">
+    <ClInclude Include="..\..\Loader53\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Panel\Controls.h">
+    <ClInclude Include="..\..\Loader53\src\Panel\Controls.h">
       <Filter>Panel</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Panel\Panel.h">
+    <ClInclude Include="..\..\Loader53\src\Panel\Panel.h">
       <Filter>Panel</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Utils\GlobalFunctions.h">
+    <ClInclude Include="..\..\Loader53\src\Utils\GlobalFunctions.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\Utils\Math.h">
+    <ClInclude Include="..\..\Loader53\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\main.h" />
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal.h">
+    <ClInclude Include="..\..\Loader53\src\main.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_cortex.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_cortex.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_dma.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_dma.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_flash.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_flash.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_flash_ex.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_flash_ex.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_gpio.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_gpio.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_gpio_ex.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_gpio_ex.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_hcd.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_hcd.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_rcc.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_rcc.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_spi.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_spi.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_sram.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_sram.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_tim.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_tim.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_tim_ex.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_tim_ex.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_fsmc.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_fsmc.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_usb.h">
+    <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_usb.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\defines.h" />
-    <ClInclude Include="..\..\..\S8-53\Bootloader\src\globals.h" />
+    <ClInclude Include="..\..\Loader53\src\defines.h" />
+    <ClInclude Include="..\..\Loader53\src\globals.h" />
     <ClInclude Include="..\..\S8-53\Bootloader\src\libs\ffconf.h">
       <Filter>libs</Filter>
     </ClInclude>
@@ -331,28 +331,28 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\font5.inc">
+    <None Include="..\..\Loader53\src\Display\font\font5.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\font5display.inc">
+    <None Include="..\..\Loader53\src\Display\font\font5display.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\font8.inc">
+    <None Include="..\..\Loader53\src\Display\font\font8.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\font8display.inc">
+    <None Include="..\..\Loader53\src\Display\font\font8display.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\fontUGO.inc">
+    <None Include="..\..\Loader53\src\Display\font\fontUGO.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\fontUGO2.inc">
+    <None Include="..\..\Loader53\src\Display\font\fontUGO2.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\fontUGO2display.inc">
+    <None Include="..\..\Loader53\src\Display\font\fontUGO2display.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\..\S8-53\Bootloader\src\Display\font\fontUGOdisplay.inc">
+    <None Include="..\..\Loader53\src\Display\font\fontUGOdisplay.inc">
       <Filter>Display\fonts</Filter>
     </None>
     <None Include="..\..\S8-53\Bootloader\src\libs\startup_stm32f207xx.s">
