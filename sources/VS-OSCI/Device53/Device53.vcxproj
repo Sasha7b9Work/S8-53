@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Device53\src\defines.c">
+    <ClCompile Include="..\..\Device53\src\defines.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\Colors.c">
+    <ClCompile Include="..\..\Device53\src\Display\Colors.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Display\Display.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\DisplayPrimitives.c">
+    <ClCompile Include="..\..\Device53\src\Display\DisplayPrimitives.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\font\Font.c" />
+    <ClCompile Include="..\..\Device53\src\Display\font\Font.cpp" />
     <ClCompile Include="..\..\Device53\src\Display\Grid.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -33,13 +33,13 @@
     <ClCompile Include="..\..\Device53\src\Display\Painter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterMem.c">
+    <ClCompile Include="..\..\Device53\src\Display\PainterMem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterText.c">
+    <ClCompile Include="..\..\Device53\src\Display\PainterText.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\WelcomeScreen.c">
+    <ClCompile Include="..\..\Device53\src\Display\WelcomeScreen.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Ethernet\Ethernet.c" />
@@ -59,19 +59,19 @@
     <ClCompile Include="..\..\Device53\src\FPGA\FPGA_Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Globals.c">
+    <ClCompile Include="..\..\Device53\src\Globals.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Hardware\ADC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FLASH.c">
+    <ClCompile Include="..\..\Device53\src\Hardware\FLASH.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FSMC.c">
+    <ClCompile Include="..\..\Device53\src\Hardware\FSMC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Hardware.c">
+    <ClCompile Include="..\..\Device53\src\Hardware\Hardware.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Hardware\MSP_USBH.c">
@@ -83,20 +83,20 @@
     <ClCompile Include="..\..\Device53\src\Hardware\Sound.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Timer.c">
+    <ClCompile Include="..\..\Device53\src\Hardware\Timer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\app_ethernet.c" />
+    <ClCompile Include="..\..\Device53\src\libs\app_ethernet.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\ethernetif.c" />
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.c" />
+    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.c" />
     <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c" />
-    <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.c" />
+    <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\usbd_conf.c" />
     <ClCompile Include="..\..\Device53\src\libs\usbd_desc.c" />
     <ClCompile Include="..\..\Device53\src\libs\usbh_conf.c" />
     <ClCompile Include="..\..\Device53\src\Log.c" />
-    <ClCompile Include="..\..\Device53\src\main.c">
+    <ClCompile Include="..\..\Device53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Menu\FileManager.c" />
@@ -121,35 +121,36 @@
     <ClCompile Include="..\..\Device53\src\Panel\Controls.c" />
     <ClCompile Include="..\..\Device53\src\Panel\Panel.cpp" />
     <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.c" />
-    <ClCompile Include="..\..\Device53\src\Settings\Settings.c">
+    <ClCompile Include="..\..\Device53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsChannel.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsChannel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsCursors.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsCursors.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDebug.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsDebug.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDisplay.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsDisplay.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Settings\SettingsMeasures.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsMemory.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsMemory.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsService.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsService.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsTime.c">
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsTime.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Tables.c">
+    <ClCompile Include="..\..\Device53\src\Tables.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Utils\Generator.c" />
     <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.c" />
@@ -171,7 +172,7 @@
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\displaySCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\SCPI.c">
+    <ClCompile Include="..\..\Device53\src\VCP\SCPI\SCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\tbaseSCPI.c">
@@ -358,7 +359,10 @@
     <ClInclude Include="..\VS_DEF\inttypes.h" />
     <ClInclude Include="..\VS_DEF\limits.h" />
     <ClInclude Include="..\VS_DEF\math.h" />
+    <ClInclude Include="..\VS_DEF\stdarg.h" />
     <ClInclude Include="..\VS_DEF\stdint.h" />
+    <ClInclude Include="..\VS_DEF\stdio.h" />
+    <ClInclude Include="..\VS_DEF\stdlib.h" />
     <ClInclude Include="..\VS_DEF\string.h" />
     <ClInclude Include="src\cmsis_gcc.h" />
   </ItemGroup>
@@ -436,12 +440,13 @@
       </PrecompiledHeader>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;WIN32;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
       <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4996</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

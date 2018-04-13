@@ -160,11 +160,11 @@
             <ldmm>1</ldmm>
             <ldXref>1</ldXref>
             <BigEnd>0</BigEnd>
-            <AdsALst>1</AdsALst>
+            <AdsALst>0</AdsALst>
             <AdsACrf>1</AdsACrf>
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
-            <AdsLLst>1</AdsLLst>
+            <AdsLLst>0</AdsLLst>
             <AdsLmap>1</AdsLmap>
             <AdsLcgr>1</AdsLcgr>
             <AdsLsym>1</AdsLsym>
@@ -173,7 +173,7 @@
             <AdsLsun>1</AdsLsun>
             <AdsLven>1</AdsLven>
             <AdsLsxf>1</AdsLsxf>
-            <RvctClst>1</RvctClst>
+            <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
             <AdsCpuType>"Cortex-M3"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
@@ -817,11 +817,6 @@
               <FilePath>.\src\libs\stm32f2xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f2xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f2xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>usbh_conf.c</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\usbh_conf.c</FilePath>
@@ -835,11 +830,6 @@
               <FileName>ffconf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\ffconf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\usbd_cdc_interface.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc_interface.h</FileName>
@@ -867,11 +857,6 @@
               <FilePath>.\src\libs\usbd_desc.h</FilePath>
             </File>
             <File>
-              <FileName>app_ethernet.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\app_ethernet.c</FilePath>
-            </File>
-            <File>
               <FileName>app_ethernet.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\app_ethernet.h</FilePath>
@@ -891,6 +876,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\libs\lwipopts.h</FilePath>
             </File>
+            <File>
+              <FileName>app_ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\app_ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f2xx_hal_msp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\stm32f2xx_hal_msp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbd_cdc_interface.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -902,34 +902,14 @@
               <FilePath>.\src\main.h</FilePath>
             </File>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
               <FileName>defines.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Tables.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Tables.c</FilePath>
-            </File>
-            <File>
               <FileName>Tables.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Tables.h</FilePath>
-            </File>
-            <File>
-              <FileName>defines.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\defines.c</FilePath>
-            </File>
-            <File>
-              <FileName>Globals.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Globals.c</FilePath>
             </File>
             <File>
               <FileName>Globals.h</FileName>
@@ -950,6 +930,26 @@
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>defines.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\defines.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tables.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tables.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Globals.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -987,16 +987,6 @@
               <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
-              <FileName>Colors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Colors.c</FilePath>
-            </File>
-            <File>
-              <FileName>DisplayPrimitives.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\DisplayPrimitives.c</FilePath>
-            </File>
-            <File>
               <FileName>DisplayTypes.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\DisplayTypes.h</FilePath>
@@ -1022,24 +1012,9 @@
               <FilePath>.\src\Display\Math3D.h</FilePath>
             </File>
             <File>
-              <FileName>WelcomeScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\WelcomeScreen.c</FilePath>
-            </File>
-            <File>
               <FileName>WelcomeScreen.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\WelcomeScreen.h</FilePath>
-            </File>
-            <File>
-              <FileName>PainterText.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\PainterText.c</FilePath>
-            </File>
-            <File>
-              <FileName>PainterMem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\PainterMem.c</FilePath>
             </File>
             <File>
               <FileName>PainterMem.h</FileName>
@@ -1051,16 +1026,41 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
+            <File>
+              <FileName>WelcomeScreen.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\WelcomeScreen.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayPrimitives.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DisplayPrimitives.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\PainterC.h</FilePath>
+            </File>
+            <File>
+              <FileName>PainterMem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterMem.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Display/font</GroupName>
           <Files>
-            <File>
-              <FileName>Font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\font\Font.c</FilePath>
-            </File>
             <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
@@ -1105,6 +1105,11 @@
               <FileName>fontUGOdisplay.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\fontUGOdisplay.inc</FilePath>
+            </File>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\font\Font.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1202,29 +1207,14 @@
               <FilePath>.\src\Hardware\ADC.h</FilePath>
             </File>
             <File>
-              <FileName>FLASH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FLASH.c</FilePath>
-            </File>
-            <File>
               <FileName>FLASH.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FLASH.h</FilePath>
             </File>
             <File>
-              <FileName>FSMC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FSMC.c</FilePath>
-            </File>
-            <File>
               <FileName>FSMC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
-            </File>
-            <File>
-              <FileName>Hardware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Hardware.c</FilePath>
             </File>
             <File>
               <FileName>Hardware.h</FileName>
@@ -1257,14 +1247,29 @@
               <FilePath>.\src\Hardware\Sound.h</FilePath>
             </File>
             <File>
-              <FileName>Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Timer.c</FilePath>
-            </File>
-            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>FLASH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Hardware.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1577,19 +1582,9 @@
               <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
             </File>
             <File>
-              <FileName>Settings.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\Settings.c</FilePath>
-            </File>
-            <File>
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsChannel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsChannel.c</FilePath>
             </File>
             <File>
               <FileName>SettingsChannel.h</FileName>
@@ -1597,19 +1592,9 @@
               <FilePath>.\src\Settings\SettingsChannel.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsDisplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsDisplay.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsDisplay.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsDisplay.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsMemory.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsMemory.c</FilePath>
             </File>
             <File>
               <FileName>SettingsMemory.h</FileName>
@@ -1617,19 +1602,9 @@
               <FilePath>.\src\Settings\SettingsMemory.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsTime.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsTime.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsTime.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsTime.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsService.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsService.c</FilePath>
             </File>
             <File>
               <FileName>SettingsService.h</FileName>
@@ -1637,19 +1612,9 @@
               <FilePath>.\src\Settings\SettingsService.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsCursors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsCursors.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsCursors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsCursors.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsDebug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsDebug.c</FilePath>
             </File>
             <File>
               <FileName>SettingsDebug.h</FileName>
@@ -1665,6 +1630,56 @@
               <FileName>SettingsMath.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsMath.h</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsChannel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsChannel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsCursors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsCursors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMeasures.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Settings\SettingsMeasures.c</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMeasures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsMeasures.h</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsDisplay.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsDisplay.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMemory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsMemory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1822,11 +1837,6 @@
               <FilePath>.\src\VCP\SCPI\displaySCPI.c</FilePath>
             </File>
             <File>
-              <FileName>SCPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\VCP\SCPI\SCPI.c</FilePath>
-            </File>
-            <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\VCP\SCPI\SCPI.h</FilePath>
@@ -1840,6 +1850,11 @@
               <FileName>tbaseSCPI.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\VCP\SCPI\tbaseSCPI.c</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\VCP\SCPI\SCPI.cpp</FilePath>
             </File>
           </Files>
         </Group>

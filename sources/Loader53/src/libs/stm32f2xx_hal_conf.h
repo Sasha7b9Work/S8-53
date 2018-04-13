@@ -41,6 +41,12 @@
 #ifndef __STM32F2xx_HAL_CONF_H
 #define __STM32F2xx_HAL_CONF_H
 
+#ifdef WIN32
+typedef unsigned int uint32_t;
+typedef unsigned char uint8_t;
+#define __IO
+#endif
+
 #ifdef __cplusplus
  extern "C" {
 #endif

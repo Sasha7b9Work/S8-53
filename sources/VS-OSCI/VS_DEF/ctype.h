@@ -1,3 +1,5 @@
 #pragma once
 
-typedef unsigned int uint32_t;
+int toupper(uint8);
+void *malloc(int);
+void free(void *);

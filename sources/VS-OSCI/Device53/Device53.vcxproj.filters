@@ -60,22 +60,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Device53\src\Display\Colors.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\DisplayPrimitives.c">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\Display\Math3D.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterMem.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterText.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\WelcomeScreen.c">
       <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\VCP\VCP.c">
@@ -93,26 +78,11 @@
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\displaySCPI.c">
       <Filter>VCP\SCPI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\SCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\tbaseSCPI.c">
       <Filter>VCP\SCPI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\trigSCPI.c">
       <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\font\Font.c">
-      <Filter>Display\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FLASH.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FSMC.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Hardware.c">
-      <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Hardware\MSP_USBH.c">
       <Filter>Hardware</Filter>
@@ -120,44 +90,8 @@
     <ClCompile Include="..\..\Device53\src\Hardware\RTC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Timer.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\Settings.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsChannel.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsCursors.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDebug.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDisplay.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\Settings\SettingsMeasures.c">
       <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsService.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsTime.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\defines.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Globals.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\main.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Tables.c">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Panel\Controls.c">
       <Filter>Panel</Filter>
@@ -222,22 +156,13 @@
     <ClCompile Include="..\..\Device53\src\Menu\MenuItemsLogic.c">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\app_ethernet.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\ethernetif.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.c">
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.c">
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.c">
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\usbd_conf.c">
@@ -272,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Utils\Strings.c">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsMemory.c">
-      <Filter>Settings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
       <Filter>USBD</Filter>
@@ -329,6 +251,84 @@
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Menu\MenuItems.cpp">
       <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\defines.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Tables.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\WelcomeScreen.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\PainterText.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\DisplayPrimitives.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Hardware\FLASH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\Settings.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsChannel.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsDebug.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsCursors.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsDisplay.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\PainterMem.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsService.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\Colors.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\app_ethernet.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Display\font\Font.cpp">
+      <Filter>Display\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsTime.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Globals.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Hardware\FSMC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Settings\SettingsMemory.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Hardware\Hardware.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\VCP\SCPI\SCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +618,15 @@
       <Filter>VS_DEF</Filter>
     </ClInclude>
     <ClInclude Include="..\VS_DEF\cmsis_gcc.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\stdio.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\stdlib.h">
+      <Filter>VS_DEF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VS_DEF\stdarg.h">
       <Filter>VS_DEF</Filter>
     </ClInclude>
   </ItemGroup>

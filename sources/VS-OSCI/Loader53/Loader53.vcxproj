@@ -85,7 +85,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Loader53\src\defines.c" />
+    <ClCompile Include="..\..\Loader53\src\defines.c">
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</PreprocessToFile>
+    </ClCompile>
     <ClCompile Include="..\..\Loader53\src\Display\Colors.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
