@@ -107,7 +107,7 @@ void PressSmallButtonExit()
         }
     }
 
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
     gBF.ledRegSetNeedEnabled = 0;
 }
 */

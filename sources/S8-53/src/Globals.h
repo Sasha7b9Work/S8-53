@@ -37,7 +37,7 @@ typedef struct
     uint cableLANisConnected        : 1;    // Если 1, значит, просто подключён кабель
     uint clientLANisConnected       : 1;    // Если 1, то подсоединён клиент
 
-    // Для рисования : display.c
+    // Для рисования : Display::c
     uint showLevelRShift0           : 1;    // Нужно ли рисовать горизонтальную линию уровня смещения первого канала
     uint showLevelRShift1           : 1;
     uint showLevelTrigLev           : 1;    // Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации

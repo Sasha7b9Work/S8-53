@@ -175,7 +175,7 @@ static void PressSB_MemLast_SaveToFlash()
 
 static void PressSB_SetName_Exit()
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
     if (gMemory.exitFromModeSetNameTo == RETURN_TO_DISABLE_MENU)
     {
         menu.ShortPressOnPageItem(menu.PagePointerFromName(Page_SB_MemExtSetName), 0);
@@ -554,7 +554,7 @@ static void SaveSignalToIntMemory(void)
         {
             FLASH_SaveData(gMemory.currentNumIntSignal, gDSmemLast, gData0memLast, gData1memLast);
             FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
-            display.ShowWarningGood(SignalIsSaved);
+            Display::ShowWarningGood(SignalIsSaved);
         }
     }
     else
@@ -563,7 +563,7 @@ static void SaveSignalToIntMemory(void)
         {
             FLASH_SaveData(gMemory.currentNumIntSignal, gDSet, gData0, gData1);
             FLASH_GetData(gMemory.currentNumIntSignal, &gDSet, &gData0memInt, &gData1memInt);
-            display.ShowWarningGood(SignalIsSaved);
+            Display::ShowWarningGood(SignalIsSaved);
         }
     }
 }
@@ -850,7 +850,7 @@ static const SmallButton sbExitMemInt    //  нопка дл€ выхода из режима малых кн
 void OnPressMemoryExtMask(void)
 {
     menu.OpenPageAndSetItCurrent(Page_SB_MemExtSetMask);
-    display.SetAddDrawFunction(DrawSetMask);
+    Display::SetAddDrawFunction(DrawSetMask);
 }
 
 // ѕјћя“№
@@ -1111,7 +1111,7 @@ void Memory_SaveSignalToFlashDrive()
         if (FILE_NAMING_MODE_IS_HAND)
         {
             menu.OpenPageAndSetItCurrent(Page_SB_MemExtSetName);
-            display.SetAddDrawFunction(DrawSetName);
+            Display::SetAddDrawFunction(DrawSetName);
         }
         else
         {
@@ -1132,7 +1132,7 @@ static void PressSB_MemLast_Exit()
         fpga.Start();
         gMemory.runningFPGAbeforeSmallButtons = 0;
     }
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
 }
 
 // Ќажатие ѕјћя“№ - ѕоследние.
@@ -1174,7 +1174,7 @@ static const Page mspMemLast
 
 static void PressSB_SetMask_Exit()
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
 }
 
 static const SmallButton sbExitSetMask
@@ -1211,7 +1211,7 @@ void OnPressMemoryExtFileManager()
     if(FLASH_DRIVE_IS_CONNECTED)
     {
         menu.OpenPageAndSetItCurrent(Page_SB_FileManager);
-        display.SetDrawMode(DrawMode_Hand, FM_Draw);
+        Display::SetDrawMode(DrawMode_Hand, FM_Draw);
         gBF.needRedrawFileManager = 1;
     }
 }
@@ -1223,8 +1223,8 @@ bool FuncOfActiveExtMemFolder()
 
 static void PressSB_FM_Exit()
 {
-    display.SetDrawMode(DrawMode_Auto, 0);
-    display.RemoveAddDrawFunction();
+    Display::SetDrawMode(DrawMode_Auto, 0);
+    Display::RemoveAddDrawFunction();
 }
 
 const SmallButton sbExitFileManager

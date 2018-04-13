@@ -401,7 +401,7 @@ static const SmallButton sbSetExit
 
 static void PressSB_Cursors_Exit(void)
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
 }
 
 

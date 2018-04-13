@@ -220,7 +220,7 @@ float Choice::Step()
         }
         tsChoice.choice = 0;
         FuncOnChanged(menu.ItemIsActive(this));
-        display.Redraw();
+        Display::Redraw();
         tsChoice.inMoveDecrease = tsChoice.inMoveIncrease = 0;
         return 0.0f;
     }
@@ -242,5 +242,5 @@ void Choice::ChangeValue(int delta)
     }
     FuncOnChanged(menu.ItemIsActive(this));
     sound.GovernorChangedValue();
-    display.Redraw();
+    Display::Redraw();
 }

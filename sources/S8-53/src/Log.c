@@ -19,7 +19,7 @@ void Log_Write(char *format, ...)
     va_start(args, format);
     vsprintf(buffer, format, args);
     va_end(args);
-    display.AddStringToIndicating(buffer);
+    Display::AddStringToIndicating(buffer);
     if(loggerUSB)
     {
         VCP_SendFormatStringAsynch(buffer);
@@ -44,8 +44,8 @@ void Log_Error(const char *module, const char *func, int numLine, char *format, 
     strcat(message, " ");
     strcat(message, func);
     strcat(message, numBuffer);
-    display.AddStringToIndicating(message);
-    display.AddStringToIndicating(buffer);
+    Display::AddStringToIndicating(message);
+    Display::AddStringToIndicating(buffer);
     if(loggerUSB)
     {
         VCP_SendFormatStringAsynch(message);

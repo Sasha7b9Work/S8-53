@@ -52,7 +52,7 @@ extern void LoadStretchADC(Channel chan);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnTimerDraw(void)
 {
-    display.Update();
+    Display::Update();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ void FPGA::ProcedureCalibration(void)
 
     SET_ENABLED_A = SET_ENABLED_B = true;
 
-    display.SetDrawMode(DrawMode_Hand, FuncAttScreen);
+    Display::SetDrawMode(DrawMode_Hand, FuncAttScreen);
     Timer_Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
 
     koeffCalibrationOld[A] = STRETCH_ADC_A;
@@ -208,7 +208,7 @@ void FPGA::ProcedureCalibration(void)
     panel.WaitPressingButton();
     panel.Enable();
     Timer_Disable(kTimerDrawHandFunction);
-    display.SetDrawMode(DrawMode_Auto, 0);
+    Display::SetDrawMode(DrawMode_Auto, 0);
     gStateFPGA.stateCalibration = StateCalibration_None;
 
     SET_ENABLED_A = chanAenable;
@@ -230,7 +230,7 @@ void FuncAttScreen(void)
         startTime = gTimerMS;
     }
     int16 y = 10;
-    display.Clear();
+    Display::Clear();
     
     painter.SetColor(COLOR_FILL);
     

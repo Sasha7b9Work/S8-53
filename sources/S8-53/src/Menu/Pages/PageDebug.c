@@ -856,7 +856,7 @@ static void OnPress_SaveFirmware(void)
 
     flashDrive.CloseFile(&structForWrite);
 
-    display.ShowWarningGood(FirmwareSaved);
+    Display::ShowWarningGood(FirmwareSaved);
 }
 
 
@@ -883,7 +883,7 @@ static const Page ppSerialNumber
 static void OnPress_SerialNumber(void)
 {
     menu.OpenPageAndSetItCurrent(Page_SB_SerialNumber);
-    display.SetAddDrawFunction(Draw_EnterSerialNumber);
+    Display::SetAddDrawFunction(Draw_EnterSerialNumber);
     MALLOC_EXTRAMEM(StructForSN, s);
     s->number = 01;
     s->year = 2017;
@@ -976,7 +976,7 @@ static const SmallButton bSerialNumber_Exit
 
 static void OnPress_SerialNumber_Exit(void)
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
     FREE_EXTRAMEM();
 }
 
@@ -1027,7 +1027,7 @@ static void OnPress_SerialNumber_Save(void)
 
     if (!OTP_SaveSerialNumber(stringSN))
     {
-        display.ShowWarningBad(FullyCompletedOTP);
+        Display::ShowWarningBad(FullyCompletedOTP);
     }
 }
 

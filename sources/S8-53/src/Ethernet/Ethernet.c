@@ -43,38 +43,7 @@ char *GetStringFromBuffer(const char *buffer, uint length, char *string)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncReceiver(const char *buffer, uint length)
 {
-    /*
-    const char *pBuffer = buffer;
-    
-    static char prevSymbol = 0;
-    
-    if(prevSymbol == 'K' && buffer[1] == 'D')
-    {
-        prevSymbol = 'K';
-    }
-    
-    char string[100];
-
-    LOG_WRITE(GetStringFromBuffer(buffer, length, string));
-
-    int count = 0;
-    for(int i = 0; i < length; i++)
-    {
-        if(buffer[i] == ':')
-        {
-            ++count;
-        }
-
-        if(count == 2)
-        {
-            count = 2;
-        }
-    }
-    */
-    
     SCPI_AddNewData((uint8 *)buffer, length);
-    
-    //prevSymbol = pBuffer[1];
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ int main(void)
     HAL_Delay(250);
     fpga.OnPressStartStop();
     Ethernet_Init();
-    display.Init();
+    Display::Init();
     if (gBF.tuneTime == 1)
     {
         //menu.OpenItemTime();
@@ -67,7 +67,7 @@ int main(void)
 
         if (!WelcomeScreen_Run())
         {
-            display.Update();               // Рисуем экран.
+            Display::Update();               // Рисуем экран.
         }
 
         menu.UpdateInput();                 // Обновляем состояние меню

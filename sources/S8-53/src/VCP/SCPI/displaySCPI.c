@@ -328,7 +328,7 @@ static void Process_GRID_BRIGHTNESS(uint8 *buffer)
     if (SCPI_FirstIsInt(buffer, &intVal, 0, 100))
     {
         BRIGHTNESS_GRID = intVal;
-        display.RunAfterDraw(OnChanged_Grid_Brightness);
+        Display::RunAfterDraw(OnChanged_Grid_Brightness);
     }
     else
     {

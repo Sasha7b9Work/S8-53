@@ -8,113 +8,111 @@
 class Display
 {
 public:
-    void Init();
+    static void Init();
 
-    void Update(bool endScene = true);
+    static void Update(bool endScene = true);
 
-    void RotateRShift(Channel channel);
+    static void RotateRShift(Channel channel);
 
-    void RotateTrigLev();
+    static void RotateTrigLev();
 
-    void Redraw();
+    static void Redraw();
 
-    void EnableTrigLabel(bool enable);
+    static void EnableTrigLabel(bool enable);
     /// Функция должна вызываться для очистки поточечной памяти. Вызывается при изменении масштаба по напряжению.
-    void ResetP2Ppoints(bool empty);
+    static void ResetP2Ppoints(bool empty);
     /// Добавляет точки в режиме поточечного вывода и самописца data00, data01 - для первого канала; data10, data11 - для второго канала
-    void AddPoints(uint8 data00, uint8 data01, uint8 data10, uint8 data11);
+    static void AddPoints(uint8 data00, uint8 data01, uint8 data10, uint8 data11);
 
-    void ShowWarningBad(Warning warning);
+    static void ShowWarningBad(Warning warning);
 
-    void ShowWarningGood(Warning warning);
+    static void ShowWarningGood(Warning warning);
 
-    void ClearFromWarnings();
+    static void ClearFromWarnings();
 
-    void SetDrawMode(DrawMode mode, pFuncVV func);
+    static void SetDrawMode(DrawMode mode, pFuncVV func);
 
-    void SetAddDrawFunction(pFuncVV func);
+    static void SetAddDrawFunction(pFuncVV func);
 
-    void RemoveAddDrawFunction();
+    static void RemoveAddDrawFunction();
 
-    void Clear();
+    static void Clear();
 
-    void ShiftScreen(int delta);
+    static void ShiftScreen(int delta);
 
-    void ChangedRShiftMarkers();
+    static void ChangedRShiftMarkers();
 
-    void AddStringToIndicating(const char *string);
+    static void AddStringToIndicating(const char *string);
 
-    void OneStringUp();
+    static void OneStringUp();
 
-    void OneStringDown();
+    static void OneStringDown();
 
-    void SetPauseForConsole(bool pause);
+    static void SetPauseForConsole(bool pause);
     /// После отрисовки очередного экрана эта функция будет вызвана один раз.
-    void RunAfterDraw(pFuncVV func);
+    static void RunAfterDraw(pFuncVV func);
     /// Отключить вспомогательную линию маркера смещения по напряжению первого канала.
-    void DisableShowLevelRShiftA();
+    static void DisableShowLevelRShiftA();
     /// Отключить вспомогательную линию маркера смещения по напряжению второго канала.
-    void DisableShowLevelRShiftB();
+    static void DisableShowLevelRShiftB();
     
-    void DisableShowLevelTrigLev();
+    static void DisableShowLevelTrigLev();
 
-    void OnRShiftMarkersAutoHide();
+    static void OnRShiftMarkersAutoHide();
 
 private:
 
-    void ShowWarn(const char *message);
+    static void ShowWarn(const char *message);
     /// Нарисовать сетку.
-    void DrawGrid(int left, int top, int width, int height);
+    static void DrawGrid(int left, int top, int width, int height);
     /// Нарисовать полную сетку.
-    void DrawFullGrid();
+    static void DrawFullGrid();
 
-    void DrawCursorsWindow();
+    static void DrawCursorsWindow();
 
-    void DrawCursorsRShift();
+    static void DrawCursorsRShift();
     /// Нарисовать маркеры смещения по напряжению
-    void DrawCursorRShift(Channel chan);
+    static void DrawCursorRShift(Channel chan);
     /// Нарисовать маркер уровня синхронизации.
-    void DrawCursorTrigLevel();
+    static void DrawCursorTrigLevel();
     /// Нарисовать маркер смещения по времени.
-    void DrawCursorTShift();
+    static void DrawCursorTShift();
     /// Написать информацию под сеткой - в нижней части дисплея.
-    void DrawLowPart();
+    static void DrawLowPart();
 
-    void DrawHiPart();
+    static void DrawHiPart();
 
-    void DrawHiRightPart();
+    static void DrawHiRightPart();
 
-    void DrawMath();
+    static void DrawMath();
 
-    void DrawSpectrum();
+    static void DrawSpectrum();
     /// Вывести текущее время.
-    void DrawTime(int x, int y);
+    static void DrawTime(int x, int y);
     /// Нарисовать курсоры курсорных измерений.
-    void DrawCursors();
+    static void DrawCursors();
     /// Вывести значения курсоров курсорных измерений.
-    void WriteCursors();
+    static void WriteCursors();
     /// Вывести значения автоматических измерений.
-    void DrawMeasures();
+    static void DrawMeasures();
     /// Написать сообщения отладочной консоли.
-    void DrawConsole();
+    static void DrawConsole();
     /// Написать предупреждения.
-    void DrawWarnings();
+    static void DrawWarnings();
 
-    void DrawTimeForFrame(uint timeMS);
+    static void DrawTimeForFrame(uint timeMS);
     /// Нарисовать горизонтальный курсор курсорных измерений.
-    void DrawHorizontalCursor
+    static void DrawHorizontalCursor
                                 (int y,             ///< числовое значение курсора.
                                 int xTearing        ///< координата места, в котором необходимо сделать разрыв для квадрата пересечения.
                                 );
     /// Нарисовать вертикальный курсор курсорных измерений.
-    void DrawVerticalCursor
+    static void DrawVerticalCursor
                                 (int x,             ///< числовое значение курсора.
                                 int yTearing        ///< координата места, в котором необходимо сделать разрыв для квадрата пересечения.
                                 );
     /// Вывести значение уровня синхронизации. 
-    void WriteValueTrigLevel();
+    static void WriteValueTrigLevel();
 
 };
 
-
-extern Display display;

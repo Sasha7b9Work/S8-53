@@ -257,7 +257,7 @@ CursCntrl GetMeasuresCursCntrlActive()
 
 static void PressSB_MeasTune_Exit()
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
 }
 
 static const SmallButton sbExitMeasTune

@@ -90,7 +90,7 @@ const Page pDisplay                 ///< ДИСПЛЕЙ
     &mainPage, 0,
     "ДИСПЛЕЙ", "DISPLAY",
     "Содержит настройки отображения дисплея.",
-    "Contains settings of display of the display.",
+    "Contains settings of display of the Display::",
     Page_Display, &itemsDisplay
 );
 
@@ -176,7 +176,7 @@ static const Choice mcAccumulation_Mode =
         "2. \"Не сбрасывать\" - на дисплей всегда выводится заданное или меньшее (в случае нехватки памяти) количество измерений. Недостатком является "
         "меньшее быстродействие и невозможность накопления заданного количества измерений при недостатке памяти."
         ,
-        "1. \"Dump\" - after accumulation of the set number of measurement there is a cleaning of the display. This mode is convenient when memory "
+        "1. \"Dump\" - after accumulation of the set number of measurement there is a cleaning of the Display:: This mode is convenient when memory "
         "isn't enough for preservation of the necessary number of measurements.\n"
         "2. \"Not to dump\" - the number of measurements is always output to the display set or smaller (in case of shortage of memory). Shortcoming "
         "is smaller speed and impossibility of accumulation of the set number of measurements at a lack of memory."
@@ -206,7 +206,7 @@ static bool IsActive_Accumulation_Clear(void)
 
 void OnPress_Accumulation_Clear(void)
 {
-    display.Redraw();
+    Display::Redraw();
 }
 
 
@@ -318,7 +318,7 @@ static void OnChanged_MinMax(bool active)
 
     if (maxMeasures < numMinMax)
     {
-        display.ShowWarningWithNumber(ExcessValues, maxMeasures);
+        Display::ShowWarningWithNumber(ExcessValues, maxMeasures);
     }
     */
 }
@@ -638,7 +638,7 @@ static const Choice mcSettings_ShowAltMarkers =
 
 static void OnChanged_Settings_ShowAltMarkers(bool)
 {
-    display.ChangedRShiftMarkers();
+    Display::ChangedRShiftMarkers();
 }
 
 

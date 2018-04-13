@@ -296,7 +296,7 @@ void Panel::EnableLEDTrig(bool enable)
     if(first)
     {
         panel.TransmitData(LED_TRIG_DISABLE);
-        display.EnableTrigLabel(false);
+        Display::EnableTrigLabel(false);
         timeEnable = gTimerMS;
         first = false;
     }
@@ -311,13 +311,13 @@ void Panel::EnableLEDTrig(bool enable)
         if(enable)
         {
             panel.TransmitData(LED_TRIG_ENABLE);
-            display.EnableTrigLabel(true);
+            Display::EnableTrigLabel(true);
             fired = true;
         }
         else if(gTimerMS - timeEnable > 100)
         {
             panel.TransmitData(LED_TRIG_DISABLE);
-            display.EnableTrigLabel(false);
+            Display::EnableTrigLabel(false);
             fired = false;
         }
     }

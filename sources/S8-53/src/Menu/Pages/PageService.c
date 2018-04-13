@@ -131,7 +131,7 @@ static const Button bResetSettings
 static void OnPress_ResetSettings(void)
 {
     panel.Disable();
-    display.SetDrawMode(DrawMode_Hand, FuncDraw);
+    Display::SetDrawMode(DrawMode_Hand, FuncDraw);
     Timer_Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
 
     if (panel.WaitPressingButton() == B_Start)
@@ -140,7 +140,7 @@ static void OnPress_ResetSettings(void)
     }
 
     Timer_Disable(kTimerDrawHandFunction);
-    display.SetDrawMode(DrawMode_Auto, 0);
+    Display::SetDrawMode(DrawMode_Auto, 0);
     panel.Enable();
 }
 
@@ -156,7 +156,7 @@ static void FuncDraw(void)
 
 static void OnTimerDraw(void)
 {
-    display.Update();
+    Display::Update();
 }
 
 
@@ -273,7 +273,7 @@ static void OnPress_Math_Function(void)
 {
     if (ENABLED_FFT)
     {
-        display.ShowWarningBad(ImpossibleEnableMathFunction);
+        Display::ShowWarningBad(ImpossibleEnableMathFunction);
     }
 }
 
@@ -382,7 +382,7 @@ static void OnPress_Math_Function_ModeDraw(void)
 {
     if (ENABLED_FFT)
     {
-        display.ShowWarningBad(ImpossibleEnableMathFunction);
+        Display::ShowWarningBad(ImpossibleEnableMathFunction);
     }
     else
     {
@@ -572,7 +572,7 @@ static void OnPress_Math_FFT(void)
 {
     if (!IsActive_Math_FFT())
     {
-        display.ShowWarningBad(ImpossibleEnableFFT);
+        Display::ShowWarningBad(ImpossibleEnableFFT);
     }
 }
 
@@ -685,7 +685,7 @@ static const SmallButton cMath_FFT_Cursors_Exit
 
 static void OnPress_Math_FFT_Cursors_Exit(void)
 {
-    display.RemoveAddDrawFunction();
+    Display::RemoveAddDrawFunction();
 }
 
 // —≈–¬»— - Ã¿“≈Ã¿“» ¿ - —œ≈ “– -  ”–—Œ–€ - »ÒÚÓ˜ÌËÍ -------------------------------------------------------------------------------------------------
@@ -772,8 +772,8 @@ static const Choice cEthernet_Enable =
 
 static void OnChanged_Ethernet_Enable(bool active)
 {
-    display.ShowWarningGood(NeedRebootDevice2);
-    display.ShowWarningGood(NeedRebootDevice1);
+    Display::ShowWarningGood(NeedRebootDevice2);
+    Display::ShowWarningGood(NeedRebootDevice1);
 }
 
 // —≈–¬»— - ETHERNET - IP ‡‰ÂÒ ----------------------------------------------------------------------------------------------------------------------
@@ -942,7 +942,7 @@ static const Page ppInformation
 static void OnPress_Information(void)
 {
     menu.OpenPageAndSetItCurrent(Page_SB_Information);
-    display.SetDrawMode(DrawMode_Hand, Information_Draw);
+    Display::SetDrawMode(DrawMode_Hand, Information_Draw);
 }
 
 static void Information_Draw(void)
@@ -998,8 +998,8 @@ const SmallButton sbInformation_Exit
 
 static void OnPress_Information_Exit(void)
 {
-    display.SetDrawMode(DrawMode_Auto, 0);
-    display.RemoveAddDrawFunction();
+    Display::SetDrawMode(DrawMode_Auto, 0);
+    Display::RemoveAddDrawFunction();
 }
 
 

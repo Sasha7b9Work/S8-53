@@ -81,8 +81,8 @@ void IPaddress_ChangeValue(IPaddress *ip, int delta)
             ip->ip0[numByte] = newValue;
         }
         sound.GovernorChangedValue();
-        display.ShowWarningGood(NeedRebootDevice2);
-        display.ShowWarningGood(NeedRebootDevice1);
+        Display::ShowWarningGood(NeedRebootDevice2);
+        Display::ShowWarningGood(NeedRebootDevice1);
     }
 }
 
@@ -91,8 +91,8 @@ void MACaddress_ChangeValue(MACaddress *mac, int delta)
     uint8 *value = mac->mac0 + gCurDigit;
     *value += delta > 0 ? 1 : -1;
     sound.GovernorChangedValue();
-    display.ShowWarningGood(NeedRebootDevice2);
-    display.ShowWarningGood(NeedRebootDevice1);
+    Display::ShowWarningGood(NeedRebootDevice2);
+    Display::ShowWarningGood(NeedRebootDevice1);
 }
 
 void IPaddress_GetNumPosIPvalue(int *numIP, int *selPos)

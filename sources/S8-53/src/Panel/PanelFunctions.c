@@ -293,7 +293,7 @@ void TrigLevRight()
 
 static void ShiftScreen(int shift)
 {
-    display.ShiftScreen(shift);
+    Display::ShiftScreen(shift);
 }
 
 static void SetTShift(int tShift)

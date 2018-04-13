@@ -56,21 +56,21 @@ void Menu::OpenFileManager()
     {
         ShortPressureButton(B_Menu);
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
     
     if(!MenuIsShown())
     {
         ShortPressureButton(B_Menu);
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
 
     for(int i = 0; i < 5 * stepAngleRegSet + 1; i++)
     {
         RotateRegSetLeft();
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
     
     angleRegSet = 0;
@@ -79,31 +79,31 @@ void Menu::OpenFileManager()
     {
         RotateRegSetRight();
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
     
     angleRegSet = 0;
 
     ShortPressureButton(B_F2);
     UpdateInput();
-    display.Update(false);
+    Display::Update(false);
 
     ShortPressureButton(B_F4);
     UpdateInput();
-    display.Update(false);
+    Display::Update(false);
    
     for(int i = 0; i < stepAngleRegSet + 1; i++)
     {
         RotateRegSetLeft();
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
        
     for(int i = 0; i < 2; i++)
     {
         ShortPressureButton(B_F1);
         UpdateInput();
-        display.Update(false);
+        Display::Update(false);
     }
 }
 
@@ -139,7 +139,7 @@ void Menu::LongPressureButton(PanelButton button)
     if (gBF.showHelpHints == 0)
     {
         longPressureButton = button;
-        display.Redraw();
+        Display::Redraw();
     }
 };
 
@@ -291,7 +291,7 @@ void Menu::PressButton(PanelButton button)
         if (memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS) == 0)
         {
             gBF.showDebugMenu = 1;
-            display.ShowWarningGood(MenuDebugEnabled);
+            Display::ShowWarningGood(MenuDebugEnabled);
         }
     }
     pressButton = button;
@@ -313,7 +313,7 @@ void Menu::RotateRegSetRight(void)
     if (gBF.showHelpHints == 0)
     {
         angleRegSet++;
-        display.Redraw();
+        Display::Redraw();
     }
 };
 
@@ -323,7 +323,7 @@ void Menu::RotateRegSetLeft(void)
     if (gBF.showHelpHints == 0)
     {
         angleRegSet--;
-        display.Redraw();
+        Display::Redraw();
     }
 };
 
@@ -403,7 +403,7 @@ void Menu::ProcessingShortPressureButton()
             shortPressureButton = B_Empty;
             return;
         }
-        display.Redraw();
+        Display::Redraw();
         menu.SetAutoHide(true);
 
         PanelButton button = shortPressureButton;
@@ -468,7 +468,7 @@ void Menu::ProcessingLongPressureButton(void)
 {
     if(longPressureButton != B_Empty)
     {
-        display.Redraw();
+        Display::Redraw();
         menu.SetAutoHide(true);
 
         if(longPressureButton == B_Time)
@@ -835,19 +835,19 @@ extern const Page pService;
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::OpenItemTime(void)
 {
-    display.ShowWarningGood(TimeNotSet);
+    Display::ShowWarningGood(TimeNotSet);
     menu.ShortPressureButton(B_Service);
     menu.UpdateInput();
-    display.Update();
+    Display::Update();
     for (int i = 0; i < 2; i++)
     {
         menu.RotateRegSetRight();
         menu.UpdateInput();
-        display.Update();
+        Display::Update();
     }
     menu.ShortPressureButton(B_F4);
     menu.UpdateInput();
-    display.Update();
+    Display::Update();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -311,9 +311,9 @@ static uint FreeMemory(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void CompactMemory(void)
 {
-    display.ClearFromWarnings();
-    display.ShowWarningGood(MovingData);
-    display.Update();
+    Display::ClearFromWarnings();
+    Display::ShowWarningGood(MovingData);
+    Display::Update();
     uint dataInfoRel = FindActualDataInfo() - ADDR_SECTOR_DATA_MAIN;
 
     EraseSector(ADDR_SECTOR_DATA_HELP);
@@ -344,7 +344,7 @@ static void CompactMemory(void)
             FLASH_SaveData(i, ds, data0, data1);
         }
     }
-    display.ClearFromWarnings();
+    Display::ClearFromWarnings();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

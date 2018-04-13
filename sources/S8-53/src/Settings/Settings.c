@@ -296,7 +296,7 @@ void Settings_Load(bool _default)
     panel.EnableLEDChannel1(sChannel_Enabled(B));
     fpga.SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
     menu.SetAutoHide(true);
-    display.ChangedRShiftMarkers();
+    Display::ChangedRShiftMarkers();
 
     SETTINGS_IS_LOADED = 1;
 }

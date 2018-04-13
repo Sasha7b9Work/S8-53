@@ -34,9 +34,6 @@
 #include "Hardware/DisplayHardware.inc"
 
 
-Display display;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define NUM_P2P_POINTS (FPGA_MAX_POINTS)
 static uint8 dataP2P_0[NUM_P2P_POINTS];
@@ -118,19 +115,19 @@ void Display::RotateRShift(Channel chan)
         Timer_Enable((chan == A) ? kShowLevelRShift0 : kShowLevelRShift1, TIME_SHOW_LEVELS  * 1000, (chan == A) ? FuncOnTimerDisableShowLevelRShiftA :
                      FuncOnTimerDisableShowLevelRShiftB);
     };
-    display.Redraw();
+    Display::Redraw();
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncOnTimerDisableShowLevelRShiftA()
 {
-    display.DisableShowLevelRShiftA();
+    Display::DisableShowLevelRShiftA();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncOnTimerDisableShowLevelRShiftB()
 {
-    display.DisableShowLevelRShiftB();
+    Display::DisableShowLevelRShiftB();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,13 +138,13 @@ void Display::RotateTrigLev()
         gBF.showLevelTrigLev = 1;
         Timer_Enable(kShowLevelTrigLev, TIME_SHOW_LEVELS * 1000, FuncOnTimerDisableShowLevelTrigLev);
     }
-    display.Redraw();
+    Display::Redraw();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncOnTimerDisableShowLevelTrigLev()
 {
-    display.DisableShowLevelTrigLev();
+    Display::DisableShowLevelTrigLev();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1304,7 +1301,7 @@ void Display::Update(bool endScene)
     {
         if (painter.SaveScreenToFlashDrive())
         {
-            display.ShowWarningGood(FileIsSaved);
+            Display::ShowWarningGood(FileIsSaved);
         }
         gMemory.needForSaveToFlashDrive = 0;
     }
@@ -2309,7 +2306,7 @@ void Display::ChangedRShiftMarkers()
 
 static void FuncOnTimerRShiftMarkersAutoHide()
 {
-    display.OnRShiftMarkersAutoHide();
+    Display::OnRShiftMarkersAutoHide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
