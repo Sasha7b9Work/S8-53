@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 200</TableColWidths>
+      <TableColWidths>115 77</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>568 160</TableColWidths>
+      <TableColWidths>868 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>728</TableColWidths>
+      <TableColWidths>1028</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -60,7 +60,7 @@
       <WinId>466</WinId>
       <ViewName>Source Browser - *** Not Enabled ***</ViewName>
       <UserString>500</UserString>
-      <TableColWidths>166</TableColWidths>
+      <TableColWidths>300</TableColWidths>
     </View>
   </TreeListPane>
 
@@ -68,11 +68,11 @@
 
   <WindowSettings>
     <LogicAnalizer>
-      <ShowLACursor>0</ShowLACursor>
-      <ShowSignalInfo>0</ShowSignalInfo>
+      <ShowLACursor>1</ShowLACursor>
+      <ShowSignalInfo>1</ShowSignalInfo>
       <ShowCycles>0</ShowCycles>
-      <LeftSideBarSize>50</LeftSideBarSize>
-      <TimeBaseIndex>16</TimeBaseIndex>
+      <LeftSideBarSize>0</LeftSideBarSize>
+      <TimeBaseIndex>-1</TimeBaseIndex>
     </LogicAnalizer>
   </WindowSettings>
 
@@ -83,8 +83,8 @@
       <flags>2</flags>
       <showCmd>3</showCmd>
       <MinPosition>
-        <xPos>-1</xPos>
-        <yPos>-1</yPos>
+        <xPos>-32000</xPos>
+        <yPos>-32000</yPos>
       </MinPosition>
       <MaxPosition>
         <xPos>-1</xPos>
@@ -100,8 +100,8 @@
     <MDIClientArea>
       <RegID>0</RegID>
       <MDITabState>
-        <Len>361</Len>
-        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000002000000010000000100000040443A5C50726F6A656374735C73746D33325C53382D35335F6E65775C736F75726365735C53382D35335C7372635C4D656E755C4D656E7544726177696E672E63000000000D4D656E7544726177696E672E6300000000FFDC7800FFFFFFFF41443A5C50726F6A656374735C73746D33325C53382D35335F6E65775C736F75726365735C53382D35335C7372635C446973706C61795C446973706C61792E637070000000000B446973706C61792E63707000000000BECEA100FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD500010000000000000002000000000000004400000047050000EB030000</Data>
+        <Len>60</Len>
+        <Data>010000000400000001000000010000000100000001000000000000000200000000000000010000000100000000000000280000002800000000000000</Data>
       </MDITabState>
     </MDIClientArea>
     <ViewEx>
@@ -3524,7 +3524,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\libs\stm32f2xx_it.h</Name>
+        <Name>&lt;1&gt;.\src\libs\stm32f2xx_it.h</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>20</CurrentLine>
@@ -3533,7 +3533,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\libs\stm32f2xx_it.c</Name>
+        <Name>&lt;1&gt;.\src\libs\stm32f2xx_it.c</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>50</TopLine>
         <CurrentLine>63</CurrentLine>
@@ -3542,7 +3542,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\Hardware\Hardware.h</Name>
+        <Name>&lt;1&gt;.\src\Hardware\Hardware.h</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>19</CurrentLine>
@@ -3551,7 +3551,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\Hardware\Hardware.c</Name>
+        <Name>&lt;1&gt;.\src\Hardware\Hardware.c</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>137</TopLine>
         <CurrentLine>162</CurrentLine>
@@ -3560,7 +3560,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\defines.h</Name>
+        <Name>&lt;1&gt;.\src\defines.h</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>65</TopLine>
         <CurrentLine>118</CurrentLine>
@@ -3569,7 +3569,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>&lt;2&gt;.\src\defines.c</Name>
+        <Name>&lt;1&gt;.\src\defines.c</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>6</CurrentLine>

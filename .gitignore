@@ -48,3 +48,8 @@ sources/VS-OSCI/NET/LibraryS8-53/bin/*
 sources/VS-OSCI/NET/LibraryS8-53/obj/*
 sources/VS-OSCI/NET/ControlLibraryS8-53/bin/*
 sources/VS-OSCI/NET/ControlLibraryS8-53/obj/*
+
+sources/Loader53/Objects/*
+sources/Loader53/Debug/*
+sources/VS-OSCI/Loader53/Debug/*
+
