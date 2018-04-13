@@ -9,7 +9,7 @@ typedef unsigned char      uchar;
 
 #ifdef WIN32
 
-#define __IO
+//#define __IO
 
 #endif
 
