@@ -220,7 +220,7 @@ void FPGA::ProcedureCalibration(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FuncAttScreen(void)
 {
-    painter.BeginScene(COLOR_BLACK);
+    Painter::BeginScene(COLOR_BLACK);
 
     static bool first = true;
     static uint startTime = 0;
@@ -232,7 +232,7 @@ void FuncAttScreen(void)
     int16 y = 10;
     Display::Clear();
     
-    painter.SetColor(COLOR_FILL);
+    Painter::SetColor(COLOR_FILL);
     
 #define dX 20
 #define dY -15
@@ -241,20 +241,20 @@ void FuncAttScreen(void)
     {
         case StateCalibration_None:
         {
-                painter.DrawTextInRect(40 + dX, y + 25 + dY, SCREEN_WIDTH - 100, 200, "Калибровка завершена. Нажмите любую кнопку, чтобы выйти из режима калибровки.");
+                Painter::DrawTextInRect(40 + dX, y + 25 + dY, SCREEN_WIDTH - 100, 200, "Калибровка завершена. Нажмите любую кнопку, чтобы выйти из режима калибровки.");
 
-                painter.DrawText(10 + dX, 55 + dY, "Поправка нуля 1к :");
-                painter.DrawText(10 + dX, 80 + dY, "Поправка нуля 2к :");
+                Painter::DrawText(10 + dX, 55 + dY, "Поправка нуля 1к :");
+                Painter::DrawText(10 + dX, 80 + dY, "Поправка нуля 2к :");
                 for (int i = 0; i < RangeSize; i++)
                 {
-                    painter.DrawFormatText(95 + i * 16 + dX, 55 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][0]);
-                    painter.DrawFormatText(95 + i * 16 + dX, 65 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][1]);
-                    painter.DrawFormatText(95 + i * 16 + dX, 80 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][0]);
-                    painter.DrawFormatText(95 + i * 16 + dX, 90 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][1]);
+                    Painter::DrawFormatText(95 + i * 16 + dX, 55 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][0]);
+                    Painter::DrawFormatText(95 + i * 16 + dX, 65 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][1]);
+                    Painter::DrawFormatText(95 + i * 16 + dX, 80 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][0]);
+                    Painter::DrawFormatText(95 + i * 16 + dX, 90 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][1]);
                 }
                 
-                painter.DrawFormatText(10 + dX, 110 + dY, COLOR_FILL, "Коэффициент калибровки 1к : %f, %d", STRETCH_ADC_A, (int)(STRETCH_ADC_A * 0x80));
-                painter.DrawFormatText(10 + dX, 130 + dY, COLOR_FILL, "Коэфффициент калибровки 2к : %f, %d", STRETCH_ADC_B, (int)(STRETCH_ADC_B * 0x80));
+                Painter::DrawFormatText(10 + dX, 110 + dY, COLOR_FILL, "Коэффициент калибровки 1к : %f, %d", STRETCH_ADC_A, (int)(STRETCH_ADC_A * 0x80));
+                Painter::DrawFormatText(10 + dX, 130 + dY, COLOR_FILL, "Коэфффициент калибровки 2к : %f, %d", STRETCH_ADC_B, (int)(STRETCH_ADC_B * 0x80));
 
                 DrawParametersChannel(A, 10 + dX, 150 + dY, false);
                 DrawParametersChannel(B, 10 + dX, 200 + dY, false);
@@ -267,7 +267,7 @@ void FuncAttScreen(void)
             break;
 
         case StateCalibration_RShift0start:
-            painter.DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Подключите ко входу канала 1 выход калибратора и нажмите кнопку ПУСК/СТОП. \
+            Painter::DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Подключите ко входу канала 1 выход калибратора и нажмите кнопку ПУСК/СТОП. \
 Если вы не хотите калибровать первый канала, нажмите любую другую кнопку.");
             break;
 
@@ -275,7 +275,7 @@ void FuncAttScreen(void)
             break;
 
         case StateCalibration_RShift1start:
-            painter.DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Подключите ко входу канала 2 выход калибратора и нажмите кнопку ПУСК/СТОП. \
+            Painter::DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Подключите ко входу канала 2 выход калибратора и нажмите кнопку ПУСК/СТОП. \
 Если вы не хотите калибровать второй канал, нажмите любую другую кнопку.");
             break;
 
@@ -283,11 +283,11 @@ void FuncAttScreen(void)
             break;
 
         case StateCalibration_ErrorCalibration0:
-            painter.DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Внимание !!! Канал 1 не скалиброван.");
+            Painter::DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Внимание !!! Канал 1 не скалиброван.");
             break;
 
         case StateCalibration_ErrorCalibration1:
-            painter.DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Внимание !!! Канал 2 не скалиброван.");
+            Painter::DrawTextInRect(50, y + 25, SCREEN_WIDTH - 100, 200, "Внимание !!! Канал 2 не скалиброван.");
             break;
     }
 
@@ -306,18 +306,18 @@ void FuncAttScreen(void)
     */
     char buffer[100];
     sprintf(buffer, "%.1f", (gTimerMS - startTime) / 1000.0f);
-    painter.DrawTextC(0, 0, buffer, COLOR_BLACK);
+    Painter::DrawTextC(0, 0, buffer, COLOR_BLACK);
 
-    painter.EndScene();
+    Painter::EndScene();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawParametersChannel(Channel chan, int eX, int eY, bool inProgress)
 {
-    painter.SetColor(COLOR_FILL);
+    Painter::SetColor(COLOR_FILL);
     if(inProgress)
     {
-        painter.DrawText(eX, eY + 4, chan == 0 ? "КАНАЛ 1" : "КАНАЛ 2");
+        Painter::DrawText(eX, eY + 4, chan == 0 ? "КАНАЛ 1" : "КАНАЛ 2");
         ProgressBar *bar = (chan == A) ? &bar0 : &bar1;
         bar->width = 240;
         bar->height = 15;
@@ -330,19 +330,19 @@ void DrawParametersChannel(Channel chan, int eX, int eY, bool inProgress)
     {
         int x = inProgress ? 5 : eX;
         int y = eY + (inProgress ? 110 : 0);
-        painter.DrawText(x, y, "Отклонение от нуля:");
+        Painter::DrawText(x, y, "Отклонение от нуля:");
         char buffer[100] = {0};
         sprintf(buffer, "АЦП1 = %.2f/%.2f, АЦП2 = %.2f/%.2f, d = %.2f/%.2f", avrADC1old[chan] - AVE_VALUE, avrADC1[chan] - AVE_VALUE, 
                                                                              avrADC2old[chan] - AVE_VALUE, avrADC2[chan] - AVE_VALUE,
                                                                              deltaADCold[chan], deltaADC[chan]);
         y += 10;
-        painter.DrawText(x, y, buffer);
+        Painter::DrawText(x, y, buffer);
         buffer[0] = 0;
         sprintf(buffer, "Расхождение AЦП = %.2f/%.2f %%", deltaADCPercentsOld[chan], deltaADCPercents[chan]);
-        painter.DrawText(x, y + 11, buffer);
+        Painter::DrawText(x, y + 11, buffer);
         buffer[0] = 0;
         sprintf(buffer, "Записано %d", SET_BALANCE_ADC(chan));
-        painter.DrawText(x, y + 19, buffer);
+        Painter::DrawText(x, y + 19, buffer);
     }
 }
 

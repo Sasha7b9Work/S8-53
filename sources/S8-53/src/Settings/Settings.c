@@ -286,7 +286,7 @@ void Settings_Load(bool _default)
             set.display.colors[color] = defaultSettings.display.colors[color];
         }
 
-        painter.LoadPalette();
+        Painter::LoadPalette();
     }
 
 

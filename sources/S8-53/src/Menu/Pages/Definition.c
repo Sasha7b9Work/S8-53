@@ -63,11 +63,11 @@ void DrawMenuCursTime(int x, int y, bool left, bool right)
     CalculateXY(&x0, &x1, &y0, &y1);
     for(int i = 0; i < (left ? 3 : 1); i++)
     {
-        painter.DrawVLine(x0 + i, y0, y1);
+        Painter::DrawVLine(x0 + i, y0, y1);
     }
     for(int i = 0; i < (right ? 3 : 1); i++)
     {
-        painter.DrawVLine(x1 - i, y0, y1);
+        Painter::DrawVLine(x1 - i, y0, y1);
     }
 }
 
@@ -81,11 +81,11 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
     CalculateXY(&x0, &x1, &y0, &y1);
     for(int i = 0; i < (top ? 3 : 1); i++)
     {
-        painter.DrawHLine(y0 + i, x0, x1);
+        Painter::DrawHLine(y0 + i, x0, x1);
     }
     for(int i = 0; i < (bottom ? 3 : 1); i++)
     {
-        painter.DrawHLine(y1 - i, x0, x1);
+        Painter::DrawHLine(y1 - i, x0, x1);
     }
 }
 
@@ -116,9 +116,9 @@ void PressSmallButtonExit()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawSB_Exit(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x2e');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x2e');
+    Painter::SetFont(TypeFont_8);
 }
 
 

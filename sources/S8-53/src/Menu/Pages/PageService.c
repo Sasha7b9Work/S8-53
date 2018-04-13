@@ -146,12 +146,12 @@ static void OnPress_ResetSettings(void)
 
 static void FuncDraw(void)
 {
-    painter.BeginScene(COLOR_BACK);
+    Painter::BeginScene(COLOR_BACK);
 
-    painter.DrawTextInRectWithTransfersC(30, 110, 300, 200, "Подтвердите сброс настроек нажатием кнопки ПУСК/СТОП.\n"
+    Painter::DrawTextInRectWithTransfersC(30, 110, 300, 200, "Подтвердите сброс настроек нажатием кнопки ПУСК/СТОП.\n"
                                          "Нажмите любую другую кнопку, если сброс не нужен.", COLOR_FILL);
 
-    painter.EndScene();
+    Painter::EndScene();
 }
 
 static void OnTimerDraw(void)
@@ -403,19 +403,19 @@ static void Draw_Math_Function_ModeDraw(int x, int y)
 
 static void Draw_Math_Function_ModeDraw_Disable(int x, int y)
 {
-    painter.DrawText(x + 2 + (set.common.lang == English ? 2 : 0), y + 5, set.common.lang == Russian ? "Вык" : "Dis");
+    Painter::DrawText(x + 2 + (set.common.lang == English ? 2 : 0), y + 5, set.common.lang == Russian ? "Вык" : "Dis");
 }
 
 static void Draw_Math_Function_ModeDraw_Separate(int x, int y)
 {
-    painter.DrawRectangle(x + 3, y + 5, 13, 9);
-    painter.DrawHLine(y + 9, x + 3, x + 16);
-    painter.DrawHLine(y + 10, x + 3, x + 16);
+    Painter::DrawRectangle(x + 3, y + 5, 13, 9);
+    Painter::DrawHLine(y + 9, x + 3, x + 16);
+    Painter::DrawHLine(y + 10, x + 3, x + 16);
 }
 
 static void Draw_Math_Function_ModeDraw_Together(int x, int y)
 {
-    painter.DrawRectangle(x + 3, y + 5, 13, 9);
+    Painter::DrawRectangle(x + 3, y + 5, 13, 9);
 }
 
 // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Вид ---------------------------------------------------------------------------------------------------------------
@@ -449,15 +449,15 @@ static void Draw_Math_Function_Type(int x, int y)
 
 static void Draw_Math_Function_Type_Sum(int x, int y)
 {
-    painter.DrawHLine(y + 9, x + 4, x + 14);
-    painter.DrawVLine(x + 9, y + 4, y + 14);
+    Painter::DrawHLine(y + 9, x + 4, x + 14);
+    Painter::DrawVLine(x + 9, y + 4, y + 14);
 }
 
 static void Draw_Math_Function_Type_Mul(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);
+    Painter::SetFont(TypeFont_8);
 }
 
 // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---------------------------------------------------------------------------------------------
@@ -491,12 +491,12 @@ static void Draw_Math_Function_ModeRegSet(int x, int y)
 
 static void Draw_Math_Function_ModeRegSet_Range(int x, int y)
 {
-    painter.DrawChar(x + 7, y + 5, set.common.lang == Russian ? 'M' : 'S');
+    Painter::DrawChar(x + 7, y + 5, set.common.lang == Russian ? 'M' : 'S');
 }
 
 static void Draw_Math_Function_ModeRegSet_RShift(int x, int y)
 {
-    painter.DrawText(x + 5 - (set.common.lang == English ? 3 : 0), y + 5, set.common.lang == Russian ? "См" : "Shif");
+    Painter::DrawText(x + 5 - (set.common.lang == English ? 3 : 0), y + 5, set.common.lang == Russian ? "См" : "Shif");
 }
 
 // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 1-го канала -----------------------------------------------------------------------------------------------
@@ -518,7 +518,7 @@ static void OnPress_Math_Function_RangeA(void)
 
 static void Draw_Math_Function_RangeA(int x, int y)
 {
-    painter.DrawChar(x + 8, y + 5, '1');
+    Painter::DrawChar(x + 8, y + 5, '1');
 }
 
 // СЕРВИС - МАТЕМАТИКА - ФУНКЦИЯ - Масштаб 2-го канала -----------------------------------------------------------------------------------------------
@@ -540,7 +540,7 @@ static void OnPress_Math_Function_RangeB(void)
 
 static void Draw_Math_Function_RangeB(int x, int y)
 {
-    painter.DrawChar(x + 8, y + 5, '2');
+    Painter::DrawChar(x + 8, y + 5, '2');
 }
 
 // СЕРВИС - МАТЕМАТИКА - СПЕКТР //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -706,7 +706,7 @@ static void OnPress_Math_FFT_Cursors_Source(void)
 
 static void Draw_Math_FFT_Cursors_Source(int x, int y)
 {
-    painter.DrawText(x + 7, y + 5, FFT_CUR_CURSOR_IS_0 ? "1" : "2");
+    Painter::DrawText(x + 7, y + 5, FFT_CUR_CURSOR_IS_0 ? "1" : "2");
 }
 
 // СЕРВИС - МАТЕМАТИКА - СПЕКТР - Диапазон -----------------------------------------------------------------------------------------------------------
@@ -949,15 +949,15 @@ static void Information_Draw(void)
 {
     Language lang = LANG;
 
-    painter.BeginScene(COLOR_BLACK);
+    Painter::BeginScene(COLOR_BLACK);
     int x = 100;
     int dY = 20;
     int y = 20;
-    painter.DrawRectangleC(0, 0, 319, 239, COLOR_FILL);
+    Painter::DrawRectangleC(0, 0, 319, 239, COLOR_FILL);
     y += dY;
-    painter.DrawText(x, y, lang == Russian ? "ИНФОРМАЦИЯ" : "INFORMATION");
+    Painter::DrawText(x, y, lang == Russian ? "ИНФОРМАЦИЯ" : "INFORMATION");
     y += dY;
-    painter.DrawText(x, y, lang == Russian ? "Модель : С8-53/1" : "Model : S8-53/1");
+    Painter::DrawText(x, y, lang == Russian ? "Модель : С8-53/1" : "Model : S8-53/1");
     y += dY;
 
     char buffer[100];
@@ -965,26 +965,26 @@ static void Information_Draw(void)
     OTP_GetSerialNumber(buffer);
     if (buffer[0])
     {
-        painter.DrawFormatText(x, y, COLOR_FILL, lang == Russian ? "C/Н : %s" : "S/N : %s", buffer);
+        Painter::DrawFormatText(x, y, COLOR_FILL, lang == Russian ? "C/Н : %s" : "S/N : %s", buffer);
         y += dY;
     }
     */
 
-    painter.DrawText(x, y, lang == Russian ? "Программное обеспечение:" : "Software:");
+    Painter::DrawText(x, y, lang == Russian ? "Программное обеспечение:" : "Software:");
     y += dY;
     sprintf(buffer, (const char*)((lang == Russian) ? "версия %s" : "version %s"), NUM_VER);
-    painter.DrawText(x, y, buffer);
+    Painter::DrawText(x, y, buffer);
     y += dY;
 
-    painter.DrawFormatText(x, y, COLOR_FILL, "CRC32 : %X", Hardware_CalculateCRC32());
+    Painter::DrawFormatText(x, y, COLOR_FILL, "CRC32 : %X", Hardware_CalculateCRC32());
 
     dY = -10;
-    painter.DrawStringInCenterRect(0, 190 + dY, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
-    painter.DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
-    painter.DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
+    Painter::DrawStringInCenterRect(0, 190 + dY, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
+    Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
+    Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
 
     menu.Draw();
-    painter.EndScene();
+    Painter::EndScene();
 }
 
 // СЕРВИС - ИНФОРМАЦИЯ - Выход -----------------------------------------------------------------------------------------------------------------------

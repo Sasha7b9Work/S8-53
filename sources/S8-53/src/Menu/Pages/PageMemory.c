@@ -74,23 +74,23 @@ bool IsActiveMemoryExtSetMask()
 
 void DrawSB_MemLastSelect(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 3, y + 2, set.memory.strMemoryLast.isActiveModeSelect ? '\x2a' : '\x28');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 3, y + 2, set.memory.strMemoryLast.isActiveModeSelect ? '\x2a' : '\x28');
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_MemLast_Prev(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, '\x20');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x20');
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_MemLast_Next(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, '\x64');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x64');
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_MemLastSelect()
@@ -130,27 +130,27 @@ static void FuncDrawingAdditionSPageMemoryLast()
     
     int width = 40;
     int height = 10;
-    painter.FillRegionC(grid.Right() - width, GRID_TOP, width, height, COLOR_BACK);
-    painter.DrawRectangleC(grid.Right() - width, GRID_TOP, width, height, COLOR_FILL);
-    painter.DrawText(grid.Right() - width + 2, GRID_TOP + 1, Int2String(gMemory.currentNumLatestSignal + 1, false, 3, buffer));
-    painter.DrawText(grid.Right() - width + 17, GRID_TOP + 1, "/");
-    painter.DrawText(grid.Right() - width + 23, GRID_TOP + 1, Int2String(dataStorage.AllDatas(), false, 3, buffer));
+    Painter::FillRegionC(grid.Right() - width, GRID_TOP, width, height, COLOR_BACK);
+    Painter::DrawRectangleC(grid.Right() - width, GRID_TOP, width, height, COLOR_FILL);
+    Painter::DrawText(grid.Right() - width + 2, GRID_TOP + 1, Int2String(gMemory.currentNumLatestSignal + 1, false, 3, buffer));
+    Painter::DrawText(grid.Right() - width + 17, GRID_TOP + 1, "/");
+    Painter::DrawText(grid.Right() - width + 23, GRID_TOP + 1, Int2String(dataStorage.AllDatas(), false, 3, buffer));
 }
 
 void DrawSB_MemLast_IntEnter(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x40');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x40');
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_MemLast_SaveToFlash(int x, int y)
 {
     if (FLASH_DRIVE_IS_CONNECTED)
     {
-        painter.SetFont(TypeFont_UGO2);
-        painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
-        painter.SetFont(TypeFont_8);
+        Painter::SetFont(TypeFont_UGO2);
+        Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x42');
+        Painter::SetFont(TypeFont_8);
     }
 }
 
@@ -158,9 +158,9 @@ static void DrawSB_MemExtSetNameSave(int x, int y)
 {
     if (FLASH_DRIVE_IS_CONNECTED)
     {
-        painter.SetFont(TypeFont_UGO2);
-        painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
-        painter.SetFont(TypeFont_8);
+        Painter::SetFont(TypeFont_UGO2);
+        Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x42');
+        Painter::SetFont(TypeFont_8);
     }
 }
 
@@ -266,16 +266,16 @@ static const SmallButton sbSetNameSave
 
 void DrawSB_SetMask_Backspace(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_SetName_Backspace(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_SetMask_Backspace()
@@ -306,9 +306,9 @@ void PressSB_SetName_Backspace()
 
 void DrawSB_SetMask_Delete(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_SetMask_Delete()
@@ -318,9 +318,9 @@ void PressSB_SetMask_Delete()
 
 void DrawSB_SetName_Delete(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_SetName_Delete()
@@ -330,9 +330,9 @@ void PressSB_SetName_Delete()
 
 void DrawSB_SetMask_Insert(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_INSERT);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_INSERT);
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_SetMask_Insert()
@@ -373,9 +373,9 @@ void PressSB_SetMask_Insert()
 
 void DrawSB_SetName_Insert(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, '\x26');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x26');
+    Painter::SetFont(TypeFont_8);
 }
 
 void PressSB_SetName_Insert()
@@ -397,7 +397,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
         CircleIncreaseInt8
     };
 
-    painter.ResetFlash();
+    Painter::ResetFlash();
     if (INDEX_SYMBOL > maxIndex)
     {
         INDEX_SYMBOL = maxIndex - 1;
@@ -478,30 +478,30 @@ const SmallButton sbSetNameInsert
 
 void DrawSB_MemExtNewFolder(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 1, y, '\x46');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 1, y, '\x46');
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_FM_LevelDown(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
+    Painter::SetFont(TypeFont_8);
 }
 
 void DrawSB_FM_LevelUp(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x48');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
+    Painter::SetFont(TypeFont_8);
 }
 
 static void DrawSB_FM_Tab(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x6e');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x6e');
+    Painter::SetFont(TypeFont_8);
 }
 
 extern void PressSB_FM_Tab();
@@ -540,9 +540,9 @@ const SmallButton sbFileManagerLevelUp
 
 void DrawSB_MemInt_SaveToIntMemory(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_SAVE_TO_MEM);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_SAVE_TO_MEM);
+    Painter::SetFont(TypeFont_8);
 }
 
 
@@ -578,9 +578,9 @@ void DrawSB_MemInt_SaveToFlashDrive(int x, int y)
 {
     if (FLASH_DRIVE_IS_CONNECTED)
     {
-        painter.SetFont(TypeFont_UGO2);
-        painter.Draw4SymbolsInRect(x + 2, y + 1, '\x42');
-        painter.SetFont(TypeFont_8);
+        Painter::SetFont(TypeFont_UGO2);
+        Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x42');
+        Painter::SetFont(TypeFont_8);
     }
 }
 
@@ -591,16 +591,16 @@ static void DrawMemoryWave(int num, bool exist)
     int x = grid.Left() + 2 + num * 12;
     int y = grid.FullBottom() - 10;
     int width = 12;
-    painter.FillRegionC(x, y, width, 10, num == gMemory.currentNumIntSignal ? COLOR_FLASH_10 : COLOR_BACK);
-    painter.DrawRectangleC(x, y, width, 10, COLOR_FILL);
-    painter.SetColor(num == gMemory.currentNumIntSignal ? COLOR_FLASH_01 : COLOR_FILL);
+    Painter::FillRegionC(x, y, width, 10, num == gMemory.currentNumIntSignal ? COLOR_FLASH_10 : COLOR_BACK);
+    Painter::DrawRectangleC(x, y, width, 10, COLOR_FILL);
+    Painter::SetColor(num == gMemory.currentNumIntSignal ? COLOR_FLASH_01 : COLOR_FILL);
     if (exist)
     {
-        painter.DrawText(x + 2, y + 1, Int2String(num + 1, false, 2, buffer));
+        Painter::DrawText(x + 2, y + 1, Int2String(num + 1, false, 2, buffer));
     }
     else
     {
-        painter.DrawText(x + 3, y + 1, "\x88");
+        Painter::DrawText(x + 3, y + 1, "\x88");
     }
 }
 
@@ -636,21 +636,21 @@ static void FuncOnRegSetMemInt(int delta)
         CircleIncreaseInt8(&CURRENT_NUM_INT_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
-    painter.ResetFlash();
+    Painter::ResetFlash();
 }
 
 static void DrawSB_MemInt_ShowSignalAllways_Yes(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x66');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x66');
+    Painter::SetFont(TypeFont_8);
 }
 
 static void DrawSB_MemInt_ShowSignalAllways_No(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, '\x68');
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x68');
+    Painter::SetFont(TypeFont_8);
 }
 
 static void DrawSB_MemInt_ShowSignalAlways(int x, int y)
@@ -694,32 +694,32 @@ static const SmallButton sbMemIntShowSignalAlways
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawSB_MemInt_ModeShow_Direct(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_MEM_INT_SHOW_DIRECT);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_MEM_INT_SHOW_DIRECT);
+    Painter::SetFont(TypeFont_8);
 }
 
 static void DrawSB_MemInt_ModeShow_Saved(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_MEM_INT_SHOW_SAVED);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_MEM_INT_SHOW_SAVED);
+    Painter::SetFont(TypeFont_8);
 }
 
 static void DrawSB_MemInt_ModeShow_Both(int x, int y)
 {
     ++y;
 
-    painter.DrawRectangle(x + 2, y + 5, 4, 7);
+    Painter::DrawRectangle(x + 2, y + 5, 4, 7);
 
-    painter.DrawRectangle(x + 8, y + 8, 4, 4);
-    painter.DrawVLine(x + 8, y + 8, y + 5);
-    painter.DrawHLine(y + 5, x + 8, x + 12);
+    Painter::DrawRectangle(x + 8, y + 8, 4, 4);
+    Painter::DrawVLine(x + 8, y + 8, y + 5);
+    Painter::DrawHLine(y + 5, x + 8, x + 12);
 
-    painter.DrawVLine(x + 14, y + 6, y + 12);
-    painter.DrawVLine(x + 17, y + 5, y + 12);
-    painter.DrawHLine(y + 9, x + 14, x + 17);
-    painter.DrawHLine(y + 5, x + 15, x + 17);
+    Painter::DrawVLine(x + 14, y + 6, y + 12);
+    Painter::DrawVLine(x + 17, y + 5, y + 12);
+    Painter::DrawHLine(y + 9, x + 14, x + 17);
+    Painter::DrawHLine(y + 5, x + 15, x + 17);
 }
 
 static void DrawSB_MemInt_ModeShow(int x, int y)
@@ -771,9 +771,9 @@ static void PressSB_MemInt_Delete()
 
 static void DrawSB_MemInt_Delete(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+    Painter::SetFont(TypeFont_8);
 }
 
 static const SmallButton sbMemIntDelete
@@ -966,8 +966,8 @@ void DrawSetName()
     int width = grid.Width() - 80;
     int height = 80;
 
-    painter.DrawRectangleC(x0, y0, width, height, COLOR_FILL);
-    painter.FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
+    Painter::DrawRectangleC(x0, y0, width, height, COLOR_FILL);
+    Painter::FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
 
     int index = 0;
     int position = 0;
@@ -1001,38 +1001,38 @@ void DrawSetName()
         position++;
     }
 
-    int x = painter.DrawTextC(x0 + deltaX, y0 + 65, FILE_NAME, COLOR_FILL);
-    painter.FillRegionC(x, y0 + 65, 5, 8, COLOR_FLASH_10);
+    int x = Painter::DrawTextC(x0 + deltaX, y0 + 65, FILE_NAME, COLOR_FILL);
+    Painter::FillRegionC(x, y0 + 65, 5, 8, COLOR_FLASH_10);
 }
 
 static void DrawFileMask(int x, int y)
 {
     char *ch = FILE_NAME_MASK;
 
-    painter.SetColor(COLOR_FILL);
+    Painter::SetColor(COLOR_FILL);
     while (*ch != '\0')
     {
         if (*ch >= 32)
         {
-            x = painter.DrawChar(x, y, *ch);
+            x = Painter::DrawChar(x, y, *ch);
         }
         else
         {
             if (*ch == 0x07)
             {
-                x = painter.DrawChar(x, y, '%');
-                x = painter.DrawChar(x, y, (char)(0x30 | *(ch + 1)));
-                x = painter.DrawChar(x, y, 'N');
+                x = Painter::DrawChar(x, y, '%');
+                x = Painter::DrawChar(x, y, (char)(0x30 | *(ch + 1)));
+                x = Painter::DrawChar(x, y, 'N');
                 ch++;
             }
             else
             {
-                x = painter.DrawText(x, y, symbolsAlphaBet[*ch + 0x40]);
+                x = Painter::DrawText(x, y, symbolsAlphaBet[*ch + 0x40]);
             }
         }
         ch++;
     }
-    painter.FillRegionC(x, y, 5, 8, COLOR_FLASH_10);
+    Painter::FillRegionC(x, y, 5, 8, COLOR_FLASH_10);
 }
 
 void DrawSetMask()
@@ -1042,8 +1042,8 @@ void DrawSetMask()
     int width = grid.Width() - 80;
     int height = 160;
 
-    painter.DrawRectangleC(x0, y0, width, height, COLOR_FILL);
-    painter.FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
+    Painter::DrawRectangleC(x0, y0, width, height, COLOR_FILL);
+    Painter::FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
 
     int index = 0;
     int position = 0;
@@ -1097,10 +1097,10 @@ void DrawSetMask()
     };
 
     deltaY--;
-    painter.SetColor(COLOR_FILL);
+    Painter::SetColor(COLOR_FILL);
     for(int i = 0; i < sizeof(strings) / 4; i++)
     {
-        painter.DrawText(x0 + deltaX, y0 + 100 + deltaY * i, strings[i]);
+        Painter::DrawText(x0 + deltaX, y0 + 100 + deltaY * i, strings[i]);
     }
 }
 

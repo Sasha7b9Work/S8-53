@@ -11,7 +11,7 @@
 static void SetColor(ColorType *colorType)
 {
     set.display.colors[colorType->color] = MAKE_COLOR((int)colorType->red, (int)colorType->green, (int)colorType->blue);
-    painter.SetPalette(colorType->color);
+    Painter::SetPalette(colorType->color);
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------

@@ -83,9 +83,9 @@ bool WelcomeScreen_Run()
 
     static bool isDown = false;
 
-    painter.BeginScene(COLOR_BLACK);
+    Painter::BeginScene(COLOR_BLACK);
 
-    painter.DrawRectangleC(0, 0, 319, 239, COLOR_FILL);
+    Painter::DrawRectangleC(0, 0, 319, 239, COLOR_FILL);
 
     static float y = 0.0f;
 
@@ -114,13 +114,13 @@ bool WelcomeScreen_Run()
         }
     }
 
-    painter.DrawBigText(45, y, 8, "МНИПИ");
+    Painter::DrawBigText(45, y, 8, "МНИПИ");
 
-    painter.DrawStringInCenterRect(0, 190, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
-    painter.DrawStringInCenterRect(0, 205, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
-    painter.DrawStringInCenterRect(0, 220, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
+    Painter::DrawStringInCenterRect(0, 190, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
+    Painter::DrawStringInCenterRect(0, 205, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
+    Painter::DrawStringInCenterRect(0, 220, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
 
-    painter.EndScene();
+    Painter::EndScene();
 
     return isRun;
 }
@@ -128,7 +128,7 @@ bool WelcomeScreen_Run()
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void WelcomeScreen_Update() {
-    painter.BeginScene(COLOR_WHITE);
+    Painter::BeginScene(COLOR_WHITE);
     for(int num = 0; num < 12; num++) {
         Point p0 = mesh.points[mesh.edges[num].numPoint0];
         Point p1 = mesh.points[mesh.edges[num].numPoint1];
@@ -169,7 +169,7 @@ void WelcomeScreen_Update() {
         PresentPointToScreen(&p0out3, &x0, &y0);
         PresentPointToScreen(&p1out3, &x1, &y1);
 
-        painter.DrawLineC(x0, y0, x1, y1, COLOR_WHITE);
+        Painter::DrawLineC(x0, y0, x1, y1, COLOR_WHITE);
     }
-    painter.EndScene();
+    Painter::EndScene();
 }

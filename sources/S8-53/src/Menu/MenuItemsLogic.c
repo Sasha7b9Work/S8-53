@@ -209,7 +209,7 @@ void ItemTime_SetNewTime(Time *time)
 void ItemTime_SelectNextPosition(Time *time)
 {
     CircleIncreaseInt8(time->curField, 0, 7);
-    painter.ResetFlash();
+    Painter::ResetFlash();
 }
 
 void ItemTime_IncCurrentPosition(Time *time)

@@ -568,7 +568,7 @@ static const Governor mgSettings_Brightness
 
 static void OnChanged_Settings_Brightness(void)
 {
-    painter.SetBrightnessDisplay(BRIGHTNESS);
+    Painter::SetBrightnessDisplay(BRIGHTNESS);
 }
 
 

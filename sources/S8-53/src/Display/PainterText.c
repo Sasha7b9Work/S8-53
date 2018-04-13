@@ -24,8 +24,8 @@ void Painter::SetFont(TypeFont typeFont)
     uint8 command[4];
     command[0] = SET_FONT;
     command[1] = (uint8)typeFont;
-    painter.SendToDisplay(command, 4);
-    painter.SendToVCP(command, 2);
+    Painter::SendToDisplay(command, 4);
+    Painter::SendToVCP(command, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,15 +37,15 @@ void Painter::LoadFont(TypeFont typeFont)
     command[0] = LOAD_FONT;
     command[1] = typeFont;
     *(uint*)(command + 2) = fonts[typeFont]->height;
-    painter.SendToVCP(command, 2 + 4);
+    Painter::SendToVCP(command, 2 + 4);
 
-    //painter.SendToVCP(pFont + 4, sizeof(Font) - 4);
+    //Painter::SendToVCP(pFont + 4, sizeof(Font) - 4);
 
     pFont += 4;
 
     for(int i = 0; i < 256; i++)
     {
-        painter.SendToVCP(pFont, sizeof(Symbol));
+        Painter::SendToVCP(pFont, sizeof(Symbol));
         pFont += sizeof(Symbol);
         Timer_PauseOnTicks(10000);
     }
@@ -96,7 +96,7 @@ static void DrawCharInColorDisplay(int eX, int eY, uchar symbol)
             {
                 if (BitInFontIsExist(symbol, b, bit))
                 {
-                    painter.SetPoint(x, y);
+                    Painter::SetPoint(x, y);
                 }
                 x++;
             }
@@ -125,7 +125,7 @@ static int Painter_DrawBigChar(int eX, int eY, int size, char symbol)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            painter.SetPoint(x + i, y + j);
+                            Painter::SetPoint(x + i, y + j);
                         }
                     }
                 }
@@ -169,7 +169,7 @@ int Painter::DrawChar(int x, int y, char symbol)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawCharC(int x, int y, char symbol, Color color)
 {
-    painter.SetColor(color);
+    Painter::SetColor(color);
     return DrawChar(x, y, symbol);
 }
 
@@ -213,8 +213,8 @@ int Painter::DrawText(int x, int y, const char *text)
     *pointer = 0;
     *(command + 4) = length;
     int numBytes = ((length + 4) / 4) * 4 + 4;
-    painter.SendToDisplay(command, numBytes);
-    painter.SendToVCP(command, 1 + 2 + 1 + 1 + length);
+    Painter::SendToDisplay(command, numBytes);
+    Painter::SendToVCP(command, 1 + 2 + 1 + 1 + length);
     return retValue;
 #undef SIZE_BUFFER
 
@@ -233,7 +233,7 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
     int width = Font_GetLengthText(text);
     int height = Font_GetSize();
 
-    Color colorText = painter.CurrentColor();
+    Color colorText = Painter::CurrentColor();
     FillRegionC(x - 1, y, width, height, colorBackground);
     SetColor(colorText);
 

@@ -180,7 +180,7 @@ void Measure_RotateRegSet(int angle)
             posOnPageChoice = 0;
         }
         MEASURE(posActive) = (Measure)posOnPageChoice;
-        painter.ResetFlash();
+        Painter::ResetFlash();
     }
     else
     {
@@ -249,7 +249,7 @@ void Measure_DrawPageChoice()
     int maxRow = num61or62 ? 8 : 5;
     int maxCol = num61or62 ? 3 : 5;
     Measure meas = Measure_None;
-    painter.SetFont(TypeFont_UGO);
+    Painter::SetFont(TypeFont_UGO);
     for(int row = 0; row < maxRow; row++)
     {
         for(int col = 0; col < maxCol; col++)
@@ -261,20 +261,20 @@ void Measure_DrawPageChoice()
             int x0 = x + col * dX;
             int y0 = y + row * dY;
             bool active = meas == posOnPageChoice;
-            painter.DrawRectangleC(x0, y0, dX, dY, COLOR_FILL);
-            painter.FillRegionC(x0 + 1, y0 + 1, dX - 2, dY - 2, active ? COLOR_FLASH_10 : COLOR_BACK);
-            painter.SetColor(active ? COLOR_FLASH_01 : COLOR_FILL);
-            painter.Draw10SymbolsInRect(x0 + 2, y0 + 1, Measure_GetChar(meas));
+            Painter::DrawRectangleC(x0, y0, dX, dY, COLOR_FILL);
+            Painter::FillRegionC(x0 + 1, y0 + 1, dX - 2, dY - 2, active ? COLOR_FLASH_10 : COLOR_BACK);
+            Painter::SetColor(active ? COLOR_FLASH_01 : COLOR_FILL);
+            Painter::Draw10SymbolsInRect(x0 + 2, y0 + 1, Measure_GetChar(meas));
             if(meas < Measure_NumMeasures)
             {
-                painter.SetFont(TypeFont_5);
-                painter.DrawTextRelativelyRightC(x0 + dX, y0 + 12, measures[meas].name, active ? COLOR_FLASH_01 : COLOR_FILL);
-                painter.SetFont(TypeFont_UGO);
+                Painter::SetFont(TypeFont_5);
+                Painter::DrawTextRelativelyRightC(x0 + dX, y0 + 12, measures[meas].name, active ? COLOR_FLASH_01 : COLOR_FILL);
+                Painter::SetFont(TypeFont_UGO);
             }
             ++meas;
         }
     }
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_8);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

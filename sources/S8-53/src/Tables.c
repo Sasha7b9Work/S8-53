@@ -183,7 +183,7 @@ void DrawStr(int index, int x, int y)
     const char *str = symbolsAlphaBet[index];
     if (index == INDEX_SYMBOL)
     {
-        painter.FillRegionC(x - 1, y, Font_GetLengthText(str), 9, COLOR_FLASH_10);
+        Painter::FillRegionC(x - 1, y, Font_GetLengthText(str), 9, COLOR_FLASH_10);
     }
-    painter.DrawTextC(x, y, symbolsAlphaBet[index], index == INDEX_SYMBOL ? COLOR_FLASH_01 : COLOR_FILL);
+    Painter::DrawTextC(x, y, symbolsAlphaBet[index], index == INDEX_SYMBOL ? COLOR_FLASH_01 : COLOR_FILL);
 }

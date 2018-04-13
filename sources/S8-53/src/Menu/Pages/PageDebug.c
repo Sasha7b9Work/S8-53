@@ -818,7 +818,7 @@ static const Choice mcSizeSettings =
 
 static void OnDraw_SizeSettings(int x, int y)
 {
-    painter.DrawFormatText(x + 5, y + 21, COLOR_BLACK, "Размер %d", sizeof(Settings));
+    Painter::DrawFormatText(x + 5, y + 21, COLOR_BLACK, "Размер %d", sizeof(Settings));
 }
 
 
@@ -897,8 +897,8 @@ static void Draw_EnterSerialNumber(void)
     int width = grid.Width() - 80;
     int height = 160;
 
-    painter.DrawRectangleC(x0, y0, width, height, COLOR_FILL);
-    painter.FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
+    Painter::DrawRectangleC(x0, y0, width, height, COLOR_FILL);
+    Painter::FillRegionC(x0 + 1, y0 + 1, width - 2, height - 2, COLOR_BACK);
 
     int deltaX = 10;
 
@@ -920,8 +920,8 @@ static void Draw_EnterSerialNumber(void)
 
     int y = y0 + 50;
 
-    painter.SetColor(colorText);
-    int x = painter.DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
+    Painter::SetColor(colorText);
+    int x = Painter::DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
 
     colorText = COLOR_FLASH_01;
     colorBackground = COLOR_FLASH_10;
@@ -934,16 +934,16 @@ static void Draw_EnterSerialNumber(void)
 
     snprintf(buffer, 19, "%04d", s->year);
 
-    painter.SetColor(colorText);
-    painter.DrawTextOnBackground(x + 5, y, buffer, colorBackground);
+    Painter::SetColor(colorText);
+    Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);
 
     // Теперь выведем информацию об оставшемся месте в OTP-памяти для записи
 
     int allShots = OTP_GetSerialNumber(buffer);
 
-    painter.DrawFormatText(x0 + deltaX, y0 + 130, COLOR_FILL, "Текущий сохранённый номер %s", buffer[0] == 0 ? "-- ----" : buffer);
+    Painter::DrawFormatText(x0 + deltaX, y0 + 130, COLOR_FILL, "Текущий сохранённый номер %s", buffer[0] == 0 ? "-- ----" : buffer);
 
-    painter.DrawFormatText(x0 + deltaX, y0 + 100, COLOR_FILL, "Осталось места для %d попыток", allShots);
+    Painter::DrawFormatText(x0 + deltaX, y0 + 100, COLOR_FILL, "Осталось места для %d попыток", allShots);
 }
 
 static void OnRegSet_SerialNumber(int angle)
@@ -996,14 +996,14 @@ static void OnPress_SerialNumber_Change(void)
     ACCESS_EXTRAMEM(StructForSN, s);
     ++s->curDigt;
     s->curDigt %= 2;
-    painter.ResetFlash();
+    Painter::ResetFlash();
 }
 
 static void Draw_SerialNumber_Change(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
+    Painter::SetFont(TypeFont_8);
 }
 
 // ОТЛАДКА - С/Н - Сохранить -------------------------------------------------------------------------------------------------------------------------
@@ -1033,9 +1033,9 @@ static void OnPress_SerialNumber_Save(void)
 
 static void Draw_SerialNumber_Save(int x, int y)
 {
-    painter.SetFont(TypeFont_UGO2);
-    painter.Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_SAVE_TO_MEM);
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_UGO2);
+    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_SAVE_TO_MEM);
+    Painter::SetFont(TypeFont_8);
 }
 
 

@@ -435,12 +435,12 @@ static void DrawSB_Cursors_Source(int x, int y)
 
 static void DrawSB_Cursors_SourceA(int x, int y)
 {
-    painter.DrawText(x + 7, y + 5, "1");
+    Painter::DrawText(x + 7, y + 5, "1");
 }
 
 static void DrawSB_Cursors_SourceB(int x, int y)
 {
-    painter.DrawText(x + 7, y + 5, "2");
+    Painter::DrawText(x + 7, y + 5, "2");
 }
 
 
@@ -514,9 +514,9 @@ static void DrawSB_Cursors_U(int x, int y)
         if (set.cursors.lookMode[0] == CursLookMode_Voltage || set.cursors.lookMode[0] == CursLookMode_Both ||
             set.cursors.lookMode[1] == CursLookMode_Voltage || set.cursors.lookMode[1] == CursLookMode_Both)
         {
-            painter.SetFont(TypeFont_5);
-            painter.DrawChar(x + 10, y, 'c');
-            painter.SetFont(TypeFont_8);
+            Painter::SetFont(TypeFont_5);
+            Painter::DrawChar(x + 10, y, 'c');
+            Painter::SetFont(TypeFont_8);
         }
         */
     }
@@ -524,7 +524,7 @@ static void DrawSB_Cursors_U(int x, int y)
 
 static void DrawSB_Cursors_U_Disable(int x, int y)
 {
-    painter.DrawText(x + 7, y + 5, "U");
+    Painter::DrawText(x + 7, y + 5, "U");
 }
 
 static void DrawSB_Cursors_U_Upper(int x, int y)
@@ -619,7 +619,7 @@ static void DrawSB_Cursors_T(int x, int y)
 
 static void DrawSB_Cursors_T_Disable(int x, int y)
 {
-    painter.DrawText(x + 7, y + 5, "T");
+    Painter::DrawText(x + 7, y + 5, "T");
 }
 
 static void DrawSB_Cursors_T_Both_Disable(int x, int y)
@@ -667,9 +667,9 @@ static void SetCursPos100(Channel chan)
 
 static void DrawSB_Cursors_100(int x, int y)
 {
-    painter.SetFont(TypeFont_5);
-    painter.DrawText(x + 2, y + 3, "100%");
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_5);
+    Painter::DrawText(x + 2, y + 3, "100%");
+    Painter::SetFont(TypeFont_8);
 }
 
 
@@ -712,14 +712,14 @@ static void DrawSB_Cursors_PointsPercents(int x, int y)
 
 static void DrawSB_Cursors_PointsPercents_Percents(int x, int y)
 {
-    painter.DrawText(x + 6, y + 5, "\x83");
+    Painter::DrawText(x + 6, y + 5, "\x83");
 }
 
 static void DrawSB_Cursors_PointsPercents_Points(int x, int y)
 {
-    painter.SetFont(TypeFont_5);
-    painter.DrawText(x + 4, y + 3, "ò÷ê");
-    painter.SetFont(TypeFont_8);
+    Painter::SetFont(TypeFont_5);
+    Painter::DrawText(x + 4, y + 3, "ò÷ê");
+    Painter::SetFont(TypeFont_8);
 }
 
 
