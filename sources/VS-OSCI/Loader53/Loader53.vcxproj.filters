@@ -81,9 +81,6 @@
     <ClCompile Include="..\..\Loader53\src\Panel\Panel.c">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Loader53\src\Panel\PanelFunctions.c">
-      <Filter>Panel</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Loader53\src\Utils\GlobalFunctions.c">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -132,18 +129,6 @@
     <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_usb.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_hal_msp.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_it.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\Bootloader\src\libs\system_stm32f2xx.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\Bootloader\src\libs\usbh_conf.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\diskio.c">
       <Filter>FatFS</Filter>
     </ClCompile>
@@ -191,6 +176,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Loader53\src\main.c">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\libs\stm32f2xx_hal_msp.c">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\libs\stm32f2xx_it.c">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\libs\system_stm32f2xx.c">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\libs\usbh_conf.c">
+      <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,18 +290,6 @@
     <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_usb.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\Bootloader\src\libs\ffconf.h">
-      <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_hal_conf.h">
-      <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_it.h">
-      <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\Bootloader\src\libs\usbh_conf.h">
-      <Filter>libs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\diskio.h">
       <Filter>FatFS</Filter>
     </ClInclude>
@@ -353,6 +338,18 @@
     <ClInclude Include="..\VS_DEF\stdint.h">
       <Filter>VS_DEF</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\libs\ffconf.h">
+      <Filter>libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\libs\stm32f2xx_hal_conf.h">
+      <Filter>libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\libs\stm32f2xx_it.h">
+      <Filter>libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\libs\usbh_conf.h">
+      <Filter>libs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Loader53\src\Display\font\font5.inc">
@@ -379,7 +376,7 @@
     <None Include="..\..\Loader53\src\Display\font\fontUGOdisplay.inc">
       <Filter>Display\fonts</Filter>
     </None>
-    <None Include="..\..\S8-53\Bootloader\src\libs\startup_stm32f207xx.s">
+    <None Include="..\..\Loader53\src\libs\startup_stm32f207xx.s">
       <Filter>libs</Filter>
     </None>
   </ItemGroup>
