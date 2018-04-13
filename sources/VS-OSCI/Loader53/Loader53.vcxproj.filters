@@ -34,6 +34,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{b35f3ad8-78e9-42ed-b3ad-8af92e8d7d31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{414d7f3c-51cf-4470-b9de-b6c8d8152d4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Loader53\src\Display\Colors.c">
@@ -84,7 +87,6 @@
     <ClCompile Include="..\..\Loader53\src\Utils\Math.c">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Loader53\src\main.c" />
     <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal.c">
       <Filter>HAL</Filter>
     </ClCompile>
@@ -127,8 +129,6 @@
     <ClCompile Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_ll_usb.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Loader53\src\globals.c" />
-    <ClCompile Include="..\..\Loader53\src\defines.c" />
     <ClCompile Include="..\..\S8-53\Bootloader\src\libs\stm32f2xx_hal_msp.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -179,6 +179,15 @@
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_scsi.c">
       <Filter>USBH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\defines.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\globals.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Loader53\src\main.c">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,7 +245,6 @@
     <ClInclude Include="..\..\Loader53\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Loader53\src\main.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal.h">
       <Filter>HAL</Filter>
     </ClInclude>
@@ -282,8 +290,6 @@
     <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_ll_usb.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Loader53\src\defines.h" />
-    <ClInclude Include="..\..\Loader53\src\globals.h" />
     <ClInclude Include="..\..\S8-53\Bootloader\src\libs\ffconf.h">
       <Filter>libs</Filter>
     </ClInclude>
@@ -328,6 +334,15 @@
     </ClInclude>
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc_scsi.h">
       <Filter>USBH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\defines.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\globals.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Loader53\src\main.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

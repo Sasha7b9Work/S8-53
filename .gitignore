@@ -58,3 +58,5 @@ sources/VS-OSCI/S8-53/Release/*
 sources/Device53/Listings/*
 sources/Device53/Objects/*
 sources/Loader53/Listings/*
+sources/VS-OSCI/Device53/Debug/*
+sources/VS-OSCI/Device53/Release/*
