@@ -792,11 +792,6 @@
           <GroupName>libs</GroupName>
           <Files>
             <File>
-              <FileName>stm32f2xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f2xx_it.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f2xx_it.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\stm32f2xx_it.h</FilePath>
@@ -852,11 +847,6 @@
               <FilePath>.\src\libs\app_ethernet.h</FilePath>
             </File>
             <File>
-              <FileName>ethernetif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\ethernetif.c</FilePath>
-            </File>
-            <File>
               <FileName>ethernetif.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\ethernetif.h</FilePath>
@@ -891,6 +881,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\libs\usbh_conf.cpp</FilePath>
             </File>
+            <File>
+              <FileName>stm32f2xx_it.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\stm32f2xx_it.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ethernetif.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\ethernetif.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -922,11 +922,6 @@
               <FilePath>.\src\main2.s</FilePath>
             </File>
             <File>
-              <FileName>Log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Log.c</FilePath>
-            </File>
-            <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
@@ -950,6 +945,11 @@
               <FileName>Globals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Globals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Log.cpp</FilePath>
             </File>
           </Files>
         </Group>

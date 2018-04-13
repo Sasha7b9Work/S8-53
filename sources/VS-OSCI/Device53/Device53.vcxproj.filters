@@ -66,15 +66,6 @@
     <ClCompile Include="..\..\Device53\src\Hardware\RTC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Log.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\ethernetif.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -329,6 +320,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Utils\Strings.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\ethernetif.cpp">
+      <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

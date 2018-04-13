@@ -1,10 +1,12 @@
 *.bin
+*.bsc
 *.cof
 *.config
 *.dll
 *.err
 *.exe
 *.hex
+*.lib
 *.o
 *.pdb
 *.suo

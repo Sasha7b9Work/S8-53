@@ -87,9 +87,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\app_ethernet.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\ethernetif.c" />
+    <ClCompile Include="..\..\Device53\src\libs\ethernetif.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.c" />
+    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -97,7 +99,7 @@
     <ClCompile Include="..\..\Device53\src\libs\usbd_conf.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\usbd_desc.c" />
     <ClCompile Include="..\..\Device53\src\libs\usbh_conf.cpp" />
-    <ClCompile Include="..\..\Device53\src\Log.c" />
+    <ClCompile Include="..\..\Device53\src\Log.cpp" />
     <ClCompile Include="..\..\Device53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -124,7 +126,9 @@
     <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.cpp" />
     <ClCompile Include="..\..\Device53\src\Panel\Controls.cpp" />
     <ClCompile Include="..\..\Device53\src\Panel\Panel.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.cpp" />
+    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Device53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -407,7 +411,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
