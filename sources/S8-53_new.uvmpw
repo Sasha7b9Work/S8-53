@@ -9,11 +9,11 @@
 
   <project>
     <PathAndName>.\Loader53\Loader53.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\Device53\Device53.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
