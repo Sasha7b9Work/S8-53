@@ -127,7 +127,7 @@ extern const Page mainPage;
 
 //#include "PageTrig.c"
 //#include "PageTime.c"
-#include "PageHelp.c"
+#include "PageHelp.cpp"
 
 extern const Page pDisplay;
 extern const Page pCursors;

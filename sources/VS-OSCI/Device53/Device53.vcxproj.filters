@@ -75,54 +75,6 @@
     <ClCompile Include="..\..\Device53\src\Log.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\Definition.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\HelpContent.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageChannels.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageCursors.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDebug.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDisplay.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageHelp.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMeasures.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMemory.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageService.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTime.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\FileManager.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\MenuDrawing.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsGraphics.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsLogic.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\ethernetif.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -329,6 +281,54 @@
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Ethernet\TcpSocket.cpp">
       <Filter>Ethernet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\FileManager.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\MenuDrawing.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsGraphics.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsLogic.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\Definition.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\HelpContent.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageChannels.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageCursors.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDebug.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDisplay.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageHelp.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMeasures.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMemory.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageService.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTime.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.cpp">
+      <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
