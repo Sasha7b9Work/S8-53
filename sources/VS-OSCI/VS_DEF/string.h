@@ -8,3 +8,4 @@ int strlen(const char *);
 void strcpy(void *, const void *);
 int strcmp(void *, void *);
 void strcat(void *, const void *);
+float atof(void *);

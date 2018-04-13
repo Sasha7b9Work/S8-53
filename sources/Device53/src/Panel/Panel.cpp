@@ -13,7 +13,7 @@
 #include <stm32f2xx_hal_gpio.h>
 #include <stdio.h>
 #include <string.h>
-#include "PanelFunctions.c"
+#include "PanelFunctions.cpp"
 
 
 Panel panel;

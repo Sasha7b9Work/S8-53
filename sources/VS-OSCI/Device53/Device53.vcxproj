@@ -94,9 +94,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\usbd_conf.c" />
+    <ClCompile Include="..\..\Device53\src\libs\usbd_conf.cpp" />
     <ClCompile Include="..\..\Device53\src\libs\usbd_desc.c" />
-    <ClCompile Include="..\..\Device53\src\libs\usbh_conf.c" />
+    <ClCompile Include="..\..\Device53\src\libs\usbh_conf.cpp" />
     <ClCompile Include="..\..\Device53\src\Log.c" />
     <ClCompile Include="..\..\Device53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -122,9 +122,9 @@
     <ClCompile Include="..\..\Device53\src\Menu\Pages\PageService.cpp" />
     <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTime.cpp" />
     <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\Controls.c" />
+    <ClCompile Include="..\..\Device53\src\Panel\Controls.cpp" />
     <ClCompile Include="..\..\Device53\src\Panel\Panel.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.c" />
+    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.cpp" />
     <ClCompile Include="..\..\Device53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -156,14 +156,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Generator.c" />
-    <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.c" />
-    <ClCompile Include="..\..\Device53\src\Utils\Map.c" />
-    <ClCompile Include="..\..\Device53\src\Utils\Math.c" />
-    <ClCompile Include="..\..\Device53\src\Utils\Measures.c" />
-    <ClCompile Include="..\..\Device53\src\Utils\ProcessingSignal.c" />
+    <ClCompile Include="..\..\Device53\src\Utils\Generator.cpp" />
+    <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.cpp" />
+    <ClCompile Include="..\..\Device53\src\Utils\Map.cpp" />
+    <ClCompile Include="..\..\Device53\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Device53\src\Utils\Measures.cpp" />
+    <ClCompile Include="..\..\Device53\src\Utils\ProcessingSignal.cpp" />
     <ClCompile Include="..\..\Device53\src\Utils\Stack2500uint16.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Strings.c" />
+    <ClCompile Include="..\..\Device53\src\Utils\Strings.cpp" />
     <ClCompile Include="..\..\Device53\src\VCP\SCPI\channelSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>

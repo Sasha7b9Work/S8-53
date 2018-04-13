@@ -66,12 +66,6 @@
     <ClCompile Include="..\..\Device53\src\Hardware\RTC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Panel\Controls.c">
-      <Filter>Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.c">
-      <Filter>Panel</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\Log.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -84,37 +78,10 @@
     <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\usbd_conf.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\libs\usbd_desc.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\usbh_conf.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Generator.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Map.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Math.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Measures.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\ProcessingSignal.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device53\src\Utils\Stack2500uint16.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Strings.c">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
@@ -329,6 +296,39 @@
     </ClCompile>
     <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Panel\Controls.cpp">
+      <Filter>Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.cpp">
+      <Filter>Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\usbh_conf.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\libs\usbd_conf.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\Generator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\Map.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\Measures.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\ProcessingSignal.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device53\src\Utils\Strings.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

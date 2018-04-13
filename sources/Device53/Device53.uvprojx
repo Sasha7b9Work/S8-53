@@ -817,11 +817,6 @@
               <FilePath>.\src\libs\stm32f2xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>usbh_conf.c</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\usbh_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbh_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\usbh_conf.h</FilePath>
@@ -835,11 +830,6 @@
               <FileName>usbd_cdc_interface.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\usbd_cdc_interface.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\usbd_conf.c</FilePath>
             </File>
             <File>
               <FileName>usbd_conf.h</FileName>
@@ -890,6 +880,16 @@
               <FileName>usbd_cdc_interface.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\usbd_cdc_interface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbd_conf.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_conf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbh_conf.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1497,11 +1497,6 @@
           <GroupName>Panel</GroupName>
           <Files>
             <File>
-              <FileName>Controls.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Panel\Controls.c</FilePath>
-            </File>
-            <File>
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Panel\Controls.h</FilePath>
@@ -1517,9 +1512,14 @@
               <FilePath>.\src\Panel\Panel.h</FilePath>
             </File>
             <File>
-              <FileName>PanelFunctions.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Panel\PanelFunctions.c</FilePath>
+              <FileName>Controls.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Panel\Controls.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PanelFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Panel\PanelFunctions.cpp</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1549,16 +1549,16 @@
                     <PlainCh>2</PlainCh>
                     <Ropi>2</Ropi>
                     <Rwpi>2</Rwpi>
-                    <wLevel>2</wLevel>
+                    <wLevel>0</wLevel>
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
                     <uC99>2</uC99>
                     <useXO>2</useXO>
                     <v6Lang>0</v6Lang>
                     <v6LangP>0</v6LangP>
-                    <vShortEn>0</vShortEn>
-                    <vShortWch>0</vShortWch>
-                    <v6Lto>0</v6Lto>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
                     <v6WtE>2</v6WtE>
                     <v6Rtti>2</v6Rtti>
                     <VariousControls>
@@ -1687,19 +1687,9 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Strings.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Strings.c</FilePath>
-            </File>
-            <File>
               <FileName>Strings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Strings.h</FilePath>
-            </File>
-            <File>
-              <FileName>Map.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Map.c</FilePath>
             </File>
             <File>
               <FileName>Map.h</FileName>
@@ -1707,19 +1697,9 @@
               <FilePath>.\src\Utils\Map.h</FilePath>
             </File>
             <File>
-              <FileName>Generator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Generator.c</FilePath>
-            </File>
-            <File>
               <FileName>Generator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>GlobalFunctions.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\GlobalFunctions.c</FilePath>
             </File>
             <File>
               <FileName>GlobalFunctions.h</FileName>
@@ -1727,29 +1707,14 @@
               <FilePath>.\src\Utils\GlobalFunctions.h</FilePath>
             </File>
             <File>
-              <FileName>Math.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Math.c</FilePath>
-            </File>
-            <File>
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Measures.c</FilePath>
-            </File>
-            <File>
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Measures.h</FilePath>
-            </File>
-            <File>
-              <FileName>ProcessingSignal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\ProcessingSignal.c</FilePath>
             </File>
             <File>
               <FileName>ProcessingSignal.h</FileName>
@@ -1777,14 +1742,44 @@
               <FilePath>.\src\Utils\TablesLog.h</FilePath>
             </File>
             <File>
-              <FileName>TablesSin.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\TablesSin.h</FilePath>
-            </File>
-            <File>
               <FileName>TablesWindow.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\TablesWindow.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Generator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Map.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Map.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProcessingSignal.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\ProcessingSignal.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Strings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Strings.cpp</FilePath>
             </File>
           </Files>
         </Group>
