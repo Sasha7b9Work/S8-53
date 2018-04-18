@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 253</TableColWidths>
+      <TableColWidths>115 77</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>1018 160</TableColWidths>
+      <TableColWidths>568 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1178</TableColWidths>
+      <TableColWidths>728</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -30,25 +30,25 @@
       <WinId>1506</WinId>
       <ViewName>Symbols</ViewName>
       <UserString></UserString>
-      <TableColWidths>80 80 80</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1936</WinId>
       <ViewName>Watch 1</ViewName>
       <UserString></UserString>
-      <TableColWidths>80 80 80</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1937</WinId>
       <ViewName>Watch 2</ViewName>
       <UserString></UserString>
-      <TableColWidths>80 80 80</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1935</WinId>
       <ViewName>Call Stack + Locals</ViewName>
       <UserString></UserString>
-      <TableColWidths>80 80 80</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>2506</WinId>
@@ -92,9 +92,9 @@
       </MaxPosition>
       <NormalPosition>
         <Top>0</Top>
-        <Left>215</Left>
-        <Right>1924</Right>
-        <Bottom>1212</Bottom>
+        <Left>-39</Left>
+        <Right>1208</Right>
+        <Bottom>725</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>

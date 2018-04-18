@@ -175,10 +175,8 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef *hpcd)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
-#ifndef WIN32
     /* Change Systick prioity */
     NVIC_SetPriority (SysTick_IRQn, 0);  
-#endif
   
     /*Set LL Driver parameters */
     handlePCD.Instance = USB_OTG_FS;
