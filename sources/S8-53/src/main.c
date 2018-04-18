@@ -40,7 +40,7 @@ extern void main3();
 int main(void)
 {
     //main3();
-    Hardware_Init();
+    Hardware::Init();
     Init();
     Settings_Load(false);
     FPGA::Init();    

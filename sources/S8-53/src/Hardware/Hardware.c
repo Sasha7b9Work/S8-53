@@ -45,7 +45,7 @@ static void SystemClock_Config();
 extern "C" {
 #endif
     
-void Hardware_Init(void)
+void Hardware::Init(void)
 {
     HAL_Init();
 
@@ -207,7 +207,7 @@ static void SystemClock_Config(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware_CalculateCRC32(uint address, uint numBytes)
+uint Hardware::CalculateCRC32(uint address, uint numBytes)
 {
     return HAL_CRC_Calculate(&crcHandle, (uint *)address, numBytes);
 }
