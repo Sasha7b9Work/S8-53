@@ -173,7 +173,7 @@ static const Button bAutoSearch
 
 static void OnPress_AutoSearch(void)
 {
-    fpga.StartAutoFind();
+    FPGA::StartAutoFind();
 };
 
 // —≈–¬»— -  ¿À»¡–¿“Œ– ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,7 +211,7 @@ static const Choice cCalibrator_Mode =
 
 static void OnChanged_Calibrator_Mode(bool active)
 {
-    fpga.SetCalibratorMode(CALIBRATOR);
+    FPGA::SetCalibratorMode(CALIBRATOR);
 }
 
 // —≈–¬»— -  ¿À»¡–¿“Œ– -  ‡ÎË·Ó‚‡Ú¸ -----------------------------------------------------------------------------------------------------------------

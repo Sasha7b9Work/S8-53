@@ -1169,15 +1169,15 @@ void Display::DrawHiRightPart()
 
         x += 2;
         y = 1;
-        if (fpga.CurrentStateWork() == StateWorkFPGA_Work)
+        if (FPGA::CurrentStateWork() == StateWorkFPGA_Work)
         {
             Painter::Draw4SymbolsInRect(x, 1, SYMBOL_PLAY);
         }
-        else if (fpga.CurrentStateWork() == StateWorkFPGA_Stop)
+        else if (FPGA::CurrentStateWork() == StateWorkFPGA_Stop)
         {
             Painter::FillRegion(x + 3, y + 3, 10, 10);
         }
-        else if (fpga.CurrentStateWork() == StateWorkFPGA_Wait)
+        else if (FPGA::CurrentStateWork() == StateWorkFPGA_Wait)
         {
             int w = 4;
             int h = 14;
@@ -2033,7 +2033,7 @@ void Display::DrawLowPart()
 
     buffer[0] = 0;
     char bufForVal[20];
-    sprintf(buffer, "\xa5%s", fpga.GetTShiftString(tShift, bufForVal));
+    sprintf(buffer, "\xa5%s", FPGA::GetTShiftString(tShift, bufForVal));
     Painter::DrawText(x + 35, y0, buffer);
 
     buffer[0] = 0;
@@ -2113,7 +2113,7 @@ void Display::DrawLowPart()
     {
         char mesFreq[20] = "\x7c=";
         char buffer[20];
-        float freq = fpga.GetFreq();
+        float freq = FPGA::GetFreq();
         if (freq == -1.0f) //-V550
         {
             strcat(mesFreq, "******");

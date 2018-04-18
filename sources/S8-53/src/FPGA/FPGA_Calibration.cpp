@@ -71,25 +71,25 @@ void FPGA::ProcedureCalibration(void)
 
     bar0.fullTime = bar0.passedTime = bar1.fullTime = bar1.passedTime = 0;
 
-    fpga.SaveState();                               // Сохраняем текущее состояние.
+    FPGA::SaveState();                               // Сохраняем текущее состояние.
     panel.Disable();                                // Отлкючаем панель управления.
 
     while(1)
     {
         gStateFPGA.stateCalibration = StateCalibration_ADCinProgress;                  // Запускаем процедуру балансировки АЦП.
 
-        fpga.SetTBase(TBase_500us);
-        fpga.SetTShift(0);
+        FPGA::SetTBase(TBase_500us);
+        FPGA::SetTShift(0);
         STRETCH_ADC_A = 1.0f;
         STRETCH_ADC_B = 1.0f;
-        fpga.LoadKoeffCalibration(A);
-        fpga.LoadKoeffCalibration(B);
-        fpga.SetRange(A, Range_500mV);
-        fpga.SetRange(B, Range_500mV);
-        fpga.SetRShift(A, RShiftZero);
-        fpga.SetRShift(B, RShiftZero);
-        fpga.SetModeCouple(A, ModeCouple_GND);
-        fpga.SetModeCouple(B, ModeCouple_GND);
+        FPGA::LoadKoeffCalibration(A);
+        FPGA::LoadKoeffCalibration(B);
+        FPGA::SetRange(A, Range_500mV);
+        FPGA::SetRange(B, Range_500mV);
+        FPGA::SetRShift(A, RShiftZero);
+        FPGA::SetRShift(B, RShiftZero);
+        FPGA::SetModeCouple(A, ModeCouple_GND);
+        FPGA::SetModeCouple(B, ModeCouple_GND);
         FSMC_Write(WR_ADD_RSHIFT_DAC1, 0);
         FSMC_Write(WR_ADD_RSHIFT_DAC2, 0);
 
@@ -120,7 +120,7 @@ void FPGA::ProcedureCalibration(void)
             else
             {
                 STRETCH_ADC_A = koeffCal0;
-                fpga.LoadKoeffCalibration(A);
+                FPGA::LoadKoeffCalibration(A);
             }
 			
             for (int range = 0; range <= RangeSize; range++)
@@ -129,7 +129,7 @@ void FPGA::ProcedureCalibration(void)
                 {
                     if (!(mode == 0 && (range == Range_2mV || range == Range_5mV || range == Range_10mV)))
                     {
-                        fpga.SetModeCouple(A, (ModeCouple)mode);
+                        FPGA::SetModeCouple(A, (ModeCouple)mode);
                         set.chan[A].rShiftAdd[range][mode] = 0;
                         int16 rShiftAdd = CalculateAdditionRShift(A, (Range)range);
                         set.chan[A].rShiftAdd[range][mode] = rShiftAdd;
@@ -157,7 +157,7 @@ void FPGA::ProcedureCalibration(void)
             else
             {
                 STRETCH_ADC_B = koeffCal1;
-                fpga.LoadKoeffCalibration(B);
+                FPGA::LoadKoeffCalibration(B);
             }
 
             for (int range = 0; range < RangeSize; range++)
@@ -166,7 +166,7 @@ void FPGA::ProcedureCalibration(void)
                 {
                     if (!(mode == 0 && (range == Range_2mV || range == Range_5mV || range == Range_10mV)))
                     {
-                        fpga.SetModeCouple(B, (ModeCouple)mode);
+                        FPGA::SetModeCouple(B, (ModeCouple)mode);
                         set.chan[B].rShiftAdd[range][mode] = 0;
                         set.chan[B].rShiftAdd[range][mode] = CalculateAdditionRShift(B, (Range)range);
                     }
@@ -176,7 +176,7 @@ void FPGA::ProcedureCalibration(void)
             /*
             for (int range = 2; range < RangeSize; range++)
             {
-                fpga.SetModeCouple(B, ModeCouple_AC);
+                FPGA::SetModeCouple(B, ModeCouple_AC);
                 set.chan[B].rShiftAdd[range][ModeCouple_AC] = 0;
                 set.chan[B].rShiftAdd[range][ModeCouple_AC] = CalculateAdditionRShift(B, (Range)range);
                 set.chan[B].rShiftAdd[range][ModeCouple_DC] = set.chan[B].rShiftAdd[range][ModeCouple_AC];
@@ -187,22 +187,22 @@ void FPGA::ProcedureCalibration(void)
         break;
     }
 
-    fpga.RestoreState();
+    FPGA::RestoreState();
 
     SET_BALANCE_ADC_A = shiftADC0;
     SET_BALANCE_ADC_B = shiftADC1;
     FSMC_Write(WR_ADD_RSHIFT_DAC1, SET_BALANCE_ADC_A);
     FSMC_Write(WR_ADD_RSHIFT_DAC2, SET_BALANCE_ADC_B);
 
-    fpga.SetRShift(A, SET_RSHIFT_A);
-    fpga.SetRShift(B, SET_RSHIFT_B);
+    FPGA::SetRShift(A, SET_RSHIFT_A);
+    FPGA::SetRShift(B, SET_RSHIFT_B);
 
     STRETCH_ADC_A = (koeffCal0 == ERROR_VALUE_FLOAT) ? koeffCalibrationOld[0] : koeffCal0;
 
-    fpga.LoadKoeffCalibration(A);
+    FPGA::LoadKoeffCalibration(A);
 
     STRETCH_ADC_B = (koeffCal1 == ERROR_VALUE_FLOAT) ? koeffCalibrationOld[1] : koeffCal1;
-    fpga.LoadKoeffCalibration(B);
+    FPGA::LoadKoeffCalibration(B);
 
     gStateFPGA.stateCalibration = StateCalibration_None;
     panel.WaitPressingButton();
@@ -214,7 +214,7 @@ void FPGA::ProcedureCalibration(void)
     SET_ENABLED_A = chanAenable;
     SET_ENABLED_B = chanBenable;
 
-    fpga.OnPressStartStop();
+    FPGA::OnPressStartStop();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -356,8 +356,8 @@ float CalculateDeltaADC(Channel chan, float *avgADC1, float *avgADC2, float *del
     bar->passedTime = 0;
     bar->fullTime = 0;
 
-    fpga.SetTrigSource((TrigSource)chan);
-    fpga.SetTrigLev((TrigSource)chan, TrigLevZero);
+    FPGA::SetTrigSource((TrigSource)chan);
+    FPGA::SetTrigLev((TrigSource)chan, TrigLevZero);
 
     uint8 *address1 = chan == A ? RD_ADC_A1 : RD_ADC_B1;
     uint8 *address2 = chan == A ? RD_ADC_A2 : RD_ADC_B2;
@@ -367,7 +367,7 @@ float CalculateDeltaADC(Channel chan, float *avgADC1, float *avgADC2, float *del
     {
         FSMC_Write(WR_START, 1);
         while(_GET_BIT(FSMC_Read(RD_FL), 2) == 0) {};
-        fpga.SwitchingTrig();
+        FPGA::SwitchingTrig();
         while(_GET_BIT(FSMC_Read(RD_FL), 0) == 0) {};
         FSMC_Write(WR_STOP, 1);
 
@@ -415,14 +415,14 @@ void AlignmentADC(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int16 CalculateAdditionRShift(Channel chan, Range range)
 {
-    fpga.SetRange(chan, range);
-    fpga.SetRShift(chan, RShiftZero);
-    fpga.SetTBase(TBase_200us);
-    fpga.SetTrigSource(chan == A ? TrigSource_ChannelA : TrigSource_ChannelB);
-    fpga.SetTrigPolarity(TrigPolarity_Front);
-    fpga.SetTrigLev((TrigSource)chan, TrigLevZero);
+    FPGA::SetRange(chan, range);
+    FPGA::SetRShift(chan, RShiftZero);
+    FPGA::SetTBase(TBase_200us);
+    FPGA::SetTrigSource(chan == A ? TrigSource_ChannelA : TrigSource_ChannelB);
+    FPGA::SetTrigPolarity(TrigPolarity_Front);
+    FPGA::SetTrigLev((TrigSource)chan, TrigLevZero);
 
-    fpga.WriteToHardware(WR_UPR, BINARY_U8(00000000), false);   // Устанавливаем выход калибратора в ноль
+    FPGA::WriteToHardware(WR_UPR, BINARY_U8(00000000), false);   // Устанавливаем выход калибратора в ноль
 
     int numMeasures = 8;
     int sum = 0;
@@ -444,7 +444,7 @@ int16 CalculateAdditionRShift(Channel chan, Range range)
             return ERROR_VALUE_INT16;                       // выход с ошибкой.
         }
 
-        fpga.SwitchingTrig();
+        FPGA::SwitchingTrig();
 
         startTime = gTimerMS;
 
@@ -480,12 +480,12 @@ int16 CalculateAdditionRShift(Channel chan, Range range)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float CalculateKoeffCalibration(Channel chan)
 {
-    fpga.WriteToHardware(WR_UPR, BINARY_U8(00000100), false);
+    FPGA::WriteToHardware(WR_UPR, BINARY_U8(00000100), false);
 
-    fpga.SetRShift(chan, RShiftZero - 40 * 4);
-    fpga.SetModeCouple(chan, ModeCouple_DC);
-    fpga.SetTrigSource((TrigSource)chan);
-    fpga.SetTrigLev((TrigSource)chan, TrigLevZero + 40 * 4);
+    FPGA::SetRShift(chan, RShiftZero - 40 * 4);
+    FPGA::SetModeCouple(chan, ModeCouple_DC);
+    FPGA::SetTrigSource((TrigSource)chan);
+    FPGA::SetTrigLev((TrigSource)chan, TrigLevZero + 40 * 4);
     
     int numMeasures = 16;
     int sumMIN = 0;
@@ -508,7 +508,7 @@ float CalculateKoeffCalibration(Channel chan)
             return ERROR_VALUE_FLOAT;
         }
 
-        fpga.SwitchingTrig();
+        FPGA::SwitchingTrig();
         startTime = gTimerMS;
 
         while(_GET_BIT(FSMC_Read(RD_FL), 0) == 0 && (gTimerMS - startTime > timeWait)) {};

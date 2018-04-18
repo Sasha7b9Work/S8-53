@@ -131,7 +131,7 @@ static const Choice mcCoupleA =
 
 void OnChanged_CoupleA(bool active)
 {
-    fpga.SetModeCouple(A, SET_COUPLE_A);
+    FPGA::SetModeCouple(A, SET_COUPLE_A);
 }
 
 
@@ -153,7 +153,7 @@ static const Choice mcFiltrA =
 
 void OnChanged_FiltrA(bool active)
 {
-    fpga.EnableChannelFiltr(A, FILTR_A);
+    FPGA::EnableChannelFiltr(A, FILTR_A);
 }
 
 
@@ -175,7 +175,7 @@ static const Choice mcInverseA =
 
 static void OnChanged_InverseA(bool active)
 {
-    fpga.SetRShift(A, SET_RSHIFT_A);
+    FPGA::SetRShift(A, SET_RSHIFT_A);
 }
 
 
@@ -258,7 +258,7 @@ static const Choice mcCoupleB =
 
 void OnChanged_CoupleB(bool active)
 {
-    fpga.SetModeCouple(B, SET_COUPLE_B);
+    FPGA::SetModeCouple(B, SET_COUPLE_B);
 }
 
 //  ¿Õ¿À 2 - ‘ËÎ¸Ú ----------------------------------------------------------------------------------------------------------------------------------
@@ -279,7 +279,7 @@ static const Choice mcFiltrB =
 
 void OnChanged_FiltrB(bool active)
 {
-    fpga.EnableChannelFiltr(B, FILTR_B);
+    FPGA::EnableChannelFiltr(B, FILTR_B);
 }
 
 
@@ -301,7 +301,7 @@ static const Choice mcInverseB =
 
 static void OnChanged_InverseB(bool active)
 {
-    fpga.SetRShift(B, SET_RSHIFT_B);
+    FPGA::SetRShift(B, SET_RSHIFT_B);
 }
 
 

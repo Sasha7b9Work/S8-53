@@ -290,11 +290,11 @@ void Settings_Load(bool _default)
     }
 
 
-    fpga.LoadSettings();
-    fpga.SetNumSignalsInSec(sDisplay_NumSignalsInS());
+    FPGA::LoadSettings();
+    FPGA::SetNumSignalsInSec(sDisplay_NumSignalsInS());
     panel.EnableLEDChannel0(sChannel_Enabled(A));
     panel.EnableLEDChannel1(sChannel_Enabled(B));
-    fpga.SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
+    FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
     Menu::SetAutoHide(true);
     Display::ChangedRShiftMarkers();
 

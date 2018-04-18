@@ -43,9 +43,9 @@ int main(void)
     Hardware_Init();
     Init();
     Settings_Load(false);
-    fpga.Init();    
+    FPGA::Init();    
     HAL_Delay(250);
-    fpga.OnPressStartStop();
+    FPGA::OnPressStartStop();
     Ethernet_Init();
     Display::Init();
     if (gBF.tuneTime == 1)
@@ -61,7 +61,7 @@ int main(void)
 
         Ethernet_Update(0);
 
-        fpga.Update();                      // Обновляем аппаратную часть.
+        FPGA::Update();                      // Обновляем аппаратную часть.
 
         ProcessingSignal();
 

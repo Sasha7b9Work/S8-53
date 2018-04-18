@@ -62,7 +62,7 @@ void ChangeC_Memory_NumPoints(bool active)
             SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) - Grid::Width() - 2;
         }
     }
-    fpga.SetTShift(TSHIFT);
+    FPGA::SetTShift(TSHIFT);
 }
 
 // ¿ÍÚË‚Ì‡ ÎË œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã‡ÒÍ‡
@@ -1129,7 +1129,7 @@ static void PressSB_MemLast_Exit()
     MODE_WORK = ModeWork_Direct;
     if (RUN_FPGA_AFTER_SMALL_BUTTONS)
     {
-        fpga.Start();
+        FPGA::Start();
         RUN_FPGA_AFTER_SMALL_BUTTONS = 0;
     }
     Display::RemoveAddDrawFunction();
@@ -1139,8 +1139,8 @@ static void PressSB_MemLast_Exit()
 void OnPressMemoryLatest()
 {
     CURRENT_NUM_LATEST_SIGNAL = 0;
-    RUN_FPGA_AFTER_SMALL_BUTTONS = fpga.IsRunning() ? 1 : 0;
-    fpga.Stop(false);
+    RUN_FPGA_AFTER_SMALL_BUTTONS = FPGA::IsRunning() ? 1 : 0;
+    FPGA::Stop(false);
     MODE_WORK = ModeWork_Latest;
 }
 

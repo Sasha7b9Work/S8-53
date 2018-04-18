@@ -479,8 +479,8 @@ static void OnChanged_ADC_Balance_Mode(bool active)
 {
     Draw_ADC_Balance_Mode(0, 0);
 
-    fpga.WriteToHardware(WR_ADD_RSHIFT_DAC1, shiftADCA, false);
-    fpga.WriteToHardware(WR_ADD_RSHIFT_DAC2, shiftADCB, false);
+    FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, shiftADCA, false);
+    FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, shiftADCB, false);
 }
 
 static void Draw_ADC_Balance_Mode(int x, int y)
@@ -508,7 +508,7 @@ static const Governor mgADC_Balance_ShiftA
 static void OnChanged_ADC_Balance_ShiftA(void)
 {
     BALANCE_ADC_A = shiftADCA;
-    fpga.WriteToHardware(WR_ADD_RSHIFT_DAC1, BALANCE_ADC_A, false);
+    FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, BALANCE_ADC_A, false);
 }
 
 static bool IsActive_ADC_Balance_Shift(void)
@@ -529,7 +529,7 @@ static const Governor mgADC_Balance_ShiftB
 static void OnChanged_ADC_Balance_ShiftB(void)
 {
     BALANCE_ADC_B = shiftADCB;
-    fpga.WriteToHardware(WR_ADD_RSHIFT_DAC2, BALANCE_ADC_B, false);
+    FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, BALANCE_ADC_B, false);
 }
 
 
@@ -580,15 +580,15 @@ void LoadStretchADC(Channel chan)
 {
     if(DEBUG_STRETCH_ADC_TYPE_IS_DISABLED)
     {
-        fpga.WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, 0x80, true);
+        FPGA::WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, 0x80, true);
     }
     else if(DEBUG_STRETCH_ADC_TYPE_IS_HAND)
     {
-        fpga.WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, (uint8)DEBUG_STRETCH_ADC(chan), true);
+        FPGA::WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, (uint8)DEBUG_STRETCH_ADC(chan), true);
     }
     else if(DEBUG_STRETCH_ADC_TYPE_IS_SETTINGS)
     {
-        fpga.LoadKoeffCalibration(chan);
+        FPGA::LoadKoeffCalibration(chan);
     }
 }
 
@@ -609,7 +609,7 @@ static bool IsActive_ADC_Stretch_ADC(void)
 
 static void OnChanged_ADC_Stretch_ADC_A(void)
 {
-    fpga.WriteToHardware(WR_CAL_A, (uint8)DEBUG_STRETCH_ADC_A, true);
+    FPGA::WriteToHardware(WR_CAL_A, (uint8)DEBUG_STRETCH_ADC_A, true);
 }
 
 
@@ -625,7 +625,7 @@ static const Governor mgADC_Stretch_ADC_B
 
 static void OnChanged_ADC_Stretch_ADC_B(void)
 {
-    fpga.WriteToHardware(WR_CAL_B, (uint8)DEBUG_STRETCH_ADC_B, true);
+    FPGA::WriteToHardware(WR_CAL_B, (uint8)DEBUG_STRETCH_ADC_B, true);
 }
 
 // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -670,8 +670,8 @@ static void OnPress_ADC_AltRShift_Reset(void)
             }
         }
     }
-    fpga.SetRShift(A, SET_RSHIFT_A);
-    fpga.SetRShift(B, SET_RSHIFT_B);
+    FPGA::SetRShift(A, SET_RSHIFT_A);
+    FPGA::SetRShift(B, SET_RSHIFT_B);
 }
 
 // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---------------------------------------------------------------------------------------------------------
@@ -686,7 +686,7 @@ static const Governor mbADC_AltRShift_2mV_DC_A
 
 static void OnChanged_ADC_AltRShift_A(void)
 {
-    fpga.SetRShift(A, SET_RSHIFT_A);
+    FPGA::SetRShift(A, SET_RSHIFT_A);
 }
 
 // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---------------------------------------------------------------------------------------------------------
@@ -701,7 +701,7 @@ static const Governor mbADC_AltRShift_2mV_DC_B
 
 static void OnChanged_ADC_AltRShift_B(void)
 {
-    fpga.SetRShift(B, SET_RSHIFT_B);
+    FPGA::SetRShift(B, SET_RSHIFT_B);
 }
 
 // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ ---------------------------------------------------------------------------------------------------------
@@ -774,7 +774,7 @@ static const Governor mgRandomizer_SamplesForGates
 
 static void OnChanged_Randomizer_SamplesForGates(void)
 {
-    fpga.SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
+    FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
 }
 
 // Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– - tShift ‰ÓÔ. ------------------------------------------------------------------------------------------------------------------
@@ -789,7 +789,7 @@ static const Governor mgRandomizer_AltTShift0
 
 static void OnChanged_Randomizer_AltTShift0(void)
 {
-    fpga.SetDeltaTShift(ADD_SHIFT_T0);
+    FPGA::SetDeltaTShift(ADD_SHIFT_T0);
 }
 
 // Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– - ”ÒÂ‰Ì. ----------------------------------------------------------------------------------------------------------------------
@@ -1049,8 +1049,8 @@ static void Draw_SerialNumber_Save(int x, int y)
         /*
         static void OnChangeRShiftADC(bool active)
         {
-            fpga.SetRShift(A, SET_RSHIFT_A);
-            fpga.SetRShift(B, SET_RSHIFT_B);
+            FPGA::SetRShift(A, SET_RSHIFT_A);
+            FPGA::SetRShift(B, SET_RSHIFT_B);
         }
 
         const Choice mcDebugADCrShiftMode =
@@ -1077,7 +1077,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 
         static void OnChangeRShiftADC0(void)
         {
-            fpga.SetRShift(A, SET_RSHIFT_A);
+            FPGA::SetRShift(A, SET_RSHIFT_A);
         }
 
         const Governor mgDebugRShiftADC00 =
@@ -1111,7 +1111,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 
         static void OnChangeRShiftADC1(void)
         {
-            fpga.SetRShift(B, SET_RSHIFT_B);
+            FPGA::SetRShift(B, SET_RSHIFT_B);
         }
 
         // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ. —Ã≈Ÿ. œ¿Ã.

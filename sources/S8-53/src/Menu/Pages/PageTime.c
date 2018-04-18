@@ -106,8 +106,8 @@ void OnChanged_PeakDet(bool active)
 {
     if (active)
     {
-        fpga.SetPeackDetMode(PEAKDET);
-        fpga.SetTBase(TBASE);
+        FPGA::SetPeackDetMode(PEAKDET);
+        FPGA::SetTBase(TBASE);
         if (PEAKDET_IS_DISABLE)
         {
             int8 shift[2][3] =
@@ -116,13 +116,13 @@ void OnChanged_PeakDet(bool active)
                 {0, SET_BALANCE_ADC_B, BALANCE_ADC_B}
             };
 
-            fpga.WriteToHardware(WR_ADD_RSHIFT_DAC1, shift[0][BALANCE_ADC_TYPE], false);
-            fpga.WriteToHardware(WR_ADD_RSHIFT_DAC2, shift[1][BALANCE_ADC_TYPE], false);
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, shift[0][BALANCE_ADC_TYPE], false);
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, shift[1][BALANCE_ADC_TYPE], false);
         }
         else
         {
-            fpga.WriteToHardware(WR_ADD_RSHIFT_DAC1, 3, false);     // Почему-то при пиковом детекторе смещение появляется. Вот его и компенсируем.
-            fpga.WriteToHardware(WR_ADD_RSHIFT_DAC2, 3, false);
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, 3, false);     // Почему-то при пиковом детекторе смещение появляется. Вот его и компенсируем.
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, 3, false);
         }
         if (PEAKDET_IS_DISABLE)
         {
@@ -164,7 +164,7 @@ static const Choice mcTPos =
 void OnChanged_TPos(bool active)
 {
     ChangeC_Memory_NumPoints(active);
-    fpga.SetTShift(TSHIFT);
+    FPGA::SetTShift(TSHIFT);
 }
 
 // РАЗВЕРТКА - Самописец -----------------------------------------------------------------------------------------------------------------------------

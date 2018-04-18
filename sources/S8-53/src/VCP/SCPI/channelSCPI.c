@@ -163,7 +163,7 @@ void Process_RANGE(uint8 *buffer)
         {0}
     };
     ENTER_ANALYSIS
-        if (value <= (uint8)Range_20V)      { fpga.SetRange(chan, (Range)value); }
+        if (value <= (uint8)Range_20V)      { FPGA::SetRange(chan, (Range)value); }
         else if (value == (uint8)RangeSize)
         {
             SCPI_SEND(":CHANNEL%d:SET_RANGE %s", Tables_GetNumChannel(chan), map[SET_RANGE(chan)].key);
@@ -184,7 +184,7 @@ void Process_OFFSET(uint8 *buffer)
     if (SCPI_FirstIsInt(buffer, &intVal, -240, 240))
     {
         int rShift = RShiftZero + 2 * intVal;
-        fpga.SetRShift(chan, rShift);
+        FPGA::SetRShift(chan, rShift);
         return;
     }
     ENTER_ANALYSIS

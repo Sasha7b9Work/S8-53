@@ -47,7 +47,7 @@ void TrigLong(void)
     }
     else
     {
-        fpga.FindAndSetTrigLevel();
+        FPGA::FindAndSetTrigLevel();
     }
 }
 
@@ -163,7 +163,7 @@ void ChangeRShift(int *prevTime, void(*f)(Channel, int16), Channel chan, int16 r
 {
     if (ENUM_ACCUM_IS_NONE)
     {
-        fpga.TemporaryPause();
+        FPGA::TemporaryPause();
     }
     int count = CalculateCount(prevTime);
     int rShiftOld = SET_RSHIFT(chan);
@@ -247,7 +247,7 @@ void ChangeShiftScreen(int *prevTime, void(*f)(int), int16 relStep)
 
 static void SetRShift(Channel ch, int16 rShift)
 {
-    fpga.SetRShift(ch, rShift);
+    FPGA::SetRShift(ch, rShift);
 }
 
 void RShift0Left()
@@ -276,7 +276,7 @@ void RShift1Right()
 
 static void SetTrigLev(TrigSource ch, int16 trigLev)
 {
-    fpga.SetTrigLev(ch, trigLev);
+    FPGA::SetTrigLev(ch, trigLev);
 }
 
 void TrigLevLeft()
@@ -298,13 +298,13 @@ static void ShiftScreen(int shift)
 
 static void SetTShift(int tShift)
 {
-    fpga.SetTShift(tShift);
+    FPGA::SetTShift(tShift);
 }
 
 void XShift(int delta)
 {
     static int prevTime = 0;
-    if (!fpga.IsRunning() || TIME_DIV_XPOS_IS_SHIFT_IN_MEMORY)
+    if (!FPGA::IsRunning() || TIME_DIV_XPOS_IS_SHIFT_IN_MEMORY)
     {
         if (!ENUM_POINTS_IS_281)
         {
@@ -330,37 +330,37 @@ void TShiftRight()
 void Range0Left()
 {
     sound.RegulatorSwitchRotate();
-    fpga.RangeIncrease(A);
+    FPGA::RangeIncrease(A);
 }
 
 void Range0Right()
 {
     sound.RegulatorSwitchRotate();
-    fpga.RangeDecrease(A);
+    FPGA::RangeDecrease(A);
 }
 
 void Range1Left()
 {
     sound.RegulatorSwitchRotate();
-    fpga.RangeIncrease(B);
+    FPGA::RangeIncrease(B);
 }
 
 void Range1Right()
 {
     sound.RegulatorSwitchRotate();
-    fpga.RangeDecrease(B);
+    FPGA::RangeDecrease(B);
 }
 
 void TBaseLeft()
 {
     sound.RegulatorSwitchRotate();
-    fpga.TBaseIncrease();
+    FPGA::TBaseIncrease();
 }
 
 void TBaseRight()
 {
     sound.RegulatorSwitchRotate();
-    fpga.TBaseDecrease();
+    FPGA::TBaseDecrease();
 }
 
 void SetLeft()

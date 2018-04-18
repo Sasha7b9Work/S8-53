@@ -206,7 +206,7 @@ void FPGA::SetTBase(TBase tBase)
         float tShiftAbsOld = TSHIFT_2_ABS(TSHIFT, TBASE);
         sTime_SetTBase(tBase);
         LoadTBase();
-        fpga.SetTShift(TSHIFT_2_REL(tShiftAbsOld, TBASE));
+        FPGA::SetTShift(TSHIFT_2_REL(tShiftAbsOld, TBASE));
         Display::Redraw();
     }
     else
@@ -220,7 +220,7 @@ void FPGA::LoadTBase(void)
 {
     TBase tBase = TBASE;
     uint8 mask = PEAKDET ? masksTBase[tBase].maskPeackDet : masksTBase[tBase].maskNorm;
-    fpga.WriteToHardware(WR_RAZVERTKA, mask, true);
+    FPGA::WriteToHardware(WR_RAZVERTKA, mask, true);
     ADD_SHIFT_T0 = deltaTShift[tBase];
 }
 
@@ -243,7 +243,7 @@ void FPGA::TBaseDecrease(void)
         else
         {
             TBase base = (TBase)((int)TBASE - 1);
-            fpga.SetTBase(base);
+            FPGA::SetTBase(base);
         }
     }
     else
@@ -258,7 +258,7 @@ void FPGA::TBaseIncrease(void)
     if (TBASE < (TBaseSize - 1))
     {
         TBase base = (TBase)(TBASE + 1);
-        fpga.SetTBase(base);
+        FPGA::SetTBase(base);
     }
     else
     {
@@ -417,13 +417,13 @@ void FPGA::LoadRegUPR(void)
         _SET_BIT(data, 3);
     }
 
-    fpga.WriteToHardware(WR_UPR, data, true);
+    FPGA::WriteToHardware(WR_UPR, data, true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadKoeffCalibration(Channel chan)
 {
-    fpga.WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, STRETCH_ADC(chan) * 0x80, false);
+    FPGA::WriteToHardware(chan == A ? WR_CAL_A : WR_CAL_B, STRETCH_ADC(chan) * 0x80, false);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -438,7 +438,7 @@ void FPGA::LoadTShift(void)
         tShift = tShift / k[tBase] + deltaTShift[tBase];
     }
     int additionShift = (tShiftOld % k[tBase]) * 2;
-    fpga.SetAdditionShift(additionShift);
+    FPGA::SetAdditionShift(additionShift);
     uint16 post = tShift;
     post = (~post);
     WriteToHardware(WR_POST_LOW, (uint8)post, true);

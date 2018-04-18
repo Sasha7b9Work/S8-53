@@ -11,151 +11,148 @@ class FPGA
 {
 public:
 
-    void Init();
+    static void Init();
     /// Установить количество считываемых сигналов в секунду.
-    void SetNumSignalsInSec(int numSigInSec);
+    static void SetNumSignalsInSec(int numSigInSec);
 
-    void Update();
+    static void Update();
     /// Запись в регистр ПЛИС нового значения.
-    void WriteToHardware				        
+    static void WriteToHardware				        
                             (uint8 *address,    ///< адрес регистра.
                                 uint8 value,    ///< записываемое значение.
                                 bool restart    ///< true означает, что после записи нужно запусить режим измерений, если до этого прибор не находился в режиме паузы.
                             );
 
-    StateWorkFPGA FPGA_CurrentStateWork();
+    static StateWorkFPGA FPGA_CurrentStateWork();
     /// Запускает цикл сбора информации.
-    void OnPressStartStop();
+    static void OnPressStartStop();
     /// Запуск процесса сбора информации.
-    void Start();
+    static void Start();
     /// Прерывает процесс сбора информации.
-    void Stop(bool pause);
+    static void Stop(bool pause);
     /// Возвращает true, если прибор находится не в процессе сбора информации.
-    bool IsRunning();
+    static bool IsRunning();
     /// Сохраняет текущие настройки. Потом их можно восстановить функцией FPGA_RestoreState().
-    void SaveState();
+    static void SaveState();
     /// Восстанавливает настройки, ранее сохранённые функцией FPGA_SaveState().
-    void RestoreState();
+    static void RestoreState();
     /// Получить значение частоты.
-    float GetFreq();
+    static float GetFreq();
     /// Удаляет данные. Нужно для режима рандомизаотра, где информация каждого цикла не является самостоятельной.
-    void ClearData();
+    static void ClearData();
     /// Установить дополнительное смещение. Нужно для правильной расстановки точек в режиме рандомизатора.
-    void SetAdditionShift(int shift);
+    static void SetAdditionShift(int shift);
     /// Возвращает true,если все точки получены в режиме рандомизатора.
-    bool AllPointsRandomizer();
+    static bool AllPointsRandomizer();
     /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора.
-    void SetNumberMeasuresForGates(int number);
+    static void SetNumberMeasuresForGates(int number);
     /// Принудительно запустить синхронизацию.
-    void SwitchingTrig();
+    static void SwitchingTrig();
     /// Запустить процесс поиска сигнала.
-    void StartAutoFind();
+    static void StartAutoFind();
     /// Установить временную паузу после изменения ручек - чтобы смещённый сигнал зафиксировать на некоторое время
-    void TemporaryPause();
+    static void TemporaryPause();
 
-    void FillDataPointer(DataSettings *dp);
+    static void FillDataPointer(DataSettings *dp);
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
-    void FindAndSetTrigLevel();
+    static void FindAndSetTrigLevel();
     /// Загрузить настройки в аппаратную часть из глобальной структуры SSettings.
-    void LoadSettings();
+    static void LoadSettings();
     /// Установить режим канала по входу.
-    void SetModeCouple(Channel chan, ModeCouple modeCoupe);
+    static void SetModeCouple(Channel chan, ModeCouple modeCoupe);
     /// Включить/выключить фильтр на входе канала.
-    void EnableChannelFiltr(Channel chan, bool enable);
+    static void EnableChannelFiltr(Channel chan, bool enable);
     /// Установить масштаб по напряжению.
-    void SetRange(Channel chan, Range range);
+    static void SetRange(Channel chan, Range range);
     /// Увеличить масштаб по напряжению.
-    bool RangeIncrease(Channel chan);
+    static bool RangeIncrease(Channel chan);
     /// Уменьшить масштаб по напряжению.
-    bool RangeDecrease(Channel chan);
+    static bool RangeDecrease(Channel chan);
     /// Установить масштаб по времени.
-    void SetTBase(TBase tBase);
+    static void SetTBase(TBase tBase);
     /// Уменьшить масштаб по времени.
-    void TBaseDecrease();
+    static void TBaseDecrease();
     /// Увеличить масштаб по времени.
-    void TBaseIncrease();
+    static void TBaseIncrease();
     /// Установить относительное смещение по напряжению.
-    void SetRShift(Channel chan, int16 rShift);
+    static void SetRShift(Channel chan, int16 rShift);
     /// Установить относительное смещение по времени.
-    void SetTShift(int tShift);
+    static void SetTShift(int tShift);
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное.
-    void SetDeltaTShift(int16 shift);
+    static void SetDeltaTShift(int16 shift);
     /// Включить/выключить режим пикового детектора.
-    void SetPeackDetMode(PeackDetMode peackDetMode);
+    static void SetPeackDetMode(PeackDetMode peackDetMode);
     /// Включить/выключить калибратор.
-    void SetCalibratorMode(CalibratorMode calibratorMode);
+    static void SetCalibratorMode(CalibratorMode calibratorMode);
     /// Загрузить в аппарат коэффициенты калибровки каналов.
-    void LoadKoeffCalibration(Channel chan);
+    static void LoadKoeffCalibration(Channel chan);
     /// Установить относительный уровень синхронизации.
-    void SetTrigLev(TrigSource chan, int16 trigLev);
+    static void SetTrigLev(TrigSource chan, int16 trigLev);
     /// Установить источник синхронизации.
-    void SetTrigSource(TrigSource trigSource);
+    static void SetTrigSource(TrigSource trigSource);
     /// Установить полярность синхронизации.
-    void SetTrigPolarity(TrigPolarity polarity);
+    static void SetTrigPolarity(TrigPolarity polarity);
     /// Установить режим входа синхронизации.
-    void SetTrigInput(TrigInput trigInput);
+    static void SetTrigInput(TrigInput trigInput);
     /// Возвращает установленное смещение по времени в текстовом виде, пригодном для вывода на экран.
-    const char* GetTShiftString(int16 tShiftRel, char buffer[20]);
+    static const char* GetTShiftString(int16 tShiftRel, char buffer[20]);
     /// Запуск функции калибровки.
-    void ProcedureCalibration();
+    static void ProcedureCalibration();
 
-    StateWorkFPGA CurrentStateWork();
+    static StateWorkFPGA CurrentStateWork();
 
 private:
     /// Загрузка коэффицента развёртки в аппаратную часть.
-    void LoadTBase();
+    static void LoadTBase();
     /// Загрузка смещения по времени в аппаратную часть.
-    void LoadTShift();
+    static void LoadTShift();
     /// Загрузка масштаба по напряжению в аппаратную часть.
-    void LoadRange(Channel chan);
+    static void LoadRange(Channel chan);
     /// Загрузка смещения по напряжению в аппаратную часть.
-    void LoadRShift(Channel chan);
+    static void LoadRShift(Channel chan);
     /// Загрузка уровня синхронизации в аппаратную часть.
-    void LoadTrigLev();                                  
+    static void LoadTrigLev();                                  
     /// Загузка полярности синхронизации в аппаратную часть.
-    void LoadTrigPolarity();
+    static void LoadTrigPolarity();
     /// Загрузить все параметры напряжения каналов и синхронизации в аппаратную часть.
-    void SetAttribChannelsAndTrig(TypeWriteAnalog type);
+    static void SetAttribChannelsAndTrig(TypeWriteAnalog type);
     /// Загрузить регистр WR_UPR (пиковый детектор и калибратор).
-    void LoadRegUPR();
+    static void LoadRegUPR();
 
-    void WriteToAnalog(TypeWriteAnalog type, uint data);
+    static void WriteToAnalog(TypeWriteAnalog type, uint data);
 
-    void WriteToDAC(TypeWriteDAC type, uint16 data);
+    static void WriteToDAC(TypeWriteDAC type, uint16 data);
     /// Прочитать данные.
-    void DataRead(
+    static void DataRead(
                         bool necessaryShift,    ///< Признак того, что сигнал нужно смещать.
                         bool saveToStorage      ///< Нужно в режиме рандомизатора для указания, что пора сохранять измерение
                         );
 
-    bool CalculateGate(uint16 rand, uint16 *min, uint16 *max);
+    static bool CalculateGate(uint16 rand, uint16 *min, uint16 *max);
 
-    int CalculateShift();
+    static int CalculateShift();
     /// Инвертирует данные.
-    void InverseDataIsNecessary(Channel chan, uint8 *data);
+    static void InverseDataIsNecessary(Channel chan, uint8 *data);
 
-    void AutoFind();
+    static void AutoFind();
 
-    uint8 CalculateMin(uint8 buffer[100]);
+    static uint8 CalculateMin(uint8 buffer[100]);
 
-    uint8 CalculateMax(uint8 buffer[100]);
+    static uint8 CalculateMax(uint8 buffer[100]);
 
-    bool ProcessingData();
+    static bool ProcessingData();
 
-    void ReadRandomizeMode();
+    static void ReadRandomizeMode();
 
-    void ReadRealMode(bool necessaryShift);
+    static void ReadRealMode(bool necessaryShift);
 
-    Range FindRange(Channel chan);
+    static Range FindRange(Channel chan);
 
-    Range AccurateFindRange(Channel chan);
+    static Range AccurateFindRange(Channel chan);
 
-    bool FindParams(Channel chan, TBase *tBase);
+    static bool FindParams(Channel chan, TBase *tBase);
 
-    bool AccurateFindParams(Channel chan);
+    static bool AccurateFindParams(Channel chan);
 
-    bool FindWave(Channel chan);
+    static bool FindWave(Channel chan);
 };
-
-
-extern FPGA fpga;

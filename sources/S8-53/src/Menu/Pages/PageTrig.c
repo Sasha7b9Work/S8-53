@@ -80,10 +80,10 @@ static const Choice mcMode =
 
 void OnPress_Mode(bool active)
 {
-    fpga.Stop(false);
+    FPGA::Stop(false);
     if (!START_MODE_IS_SINGLE)
     {
-        fpga.Start();
+        FPGA::Start();
     }
 }
 
@@ -107,7 +107,7 @@ static const Choice mcSource =
 
 static void OnChanged_Source(bool active)
 {
-    fpga.SetTrigSource(TRIG_SOURCE);
+    FPGA::SetTrigSource(TRIG_SOURCE);
 }
 
 
@@ -133,7 +133,7 @@ static const Choice mcPolarity =
 
 static void OnChanged_Polarity(bool active)
 {
-    fpga.SetTrigPolarity(TRIG_POLARITY);
+    FPGA::SetTrigPolarity(TRIG_POLARITY);
 }
 
 
@@ -167,7 +167,7 @@ static const Choice mcInput =
 
 static void OnChanged_Input(bool active)
 {
-    fpga.SetTrigInput(TRIG_INPUT);
+    FPGA::SetTrigInput(TRIG_INPUT);
 }
 
 
@@ -231,7 +231,7 @@ static bool IsActive_AutoFind_Search(void)
 
 static void OnPress_AutoFind_Search(void)
 {
-    fpga.FindAndSetTrigLevel();
+    FPGA::FindAndSetTrigLevel();
 }
 
 

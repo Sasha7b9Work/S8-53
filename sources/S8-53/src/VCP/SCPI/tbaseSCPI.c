@@ -70,7 +70,7 @@ void Process_RANGE(uint8 *buffer)
         {0}
     };
     ENTER_ANALYSIS
-        if (TBaseSize > value) { fpga.SetTBase((TBase)value); }
+        if (TBaseSize > value) { FPGA::SetTBase((TBase)value); }
         else if (255 == value)
         {
             SCPI_SEND(":TBASE:SET_RANGE %s", Tables_GetTBaseStringEN(TBASE));
@@ -92,7 +92,7 @@ void Process_OFFSET(uint8 *buffer)
     if (SCPI_FirstIsInt(buffer, &intVal, -1024, 15000))
     {
         int tShift = intVal + 1024;
-        fpga.SetTShift(tShift);
+        FPGA::SetTShift(tShift);
         return;
     }
 
