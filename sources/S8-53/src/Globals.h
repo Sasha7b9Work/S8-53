@@ -106,8 +106,9 @@ extern BitField gBF;
 #define RETURN_TO_INT_MEM       2
 #define RETURN_TO_DISABLE_MENU  3
 
-#define CURRENT_NUM_INT_SIGNAL (gMemory.currentNumIntSignal)
-
+#define CURRENT_NUM_LATEST_SIGNAL (gMemory.currentNumLatestSignal)
+#define CURRENT_NUM_INT_SIGNAL    (gMemory.currentNumIntSignal)
+#define EXIT_FROM_INT_TO_LAST     (gMemory.exitFromIntToLast)
 
 typedef struct 
 {

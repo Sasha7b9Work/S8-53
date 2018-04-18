@@ -100,9 +100,9 @@ BitField gBF =
 
 GMemory gMemory =
 {
-    0,
-    0,
-    0,
+    0,  // currentNumLatestSignal
+    0,  // currentNumIntSignal
+    0,  // showAlways
     0,  // runningFPGAbeforeSmallButtons
     0,  // exitFromIntToLast
     0,  // после установки имени и сохранения на флешку возвращаемся в основное рабочее окно

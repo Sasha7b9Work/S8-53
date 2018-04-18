@@ -100,12 +100,12 @@ void PressSB_MemLastSelect()
 
 void PressSB_MemLast_Next()
 {
-    CircleIncreaseInt16(&gMemory.currentNumLatestSignal, 0, dataStorage.AllDatas() - 1);
+    CircleIncreaseInt16(&CURRENT_NUM_LATEST_SIGNAL, 0, dataStorage.AllDatas() - 1);
 }
 
 void PressSB_MemLast_Prev()
 {
-    CircleDecreaseInt16(&gMemory.currentNumLatestSignal, 0, dataStorage.AllDatas() - 1);
+    CircleDecreaseInt16(&CURRENT_NUM_LATEST_SIGNAL, 0, dataStorage.AllDatas() - 1);
 }
 
 static void RotateSB_MemLast(int angle)
@@ -132,7 +132,7 @@ static void FuncDrawingAdditionSPageMemoryLast()
     int height = 10;
     Painter::FillRegionC(Grid::Right() - width, GRID_TOP, width, height, COLOR_BACK);
     Painter::DrawRectangleC(Grid::Right() - width, GRID_TOP, width, height, COLOR_FILL);
-    Painter::DrawText(Grid::Right() - width + 2, GRID_TOP + 1, Int2String(gMemory.currentNumLatestSignal + 1, false, 3, buffer));
+    Painter::DrawText(Grid::Right() - width + 2, GRID_TOP + 1, Int2String(CURRENT_NUM_LATEST_SIGNAL + 1, false, 3, buffer));
     Painter::DrawText(Grid::Right() - width + 17, GRID_TOP + 1, "/");
     Painter::DrawText(Grid::Right() - width + 23, GRID_TOP + 1, Int2String(dataStorage.AllDatas(), false, 3, buffer));
 }
@@ -227,8 +227,8 @@ void PressSB_MemLast_IntEnter()
 {
     menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
     MODE_WORK = ModeWork_MemInt;
-    FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
-    gMemory.exitFromIntToLast = 1;
+    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    EXIT_FROM_INT_TO_LAST = 1;
 }
 
 const SmallButton sbMemLastIntEnter
@@ -548,12 +548,12 @@ void DrawSB_MemInt_SaveToIntMemory(int x, int y)
 
 static void SaveSignalToIntMemory(void)
 {
-    if (gMemory.exitFromIntToLast == 1)
+    if (EXIT_FROM_INT_TO_LAST)
     {
         if  (gDSmemLast != 0)
         {
-            FLASH_SaveData(gMemory.currentNumIntSignal, gDSmemLast, gData0memLast, gData1memLast);
-            FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
+            FLASH_SaveData(CURRENT_NUM_INT_SIGNAL, gDSmemLast, gData0memLast, gData1memLast);
+            FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
             Display::ShowWarningGood(SignalIsSaved);
         }
     }
@@ -561,8 +561,8 @@ static void SaveSignalToIntMemory(void)
     {
         if (gDSet != 0)
         {
-            FLASH_SaveData(gMemory.currentNumIntSignal, gDSet, gData0, gData1);
-            FLASH_GetData(gMemory.currentNumIntSignal, &gDSet, &gData0memInt, &gData1memInt);
+            FLASH_SaveData(CURRENT_NUM_INT_SIGNAL, gDSet, gData0, gData1);
+            FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSet, &gData0memInt, &gData1memInt);
             Display::ShowWarningGood(SignalIsSaved);
         }
     }
@@ -591,9 +591,9 @@ static void DrawMemoryWave(int num, bool exist)
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 10;
     int width = 12;
-    Painter::FillRegionC(x, y, width, 10, num == gMemory.currentNumIntSignal ? COLOR_FLASH_10 : COLOR_BACK);
+    Painter::FillRegionC(x, y, width, 10, num == CURRENT_NUM_INT_SIGNAL ? COLOR_FLASH_10 : COLOR_BACK);
     Painter::DrawRectangleC(x, y, width, 10, COLOR_FILL);
-    Painter::SetColor(num == gMemory.currentNumIntSignal ? COLOR_FLASH_01 : COLOR_FILL);
+    Painter::SetColor(num == CURRENT_NUM_INT_SIGNAL ? COLOR_FLASH_01 : COLOR_FILL);
     if (exist)
     {
         Painter::DrawText(x + 2, y + 1, Int2String(num + 1, false, 2, buffer));
@@ -809,12 +809,12 @@ const SmallButton sbMemIntSaveToFlash
 
 void PressSB_MemInt_Exit()
 {
-    FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
-    if (gMemory.exitFromIntToLast == 1)
+    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    if (EXIT_FROM_INT_TO_LAST)
     {
         menu.OpenPageAndSetItCurrent(Page_SB_MemLatest);
         MODE_WORK = ModeWork_Latest;
-        gMemory.exitFromIntToLast = 0;
+        EXIT_FROM_INT_TO_LAST = 0;
     }
     else
     {
@@ -1138,7 +1138,7 @@ static void PressSB_MemLast_Exit()
 // Нажатие ПАМЯТЬ - Последние.
 void OnPressMemoryLatest()
 {
-    gMemory.currentNumLatestSignal = 0;
+    CURRENT_NUM_LATEST_SIGNAL = 0;
     gMemory.runningFPGAbeforeSmallButtons = fpga.IsRunning() ? 1 : 0;
     fpga.Stop(false);
     MODE_WORK = ModeWork_Latest;
@@ -1285,7 +1285,7 @@ void OnPressMemoryInt()
 {
     menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
     MODE_WORK = ModeWork_MemInt;
-    FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
+    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
 }
 
 static const arrayItems itemsMemInt =

@@ -99,14 +99,14 @@ void ProcessingSignal()
         data0 = &gData0memLast;
         data1 = &gData1memLast;
         ds = &gDSmemLast;
-        dataStorage.GetDataFromEnd(gMemory.currentNumLatestSignal, &gDSmemLast, &gData0memLast, &gData1memLast);
+        dataStorage.GetDataFromEnd(CURRENT_NUM_LATEST_SIGNAL, &gDSmemLast, &gData0memLast, &gData1memLast);
     }
     else if (MODE_WORK_IS_MEMINT)
     {
         data0 = &gData0memInt;
         data1 = &gData1memInt;
         ds = &gDSmemInt;
-        FLASH_GetData(gMemory.currentNumIntSignal, &gDSmemInt, &gData0memInt, &gData1memInt);
+        FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     }
 
     if (MODE_WORK_IS_MEMINT)
