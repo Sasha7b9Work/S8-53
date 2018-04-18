@@ -57,7 +57,7 @@ int main(void)
     {
         Timer_StartMultiMeasurement();      // —брос таймера дл€ замера длительности временных интервалов в течение одной итерации цикла.
         
-        flashDrive.Update();
+        FlashDrive::Update();
 
         Ethernet_Update(0);
 

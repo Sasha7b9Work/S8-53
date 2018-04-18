@@ -117,7 +117,7 @@ void Hardware_Init(void)
 
     adc.Init();
 
-    flashDrive.Init();
+    FlashDrive::Init();
     
 // Analog and DAC programmable SPI ////////////////////////////////////////
 

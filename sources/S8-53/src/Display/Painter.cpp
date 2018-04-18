@@ -711,9 +711,9 @@ bool Painter::SaveScreenToFlashDrive(void) {
         return false;
     }
     
-    flashDrive.OpenNewFileForWrite(fileName, &structForWrite);
+    FlashDrive::OpenNewFileForWrite(fileName, &structForWrite);
 
-    flashDrive.WriteToFile((uint8*)(&bmFH), 14, &structForWrite);
+    FlashDrive::WriteToFile((uint8*)(&bmFH), 14, &structForWrite);
 
     BITMAPINFOHEADER bmIH =
     {
@@ -730,7 +730,7 @@ bool Painter::SaveScreenToFlashDrive(void) {
         0   // clrImportant;
     };  
 
-    flashDrive.WriteToFile((uint8*)(&bmIH), 40, &structForWrite);
+    FlashDrive::WriteToFile((uint8*)(&bmIH), 40, &structForWrite);
 
     uint8 buffer[320 * 3] = {0};
     
@@ -757,7 +757,7 @@ bool Painter::SaveScreenToFlashDrive(void) {
 
     for(int i = 0; i < 4; i++)
     {
-        flashDrive.WriteToFile(buffer, 256, &structForWrite);
+        FlashDrive::WriteToFile(buffer, 256, &structForWrite);
     }
 
     HAL_GPIO_WritePin(GPIOG, GPIO_PIN_1, GPIO_PIN_SET);     // Отключаем буфер управления FPGA, чтобы снять шунтирование чтения дисплея
@@ -779,11 +779,11 @@ bool Painter::SaveScreenToFlashDrive(void) {
 
             buffer[x / 2] = ((color & 0x0f) << 4) + (color >> 4);
         }
-        flashDrive.WriteToFile(buffer, 160, &structForWrite);
+        FlashDrive::WriteToFile(buffer, 160, &structForWrite);
     }
     HAL_GPIO_WritePin(GPIOG, GPIO_PIN_1, GPIO_PIN_RESET);   // Подключаем буфер управления FPGA
     
-    flashDrive.CloseFile(&structForWrite);
+    FlashDrive::CloseFile(&structForWrite);
     
     return true;
 }

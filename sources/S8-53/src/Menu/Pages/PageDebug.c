@@ -844,7 +844,7 @@ static void OnPress_SaveFirmware(void)
 {
     StructForWrite structForWrite;
 
-    flashDrive.OpenNewFileForWrite("S8-53.bin", &structForWrite);
+    FlashDrive::OpenNewFileForWrite("S8-53.bin", &structForWrite);
 
     uint8 *address = (uint8*)0x08020000;
     uint8 *endAddress = address + 128 * 1024 * 3;
@@ -853,11 +853,11 @@ static void OnPress_SaveFirmware(void)
 
     while (address < endAddress)
     {
-        flashDrive.WriteToFile(address, sizeBlock, &structForWrite);
+        FlashDrive::WriteToFile(address, sizeBlock, &structForWrite);
         address += sizeBlock;
     }
 
-    flashDrive.CloseFile(&structForWrite);
+    FlashDrive::CloseFile(&structForWrite);
 
     Display::ShowWarningGood(FirmwareSaved);
 }
