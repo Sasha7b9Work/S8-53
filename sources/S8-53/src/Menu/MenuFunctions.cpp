@@ -4,6 +4,12 @@
 #include "Panel/Controls.h"
 #include "MenuItemsLogic.h"
 #include "Menu.h"
+#include "Menu/Pages/PageCursors.h"
+#include "Menu/Pages/PageMeasures.h"
+#include "Menu/Pages/PageMemory.h"
+#include "Menu/Pages/PageHelp.h"
+#include "Menu/Pages/PageService.h"
+#include "Menu/Pages/PageDebug.h"
 #include "Settings/SettingsTypes.h"
 #include "Utils/Measures.h"
 #include "Tables.h"
@@ -261,7 +267,26 @@ NamePage Menu::GetNameOpenedPage()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::OpenPageAndSetItCurrent(NamePage namePage)
 {
+    void *page = PageSB(namePage);
+}
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *Menu::PageSB(NamePage namePage)
+{
+    if(namePage == Page_SB_Curs)                { return PageCursors::PageSet::pointer; }
+    else if(namePage == Page_SB_MeasTuneMeas)   { return PageMeasures::Tune::pointer; }
+    else if(namePage == Page_SB_MeasTuneField)  {}
+    else if(namePage == Page_SB_MemLatest)      { return PageMemory::Latest::pointer; }
+    else if(namePage == Page_SB_MemInt)         { return PageMemory::Internal::pointer; }
+    else if(namePage == Page_SB_MemExtSetMask)  { return PageMemory::SetMask::pointer; }
+    else if(namePage == Page_SB_MemExtSetName)  { return PageMemory::SetName::pointer; }
+    else if(namePage == Page_SB_FileManager)    { return PageMemory::FileManager::pointer; }
+    else if(namePage == Page_SB_Help)           { return PageHelp::GetPointer(); }
+    else if(namePage == Page_SB_MathCursorsFFT) { return PageService::Math::FFT::Cursors::GetPointer(); }
+    else if(namePage == Page_SB_MathFunction)   { return PageService::Math::Function::GetPointer(); }
+    else if(namePage == Page_SB_Information)    {}
+    else if(namePage == Page_SB_SerialNumber)   { return PageDebug::SerialNumber::pointer; }
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

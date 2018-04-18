@@ -84,6 +84,8 @@ static void SetCursPosT(Channel chan, int numCur, float pos);           ///< Óñò
 #define MAX_POS_U   200
 #define MAX_POS_T   280
 
+void *PageCursors::PageSet::pointer = (void *)&mspSet;
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetCursSource(Channel chan)

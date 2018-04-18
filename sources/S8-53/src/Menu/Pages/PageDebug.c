@@ -13,6 +13,7 @@
 #include "Hardware/Sound.h"
 #include "Hardware/FLASH.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/PageDebug.h"
 #include "Log.h"
 
 
@@ -108,6 +109,8 @@ typedef struct
 
 
 extern Page mainPage;
+
+void *PageDebug::SerialNumber::pointer = (void *)&ppSerialNumber;
 
 
 // Œ“À¿ƒ ¿ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

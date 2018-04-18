@@ -287,9 +287,11 @@
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContent.h" />
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContentPages.h" />
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageCursors.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageHelp.h" />
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h" />
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMemory.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageService.h" />
     <ClInclude Include="..\..\S8-53\src\Panel\Controls.h" />
     <ClInclude Include="..\..\S8-53\src\Panel\Panel.h" />
     <ClInclude Include="..\..\S8-53\src\Settings\Settings.h">

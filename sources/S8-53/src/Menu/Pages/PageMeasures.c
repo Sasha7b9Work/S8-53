@@ -20,9 +20,7 @@
  */
 
 extern const Page pMeasures;
-
 extern const Page mainPage;
-
 
 static CursCntrl    GetMeasuresCursCntrlActive();       // Каким курсором из активной пары сейчас происходит управление.
 bool PageMeasures::choiceMeasuresIsActive = false;
@@ -308,6 +306,7 @@ const Page pMeasures            ///< ИЗМЕРЕНИЯ
     Page_Measures, &itemsMeasures
 );
 
+void *PageMeasures::Tune::pointer = (void *)&mspMeasTune;
 
 /** @}  @}
  */

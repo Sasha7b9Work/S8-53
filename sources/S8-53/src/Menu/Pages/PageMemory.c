@@ -1350,6 +1350,11 @@ const Page pMemory              ///< ÏÀÌßÒÜ
     Page_Memory, &itemsMemory
 );
 
+void *PageMemory::Latest::pointer      = (void *)&mspMemLast;
+void *PageMemory::Internal::pointer    = (void *)&mspMemInt;
+void *PageMemory::SetMask::pointer     = (void *)&mspSetMask;
+void *PageMemory::SetName::pointer     = (void *)&mpSetName;
+void *PageMemory::FileManager::pointer = (void *)&mspFileManager;
 
 /** @}  @}
  */

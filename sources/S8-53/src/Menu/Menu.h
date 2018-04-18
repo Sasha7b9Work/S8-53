@@ -78,6 +78,8 @@ public:
 
     void OpenPageAndSetItCurrent(NamePage namePage);
 
+    void *PageSB(NamePage namePage);
+
     bool ChangeOpenedItem(void *item, int delta);
     /// Уменьшает или увеличивает значение Governor, GovernorColor или Choice по адресу item в зависимости от знака delta
     void ChangeItem(void *item, int delta);

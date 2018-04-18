@@ -596,6 +596,12 @@
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageDebug.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageService.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\S8-53\src\Display\font\font5.inc">

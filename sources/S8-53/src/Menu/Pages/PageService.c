@@ -1,4 +1,5 @@
 #include "Definition.h"
+#include "Menu/Pages/PageService.h"
 #include "Display/Symbols.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
@@ -263,6 +264,11 @@ static const Page pppMath_Function
     "Installation and selection of mathematical functions - addition or multiplication",
     Page_SB_MathFunction, &itemsMath_Function, OnPress_Math_Function, EmptyFuncVV, OnRegSet_Math_Function
 );
+
+void *PageService::Math::Function::GetPointer()
+{
+    return (void *)&pppMath_Function;
+}
 
 static bool IsActive_Math_Function(void)
 {
@@ -663,6 +669,11 @@ static const Page ppppMath_FFT_Cursors
     Page_SB_MathCursorsFFT, &itemsMath_FFT_Cursors, EmptyFuncVV, EmptyFuncVV, OnRegSet_Math_FFT_Cursors
 );
 
+void *PageService::Math::FFT::Cursors::GetPointer()
+{
+    return (void *)&ppppMath_FFT_Cursors;
+}
+
 static bool IsActive_Math_FFT_Cursors(void)
 {
     return ENABLED_FFT;
@@ -938,6 +949,11 @@ static const Page ppInformation
     "Displays identification data of the oscilloscope",
     Page_SB_Information, &itemsInformation, OnPress_Information, EmptyFuncVV, EmptyFuncVI
 );
+
+void *PageService::Information::GetPointer()
+{
+    return (void *)&ppInformation;
+}
 
 static void OnPress_Information(void)
 {

@@ -32,13 +32,21 @@ Menu menu;
 extern void OnChanged_InputA(bool active);
 extern void OnChanged_InputB(bool active);
                                                 
-static PanelButton shortPressureButton = B_Empty;   ///< Если произошло короткое нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого нажатия.
-static PanelButton longPressureButton = B_Empty;    ///< Если произошло длинное нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого нажатия.
-static PanelButton pressButton = B_Empty;           ///< При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
-static PanelButton releaseButton = B_Empty;         ///< При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки события отпускания кнопки.
-static int angleRegSet = 0;                         ///< Угол, на который нужно повернуть ручку УСТАНОВКА - величина означает количество щелчков, знак - направление - "-" - влево, "+" - вправо
+/// Если произошло короткое нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого  нажатия.
+static PanelButton shortPressureButton = B_Empty;
+/// Если произошло длинное нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого нажатия.
+static PanelButton longPressureButton = B_Empty;
+/// При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
+static PanelButton pressButton = B_Empty;
+/// При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки  события отпускания кнопки.
+static PanelButton releaseButton = B_Empty;
+/// Угол, на который нужно повернуть ручку УСТАНОВКА - величина означает количество щелчков, знак - направление - "-" - влево, "+" - вправо
+static int angleRegSet = 0;
+
 static const int stepAngleRegSet = 2;
-static void* itemUnderKey = 0;                      ///< Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, если ни одна кнопка не нажата.
+/// Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, если ни одна 
+/// кнопка не нажата.
+static void* itemUnderKey = 0;
 
 /// Обработка события таймера автоматического сокрытия меню.
 static void OnTimerAutoHide();
@@ -49,65 +57,7 @@ static const PanelButton sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS] = {B_F5
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Menu::OpenFileManager()
-{
-    angleRegSet = 0;
-    for(int i = 0; i < 10; i++)
-    {
-        ShortPressureButton(B_Menu);
-        UpdateInput();
-        Display::Update(false);
-    }
-    
-    if(!MenuIsShown())
-    {
-        ShortPressureButton(B_Menu);
-        UpdateInput();
-        Display::Update(false);
-    }
-
-    for(int i = 0; i < 5 * stepAngleRegSet + 1; i++)
-    {
-        RotateRegSetLeft();
-        UpdateInput();
-        Display::Update(false);
-    }
-    
-    angleRegSet = 0;
-
-    for(int i = 0; i < 2 * stepAngleRegSet + 1; i++)
-    {
-        RotateRegSetRight();
-        UpdateInput();
-        Display::Update(false);
-    }
-    
-    angleRegSet = 0;
-
-    ShortPressureButton(B_F2);
-    UpdateInput();
-    Display::Update(false);
-
-    ShortPressureButton(B_F4);
-    UpdateInput();
-    Display::Update(false);
-   
-    for(int i = 0; i < stepAngleRegSet + 1; i++)
-    {
-        RotateRegSetLeft();
-        UpdateInput();
-        Display::Update(false);
-    }
-       
-    for(int i = 0; i < 2; i++)
-    {
-        ShortPressureButton(B_F1);
-        UpdateInput();
-        Display::Update(false);
-    }
-}
-
-void Menu::UpdateInput(void)
+void Menu::UpdateInput()
 {
     ProcessingShortPressureButton();
     ProcessingLongPressureButton();
@@ -918,5 +868,64 @@ void Menu::SwitchSetLED(void)
     {
         panel.EnableLEDRegSet(state);
         prevState = state;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::OpenFileManager()
+{
+    angleRegSet = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        ShortPressureButton(B_Menu);
+        UpdateInput();
+        Display::Update(false);
+    }
+
+    if (!MenuIsShown())
+    {
+        ShortPressureButton(B_Menu);
+        UpdateInput();
+        Display::Update(false);
+    }
+
+    for (int i = 0; i < 5 * stepAngleRegSet + 1; i++)
+    {
+        RotateRegSetLeft();
+        UpdateInput();
+        Display::Update(false);
+    }
+
+    angleRegSet = 0;
+
+    for (int i = 0; i < 2 * stepAngleRegSet + 1; i++)
+    {
+        RotateRegSetRight();
+        UpdateInput();
+        Display::Update(false);
+    }
+
+    angleRegSet = 0;
+
+    ShortPressureButton(B_F2);
+    UpdateInput();
+    Display::Update(false);
+
+    ShortPressureButton(B_F4);
+    UpdateInput();
+    Display::Update(false);
+
+    for (int i = 0; i < stepAngleRegSet + 1; i++)
+    {
+        RotateRegSetLeft();
+        UpdateInput();
+        Display::Update(false);
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        ShortPressureButton(B_F1);
+        UpdateInput();
+        Display::Update(false);
     }
 }
