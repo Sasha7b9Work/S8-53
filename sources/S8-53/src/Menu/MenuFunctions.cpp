@@ -268,6 +268,8 @@ NamePage Menu::GetNameOpenedPage()
 void Menu::OpenPageAndSetItCurrent(NamePage namePage)
 {
     void *page = PageSB(namePage);
+    SetCurrentItem(page, true);
+    OpenItem((Page *)page, !ItemIsOpened((Page *)page));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
