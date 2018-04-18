@@ -70,7 +70,7 @@ int main(void)
             Display::Update();               // Рисуем экран.
         }
 
-        menu.UpdateInput();                 // Обновляем состояние меню
+        Menu::UpdateInput();                 // Обновляем состояние меню
     }
 }
 

@@ -26,24 +26,24 @@ void HelpLong(void)
 
 void Channel0Long(void)
 {
-    menu.LongPressureButton(B_Channel0);
+    Menu::LongPressureButton(B_Channel0);
 }
 
 void Channel1Long(void)
 {
-    menu.LongPressureButton(B_Channel1);
+    Menu::LongPressureButton(B_Channel1);
 }
 
 void TimeLong(void)
 {
-    menu.LongPressureButton(B_Time);
+    Menu::LongPressureButton(B_Time);
 }
 
 void TrigLong(void)
 {
     if (MODE_LONG_PRESS_TRIG_IS_LEVEL0)
     {
-        menu.LongPressureButton(B_Trig);
+        Menu::LongPressureButton(B_Trig);
     }
     else
     {
@@ -55,13 +55,13 @@ void StartDown()                        // B_Start
 {
     if (MODE_WORK_IS_DIRECT)
     {
-        menu.PressButton(B_Start);
+        Menu::PressButton(B_Start);
     }
 }
 
 void PowerDown()                        // B_Power
 {
-    menu.ShortPressOnPageItem((Page *)menu.OpenedItem(), 0);
+    Menu::ShortPressOnPageItem((Page *)Menu::OpenedItem(), 0);
     Settings_Save();
     Log_DisconnectLoggerUSB();
     panel.TransmitData(0x04);           // Посылаем команду выключения
@@ -69,32 +69,32 @@ void PowerDown()                        // B_Power
 
 void MenuLong() 
 {
-    menu.LongPressureButton(B_Menu);
+    Menu::LongPressureButton(B_Menu);
 }
 
 void F1Long()
 {
-    menu.LongPressureButton(B_F1);
+    Menu::LongPressureButton(B_F1);
 }
 
 void F2Long()
 {
-    menu.LongPressureButton(B_F2);
+    Menu::LongPressureButton(B_F2);
 }
 
 void F3Long()
 {
-    menu.LongPressureButton(B_F3);
+    Menu::LongPressureButton(B_F3);
 }
 
 void F4Long()
 {
-    menu.LongPressureButton(B_F4);
+    Menu::LongPressureButton(B_F4);
 }
 
 void F5Long()
 {
-    menu.LongPressureButton(B_F5);
+    Menu::LongPressureButton(B_F5);
 }
 
 //****************************************************************************************************************
@@ -365,10 +365,10 @@ void TBaseRight()
 
 void SetLeft()
 {
-    menu.RotateRegSetLeft();
+    Menu::RotateRegSetLeft();
 }
 
 void SetRight()
 {
-    menu.RotateRegSetRight();
+    Menu::RotateRegSetRight();
 }

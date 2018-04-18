@@ -93,7 +93,7 @@ void Display::Init()
 void DrawStringNavigation() 
 {
     char buffer[100];
-    char *string = menu.StringNavigation(buffer);
+    char *string = Menu::StringNavigation(buffer);
     if(string) 
     {
         int length = Font_GetLengthText(string);
@@ -1272,7 +1272,7 @@ void Display::Update(bool endScene)
         DrawCursorTShift();
     }
     
-    menu.Draw();
+    Menu::Draw();
 
     if (needClear)
     {
@@ -1876,7 +1876,7 @@ void Display::DrawMeasures()
         {
             int x = x0 + dX * elem;
             int y = y0 + str * dY;
-            bool active = Measure_IsActive(str, elem) && menu.GetNameOpenedPage() == Page_SB_MeasTuneMeas;
+            bool active = Measure_IsActive(str, elem) && Menu::GetNameOpenedPage() == Page_SB_MeasTuneMeas;
             Color color = active ? COLOR_BACK : COLOR_FILL;
             Measure meas = Measure_Type(str, elem);
             if(meas != Measure_None)
@@ -1915,7 +1915,7 @@ void Display::DrawMeasures()
         }
     }
 
-    if(menu.GetNameOpenedPage() == Page_SB_MeasTuneMeas)
+    if(Menu::GetNameOpenedPage() == Page_SB_MeasTuneMeas)
     {
         Measure_DrawPageChoice();
     }

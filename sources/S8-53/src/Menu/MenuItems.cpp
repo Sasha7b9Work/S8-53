@@ -73,7 +73,7 @@ Governor::Governor(const Page *keeper_, pFuncBV funcOfActive_,
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsPressed()
 {
-    return this == menu.ItemUnderKey();
+    return this == Menu::ItemUnderKey();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void Choice::StartChange(int delta)
     {
         SetItemForHint(this);
     }
-    else if (!menu.ItemIsActive(this))
+    else if (!Menu::ItemIsActive(this))
     {
         FuncOnChanged(false);
     }
@@ -219,7 +219,7 @@ float Choice::Step()
             CircleDecreaseInt8(cell, 0, NumSubItems() - 1);
         }
         tsChoice.choice = 0;
-        FuncOnChanged(menu.ItemIsActive(this));
+        FuncOnChanged(Menu::ItemIsActive(this));
         Display::Redraw();
         tsChoice.inMoveDecrease = tsChoice.inMoveIncrease = 0;
         return 0.0f;
@@ -240,7 +240,7 @@ void Choice::ChangeValue(int delta)
         int8 value = (*cell == 0) ? (NumSubItems() - 1) : (*cell - 1);
         *cell = value;
     }
-    FuncOnChanged(menu.ItemIsActive(this));
+    FuncOnChanged(Menu::ItemIsActive(this));
     sound.GovernorChangedValue();
     Display::Redraw();
 }

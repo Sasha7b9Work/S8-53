@@ -12,172 +12,164 @@ class Menu
 {
 public:
     /// Возвращает адрес элемента меню, соответствующего данной button.
-    void* ItemUnderButton(PanelButton button);
+    static void* ItemUnderButton(PanelButton button);
     /// Возвращает true, если элемент меню item затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт раскрывающийся элемент меню вроде Choice или Governor.
-    bool IsShade(void* item);
-    bool IsPressed(void* item);
-    void Draw();
+    static bool IsShade(void* item);
+
+    static bool IsPressed(void* item);
+
+    static void Draw();
     /// Функция должна вызываться в главном цикле.
-    void UpdateInput();
+    static void UpdateInput();
     /// Функция обработки короткого нажатия кнопки (менее 0.5 сек.).
-    void ShortPressureButton(PanelButton button);
+    static void ShortPressureButton(PanelButton button);
     /// Функция обработки длинного нажатия кнопки (более 0.5 сек.).
-    void LongPressureButton(PanelButton button);
+    static void LongPressureButton(PanelButton button);
     /// Функция вызывается, когда кнопка переходит из отжатого в нажатое положение.
-    void PressButton(PanelButton button);
+    static void PressButton(PanelButton button);
     /// Функция вызывается, когда кнопка переходит из нажатого в отжатое положение.
-    void ReleaseButton(PanelButton button);
+    static void ReleaseButton(PanelButton button);
     /// Функция обработки поворота ручки УСТАНОВКА вправо.
-    void RotateRegSetRight();
+    static void RotateRegSetRight();
     /// Функция обработки поворота ручки УСТАНОВКА влево.
-    void RotateRegSetLeft();
+    static void RotateRegSetLeft();
     /// Установить время автоматического сокрытия меню в соответствии с установками.
-    void SetAutoHide(bool active);
+    static void SetAutoHide(bool active);
     /// Возвращает адрес пункта меню, находящегося под нажатой в данный момент кнопкой.
-    void* ItemUnderKey();
+    static void *ItemUnderKey();
     /// Возвращает путь к текущему пункту меню в текстовом виде, готовом к выводу на экран.
-    char* StringNavigation(char buffer[100]);
+    static char *StringNavigation(char buffer[100]);
 
-    void OpenItemTime();
+    static void OpenItemTime();
     /// Вовзращает true, если элемент меню item является ативным, т.е. может быть нажат.
-    bool ItemIsActive(void *item);
+    static bool ItemIsActive(void *item);
     /// Возвращает количество элементов в странице по адресу page.
-    int NumItemsInPage(const Page * const page);
+    static int NumItemsInPage(const Page * const page);
     /// Возвращает номер текущей подстранцы элемента по адресу page.
-    int NumCurrentSubPage(Page *page);
+    static int NumCurrentSubPage(Page *page);
     /// Dозвращает число подстраниц в странице по адресу page.
-    int NumSubPages(const Page *page);
+    static int NumSubPages(const Page *page);
     /// Возвращает тип элемента меню по адресу address.
-    TypeItem TypeMenuItem(void *address);
+    static TypeItem TypeMenuItem(void *address);
     /// Возвращает тип открытого элемента меню.
-    TypeItem TypeOpenedItem();
+    static TypeItem TypeOpenedItem();
     /// Возвращает адрес открытого элемента меню.
-    void* OpenedItem();
+    static void *OpenedItem();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней.
-    void* CurrentItem();
+    static void *CurrentItem();
     /// Возвращает адрес элемента меню заданной страницы.
-    void* Item
-                (const Page *page,              ///< страница, элемент которой нужно узнать
-                int numElement                  ///< порядковый номер элемента, который нужно узнать
-                );
+    static void *Item(const Page *page, int numElement);
     /// Возвращает true, если текущий элемент страницы с именем namePage открыт.
-    bool CurrentItemIsOpened(NamePage namePage);
+    static bool CurrentItemIsOpened(NamePage namePage);
     /// Возвращает позицию текущего элемента странцы page.
-    int8 PosCurrentItem(const Page *page);
+    static int8 PosCurrentItem(const Page *page);
     /// Сделать/разделать текущим пункт страницы.
-    void SetCurrentItem
-                        (const void *item,      ///< адрес элемента, активность которого нужно установить/снять
-                        bool active             ///< true - сделать элемент текущим, false - расделать элемент текущим. В этом случае текущим становится заголовок страницы
-                        );
+    static void SetCurrentItem(const void *item, bool active);
     /// Возвращает адрес элемента, которому принадлежит элемент по адресу item.
-    Page* Keeper(const void *item);
+    static Page* Keeper(const void *item);
     /// Возвращает имя страницы page.
-    NamePage GetNamePage(const Page *page);
+    static NamePage GetNamePage(const Page *page);
 
-    NamePage GetNameOpenedPage();
+    static NamePage GetNameOpenedPage();
 
-    void OpenPageAndSetItCurrent(NamePage namePage);
+    static void OpenPageAndSetItCurrent(NamePage namePage);
 
-    void *PageSB(NamePage namePage);
+    static void *PageSB(NamePage namePage);
 
-    bool ChangeOpenedItem(void *item, int delta);
+    static bool ChangeOpenedItem(void *item, int delta);
     /// Уменьшает или увеличивает значение Governor, GovernorColor или Choice по адресу item в зависимости от знака delta
-    void ChangeItem(void *item, int delta);
+    static void ChangeItem(void *item, int delta);
     /// Возвращает высоту в пикселях открытого элемента Choice или NamePage по адресу item.
-    int HeightOpenedItem(void *item);
+    static int HeightOpenedItem(void *item);
     /// Возвращает название элемента по адресу item, как оно выглядит на дисплее прибора.
-    const char* TitleItem(void *item);
+    static const char* TitleItem(void *item);
     /// Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая подстраница 1, это будет 5 и т.д.
-    int PosItemOnTop(Page *page);
+    static int PosItemOnTop(Page *page);
     /// Возвращает true, если button - функциональная клавиша [1..5].
-    bool IsFunctionalButton(PanelButton button);
+    static bool IsFunctionalButton(PanelButton button);
     /// Закрыть открытый элемент меню.
-    void CloseOpenedItem();
+    static void CloseOpenedItem();
 
-    void OpenItem(const void *item, bool open);          // Открыть/закрыть элемент меню по адрему item.
+    static void OpenItem(const void *item, bool open);          // Открыть/закрыть элемент меню по адрему item.
 
-    bool ItemIsOpened(void *item);                       // Возвращает true, если элемент меню по адрему item открыт.
+    static bool ItemIsOpened(void *item);                       // Возвращает true, если элемент меню по адрему item открыт.
 
-    void ChangeSubPage(const Page *page, int delta);
+    static void ChangeSubPage(const Page *page, int delta);
 
-    //void PrintStatePage(Page *page);
+    static void ShortPressOnPageItem(Page *page, int numItem);   // Вызывает функцию короткого нажатия кнопки над итемом numItem страницы page;
 
-    void ShortPressOnPageItem(Page *page, int numItem);   // Вызывает функцию короткого нажатия кнопки над итемом numItem страницы page;
+    static Page *PagePointerFromName(NamePage namePage);
 
-    Page* PagePointerFromName(NamePage namePage);
+    static bool PageIsSB(const Page *page);
 
-    bool PageIsSB(const Page *page);
+    static SmallButton *SmallButonFromPage(Page *page, int numButton);
 
-    SmallButton* SmallButonFromPage(Page *page, int numButton);
-
-    void ChangeStateFlashDrive();
+    static void ChangeStateFlashDrive();
 
 private:
     /// Обработка короткого нажатия кнопки.
-    void ProcessingShortPressureButton();
+    static void ProcessingShortPressureButton();
     /// Обработка длинного нажатия кнопки.
-    void ProcessingLongPressureButton();
+    static void ProcessingLongPressureButton();
     /// Обработка опускания кнопки вниз.
-    void ProcessingPressButton();
+    static void ProcessingPressButton();
     /// Обработка поднятия кнопки вверх.
-    void ProcessingReleaseButton();
+    static void ProcessingReleaseButton();
     /// Обработка поворота ручки УСТАНОВКА.
-    void ProcessingRegulatorSet();
+    static void ProcessingRegulatorSet();
     /// Включить/выключить светодиод ручки УСТАНОВКА, если необходимо.
-    void SwitchSetLED();
+    static void SwitchSetLED();
     /// Обработка короткого нажатия на элемент NamePage с адресом page.
-    void ShortPress_Page(void *page);
+    static void ShortPress_Page(void *page);
     /// Обработка короткого нажатия на элемент Choice с адресом choice.
-    void ShortPress_Choice(void *choice);
+    static void ShortPress_Choice(void *choice);
 
-    void ShortPress_Time(void *time);
+    static void ShortPress_Time(void *time);
     /// Обработка короткого нажатия на элемент Button с адресом button.
-    void ShortPress_Button(void *button);
+    static void ShortPress_Button(void *button);
     /// Обработка короткого нажатия на элемент Governor с адресом governor.
-    void ShortPress_Governor(void *governor);
+    static void ShortPress_Governor(void *governor);
     /// Обработка короткого нажатия на элемент GovernorColor с адресом governorColor.
-    void ShortPress_GovernorColor(void *governorColor);
+    static void ShortPress_GovernorColor(void *governorColor);
 
-    void ShortPress_IP(void *item);
+    static void ShortPress_IP(void *item);
 
-    void ShortPress_MAC(void *item);
+    static void ShortPress_MAC(void *item);
 
-    void ShortPress_ChoiceReg(void *choice);
+    static void ShortPress_ChoiceReg(void *choice);
 
-    void ShortPress_SmallButton(void *smallButton);
+    static void ShortPress_SmallButton(void *smallButton);
     /// Обработка длинного нажатия на элемент меню item.
-    void FuncOnLongPressItem(void *item);
+    static void FuncOnLongPressItem(void *item);
 
-    void FuncOnLongPressItemTime(void *item);
+    static void FuncOnLongPressItemTime(void *item);
     /// Обработка длинного нажатия на элемент Button с адресом button.
-    void FuncOnLongPressItemButton(void *button);
+    static void FuncOnLongPressItemButton(void *button);
     /// Возвращает функцию обработки короткого нажатия на элемент меню item.
-    void ExecuteFuncForShortPressOnItem(void *item);
+    static void ExecuteFuncForShortPressOnItem(void *item);
     /// Возвращает функцию обработки длинного нажатия на элемент меню item.
-    void ExecuteFuncForLongPressureOnItem(void *item);
+    static void ExecuteFuncForLongPressureOnItem(void *item);
 
-    bool NeedForFireSetLED();
+    static bool NeedForFireSetLED();
 
-    void DrawOpenedPage(Page *page, int layer, int yTop);
+    static void DrawOpenedPage(Page *page, int layer, int yTop);
 
-    void DrawTitlePage(Page *page, int layer, int yTop);
+    static void DrawTitlePage(Page *page, int layer, int yTop);
 
-    void DrawItemsPage(Page *page, int layer, int yTop);
+    static void DrawItemsPage(Page *page, int layer, int yTop);
 
-    void DrawPagesUGO(Page *page, int right, int bottom);
+    static void DrawPagesUGO(Page *page, int right, int bottom);
 
-    int CalculateX(int layer);
+    static int CalculateX(int layer);
 
-    void ResetItemsUnderButton();
+    static void ResetItemsUnderButton();
 
-    int ItemOpenedPosY(void *item);
+    static int ItemOpenedPosY(void *item);
 
-    void* RetLastOpened(Page *_page, TypeItem *_type);
+    static void *RetLastOpened(Page *_page, TypeItem *_type);
     
-    void OpenFileManager();
+    static void OpenFileManager();
 };
-
-extern Menu menu;
 
 /** @}
  */

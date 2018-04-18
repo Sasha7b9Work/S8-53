@@ -168,7 +168,7 @@ int16 Governor_PrevValue(Governor *governor)
 
 void Governor_NextPosition(Governor *governor)
 {
-    if (menu.OpenedItem() == governor)
+    if (Menu::OpenedItem() == governor)
     {
         CircleIncreaseInt8(&gCurDigit, 0, Governor_NumDigits(   governor) - 1);
     }

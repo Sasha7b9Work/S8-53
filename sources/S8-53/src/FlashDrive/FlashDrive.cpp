@@ -55,7 +55,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id)
         case HOST_USER_CLASS_ACTIVE:
             FLASH_DRIVE_IS_CONNECTED = 1;
             FM_Init();
-            menu.ChangeStateFlashDrive();
+            Menu::ChangeStateFlashDrive();
             if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0) != FR_OK)
             {
                 LOG_ERROR("Не могу примонтировать диск");
@@ -68,7 +68,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id)
             break;
         case HOST_USER_DISCONNECTION:
             FLASH_DRIVE_IS_CONNECTED = 0;
-            menu.ChangeStateFlashDrive();
+            Menu::ChangeStateFlashDrive();
             break;
         default:
             break;

@@ -64,7 +64,7 @@ static void DrawHintItem(int x, int y, int width)
         {"",            ""},        // Item_ChoiceReg
         {"Кнопка",      "Button"}   // Item_SmallButton
     };
-    TypeItem type = menu.TypeMenuItem(gItemHint);
+    TypeItem type = Menu::TypeMenuItem(gItemHint);
     Language lang = set.common.lang;
     Page *item = (Page*)gItemHint;
 
@@ -363,7 +363,7 @@ bool Menu::IsShade(void* item)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::IsPressed(void* item)
 {
-    return item == menu.ItemUnderKey();
+    return item == Menu::ItemUnderKey();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

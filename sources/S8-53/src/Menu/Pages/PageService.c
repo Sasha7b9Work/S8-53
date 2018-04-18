@@ -957,7 +957,7 @@ void *PageService::Information::GetPointer()
 
 static void OnPress_Information(void)
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_Information);
+    Menu::OpenPageAndSetItCurrent(Page_SB_Information);
     Display::SetDrawMode(DrawMode_Hand, Information_Draw);
 }
 
@@ -999,7 +999,7 @@ static void Information_Draw(void)
     Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
     Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
 
-    menu.Draw();
+    Menu::Draw();
     Painter::EndScene();
 }
 

@@ -664,7 +664,7 @@ static const Choice mcSettings_AutoHide =
 
 static void OnChanged_Settings_AutoHide(bool autoHide)
 {
-    menu.SetAutoHide(autoHide);
+    Menu::SetAutoHide(autoHide);
 }
 
 

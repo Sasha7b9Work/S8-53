@@ -185,7 +185,7 @@ void OnTimerPressedKey()
     if(pressedKey != B_Empty)
     {
         void (*func)(void) = funcOnLongPressure[pressedKey];
-        menu.ReleaseButton(pressedKey);
+        Menu::ReleaseButton(pressedKey);
         if(func != 0)
         {
             func();
@@ -226,18 +226,18 @@ bool Panel::ProcessingCommandFromPIC(uint16 command)
 
     if(releaseButton)
     {
-        menu.ReleaseButton(releaseButton);
+        Menu::ReleaseButton(releaseButton);
         funcOnKeyUp[releaseButton]();
         if(pressedKey != B_Empty)
         {
-            menu.ShortPressureButton(releaseButton);
+            Menu::ShortPressureButton(releaseButton);
             pressedKey = B_Empty;
         }
     }
     else if(pressButton)
     {
         funcOnKeyDown[pressButton]();
-        menu.PressButton(pressButton);
+        Menu::PressButton(pressButton);
         pressedKey = pressButton;
         Timer_Enable(kPressKey, 500, OnTimerPressedKey);
     }

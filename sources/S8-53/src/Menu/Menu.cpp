@@ -26,8 +26,6 @@
 #include <string.h>
 
 
-Menu menu;
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern void OnChanged_InputA(bool active);
 extern void OnChanged_InputB(bool active);
@@ -360,7 +358,7 @@ void Menu::ProcessingShortPressureButton()
             return;
         }
         Display::Redraw();
-        menu.SetAutoHide(true);
+        Menu::SetAutoHide(true);
 
         PanelButton button = shortPressureButton;
 
@@ -425,7 +423,7 @@ void Menu::ProcessingLongPressureButton(void)
     if(longPressureButton != B_Empty)
     {
         Display::Redraw();
-        menu.SetAutoHide(true);
+        Menu::SetAutoHide(true);
 
         if(longPressureButton == B_Time)
         {
@@ -710,7 +708,7 @@ void Menu::ShortPress_SmallButton(void *smallButton)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ExecuteFuncForShortPressOnItem(void *item)
 {
-    typedef void(Menu::*pFuncMenuVpV)(void*);
+    typedef void(*pFuncMenuVpV)(void*);
 
     static const pFuncMenuVpV shortFunction[Item_NumberItems] =
     {
@@ -733,14 +731,14 @@ void Menu::ExecuteFuncForShortPressOnItem(void *item)
 
     if (func)
     {
-        (this->*func)(item);
+        (func)(item);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ExecuteFuncForLongPressureOnItem(void *item)
 {
-    typedef void(Menu::*pFuncMenuVpV)(void*);
+    typedef void(*pFuncMenuVpV)(void*);
 
     static const pFuncMenuVpV longFunction[Item_NumberItems] =
     {
@@ -764,7 +762,7 @@ void Menu::ExecuteFuncForLongPressureOnItem(void *item)
         pFuncMenuVpV func = longFunction[TypeMenuItem(item)];
         if (func)
         {
-            (this->*func)(item);
+            (func)(item);
         }
     }
 }
@@ -792,17 +790,17 @@ extern const Page pService;
 void Menu::OpenItemTime(void)
 {
     Display::ShowWarningGood(TimeNotSet);
-    menu.ShortPressureButton(B_Service);
-    menu.UpdateInput();
+    Menu::ShortPressureButton(B_Service);
+    Menu::UpdateInput();
     Display::Update();
     for (int i = 0; i < 2; i++)
     {
-        menu.RotateRegSetRight();
-        menu.UpdateInput();
+        Menu::RotateRegSetRight();
+        Menu::UpdateInput();
         Display::Update();
     }
-    menu.ShortPressureButton(B_F4);
-    menu.UpdateInput();
+    Menu::ShortPressureButton(B_F4);
+    Menu::UpdateInput();
     Display::Update();
 }
 

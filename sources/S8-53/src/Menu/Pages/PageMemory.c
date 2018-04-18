@@ -178,15 +178,15 @@ static void PressSB_SetName_Exit()
     Display::RemoveAddDrawFunction();
     if (EXIT_FROM_SET_NAME_TO_DIS_MENU)
     {
-        menu.ShortPressOnPageItem(menu.PagePointerFromName(Page_SB_MemExtSetName), 0);
+        Menu::ShortPressOnPageItem(Menu::PagePointerFromName(Page_SB_MemExtSetName), 0);
     }
     else if (EXIT_FROM_SET_NAME_TO_LAST)
     {
-        menu.OpenPageAndSetItCurrent(Page_SB_MemLatest);
+        Menu::OpenPageAndSetItCurrent(Page_SB_MemLatest);
     }
     else if (EXIT_FROM_SET_NAME_TO_INT)
     {
-        menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
+        Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
     }
     EXIT_FROM_SET_NAME_TO = RETURN_TO_DISABLE_MENU;
 }
@@ -225,7 +225,7 @@ const SmallButton sbMemLastNext
 
 void PressSB_MemLast_IntEnter()
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
+    Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
     MODE_WORK = ModeWork_MemInt;
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     EXIT_FROM_INT_TO_LAST = 1;
@@ -812,14 +812,14 @@ void PressSB_MemInt_Exit()
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     if (EXIT_FROM_INT_TO_LAST)
     {
-        menu.OpenPageAndSetItCurrent(Page_SB_MemLatest);
+        Menu::OpenPageAndSetItCurrent(Page_SB_MemLatest);
         MODE_WORK = ModeWork_Latest;
         EXIT_FROM_INT_TO_LAST = 0;
     }
     else
     {
         MODE_WORK = ModeWork_Direct;
-        menu.ShortPressOnPageItem(menu.PagePointerFromName(Page_SB_MemInt), 0);
+        Menu::ShortPressOnPageItem(Menu::PagePointerFromName(Page_SB_MemInt), 0);
     }
 }
 
@@ -849,7 +849,7 @@ static const SmallButton sbExitMemInt    // Кнопка для выхода из режима малых кн
 // Нажатие ПАМЯТЬ - ВНЕШН ЗУ - Маска
 void OnPressMemoryExtMask(void)
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_MemExtSetMask);
+    Menu::OpenPageAndSetItCurrent(Page_SB_MemExtSetMask);
     Display::SetAddDrawFunction(DrawSetMask);
 }
 
@@ -1110,7 +1110,7 @@ void Memory_SaveSignalToFlashDrive()
     {
         if (FILE_NAMING_MODE_IS_HAND)
         {
-            menu.OpenPageAndSetItCurrent(Page_SB_MemExtSetName);
+            Menu::OpenPageAndSetItCurrent(Page_SB_MemExtSetName);
             Display::SetAddDrawFunction(DrawSetName);
         }
         else
@@ -1210,7 +1210,7 @@ void OnPressMemoryExtFileManager()
 {
     if(FLASH_DRIVE_IS_CONNECTED)
     {
-        menu.OpenPageAndSetItCurrent(Page_SB_FileManager);
+        Menu::OpenPageAndSetItCurrent(Page_SB_FileManager);
         Display::SetDrawMode(DrawMode_Hand, FM_Draw);
         gBF.needRedrawFileManager = 1;
     }
@@ -1283,7 +1283,7 @@ static const Page mspMemoryExt
 // Нажатие ПАМЯТЬ - Внутр ЗУ
 void OnPressMemoryInt()
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
+    Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
     MODE_WORK = ModeWork_MemInt;
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
 }

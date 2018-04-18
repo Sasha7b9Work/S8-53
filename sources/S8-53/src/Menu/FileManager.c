@@ -173,7 +173,7 @@ void FM_Draw(void)
     if (gBF.needRedrawFileManager == 1)
     {
         Painter::BeginScene(COLOR_BACK);
-        menu.Draw();
+        Menu::Draw();
         Painter::DrawRectangleC(0, 0, width, 239, COLOR_FILL);
         Painter::FillRegionC(left, top, Grid::Width() - 2, Grid::FullHeight() - 2, COLOR_BACK);
         flashDrive.GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);

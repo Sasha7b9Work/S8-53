@@ -885,7 +885,7 @@ static const Page ppSerialNumber
 
 static void OnPress_SerialNumber(void)
 {
-    menu.OpenPageAndSetItCurrent(Page_SB_SerialNumber);
+    Menu::OpenPageAndSetItCurrent(Page_SB_SerialNumber);
     Display::SetAddDrawFunction(Draw_EnterSerialNumber);
     MALLOC_EXTRAMEM(StructForSN, s);
     s->number = 01;

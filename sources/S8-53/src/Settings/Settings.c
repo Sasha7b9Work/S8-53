@@ -295,7 +295,7 @@ void Settings_Load(bool _default)
     panel.EnableLEDChannel0(sChannel_Enabled(A));
     panel.EnableLEDChannel1(sChannel_Enabled(B));
     fpga.SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
-    menu.SetAutoHide(true);
+    Menu::SetAutoHide(true);
     Display::ChangedRShiftMarkers();
 
     SETTINGS_IS_LOADED = 1;
@@ -339,12 +339,12 @@ bool MenuIsShown()
 void ShowMenu(bool show)
 {
     set.menu.isShown = show;
-    menu.SetAutoHide(true);
+    Menu::SetAutoHide(true);
 }
 
 bool MenuIsMinimize()
 {
-    return menu.TypeOpenedItem() == Item_Page && menu.GetNamePage((const Page *)menu.OpenedItem()) >= Page_SB_Curs;
+    return Menu::TypeOpenedItem() == Item_Page && Menu::GetNamePage((const Page *)Menu::OpenedItem()) >= Page_SB_Curs;
 }
 
 bool MenuPageDebugIsActive()
@@ -359,7 +359,7 @@ void SetMenuPageDebugActive(bool active)
 
 void CurrentPageSBregSet(int angle)
 {
-    Page *page = (Page *)menu.OpenedItem();
+    Page *page = (Page *)Menu::OpenedItem();
     if (page->funcRegSetSB)
     {
         page->funcRegSetSB(angle);
@@ -370,7 +370,7 @@ const SmallButton* GetSmallButton(PanelButton button)
 {
     if(MenuIsMinimize() && button >= B_Menu && button <= B_F5)
     {
-        Page *page = (Page *)menu.OpenedItem();
+        Page *page = (Page *)Menu::OpenedItem();
         SmallButton *sb = (SmallButton *)(*page->items)[button - B_Menu];
         return sb;
     }
