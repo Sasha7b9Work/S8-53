@@ -72,9 +72,7 @@ public:
 
     static NamePage GetNameOpenedPage();
 
-    static void OpenPageAndSetItCurrent(NamePage namePage);
-
-    static void *PageSB(NamePage namePage);
+    static void OpenPageAndSetItCurrent(void *page);
 
     static bool ChangeOpenedItem(void *item, int delta);
     /// Уменьшает или увеличивает значение Governor, GovernorColor или Choice по адресу item в зависимости от знака delta

@@ -110,7 +110,10 @@ typedef struct
 
 extern Page mainPage;
 
-void *PageDebug::SerialNumber::pointer = (void *)&ppSerialNumber;
+void *PageDebug::SerialNumber::GetPointer()
+{
+    return (void *)&ppSerialNumber;
+}
 
 
 // ÎÒËÀÄÊÀ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -885,7 +888,7 @@ static const Page ppSerialNumber
 
 static void OnPress_SerialNumber(void)
 {
-    Menu::OpenPageAndSetItCurrent(Page_SB_SerialNumber);
+    Menu::OpenPageAndSetItCurrent(PageDebug::SerialNumber::GetPointer());
     Display::SetAddDrawFunction(Draw_EnterSerialNumber);
     MALLOC_EXTRAMEM(StructForSN, s);
     s->number = 01;

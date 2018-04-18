@@ -114,7 +114,7 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.c" />

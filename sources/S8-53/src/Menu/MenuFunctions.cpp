@@ -72,11 +72,6 @@ void Menu::SetCurrentItem(const void *item, bool active)
 TypeItem Menu::TypeOpenedItem()
 {
     return TypeMenuItem(OpenedItem());
-    /*
-    TypeItem type = Item_None;
-    RetLastOpened((Page*)&mainPage, &type);
-    return type;
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -265,30 +260,10 @@ NamePage Menu::GetNameOpenedPage()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::OpenPageAndSetItCurrent(NamePage namePage)
+void Menu::OpenPageAndSetItCurrent(void *page)
 {
-    void *page = PageSB(namePage);
     SetCurrentItem(page, true);
     OpenItem((Page *)page, !ItemIsOpened((Page *)page));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void *Menu::PageSB(NamePage namePage)
-{
-    if(namePage == Page_SB_Curs)                { return PageCursors::PageSet::pointer; }
-    else if(namePage == Page_SB_MeasTuneMeas)   { return PageMeasures::Tune::pointer; }
-    else if(namePage == Page_SB_MeasTuneField)  {}
-    else if(namePage == Page_SB_MemLatest)      { return PageMemory::Latest::pointer; }
-    else if(namePage == Page_SB_MemInt)         { return PageMemory::Internal::pointer; }
-    else if(namePage == Page_SB_MemExtSetMask)  { return PageMemory::SetMask::pointer; }
-    else if(namePage == Page_SB_MemExtSetName)  { return PageMemory::SetName::pointer; }
-    else if(namePage == Page_SB_FileManager)    { return PageMemory::FileManager::pointer; }
-    else if(namePage == Page_SB_Help)           { return PageHelp::GetPointer(); }
-    else if(namePage == Page_SB_MathCursorsFFT) { return PageService::Math::FFT::Cursors::GetPointer(); }
-    else if(namePage == Page_SB_MathFunction)   { return PageService::Math::Function::GetPointer(); }
-    else if(namePage == Page_SB_Information)    {}
-    else if(namePage == Page_SB_SerialNumber)   { return PageDebug::SerialNumber::pointer; }
-    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

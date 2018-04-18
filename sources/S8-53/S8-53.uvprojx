@@ -1480,11 +1480,6 @@
               <FilePath>.\src\Menu\Pages\PageMeasures.c</FilePath>
             </File>
             <File>
-              <FileName>PageMemory.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageMemory.c</FilePath>
-            </File>
-            <File>
               <FileName>PageMemory.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory.h</FilePath>
@@ -1523,6 +1518,11 @@
               <FileName>PageMeasures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageMemory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMemory.cpp</FilePath>
             </File>
           </Files>
         </Group>

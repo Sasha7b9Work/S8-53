@@ -9,31 +9,31 @@ public:
     class Latest
     {
     public:
-        static void *pointer;
+        static void *GetPointer();
     };
 
     class Internal
     {
     public:
-        static void *pointer;
+        static void *GetPointer();
     };
 
     class SetMask
     {
     public:
-        static void *pointer;
+        static void *GetPointer();
     };
 
     class SetName
     {
     public:
-        static void *pointer;
+        static void *GetPointer();
     };
 
     class FileManager
     {
     public:
-        static void *pointer;
+        static void *GetPointer();
     };
 };
 

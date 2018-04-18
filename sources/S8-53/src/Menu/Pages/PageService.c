@@ -957,7 +957,7 @@ void *PageService::Information::GetPointer()
 
 static void OnPress_Information(void)
 {
-    Menu::OpenPageAndSetItCurrent(Page_SB_Information);
+    Menu::OpenPageAndSetItCurrent(PageService::Information::GetPointer());
     Display::SetDrawMode(DrawMode_Hand, Information_Draw);
 }
 

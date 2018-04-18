@@ -182,11 +182,11 @@ static void PressSB_SetName_Exit()
     }
     else if (EXIT_FROM_SET_NAME_TO_LAST)
     {
-        Menu::OpenPageAndSetItCurrent(Page_SB_MemLatest);
+        Menu::OpenPageAndSetItCurrent(PageMemory::Latest::GetPointer());
     }
     else if (EXIT_FROM_SET_NAME_TO_INT)
     {
-        Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
+        Menu::OpenPageAndSetItCurrent(PageMemory::Internal::GetPointer());
     }
     EXIT_FROM_SET_NAME_TO = RETURN_TO_DISABLE_MENU;
 }
@@ -225,7 +225,7 @@ const SmallButton sbMemLastNext
 
 void PressSB_MemLast_IntEnter()
 {
-    Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
+    Menu::OpenPageAndSetItCurrent(PageMemory::Internal::GetPointer());
     MODE_WORK = ModeWork_MemInt;
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     EXIT_FROM_INT_TO_LAST = 1;
@@ -548,16 +548,16 @@ void DrawSB_MemInt_SaveToIntMemory(int x, int y)
 
 static void SaveSignalToIntMemory(void)
 {
-    if (EXIT_FROM_INT_TO_LAST)
+    if (EXIT_FROM_INT_TO_LAST)          // Если перешли во ВНУТР ЗУ из ПОСЛЕДНИЕ
     {
         if  (gDSmemLast != 0)
-        {
+        {                               // то сохраняем сигнал из последних
             FLASH_SaveData(CURRENT_NUM_INT_SIGNAL, gDSmemLast, gData0memLast, gData1memLast);
             FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
             Display::ShowWarningGood(SignalIsSaved);
         }
     }
-    else
+    else                                // Иначе сохраняем текущий сигнал
     {
         if (gDSet != 0)
         {
@@ -812,7 +812,7 @@ void PressSB_MemInt_Exit()
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     if (EXIT_FROM_INT_TO_LAST)
     {
-        Menu::OpenPageAndSetItCurrent(Page_SB_MemLatest);
+        Menu::OpenPageAndSetItCurrent(PageMemory::Latest::GetPointer());
         MODE_WORK = ModeWork_Latest;
         EXIT_FROM_INT_TO_LAST = 0;
     }
@@ -849,7 +849,7 @@ static const SmallButton sbExitMemInt    // Кнопка для выхода из режима малых кн
 // Нажатие ПАМЯТЬ - ВНЕШН ЗУ - Маска
 void OnPressMemoryExtMask(void)
 {
-    Menu::OpenPageAndSetItCurrent(Page_SB_MemExtSetMask);
+    Menu::OpenPageAndSetItCurrent(PageMemory::SetMask::GetPointer());
     Display::SetAddDrawFunction(DrawSetMask);
 }
 
@@ -1110,7 +1110,7 @@ void Memory_SaveSignalToFlashDrive()
     {
         if (FILE_NAMING_MODE_IS_HAND)
         {
-            Menu::OpenPageAndSetItCurrent(Page_SB_MemExtSetName);
+            Menu::OpenPageAndSetItCurrent(PageMemory::SetName::GetPointer());
             Display::SetAddDrawFunction(DrawSetName);
         }
         else
@@ -1210,7 +1210,7 @@ void OnPressMemoryExtFileManager()
 {
     if(FLASH_DRIVE_IS_CONNECTED)
     {
-        Menu::OpenPageAndSetItCurrent(Page_SB_FileManager);
+        Menu::OpenPageAndSetItCurrent(PageMemory::FileManager::GetPointer());
         Display::SetDrawMode(DrawMode_Hand, FM_Draw);
         gBF.needRedrawFileManager = 1;
     }
@@ -1283,7 +1283,7 @@ static const Page mspMemoryExt
 // Нажатие ПАМЯТЬ - Внутр ЗУ
 void OnPressMemoryInt()
 {
-    Menu::OpenPageAndSetItCurrent(Page_SB_MemInt);
+    Menu::OpenPageAndSetItCurrent(PageMemory::Internal::GetPointer());
     MODE_WORK = ModeWork_MemInt;
     FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
 }
@@ -1350,11 +1350,35 @@ const Page pMemory              ///< ПАМЯТЬ
     Page_Memory, &itemsMemory
 );
 
-void *PageMemory::Latest::pointer      = (void *)&mspMemLast;
-void *PageMemory::Internal::pointer    = (void *)&mspMemInt;
-void *PageMemory::SetMask::pointer     = (void *)&mspSetMask;
-void *PageMemory::SetName::pointer     = (void *)&mpSetName;
-void *PageMemory::FileManager::pointer = (void *)&mspFileManager;
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::Latest::GetPointer()
+{
+    return (void *)&mspMemLast;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::Internal::GetPointer()
+{
+    return (void *)&mspMemInt;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::SetMask::GetPointer()
+{
+    return (void *)&mspSetMask;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::SetName::GetPointer()
+{
+    return (void *)&mpSetName;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::FileManager::GetPointer()
+{
+    return (void *)&mspFileManager;
+}
 
 /** @}  @}
  */
