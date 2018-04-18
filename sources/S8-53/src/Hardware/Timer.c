@@ -1,5 +1,3 @@
-
-
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
@@ -13,14 +11,14 @@ static bool isRun[TypeTimerSize] = {false};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Timer_PauseOnTicks(uint numTicks)
+void Timer::PauseOnTicks(uint numTicks)
 {
     uint startTicks = gTimerTics;
     while (gTimerTics - startTicks < numTicks) {};
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_StartMultiMeasurement(void)
+void Timer::StartMultiMeasurement(void)
 {
     TIM2->CR1 &= (uint16)~TIM_CR1_CEN;
     TIM2->CNT = 0;
@@ -57,7 +55,7 @@ uint Timer_LogPointMS(char *name)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Enable(TypeTimer type, int timeInMS, void(*eF)())
+void Timer::Enable(TypeTimer type, int timeInMS, void(*eF)())
 {
     f[type] = eF;
     reactionTimeMS[type] = timeInMS;
@@ -66,7 +64,7 @@ void Timer_Enable(TypeTimer type, int timeInMS, void(*eF)())
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Disable(TypeTimer type)
+void Timer::Disable(TypeTimer type)
 {
     isRun[type] = false;
 }
@@ -90,7 +88,7 @@ bool Timer_IsRun(TypeTimer type)
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Update1ms(void)
+void Timer::Update1ms(void)
 {
     for(int num = 0; num < TypeTimerSize; num++)
     {

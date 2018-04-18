@@ -133,14 +133,14 @@ static void OnPress_ResetSettings(void)
 {
     panel.Disable();
     Display::SetDrawMode(DrawMode_Hand, FuncDraw);
-    Timer_Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
+    Timer::Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
 
     if (panel.WaitPressingButton() == B_Start)
     {
         Settings_Load(true);
     }
 
-    Timer_Disable(kTimerDrawHandFunction);
+    Timer::Disable(kTimerDrawHandFunction);
     Display::SetDrawMode(DrawMode_Auto, 0);
     panel.Enable();
 }

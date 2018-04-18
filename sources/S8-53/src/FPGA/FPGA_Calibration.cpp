@@ -64,7 +64,7 @@ void FPGA::ProcedureCalibration(void)
     SET_ENABLED_A = SET_ENABLED_B = true;
 
     Display::SetDrawMode(DrawMode_Hand, FuncAttScreen);
-    Timer_Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
+    Timer::Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
 
     koeffCalibrationOld[A] = STRETCH_ADC_A;
     koeffCalibrationOld[B] = STRETCH_ADC_B;
@@ -207,7 +207,7 @@ void FPGA::ProcedureCalibration(void)
     gStateFPGA.stateCalibration = StateCalibration_None;
     panel.WaitPressingButton();
     panel.Enable();
-    Timer_Disable(kTimerDrawHandFunction);
+    Timer::Disable(kTimerDrawHandFunction);
     Display::SetDrawMode(DrawMode_Auto, 0);
     gStateFPGA.stateCalibration = StateCalibration_None;
 

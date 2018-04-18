@@ -1,5 +1,3 @@
-
-
 #include "defines.h"
 #include "Ethernet.h"
 #include "TcpSocket.h"
@@ -47,7 +45,7 @@ static void FuncReceiver(const char *buffer, uint length)
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void Ethernet_Init(void)
+void LAN::Init(void)
 {
     // Initilaize the LwIP stack
     lwip_init();
@@ -59,7 +57,7 @@ void Ethernet_Init(void)
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void Ethernet_Update(uint timeMS)
+void LAN::Update(uint timeMS)
 {
     uint time = gTimerMS;
 

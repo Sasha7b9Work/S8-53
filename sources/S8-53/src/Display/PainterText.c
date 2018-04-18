@@ -47,7 +47,7 @@ void Painter::LoadFont(TypeFont typeFont)
     {
         Painter::SendToVCP(pFont, sizeof(Symbol));
         pFont += sizeof(Symbol);
-        Timer_PauseOnTicks(10000);
+        Timer::PauseOnTicks(10000);
     }
 }
 

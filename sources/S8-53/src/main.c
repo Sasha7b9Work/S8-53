@@ -44,9 +44,9 @@ int main(void)
     Init();
     Settings_Load(false);
     FPGA::Init();    
-    HAL_Delay(250);
+    Timer::PauseOnTime(250);
     FPGA::OnPressStartStop();
-    Ethernet_Init();
+    LAN::Init();
     Display::Init();
     if (gBF.tuneTime == 1)
     {
@@ -55,21 +55,15 @@ int main(void)
 
     while(1)
     {
-        Timer_StartMultiMeasurement();      // Сброс таймера для замера длительности временных интервалов в течение одной итерации цикла.
-        
+        Timer::StartMultiMeasurement();      // Сброс таймера для замера длительности временных интервалов в течение одной итерации цикла.
         FlashDrive::Update();
-
-        Ethernet_Update(0);
-
+        LAN::Update(0);
         FPGA::Update();                      // Обновляем аппаратную часть.
-
         ProcessingSignal();
-
         if (!WelcomeScreen_Run())
         {
             Display::Update();               // Рисуем экран.
         }
-
         Menu::UpdateInput();                 // Обновляем состояние меню
     }
 }

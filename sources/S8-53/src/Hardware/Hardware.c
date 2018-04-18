@@ -163,7 +163,7 @@ void TIM6_DAC_IRQHandler(void)
 {
     if (__HAL_TIM_GET_FLAG(&handleTIM6forTimer, TIM_FLAG_UPDATE) == SET && __HAL_TIM_GET_ITSTATUS(&handleTIM6forTimer, TIM_IT_UPDATE))
     {
-        Timer_Update1ms();
+        Timer::Update1ms();
         __HAL_TIM_CLEAR_FLAG(&handleTIM6forTimer, TIM_FLAG_UPDATE);
         __HAL_TIM_CLEAR_IT(&handleTIM6forTimer, TIM_IT_UPDATE);
     }

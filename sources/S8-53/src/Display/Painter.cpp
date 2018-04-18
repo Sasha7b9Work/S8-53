@@ -83,7 +83,7 @@ static void OnTimerFlashDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::ResetFlash()
 {
-    Timer_Enable(kFlashDisplay, 400, OnTimerFlashDisplay);
+    Timer::Enable(kFlashDisplay, 400, OnTimerFlashDisplay);
     inverseColors = false;
 }
 
@@ -176,7 +176,7 @@ void Painter::SendToDisplay(uint8 *bytes, int numBytes)
     for (int i = 0; i < numBytes; i += 4)
     {
         while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET) {};
-        Timer_PauseOnTicks(100);
+        Timer::PauseOnTicks(100);
         *ADDR_CDISPLAY = *bytes++;
         *ADDR_CDISPLAY = *bytes++;
         *ADDR_CDISPLAY = *bytes++;
@@ -648,14 +648,14 @@ uint16 Painter::ReduceBrightness(uint16 colorValue, float newBrightness)
 static uint8 Read2points(int x, int y)
 {
     while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET) {};
-    Timer_PauseOnTicks(50);
+    Timer::PauseOnTicks(50);
     *ADDR_CDISPLAY = GET_POINT;
     *ADDR_CDISPLAY = (uint8)x;
     *ADDR_CDISPLAY = (uint8)(x >> 8);
     *ADDR_CDISPLAY = (uint8)y;
     int counter = 0;
     while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET) { counter++; };
-    Timer_PauseOnTicks(50);
+    Timer::PauseOnTicks(50);
     uint8 retValue = *ADDR_CDISPLAY;
     return retValue;
 }

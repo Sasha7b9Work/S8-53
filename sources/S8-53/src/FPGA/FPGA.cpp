@@ -63,7 +63,7 @@ void FPGA::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetNumSignalsInSec(int numSigInSec) 
 {
-    Timer_Enable(kNumSignalsInSec, 1000.f / numSigInSec, OnTimerCanReadData);
+    Timer::Enable(kNumSignalsInSec, 1000.f / numSigInSec, OnTimerCanReadData);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -78,11 +78,11 @@ void FPGA::Start(void)
     if(TBASE >= MIN_TBASE_P2P)
     {
         Display::ResetP2Ppoints(false);
-        Timer_Enable(kP2P, 1, ReadPoint);
+        Timer::Enable(kP2P, 1, ReadPoint);
     }
     else
     {
-        Timer_Disable(kP2P);
+        Timer::Disable(kP2P);
         Display::ResetP2Ppoints(true);
     }
     FSMC_Write(WR_START, 1);
@@ -219,7 +219,7 @@ void FPGA::OnPressStartStop(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Stop(bool pause) 
 {
-    Timer_Disable(kP2P);
+    Timer::Disable(kP2P);
     FSMC_Write(WR_STOP, 1);
     stateWork = pause ? StateWorkFPGA_Pause : StateWorkFPGA_Stop;
 }
@@ -1109,14 +1109,14 @@ void FPGA::AutoFind(void)
 void StopTemporaryPause(void)
 {
     gBF.FPGAtemporaryPause = 0;
-    Timer_Disable(kTemporaryPauseFPGA);
+    Timer::Disable(kTemporaryPauseFPGA);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::TemporaryPause(void)
 {
     gBF.FPGAtemporaryPause = 1;
-    Timer_Enable(kTemporaryPauseFPGA, 500, StopTemporaryPause);
+    Timer::Enable(kTemporaryPauseFPGA, 500, StopTemporaryPause);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

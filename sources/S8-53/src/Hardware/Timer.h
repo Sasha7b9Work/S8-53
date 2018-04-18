@@ -23,29 +23,36 @@ typedef enum
 } TypeTimer;
 
 
-void Timer_PauseOnTicks(uint numTicks);
-/// Функция вызывается по прерыванию системного таймера для работы таймеров. Увеличивает внутренее время таймеров на 1мс.
-void Timer_Update1ms();
-/// Функция вызывается по прерыванию системного таймера для работы таймеров. Увеличивает внутреннее время таймеров на 10мс.
-void Timer_Update10ms();
-     
-void Timer_Enable(TypeTimer type, int timeInMS, pFuncVV);
-/// Остановить таймер.
-void Timer_Disable(TypeTimer type);
-/// Приостановить таймер. Запустить снова можно функцией Timer_Continue().
-void Timer_Pause(TypeTimer type);
-/// Продолжить работу таймера, ранее приостановленного функцией Timer_Pause().
-void Timer_Continue(TypeTimer type);
-/// С помощью этой функции можно узнать, работает ли таймер.
-bool Timer_IsRun(TypeTimer type);
-/// Запускает счётчик для измерения малых отрезков времени.
-void Timer_StartMultiMeasurement();
-/// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки.
-void Timer_StartLogging();
+class Timer
+{
+public:
+    /// Задержка на timeMS миллисекунд
+    static void PauseOnTime(uint timeMS) { HAL_Delay(timeMS); };
 
-uint Timer_LogPointUS(char *name);
-
-uint Timer_LogPointMS(char *name);
+    static void PauseOnTicks(uint numTicks);
+    /// Функция вызывается по прерыванию системного таймера для работы таймеров. Увеличивает внутренее время таймеров на 1мс.
+    static void Update1ms();
+    /// Функция вызывается по прерыванию системного таймера для работы таймеров. Увеличивает внутреннее время таймеров на 10мс.
+    static void Update10ms();
+         
+    static void Enable(TypeTimer type, int timeInMS, pFuncVV);
+    /// Остановить таймер.
+    static void Disable(TypeTimer type);
+    /// Приостановить таймер. Запустить снова можно функцией Timer_Continue().
+    static void Pause(TypeTimer type);
+    /// Продолжить работу таймера, ранее приостановленного функцией Timer_Pause().
+    static void Continue(TypeTimer type);
+    /// С помощью этой функции можно узнать, работает ли таймер.
+    static bool IsRun(TypeTimer type);
+    /// Запускает счётчик для измерения малых отрезков времени.
+    static void StartMultiMeasurement();
+    /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки.
+    static void StartLogging();
+    
+    static uint LogPointUS(char *name);
+    
+    static uint LogPointMS(char *name);
+};
 
 #define gTimerMS HAL_GetTick()
 
