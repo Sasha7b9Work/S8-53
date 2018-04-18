@@ -902,11 +902,6 @@
               <FilePath>.\src\main.h</FilePath>
             </File>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
               <FileName>defines.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\defines.h</FilePath>
@@ -988,6 +983,11 @@
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
             </File>
           </Files>
         </Group>

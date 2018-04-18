@@ -42,7 +42,7 @@ int main(void)
     //main3();
     Hardware::Init();
     Init();
-    Settings_Load(false);
+    Settings::Load(false);
     FPGA::Init();    
     Timer::PauseOnTime(250);
     FPGA::OnPressStartStop();
@@ -60,10 +60,7 @@ int main(void)
         LAN::Update(0);
         FPGA::Update();                      // Обновляем аппаратную часть.
         ProcessingSignal();
-        if (!WelcomeScreen_Run())
-        {
-            Display::Update();               // Рисуем экран.
-        }
+        Display::Update();               // Рисуем экран.
         Menu::UpdateInput();                 // Обновляем состояние меню
     }
 }

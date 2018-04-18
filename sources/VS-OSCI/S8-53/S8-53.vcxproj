@@ -96,7 +96,7 @@
     <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c" />
     <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.c" />
     <ClCompile Include="..\..\S8-53\src\Log.c" />
-    <ClCompile Include="..\..\S8-53\src\main.c">
+    <ClCompile Include="..\..\S8-53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c" />

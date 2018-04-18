@@ -238,7 +238,7 @@ static const Settings defaultSettings =
 Settings set;
 
 
-void Settings_Load(bool _default)
+void Settings::Load(bool _default)
 {
     set = defaultSettings;
     
@@ -301,12 +301,12 @@ void Settings_Load(bool _default)
     SETTINGS_IS_LOADED = 1;
 }
 
-void Settings_Save()
+void Settings::Save()
 {
     FLASH_SaveSettings();
 }
 
-bool Settings_DebugModeEnable()
+bool Settings::DebugModeEnable()
 {
     return true;
 }

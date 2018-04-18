@@ -150,9 +150,6 @@
     <ClCompile Include="..\..\S8-53\src\Globals.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\main.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Tables.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -326,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp">
       <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

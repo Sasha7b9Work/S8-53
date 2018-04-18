@@ -137,7 +137,7 @@ static void OnPress_ResetSettings(void)
 
     if (panel.WaitPressingButton() == B_Start)
     {
-        Settings_Load(true);
+        Settings::Load(true);
     }
 
     Timer::Disable(kTimerDrawHandFunction);

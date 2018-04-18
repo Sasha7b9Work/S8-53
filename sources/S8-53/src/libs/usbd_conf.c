@@ -72,7 +72,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             else                                                    //
             {                                                       //
                 gBF.connectToHost = 0;                              //
-                Settings_Save();                                    // ��� ��������������� ��������� ��������� // WARN ��������, ��� �� ����� ������
+                Settings::Save();                                   // ��� ��������������� ��������� ��������� // WARN ��������, ��� �� ����� ������
             }                                                       //
             gBF.connectToHost = (prevLength != 0) ? 1 : 0;          // 
         }                                                           //

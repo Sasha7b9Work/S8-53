@@ -262,7 +262,7 @@ bool Panel::ProcessingCommandFromPIC(uint16 command)
 
     if ((command > R_Set && command < (B_Empty + 1 + 128)) || (command > (R_Set + 128)))
     {
-        if(Settings_DebugModeEnable())
+        if(Settings::DebugModeEnable())
         {
             static int errRecData = 0;
             errRecData++;
