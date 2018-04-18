@@ -16,6 +16,8 @@
 *.tre
 *.tmp
 
+JLinkLog.txt
+
 bins/*
 
 doc/disk/Sources/S8-53_Interface/.vs/*
