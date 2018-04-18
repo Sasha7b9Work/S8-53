@@ -101,14 +101,22 @@ typedef struct
 
 extern BitField gBF;
 
-#define RETURN_TO_MAIN_MENU     0
-#define RETURN_TO_LAST_MEM      1
-#define RETURN_TO_INT_MEM       2
-#define RETURN_TO_DISABLE_MENU  3
+#define CURRENT_NUM_LATEST_SIGNAL       (gMemory.currentNumLatestSignal)
+#define CURRENT_NUM_INT_SIGNAL          (gMemory.currentNumIntSignal)
+#define EXIT_FROM_INT_TO_LAST           (gMemory.exitFromIntToLast)
+#define RUN_FPGA_AFTER_SMALL_BUTTONS    (gMemory.runningFPGAbeforeSmallButtons)
+#define INT_SHOW_ALWAYS                 (gMemory.showAlways)
+#define NEED_SAVE_TO_DRIVE              (gMemory.needForSaveToFlashDrive)
 
-#define CURRENT_NUM_LATEST_SIGNAL (gMemory.currentNumLatestSignal)
-#define CURRENT_NUM_INT_SIGNAL    (gMemory.currentNumIntSignal)
-#define EXIT_FROM_INT_TO_LAST     (gMemory.exitFromIntToLast)
+#define EXIT_FROM_SET_NAME_TO           (gMemory.exitFromModeSetNameTo)
+#define RETURN_TO_MAIN_MENU             0
+#define RETURN_TO_LAST_MEM              1
+#define RETURN_TO_INT_MEM               2
+#define RETURN_TO_DISABLE_MENU          3
+#define EXIT_FROM_SET_NAME_TO_MAIN_MENU (EXIT_FROM_SET_NAME_TO == RETURN_TO_MAIN_MENU)
+#define EXIT_FROM_SET_NAME_TO_LAST      (EXIT_FROM_SET_NAME_TO == RETURN_TO_LAST_MEM)
+#define EXIT_FROM_SET_NAME_TO_INT       (EXIT_FROM_SET_NAME_TO == RETURN_TO_INT_MEM)
+#define EXIT_FROM_SET_NAME_TO_DIS_MENU  (EXIT_FROM_SET_NAME_TO == RETURN_TO_DISABLE_MENU)
 
 typedef struct 
 {

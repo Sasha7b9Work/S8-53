@@ -753,7 +753,7 @@ bool DrawData()
         }
         else
         {
-            if (gMemory.showAlways == 1)
+            if (INT_SHOW_ALWAYS)
             {
                 DrawDataMemInt();
             }
@@ -1297,13 +1297,13 @@ void Display::Update(bool endScene)
 
     Painter::EndScene(endScene);
 
-    if (gMemory.needForSaveToFlashDrive == 1)
+    if (NEED_SAVE_TO_DRIVE)
     {
         if (Painter::SaveScreenToFlashDrive())
         {
             Display::ShowWarningGood(FileIsSaved);
         }
-        gMemory.needForSaveToFlashDrive = 0;
+        NEED_SAVE_TO_DRIVE = 0;
     }
 
     if (funcAfterDraw)

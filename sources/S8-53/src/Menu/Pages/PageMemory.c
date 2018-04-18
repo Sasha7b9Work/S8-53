@@ -168,7 +168,7 @@ static void DrawSB_MemExtSetNameSave(int x, int y)
 
 static void PressSB_MemLast_SaveToFlash()
 {
-    gMemory.exitFromModeSetNameTo = RETURN_TO_LAST_MEM;
+    EXIT_FROM_SET_NAME_TO = RETURN_TO_LAST_MEM;
     Memory_SaveSignalToFlashDrive();
 }
 
@@ -176,19 +176,19 @@ static void PressSB_MemLast_SaveToFlash()
 static void PressSB_SetName_Exit()
 {
     Display::RemoveAddDrawFunction();
-    if (gMemory.exitFromModeSetNameTo == RETURN_TO_DISABLE_MENU)
+    if (EXIT_FROM_SET_NAME_TO_DIS_MENU)
     {
         menu.ShortPressOnPageItem(menu.PagePointerFromName(Page_SB_MemExtSetName), 0);
     }
-    else if (gMemory.exitFromModeSetNameTo == RETURN_TO_LAST_MEM)
+    else if (EXIT_FROM_SET_NAME_TO_LAST)
     {
         menu.OpenPageAndSetItCurrent(Page_SB_MemLatest);
     }
-    else if (gMemory.exitFromModeSetNameTo == RETURN_TO_INT_MEM)
+    else if (EXIT_FROM_SET_NAME_TO_INT)
     {
         menu.OpenPageAndSetItCurrent(Page_SB_MemInt);
     }
-    gMemory.exitFromModeSetNameTo = RETURN_TO_DISABLE_MENU;
+    EXIT_FROM_SET_NAME_TO = RETURN_TO_DISABLE_MENU;
 }
 
 
@@ -197,7 +197,7 @@ static void PressSB_MemExtSetNameSave()
     if (FLASH_DRIVE_IS_CONNECTED)
     {
         PressSB_SetName_Exit();
-        gMemory.needForSaveToFlashDrive = 1;
+        NEED_SAVE_TO_DRIVE = 1;
     }
 }
 
@@ -620,7 +620,7 @@ static void FuncAdditionDrawingSPageMemoryInt()
 
 void PressSB_MemInt_SaveToFlashDrive()
 {
-    gMemory.exitFromModeSetNameTo = RETURN_TO_INT_MEM;
+    EXIT_FROM_SET_NAME_TO = RETURN_TO_INT_MEM;
     Memory_SaveSignalToFlashDrive();
 }
 
@@ -655,7 +655,7 @@ static void DrawSB_MemInt_ShowSignalAllways_No(int x, int y)
 
 static void DrawSB_MemInt_ShowSignalAlways(int x, int y)
 {
-    if (gMemory.showAlways == 0)
+    if (INT_SHOW_ALWAYS == 0)
     {
         DrawSB_MemInt_ShowSignalAllways_No(x, y);
     }
@@ -667,7 +667,7 @@ static void DrawSB_MemInt_ShowSignalAlways(int x, int y)
 
 static void PressSB_MemInt_ShowSignalAlways()
 {
-    gMemory.showAlways = (gMemory.showAlways == 0) ? 1 : 0;
+    INT_SHOW_ALWAYS = (INT_SHOW_ALWAYS == 0) ? 1 : 0;
 }
 
 extern const Page mspMemInt;
@@ -1115,22 +1115,22 @@ void Memory_SaveSignalToFlashDrive()
         }
         else
         {
-            gMemory.needForSaveToFlashDrive = 1;
+            NEED_SAVE_TO_DRIVE = 1;
         }
     }
     else
     {
-        gMemory.exitFromModeSetNameTo = 0;
+        EXIT_FROM_SET_NAME_TO = RETURN_TO_MAIN_MENU;
     }
 }
 
 static void PressSB_MemLast_Exit()
 {
     MODE_WORK = ModeWork_Direct;
-    if (gMemory.runningFPGAbeforeSmallButtons == 1)
+    if (RUN_FPGA_AFTER_SMALL_BUTTONS)
     {
         fpga.Start();
-        gMemory.runningFPGAbeforeSmallButtons = 0;
+        RUN_FPGA_AFTER_SMALL_BUTTONS = 0;
     }
     Display::RemoveAddDrawFunction();
 }
@@ -1139,7 +1139,7 @@ static void PressSB_MemLast_Exit()
 void OnPressMemoryLatest()
 {
     CURRENT_NUM_LATEST_SIGNAL = 0;
-    gMemory.runningFPGAbeforeSmallButtons = fpga.IsRunning() ? 1 : 0;
+    RUN_FPGA_AFTER_SMALL_BUTTONS = fpga.IsRunning() ? 1 : 0;
     fpga.Stop(false);
     MODE_WORK = ModeWork_Latest;
 }
