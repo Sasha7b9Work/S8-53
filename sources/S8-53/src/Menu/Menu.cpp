@@ -126,8 +126,14 @@ void Menu::UpdateInput(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ShortPressureButton(PanelButton button)
 {
-    if (gBF.showHelpHints == 0)
+    if (!gBF.showHelpHints)
     {
+        if(button == B_Help)
+        {
+            gBF.showHelpHints++;
+            gStringForHint = 0;
+            gItemHint = 0;
+        }
         shortPressureButton = button;
     }
 };

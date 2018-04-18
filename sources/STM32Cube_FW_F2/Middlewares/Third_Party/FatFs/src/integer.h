@@ -5,6 +5,13 @@
 #ifndef _FF_INTEGER
 #define _FF_INTEGER
 
+#ifdef _WIN32	/* FatFs development platform */
+
+#include <windows.h>
+#include <tchar.h>
+
+#else			/* Embedded platform */
+
 /* This type MUST be 8 bit */
 typedef unsigned char	BYTE;
 
@@ -21,5 +28,6 @@ typedef unsigned int	UINT;
 typedef long			LONG;
 typedef unsigned long	DWORD;
 
+#endif
 
 #endif

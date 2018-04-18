@@ -1,5 +1,5 @@
-#include "defines.h"
-#include "Display/DisplayTypes.h"
+#include "../../defines.h"
+#include "../DisplayTypes.h"
 #include "font.h"
 
 

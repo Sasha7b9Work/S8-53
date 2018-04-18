@@ -11,185 +11,176 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Device53\src\defines.cpp">
+    <ClCompile Include="..\..\S8-53\src\defines.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\Colors.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\Colors.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\Display.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\Display.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\DisplayPrimitives.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\DisplayPrimitives.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\font\Font.cpp" />
-    <ClCompile Include="..\..\Device53\src\Display\Grid.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\font\Font.c" />
+    <ClCompile Include="..\..\S8-53\src\Display\Grid.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\Math3D.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\Math3D.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\Painter.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\Painter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterMem.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\PainterMem.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\PainterText.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\PainterText.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Display\WelcomeScreen.cpp">
+    <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Ethernet\Ethernet.cpp" />
-    <ClCompile Include="..\..\Device53\src\Ethernet\TcpSocket.cpp" />
-    <ClCompile Include="..\..\Device53\src\FlashDrive\FlashDrive.cpp">
+    <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.c" />
+    <ClCompile Include="..\..\S8-53\src\Ethernet\TcpSocket.c" />
+    <ClCompile Include="..\..\S8-53\src\FlashDrive\FlashDrive.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\FPGA\DataStorage.cpp">
+    <ClCompile Include="..\..\S8-53\src\FPGA\DataStorage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\FPGA\FPGA.cpp">
+    <ClCompile Include="..\..\S8-53\src\FPGA\FPGA.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\FPGA\FPGA_Calibration.cpp">
+    <ClCompile Include="..\..\S8-53\src\FPGA\FPGA_Calibration.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\FPGA\FPGA_Settings.cpp">
+    <ClCompile Include="..\..\S8-53\src\FPGA\FPGA_Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Globals.cpp">
+    <ClCompile Include="..\..\S8-53\src\Globals.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\ADC.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\ADC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FLASH.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\FSMC.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Hardware.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Hardware.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\MSP_USBH.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\RTC.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Sound.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Sound.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Hardware\Timer.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Timer.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\app_ethernet.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\ethernetif.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_hal_msp.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\stm32f2xx_it.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\system_stm32f2xx.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\libs\usbd_cdc_interface.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\usbd_conf.cpp" />
-    <ClCompile Include="..\..\Device53\src\libs\usbd_desc.c" />
-    <ClCompile Include="..\..\Device53\src\libs\usbh_conf.cpp" />
-    <ClCompile Include="..\..\Device53\src\Log.cpp" />
-    <ClCompile Include="..\..\Device53\src\main.cpp">
+    <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\ethernetif.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_hal_msp.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_it.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_cdc_interface.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_conf.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.c" />
+    <ClCompile Include="..\..\S8-53\src\Log.c" />
+    <ClCompile Include="..\..\S8-53\src\main.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\FileManager.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Menu.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\MenuDrawing.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\MenuFunctions.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsGraphics.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\MenuItemsLogic.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\Definition.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\HelpContent.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageChannels.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageCursors.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDebug.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageDisplay.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageHelp.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMeasures.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageMemory.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageService.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTime.cpp" />
-    <ClCompile Include="..\..\Device53\src\Menu\Pages\PageTrig.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\Controls.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\Panel.cpp" />
-    <ClCompile Include="..\..\Device53\src\Panel\PanelFunctions.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\Settings.cpp">
+    <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Menu.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuFunctions.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.c" />
+    <ClCompile Include="..\..\S8-53\src\Panel\Controls.c" />
+    <ClCompile Include="..\..\S8-53\src\Panel\Panel.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.c" />
+    <ClCompile Include="..\..\S8-53\src\Settings\Settings.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsChannel.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsCursors.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsCursors.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDebug.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDebug.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsDisplay.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDisplay.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsMeasures.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMeasures.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsMemory.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMemory.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsService.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsService.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Settings\SettingsTime.cpp">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Tables.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Device53\src\Utils\Generator.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\GlobalFunctions.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Map.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Math.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Measures.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\ProcessingSignal.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Stack2500uint16.cpp" />
-    <ClCompile Include="..\..\Device53\src\Utils\Strings.cpp" />
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\channelSCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\Tables.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\commonSCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\Utils\Generator.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\GlobalFunctions.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Map.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Math.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Measures.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\ProcessingSignal.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Stack2500uint16.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Strings.c" />
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\controlSCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\displaySCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\SCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\displaySCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\tbaseSCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\SCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\SCPI\trigSCPI.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\tbaseSCPI.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Device53\src\VCP\VCP.cpp">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\trigSCPI.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\VCP.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c" />
@@ -198,209 +189,199 @@
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Device53\src\defines.h">
+    <ClInclude Include="..\..\S8-53\src\defines.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\Colors.h">
+    <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\Display.h">
+    <ClInclude Include="..\..\S8-53\src\Display\Display.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\DisplayPrimitives.h">
+    <ClInclude Include="..\..\S8-53\src\Display\DisplayPrimitives.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\DisplayTypes.h">
+    <ClInclude Include="..\..\S8-53\src\Display\DisplayTypes.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\font\Font.h" />
-    <ClInclude Include="..\..\Device53\src\Display\Grid.h">
+    <ClInclude Include="..\..\S8-53\src\Display\font\Font.h" />
+    <ClInclude Include="..\..\S8-53\src\Display\Grid.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\Math3D.h">
+    <ClInclude Include="..\..\S8-53\src\Display\Math3D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\Painter.h">
+    <ClInclude Include="..\..\S8-53\src\Display\Painter.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\PainterC.h">
+    <ClInclude Include="..\..\S8-53\src\Display\PainterC.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\PainterMem.h">
+    <ClInclude Include="..\..\S8-53\src\Display\PainterMem.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\Symbols.h">
+    <ClInclude Include="..\..\S8-53\src\Display\Symbols.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Display\WelcomeScreen.h">
+    <ClInclude Include="..\..\S8-53\src\Display\WelcomeScreen.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\doc\RelatedPages.h" />
-    <ClInclude Include="..\..\Device53\src\Ethernet\Ethernet.h" />
-    <ClInclude Include="..\..\Device53\src\Ethernet\TcpSocket.h" />
-    <ClInclude Include="..\..\Device53\src\FlashDrive\FlashDrive.h" />
-    <ClInclude Include="..\..\Device53\src\FPGA\DataStorage.h">
+    <ClInclude Include="..\..\S8-53\src\doc\RelatedPages.h" />
+    <ClInclude Include="..\..\S8-53\src\Ethernet\Ethernet.h" />
+    <ClInclude Include="..\..\S8-53\src\Ethernet\TcpSocket.h" />
+    <ClInclude Include="..\..\S8-53\src\FlashDrive\FlashDrive.h" />
+    <ClInclude Include="..\..\S8-53\src\FPGA\DataStorage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\FPGA\FPGA.h">
+    <ClInclude Include="..\..\S8-53\src\FPGA\FPGA.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\FPGA\FPGA_Types.h">
+    <ClInclude Include="..\..\S8-53\src\FPGA\FPGA_Types.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Globals.h">
+    <ClInclude Include="..\..\S8-53\src\Globals.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\ADC.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\ADC.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\FLASH.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\FLASH.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\FSMC.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\FSMC.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\Hardware.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\Hardware.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\RTC.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\RTC.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\Sound.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\Sound.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Hardware\Timer.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\Timer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\libs\app_ethernet.h" />
-    <ClInclude Include="..\..\Device53\src\libs\ethernetif.h" />
-    <ClInclude Include="..\..\Device53\src\libs\ffconf.h" />
-    <ClInclude Include="..\..\Device53\src\libs\lwipopts.h" />
-    <ClInclude Include="..\..\Device53\src\libs\lwipopts_old.h" />
-    <ClInclude Include="..\..\Device53\src\libs\stm32f2xx_hal_conf.h" />
-    <ClInclude Include="..\..\Device53\src\libs\stm32f2xx_it.h" />
-    <ClInclude Include="..\..\Device53\src\libs\usbd_cdc_interface.h" />
-    <ClInclude Include="..\..\Device53\src\libs\usbd_conf.h" />
-    <ClInclude Include="..\..\Device53\src\libs\usbd_desc.h" />
-    <ClInclude Include="..\..\Device53\src\libs\usbh_conf.h" />
-    <ClInclude Include="..\..\Device53\src\Log.h" />
-    <ClInclude Include="..\..\Device53\src\main.h">
+    <ClInclude Include="..\..\S8-53\src\libs\app_ethernet.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\ethernetif.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\ffconf.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\lwipopts.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\lwipopts_old.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\stm32f2xx_hal_conf.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\stm32f2xx_it.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\usbd_cdc_interface.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\usbd_conf.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\usbd_desc.h" />
+    <ClInclude Include="..\..\S8-53\src\libs\usbh_conf.h" />
+    <ClInclude Include="..\..\S8-53\src\Log.h" />
+    <ClInclude Include="..\..\S8-53\src\main.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Menu\FileManager.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Menu.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\MenuItems.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\MenuItemsGraphics.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\MenuItemsLogic.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\Definition.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\HelpContent.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\HelpContentPages.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\PageCursors.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\PageHelp.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\PageMeasures.h" />
-    <ClInclude Include="..\..\Device53\src\Menu\Pages\PageMemory.h" />
-    <ClInclude Include="..\..\Device53\src\Panel\Controls.h" />
-    <ClInclude Include="..\..\Device53\src\Panel\Panel.h" />
-    <ClInclude Include="..\..\Device53\src\Settings\Settings.h">
+    <ClInclude Include="..\..\S8-53\src\Menu\FileManager.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Menu.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItems.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsGraphics.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsLogic.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\Definition.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContent.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContentPages.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageCursors.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageHelp.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h" />
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMemory.h" />
+    <ClInclude Include="..\..\S8-53\src\Panel\Controls.h" />
+    <ClInclude Include="..\..\S8-53\src\Panel\Panel.h" />
+    <ClInclude Include="..\..\S8-53\src\Settings\Settings.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsChannel.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsChannel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsCursors.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsCursors.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsDebug.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsDebug.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsDisplay.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsDisplay.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsMath.h" />
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsMeasures.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsMath.h" />
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsMeasures.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsMemory.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsMemory.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsService.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsService.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsTime.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsTime.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsTrig.h" />
-    <ClInclude Include="..\..\Device53\src\Settings\SettingsTypes.h">
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsTrig.h" />
+    <ClInclude Include="..\..\S8-53\src\Settings\SettingsTypes.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Tables.h">
+    <ClInclude Include="..\..\S8-53\src\Tables.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\Utils\Generator.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\GlobalFunctions.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\Map.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\Math.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\Measures.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\ProcessingSignal.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\Stack2500uint16.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\Strings.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\TablesLog.h" />
-    <ClInclude Include="..\..\Device53\src\Utils\TablesWindow.h" />
-    <ClInclude Include="..\..\Device53\src\VCP\SCPI\commonSCPI.h">
+    <ClInclude Include="..\..\S8-53\src\Utils\Generator.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\GlobalFunctions.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\Map.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\Math.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\Measures.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\ProcessingSignal.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\Stack2500uint16.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\Strings.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\TablesLog.h" />
+    <ClInclude Include="..\..\S8-53\src\Utils\TablesWindow.h" />
+    <ClInclude Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\VCP\SCPI\controlSCPI.h">
+    <ClInclude Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\VCP\SCPI\SCPI.h">
+    <ClInclude Include="..\..\S8-53\src\VCP\SCPI\SCPI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Device53\src\VCP\VCP.h" />
+    <ClInclude Include="..\..\S8-53\src\VCP\VCP.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc\stm32f2xx_hal_crc.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h" />
-    <ClInclude Include="..\VS_DEF\cmsis_gcc.h" />
-    <ClInclude Include="..\VS_DEF\ctype.h" />
-    <ClInclude Include="..\VS_DEF\inttypes.h" />
-    <ClInclude Include="..\VS_DEF\limits.h" />
-    <ClInclude Include="..\VS_DEF\math.h" />
-    <ClInclude Include="..\VS_DEF\stdarg.h" />
-    <ClInclude Include="..\VS_DEF\stdint.h" />
-    <ClInclude Include="..\VS_DEF\stdio.h" />
-    <ClInclude Include="..\VS_DEF\stdlib.h" />
-    <ClInclude Include="..\VS_DEF\string.h" />
     <ClInclude Include="src\cmsis_gcc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Device53\src\check.bat" />
-    <None Include="..\..\Device53\src\Display\font\font5.inc" />
-    <None Include="..\..\Device53\src\Display\font\font5display.inc" />
-    <None Include="..\..\Device53\src\Display\font\font8.inc" />
-    <None Include="..\..\Device53\src\Display\font\font8display.inc" />
-    <None Include="..\..\Device53\src\Display\font\fontUGO.inc" />
-    <None Include="..\..\Device53\src\Display\font\fontUGO2.inc" />
-    <None Include="..\..\Device53\src\Display\font\fontUGO2display.inc" />
-    <None Include="..\..\Device53\src\Display\font\fontUGOdisplay.inc" />
-    <None Include="..\..\Device53\src\Hardware\DisplayHardware.inc">
+    <None Include="..\..\S8-53\src\check.bat" />
+    <None Include="..\..\S8-53\src\Display\font\font5.inc" />
+    <None Include="..\..\S8-53\src\Display\font\font5display.inc" />
+    <None Include="..\..\S8-53\src\Display\font\font8.inc" />
+    <None Include="..\..\S8-53\src\Display\font\font8display.inc" />
+    <None Include="..\..\S8-53\src\Display\font\fontUGO.inc" />
+    <None Include="..\..\S8-53\src\Display\font\fontUGO2.inc" />
+    <None Include="..\..\S8-53\src\Display\font\fontUGO2display.inc" />
+    <None Include="..\..\S8-53\src\Display\font\fontUGOdisplay.inc" />
+    <None Include="..\..\S8-53\src\Hardware\DisplayHardware.inc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </None>
-    <None Include="..\..\Device53\src\libs\startup_stm32f207xx.s" />
-    <None Include="..\..\Device53\src\main2.s">
+    <None Include="..\..\S8-53\src\libs\startup_stm32f207xx.s" />
+    <None Include="..\..\S8-53\src\main2.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </None>
-    <None Include="..\..\Device53\src\Utils\CreateTables.py" />
+    <None Include="..\..\S8-53\src\Utils\CreateTables.py" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\Device53\src\err.txt">
+    <Text Include="..\..\S8-53\src\err.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>
-    <Text Include="..\..\Device53\src\includes.txt">
+    <Text Include="..\..\S8-53\src\includes.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>
-    <Text Include="..\..\Device53\src\Menu\Menu_reference.txt" />
+    <Text Include="..\..\S8-53\src\Menu\Menu_reference.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9963BBE1-43D7-4BAD-AA6A-A2D3161DA31A}</ProjectGuid>
@@ -411,7 +392,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -435,8 +416,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\VS_DEF;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\Device53\src;..\..\Device53\src\libs;..\..\Device53\src\libs\USB;..\..\Device53\src\libs\FatFS;..\..\Device53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\Device53\src\VCP\USBD;..\..\Device53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common</IncludePath>
-    <OutDir>.\</OutDir>
+    <IncludePath>..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\S8-53\src;..\..\S8-53\src\libs;..\..\S8-53\src\libs\USB;..\..\S8-53\src\libs\FatFS;..\..\S8-53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\S8-53\src\VCP\USBD;..\..\S8-53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common;$(IncludePath)</IncludePath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -446,15 +427,14 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;WIN32;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
       <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4996</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
-      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

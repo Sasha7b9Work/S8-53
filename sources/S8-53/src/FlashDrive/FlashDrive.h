@@ -1,13 +1,13 @@
 #pragma once
 #include "defines.h"
 
-#ifdef WIN32
+#ifdef _MS_VS
 #undef _WIN32
 #endif
 
 #include <ff.h>
 
-#ifdef WIN32
+#ifdef _MS_VS
 #define _WIN32
 #endif
 

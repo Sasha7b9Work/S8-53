@@ -55,3 +55,6 @@ sources/VS-OSCI/NET/S8-53_LAN/obj/*
 sources/VS-OSCI/NET/S8-53_ConsoleUSB/obj/*
 sources/VS-OSCI/NET/S8-53_Interface/obj/*
 sources/VS-OSCI/NET/S8-53_USB/obj/*
+
+sources/S8-53/Objects/*
+sources/S8-53/Listings/*
