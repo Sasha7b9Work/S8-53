@@ -1704,6 +1704,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsMath.h</FilePath>
             </File>
+            <File>
+              <FileName>SettingsTypes.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsTypes.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

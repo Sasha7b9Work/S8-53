@@ -148,6 +148,7 @@
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTypes.cpp" />
     <ClCompile Include="..\..\S8-53\src\Tables.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>

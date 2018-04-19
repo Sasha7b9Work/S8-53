@@ -146,13 +146,11 @@ private:
 
     static void ReadRealMode(bool necessaryShift);
 
-    static Range FindRange(Channel chan);
-
     static Range AccurateFindRange(Channel chan);
 
-    static bool FindParams(Channel chan, TBase *tBase);
+    static bool FindTBase(Channel chan, TBase *tBase);
 
-    static bool AccurateFindParams(Channel chan);
+    static bool AccurateFindTBase(Channel chan);
 
     static bool FindWave(Channel chan);
 };

@@ -907,10 +907,7 @@ TBase CalculateTBase(float freq)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-#define TIME_DELAY 10
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Range FPGA::FindRange(Channel chan)
+Range FPGA::AccurateFindRange(Channel chan)
 {
     /*
     Алгоритм поиска.
@@ -935,7 +932,7 @@ Range FPGA::FindRange(Channel chan)
     {
         FPGA::Stop(false);
         FPGA::SetRange(chan, (Range)range);
-        HAL_Delay(TIME_DELAY);
+        Timer::PauseOnTime(10);
         FPGA::Start();
 
         for (int i = 0; i < 50; i++)
@@ -980,39 +977,15 @@ Range FPGA::FindRange(Channel chan)
             return (Range)range;
         }
     }
+    FPGA::SetPeackDetMode(peackDetMode);
     return Range_2mV;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Range FPGA::AccurateFindRange(Channel chan)
-{
-    return FindRange(chan);
-#define NUM_MEASURES 1
-    /*                          // WARN Это было сделано, чтобы улучшить нахождение растяжки за счёт многократного нахождение
-                                   Однако, после изменения процедуры FindRangе, надобность в этом, вроде бы, отпала
-    Range range;
-    while (true)
-    {
-        int numMeasures = 0;
-        range = FindRange(chan);
-        do
-        {
-            numMeasures++;
-        } while (numMeasures < NUM_MEASURES && range == FindRange(chan));
-        if (numMeasures == NUM_MEASURES)
-        {
-            return range;
-        }
-    }
-    return Range_2mV;
-    */
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::FindParams(Channel chan, TBase *tBase)
+bool FPGA::FindTBase(Channel chan, TBase *tBase)
 {
     SetTrigInput(TrigInput_Full);
-    HAL_Delay(TIME_DELAY);
+    Timer::PauseOnTime(10);
     FPGA::Stop(false);
     float freq = CalculateFreqFromCounterFreq();
 
@@ -1036,7 +1009,7 @@ bool FPGA::FindParams(Channel chan, TBase *tBase)
         {
             *tBase = CalculateTBase(freq);
             FPGA::SetTBase(*tBase);
-            HAL_Delay(TIME_DELAY);
+            Timer::PauseOnTime(10);
             FPGA::Start();
             return true;
         }
@@ -1046,22 +1019,16 @@ bool FPGA::FindParams(Channel chan, TBase *tBase)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::AccurateFindParams(Channel chan)
+bool FPGA::AccurateFindTBase(Channel chan)
 {
-    TBase tBase;
+    TBase tBase = TBaseSize;
+    TBase secondTBase = TBaseSize;
 
-    int i = 0;
-    for (; i < 3; i++)
+    for (int i = 0; i < 5; i++)
     {
-        int numMeasures = 0;
-        FindParams(chan, &tBase);
-        TBase secondTBase;
-        do
-        {
-            FindParams(chan, &secondTBase);
-            numMeasures++;
-        } while (numMeasures < NUM_MEASURES && tBase == secondTBase);
-        if (numMeasures == NUM_MEASURES)
+        FindTBase(chan, &tBase);
+        FindTBase(chan, &secondTBase);
+        if(tBase == secondTBase)
         {
             return true;
         }
@@ -1074,7 +1041,6 @@ bool FPGA::FindWave(Channel chan)
 {
     Settings settings = set;    // Сохраняем предыдущие настройки
 
-    SetTBase(TBase_20ms);
     Stop(false);
     SET_ENABLED(chan) = true;
     FPGA::SetTrigSource((TrigSource)chan);
@@ -1084,7 +1050,7 @@ bool FPGA::FindWave(Channel chan)
     Range range = AccurateFindRange(chan);
     FPGA::SetRange(chan, range);
 
-    if (AccurateFindParams(chan))
+    if (AccurateFindTBase(chan))
     {
         return true;
     }
@@ -1097,11 +1063,14 @@ bool FPGA::FindWave(Channel chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::AutoFind(void)
 {
-    if (!FindWave(A) && !FindWave(B))
+    if (!FindWave(A) && 
+        !FindWave(B))
     {
         Display::ShowWarningBad(SignalNotFound);
     }
 
+    Start();
+    
     AUTO_FIND_IN_PROGRESS = 0;
 }
 

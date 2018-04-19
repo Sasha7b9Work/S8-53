@@ -327,6 +327,9 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTypes.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
