@@ -289,12 +289,8 @@ void Settings::Load(bool _default)
         Painter::LoadPalette();
     }
 
-
-    FPGA::LoadSettings();
-    FPGA::SetNumSignalsInSec(sDisplay_NumSignalsInS());
     panel.EnableLEDChannel0(sChannel_Enabled(A));
     panel.EnableLEDChannel1(sChannel_Enabled(B));
-    FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
     Menu::SetAutoHide(true);
     Display::ChangedRShiftMarkers();
 

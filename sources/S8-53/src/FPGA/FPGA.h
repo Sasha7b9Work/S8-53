@@ -56,8 +56,6 @@ public:
     static void FillDataPointer(DataSettings *dp);
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
     static void FindAndSetTrigLevel();
-    /// Загрузить настройки в аппаратную часть из глобальной структуры SSettings.
-    static void LoadSettings();
     /// Установить режим канала по входу.
     static void SetModeCouple(Channel chan, ModeCouple modeCoupe);
     /// Включить/выключить фильтр на входе канала.
@@ -102,6 +100,8 @@ public:
     static StateWorkFPGA CurrentStateWork();
 
 private:
+    /// Загрузить настройки в аппаратную часть из глобальной структуры SSettings.
+    static void LoadSettings();
     /// Загрузка коэффицента развёртки в аппаратную часть.
     static void LoadTBase();
     /// Загрузка смещения по времени в аппаратную часть.

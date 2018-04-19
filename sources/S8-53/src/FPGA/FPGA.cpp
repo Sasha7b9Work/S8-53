@@ -58,6 +58,10 @@ static void ReadPeriod();
 void FPGA::Init(void) 
 {
     dataStorage.Clear();
+    FPGA::LoadSettings();
+    FPGA::SetNumSignalsInSec(sDisplay_NumSignalsInS());
+    FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
+    FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
 } 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -909,12 +913,12 @@ TBase CalculateTBase(float freq)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::AutoFind(void)
 {
-    if (!FindWave(A) && 
-        !FindWave(B))
+    if (!FindWave(A) && !FindWave(B))
     {
         Display::ShowWarningBad(SignalNotFound);
     }
 
+    Init();
     Start();
     
     AUTO_FIND_IN_PROGRESS = 0;
@@ -935,12 +939,11 @@ bool FPGA::FindWave(Channel chan)
     if(range != RangeSize)
     {
         SET_RANGE(chan) = range;
-    }
-
-    TBase tBase = AccurateFindTBase(chan);
-    if(tBase != TBaseSize)
-    {
-        return true;
+        TBase tBase = AccurateFindTBase(chan);
+        if (tBase != TBaseSize)
+        {
+            return true;
+        }
     }
 
     set = settings;
@@ -1018,22 +1021,27 @@ Range FPGA::AccurateFindRange(Channel chan)
             FPGA::SetPeackDetMode(peackDetMode);
             return (Range)range;
         }
+
+        uint8 min = AVE_VALUE - 30;
+        uint8 max = AVE_VALUE + 30;
+
+        if(range == Range_2mV && CalculateMin(buffer) > min && CalculateMax(buffer) < max)
+        {
+            FPGA::SetPeackDetMode(peackDetMode);
+            return RangeSize;
+        }
     }
     FPGA::SetPeackDetMode(peackDetMode);
-    return Range_2mV;
+    return RangeSize;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 TBase FPGA::AccurateFindTBase(Channel chan)
 {
-    LOG_WRITE("канал %d", chan);
-
     for (int i = 0; i < 5; i++)
     {
         TBase tBase = FindTBase(chan);
         TBase secondTBase = FindTBase(chan);
-
-        LOG_WRITE("%d %s %s", i, TBaseName(tBase), TBaseName(secondTBase));
 
         if (tBase == secondTBase && tBase != TBaseSize)
         {
@@ -1046,19 +1054,14 @@ TBase FPGA::AccurateFindTBase(Channel chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 TBase FPGA::FindTBase(Channel chan)
 {
-    TBase tBase = TBaseSize;
     SetTrigInput(TrigInput_Full);
-    Timer::PauseOnTime(10);
-    FPGA::Stop(false);
     float freq = CalculateFreqFromCounterFreq();
-
-    FPGA::SetTrigInput(freq < 1e6f ? TrigInput_LPF : TrigInput_Full);
-
+    FPGA::SetTrigInput(freq < 50e3f ? TrigInput_LPF : TrigInput_Full);
     freq = CalculateFreqFromCounterFreq();
 
-    if (freq >= 50.0f)
+    if (freq >= 50e3f)
     {
-        tBase = CalculateTBase(freq);
+        TBase tBase = CalculateTBase(freq);
         FPGA::SetTBase(tBase);
         FPGA::Start();
         FPGA::SetTrigInput(freq < 500e3 ? TrigInput_LPF : TrigInput_HPF);
@@ -1070,7 +1073,7 @@ TBase FPGA::FindTBase(Channel chan)
         freq = CalculateFreqFromCounterPeriod();
         if (freq > 0.0f)
         {
-            tBase = CalculateTBase(freq);
+            TBase tBase = CalculateTBase(freq);
             FPGA::SetTBase(tBase);
             Timer::PauseOnTime(10);
             FPGA::Start();
