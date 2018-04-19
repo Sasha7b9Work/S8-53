@@ -168,16 +168,10 @@
     <ClCompile Include="..\..\S8-53\src\Log.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.c">
@@ -326,6 +320,12 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp">
       <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp">
+      <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

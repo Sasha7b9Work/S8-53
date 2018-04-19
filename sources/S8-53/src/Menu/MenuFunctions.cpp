@@ -193,16 +193,16 @@ void Menu::CloseOpenedItem()
     void *item = OpenedItem();
     if(TypeOpenedItem() == Item_Page)
     {
-        if (PageIsSB((const Page *)item))
+        if (PageIsSB((const Page *)item))                               // Для страницы малых кнопок
         {
-            SmallButton *sb = SmallButonFromPage((Page *)item, 0);
-            if (sb->funcOnPress)
+            SmallButton *sb = SmallButonFromPage((Page *)item, 0);      // Выполняем функцию нажатия кнопки B_Menu
+            if (sb->funcOnPress)                                        // Если она есть
             {
                 sb->funcOnPress();
             }
         }
-        NamePage name = Keeper(item)->name;
-        SetMenuPosActItem(name, MenuPosActItem(name) & 0x7f);
+        NamePage namePage = Keeper(item)->name;
+        SetMenuPosActItem(namePage, MenuPosActItem(namePage) & 0x7f);   // Сбрасываем бит 7 - "закрываем" активный пункт страницы namePage
         if(item == &mainPage)
         {
             ShowMenu(false);

@@ -194,17 +194,17 @@ typedef struct
 
 
 
-int8 MenuPosActItem(NamePage namePage);                             ///< Возвращает позицию активного пункта на странице namePage.
-void SetMenuPosActItem(NamePage namePage, int8 pos);                ///< Установить позицию активного пункта на странице namePage.
-int8 MenuCurrentSubPage(NamePage namePage);                         ///< Возвращает номер текущей подстраницы страницы namePage.
-void SetMenuCurrentSubPage(NamePage namePage, int8 posSubPage);     ///< Устанавливает номер текущей подстраницы в странице namePage.
+int8 MenuPosActItem(NamePage namePage);                         ///< Возвращает позицию активного пункта на странице namePage.
+void SetMenuPosActItem(NamePage namePage, int8 pos);            ///< Установить позицию активного пункта на странице namePage.
+int8 MenuCurrentSubPage(NamePage namePage);                     ///< Возвращает номер текущей подстраницы страницы namePage.
+void SetMenuCurrentSubPage(NamePage namePage, int8 posSubPage); ///< Устанавливает номер текущей подстраницы в странице namePage.
 bool MenuIsShown();                                             ///< Отображено ли меню на экране.
-void ShowMenu(bool show);                                           ///< Отобразить/скрыть меню.
+void ShowMenu(bool show);                                       ///< Отобразить/скрыть меню.
 bool MenuIsMinimize();                                          ///< Если true - меню находится в дополнительном режиме.
 bool MenuPageDebugIsActive();                                   ///< Активна ли страница отладки.
-void SetMenuPageDebugActive(bool active);                           ///< Сделать/разделать активной страницу отладки.
-void CurrentPageSBregSet(int angle);                                ///< Повернуть ручку УСТАНОВКА на текущей странице малых кнопок.
-const SmallButton*  GetSmallButton(PanelButton button);             ///< Вернуть указатель на малую кнопку, соответствующую данной кнопки панели.
+void SetMenuPageDebugActive(bool active);                       ///< Сделать/разделать активной страницу отладки.
+void CurrentPageSBregSet(int angle);                            ///< Повернуть ручку УСТАНОВКА на текущей странице малых кнопок.
+const SmallButton*  GetSmallButton(PanelButton button);         ///< Вернуть указатель на малую кнопку, соответствующую данной кнопки панели.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Струкура хранит все настройки прибора.

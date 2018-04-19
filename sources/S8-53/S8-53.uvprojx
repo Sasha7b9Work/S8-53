@@ -1380,11 +1380,6 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>Definition.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\Definition.c</FilePath>
-            </File>
-            <File>
               <FileName>Definition.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Definition.h</FilePath>
@@ -1523,6 +1518,11 @@
               <FileName>PageCursors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageCursors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Definition.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\Definition.cpp</FilePath>
             </File>
           </Files>
         </Group>

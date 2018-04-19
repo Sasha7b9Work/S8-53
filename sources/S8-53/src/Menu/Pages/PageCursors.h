@@ -21,6 +21,8 @@ public:
     public:
         static void *pointer;
     };
+
+    static void *GetPointer();
 };
 
 

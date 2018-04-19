@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "PageMemory.h"
+#include "Menu/Pages/PageCursors.h"
 #include "PageHelp.h"
 #include "FPGA/FPGA.h"
 #include "Display/Colors.h"
@@ -130,7 +131,6 @@ extern const Page mainPage;
 #include "PageHelp.c"
 
 extern const Page pDisplay;
-extern const Page pCursors;
 extern const Page pChanA;
 extern const Page pChanB;
 extern const Page pMeasures;
@@ -148,7 +148,7 @@ static const arrayItems itemsMainPage =
     (void*)&pChanB,
     (void*)&pTrig,
     (void*)&pTime,
-    (void*)&pCursors,
+    PageCursors::GetPointer(),
     PageMemory::GetPointer(),
     (void*)&pMeasures,
     (void*)&pService,
@@ -179,7 +179,7 @@ const void *PageForButton(PanelButton button)
         PageMemory::GetPointer(),   // B_Memory
         (void*)&pTrig,              // B_Trig
         0,                          // B_Start
-        (void*)&pCursors,           // B_Cursors
+        PageCursors::GetPointer(),  // B_Cursors
         (void*)&pMeasures,          // B_Measures
         0,                          // B_Power
         0,                          // B_Help

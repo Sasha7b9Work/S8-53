@@ -181,7 +181,7 @@ static const arrayItems itemsCursors =
     (void*)&mspSet              // йспянпш - сярюмнбхрэ
 };
 
-const Page pCursors                ///< йспянпш
+static const Page pCursors                ///< йспянпш
 (
     &mainPage, 0,
     "йспянпш", "CURSORS",
@@ -190,6 +190,10 @@ const Page pCursors                ///< йспянпш
     Page_Cursors, &itemsCursors
 );
 
+void *PageCursors::GetPointer()
+{
+    return (void *)&pCursors;
+}
 
 // йспянпш - оНЙЮГШБЮРЭ ------------------------------------------------------------------------------------------------------------------------------
 static const Choice mcShow =
