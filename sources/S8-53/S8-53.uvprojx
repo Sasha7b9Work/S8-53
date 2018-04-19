@@ -1615,11 +1615,6 @@
               <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
             </File>
             <File>
-              <FileName>Settings.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\Settings.c</FilePath>
-            </File>
-            <File>
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>
@@ -1708,6 +1703,11 @@
               <FileName>SettingsTypes.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\SettingsTypes.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
             </File>
           </Files>
         </Group>

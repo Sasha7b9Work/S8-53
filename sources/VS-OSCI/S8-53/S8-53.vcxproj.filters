@@ -120,9 +120,6 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\Timer.c">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\Settings.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">
       <Filter>Settings</Filter>
     </ClCompile>
@@ -328,6 +325,9 @@
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsTypes.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
   </ItemGroup>

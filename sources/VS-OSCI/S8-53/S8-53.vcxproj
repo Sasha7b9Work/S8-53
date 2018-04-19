@@ -121,7 +121,7 @@
     <ClCompile Include="..\..\S8-53\src\Panel\Controls.c" />
     <ClCompile Include="..\..\S8-53\src\Panel\Panel.cpp" />
     <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.c" />
-    <ClCompile Include="..\..\S8-53\src\Settings\Settings.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">

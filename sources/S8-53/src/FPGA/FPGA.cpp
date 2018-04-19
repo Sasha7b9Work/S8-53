@@ -932,9 +932,13 @@ bool FPGA::FindWave(Channel chan)
     FPGA::SetRShift(chan, RShiftZero);
     FPGA::SetModeCouple(chan, ModeCouple_AC);
     Range range = AccurateFindRange(chan);
-    FPGA::SetRange(chan, range);
+    if(range != RangeSize)
+    {
+        SET_RANGE(chan) = range;
+    }
 
-    if (AccurateFindTBase(chan))
+    TBase tBase = AccurateFindTBase(chan);
+    if(tBase != TBaseSize)
     {
         return true;
     }
@@ -1020,26 +1024,29 @@ Range FPGA::AccurateFindRange(Channel chan)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::AccurateFindTBase(Channel chan)
+TBase FPGA::AccurateFindTBase(Channel chan)
 {
-    TBase tBase = TBaseSize;
-    TBase secondTBase = TBaseSize;
+    LOG_WRITE("канал %d", chan);
 
     for (int i = 0; i < 5; i++)
     {
-        FindTBase(chan, &tBase);
-        FindTBase(chan, &secondTBase);
-        if (tBase == secondTBase)
+        TBase tBase = FindTBase(chan);
+        TBase secondTBase = FindTBase(chan);
+
+        LOG_WRITE("%d %s %s", i, TBaseName(tBase), TBaseName(secondTBase));
+
+        if (tBase == secondTBase && tBase != TBaseSize)
         {
-            return true;
+            return tBase;
         }
     }
-    return false;
+    return TBaseSize;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::FindTBase(Channel chan, TBase *tBase)
+TBase FPGA::FindTBase(Channel chan)
 {
+    TBase tBase = TBaseSize;
     SetTrigInput(TrigInput_Full);
     Timer::PauseOnTime(10);
     FPGA::Stop(false);
@@ -1051,11 +1058,11 @@ bool FPGA::FindTBase(Channel chan, TBase *tBase)
 
     if (freq >= 50.0f)
     {
-        *tBase = CalculateTBase(freq);
-        FPGA::SetTBase(*tBase);
+        tBase = CalculateTBase(freq);
+        FPGA::SetTBase(tBase);
         FPGA::Start();
         FPGA::SetTrigInput(freq < 500e3 ? TrigInput_LPF : TrigInput_HPF);
-        return true;
+        return tBase;
     }
     else
     {
@@ -1063,15 +1070,15 @@ bool FPGA::FindTBase(Channel chan, TBase *tBase)
         freq = CalculateFreqFromCounterPeriod();
         if (freq > 0.0f)
         {
-            *tBase = CalculateTBase(freq);
-            FPGA::SetTBase(*tBase);
+            tBase = CalculateTBase(freq);
+            FPGA::SetTBase(tBase);
             Timer::PauseOnTime(10);
             FPGA::Start();
-            return true;
+            return tBase;
         }
     }
 
-    return false;
+    return TBaseSize;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

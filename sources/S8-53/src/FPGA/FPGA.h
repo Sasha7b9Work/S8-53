@@ -148,9 +148,9 @@ private:
 
     static Range AccurateFindRange(Channel chan);
 
-    static bool FindTBase(Channel chan, TBase *tBase);
+    static TBase FindTBase(Channel chan);
 
-    static bool AccurateFindTBase(Channel chan);
+    static TBase AccurateFindTBase(Channel chan);
 
     static bool FindWave(Channel chan);
 };
