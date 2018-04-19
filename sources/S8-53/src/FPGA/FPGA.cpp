@@ -907,6 +907,44 @@ TBase CalculateTBase(float freq)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::AutoFind(void)
+{
+    if (!FindWave(A) && 
+        !FindWave(B))
+    {
+        Display::ShowWarningBad(SignalNotFound);
+    }
+
+    Start();
+    
+    AUTO_FIND_IN_PROGRESS = 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool FPGA::FindWave(Channel chan)
+{
+    Settings settings = set;    // Сохраняем предыдущие настройки
+
+    Stop(false);
+    SET_ENABLED(chan) = true;
+    FPGA::SetTrigSource((TrigSource)chan);
+    FPGA::SetTrigLev((TrigSource)chan, TrigLevZero);
+    FPGA::SetRShift(chan, RShiftZero);
+    FPGA::SetModeCouple(chan, ModeCouple_AC);
+    Range range = AccurateFindRange(chan);
+    FPGA::SetRange(chan, range);
+
+    if (AccurateFindTBase(chan))
+    {
+        return true;
+    }
+
+    set = settings;
+    FPGA::LoadSettings();
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 Range FPGA::AccurateFindRange(Channel chan)
 {
     /*
@@ -982,6 +1020,24 @@ Range FPGA::AccurateFindRange(Channel chan)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+bool FPGA::AccurateFindTBase(Channel chan)
+{
+    TBase tBase = TBaseSize;
+    TBase secondTBase = TBaseSize;
+
+    for (int i = 0; i < 5; i++)
+    {
+        FindTBase(chan, &tBase);
+        FindTBase(chan, &secondTBase);
+        if (tBase == secondTBase)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FPGA::FindTBase(Channel chan, TBase *tBase)
 {
     SetTrigInput(TrigInput_Full);
@@ -1016,62 +1072,6 @@ bool FPGA::FindTBase(Channel chan, TBase *tBase)
     }
 
     return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::AccurateFindTBase(Channel chan)
-{
-    TBase tBase = TBaseSize;
-    TBase secondTBase = TBaseSize;
-
-    for (int i = 0; i < 5; i++)
-    {
-        FindTBase(chan, &tBase);
-        FindTBase(chan, &secondTBase);
-        if(tBase == secondTBase)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::FindWave(Channel chan)
-{
-    Settings settings = set;    // Сохраняем предыдущие настройки
-
-    Stop(false);
-    SET_ENABLED(chan) = true;
-    FPGA::SetTrigSource((TrigSource)chan);
-    FPGA::SetTrigLev((TrigSource)chan, TrigLevZero);
-    FPGA::SetRShift(chan, RShiftZero);
-    FPGA::SetModeCouple(chan, ModeCouple_AC);
-    Range range = AccurateFindRange(chan);
-    FPGA::SetRange(chan, range);
-
-    if (AccurateFindTBase(chan))
-    {
-        return true;
-    }
-
-    set = settings;
-    FPGA::LoadSettings();
-    return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::AutoFind(void)
-{
-    if (!FindWave(A) && 
-        !FindWave(B))
-    {
-        Display::ShowWarningBad(SignalNotFound);
-    }
-
-    Start();
-    
-    AUTO_FIND_IN_PROGRESS = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
