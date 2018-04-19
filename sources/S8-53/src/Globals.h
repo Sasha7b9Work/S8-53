@@ -27,6 +27,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define CLIENT_LAN_IS_CONNECTED  (gBF.clientLANisConnected)
 #define CABLE_LAN_IS_CONNECTED   (gBF.cableLANisConnected)
 #define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
+#define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 
 
 typedef struct
@@ -96,6 +97,7 @@ typedef struct
     int topMeasures                 : 9;    // Верх таблицы вывода измерений. Это значение нужно для нормального вывода сообщений на экран - чтобы 
                                             // они ничего не перекрывали
     uint needOpenFileMananger       : 1;    // Если 1, то нужно открыть файловый менеджер (сработало автоподключение)
+    uint needClosePageSB            : 1;    // Если 1, нужно закрывать страницу малых кнопок
 } BitField;
 
 

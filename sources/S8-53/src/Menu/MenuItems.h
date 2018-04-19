@@ -173,7 +173,7 @@ typedef StructHelpSmallButton arrayHints[MAX_NUM_CHOICE_SMALL_BUTTON];
 class SmallButton : public Control
 {
 public:
-    pFuncVV             funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
+    pFuncVV             funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки. Возвращает true, если надо за
     pFuncVII            funcOnDraw;     ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const arrayHints   *hintUGO;
 

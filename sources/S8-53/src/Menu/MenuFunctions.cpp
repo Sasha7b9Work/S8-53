@@ -201,8 +201,12 @@ void Menu::CloseOpenedItem()
                 sb->funcOnPress();
             }
         }
-        NamePage namePage = Keeper(item)->name;
-        SetMenuPosActItem(namePage, MenuPosActItem(namePage) & 0x7f);   // Сбрасываем бит 7 - "закрываем" активный пункт страницы namePage
+        if(NEED_CLOSE_PAGE_SB == 1)
+        {
+            NamePage namePage = Keeper(item)->name;
+            SetMenuPosActItem(namePage, MenuPosActItem(namePage) & 0x7f);   // Сбрасываем бит 7 - "закрываем" активный пункт страницы namePage
+        }
+        NEED_CLOSE_PAGE_SB = 1;
         if(item == &mainPage)
         {
             ShowMenu(false);

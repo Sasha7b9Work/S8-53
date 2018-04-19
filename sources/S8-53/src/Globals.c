@@ -1,5 +1,3 @@
-
-
 #include "defines.h"
 #include "Globals.h"
 #include "Display/DisplayTypes.h"
@@ -94,7 +92,8 @@ BitField gBF =
 
     GRID_BOTTOM, // topMeasures
  
-    0   // needOpenFileManager
+    0,  // needOpenFileManager
+    1   // needClosePageSB
 };
 
 
