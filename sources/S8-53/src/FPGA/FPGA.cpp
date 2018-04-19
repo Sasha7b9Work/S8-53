@@ -175,7 +175,7 @@ void FPGA::Update(void)
         return;
     }
 
-	if(gBF.FPGAautoFindInProgress == 1)
+	if(AUTO_FIND_IN_PROGRESS)
     {
 		AutoFind();
 		return;
@@ -845,7 +845,7 @@ void FPGA::SetNumberMeasuresForGates(int number)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::StartAutoFind(void)
 {
-	gBF.FPGAautoFindInProgress = 1;
+	AUTO_FIND_IN_PROGRESS = 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1102,7 +1102,7 @@ void FPGA::AutoFind(void)
         Display::ShowWarningBad(SignalNotFound);
     }
 
-    gBF.FPGAautoFindInProgress = 0;
+    AUTO_FIND_IN_PROGRESS = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1475,11 +1475,6 @@
               <FilePath>.\src\Menu\Pages\PageMemory.h</FilePath>
             </File>
             <File>
-              <FileName>PageService.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.c</FilePath>
-            </File>
-            <File>
               <FileName>PageTime.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Menu\Pages\PageTime.c</FilePath>
@@ -1523,6 +1518,11 @@
               <FileName>Definition.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\Definition.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
             </File>
           </Files>
         </Group>

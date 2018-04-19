@@ -186,9 +186,6 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
@@ -325,6 +322,9 @@
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
