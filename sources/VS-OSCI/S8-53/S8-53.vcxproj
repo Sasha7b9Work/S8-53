@@ -101,7 +101,7 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Menu.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuFunctions.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.c" />

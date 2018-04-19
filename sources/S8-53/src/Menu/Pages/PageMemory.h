@@ -35,6 +35,8 @@ public:
     public:
         static void *GetPointer();
     };
+
+    static void *GetPointer();
 };
 
 

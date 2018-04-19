@@ -1341,7 +1341,7 @@ static const arrayItems itemsMemory =
     (void*)&mspMemoryExt
 };
 
-const Page pMemory              ///< ÏÀÌßÒÜ
+static const Page pMemory              ///< ÏÀÌßÒÜ
 (
     &mainPage, 0,
     "ÏÀÌßÒÜ", "MEMORY",
@@ -1349,6 +1349,12 @@ const Page pMemory              ///< ÏÀÌßÒÜ
     "Working with external and internal memory.",
     Page_Memory, &itemsMemory
 );
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void *PageMemory::GetPointer()
+{
+    return (void *)&pMemory;
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void *PageMemory::Latest::GetPointer()

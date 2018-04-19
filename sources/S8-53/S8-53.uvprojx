@@ -1330,11 +1330,6 @@
               <FilePath>.\src\Menu\Menu.h</FilePath>
             </File>
             <File>
-              <FileName>MenuDrawing.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\MenuDrawing.c</FilePath>
-            </File>
-            <File>
               <FileName>MenuItems.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
@@ -1374,6 +1369,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuFunctions.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MenuDrawing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1393,11 +1393,6 @@
               <FileName>PageChannels.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Menu\Pages\PageChannels.c</FilePath>
-            </File>
-            <File>
-              <FileName>PageCursors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageCursors.c</FilePath>
             </File>
             <File>
               <FileName>PageCursors.h</FileName>
@@ -1523,6 +1518,11 @@
               <FileName>PageMemory.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageCursors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageCursors.cpp</FilePath>
             </File>
           </Files>
         </Group>

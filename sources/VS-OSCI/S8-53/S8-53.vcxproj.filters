@@ -204,9 +204,6 @@
     <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.c">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -326,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp">
+      <Filter>Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

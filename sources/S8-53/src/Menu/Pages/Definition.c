@@ -133,7 +133,6 @@ extern const Page pDisplay;
 extern const Page pCursors;
 extern const Page pChanA;
 extern const Page pChanB;
-extern const Page pMemory;
 extern const Page pMeasures;
 extern const Page pDebug;
 extern const Page pService;
@@ -150,7 +149,7 @@ static const arrayItems itemsMainPage =
     (void*)&pTrig,
     (void*)&pTime,
     (void*)&pCursors,
-    (void*)&pMemory,
+    PageMemory::GetPointer(),
     (void*)&pMeasures,
     (void*)&pService,
     (void*)&mpHelp,
@@ -171,25 +170,25 @@ const Page mainPage
 const void *PageForButton(PanelButton button)
 {
     static const void *pages[] = {  
-        0,                  // B_Empty
-        (void*)&pChanA,    // B_Channel0
-        (void*)&pService,  // B_Service
-        (void*)&pChanB,    // B_Channel1
-        (void*)&pDisplay,  // B_Display
-        (void*)&pTime,     // B_Time
-        (void*)&pMemory,   // B_Memory
-        (void*)&pTrig,     // B_Trig
-        0,                  // B_Start
-        (void*)&pCursors,  // B_Cursors
-        (void*)&pMeasures, // B_Measures
-        0,                  // B_Power
-        0,                  // B_Help
-        0,                  // B_Menu
-        0,                  // B_F1
-        0,                  // B_F2
-        0,                  // B_F3
-        0,                  // B_F4
-        0,                  // B_F5
+        0,                          // B_Empty
+        (void*)&pChanA,             // B_Channel0
+        (void*)&pService,           // B_Service
+        (void*)&pChanB,             // B_Channel1
+        (void*)&pDisplay,           // B_Display
+        (void*)&pTime,              // B_Time
+        PageMemory::GetPointer(),   // B_Memory
+        (void*)&pTrig,              // B_Trig
+        0,                          // B_Start
+        (void*)&pCursors,           // B_Cursors
+        (void*)&pMeasures,          // B_Measures
+        0,                          // B_Power
+        0,                          // B_Help
+        0,                          // B_Menu
+        0,                          // B_F1
+        0,                          // B_F2
+        0,                          // B_F3
+        0,                          // B_F4
+        0,                          // B_F5
     };
 
     return pages[button];
