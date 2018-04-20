@@ -918,13 +918,13 @@ TBase CalculateTBase(float freq)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::AutoFind(void)
 {
-    LOG_WRITE(" ");
-    Timer::StartLogging();
+    //LOG_WRITE(" ");
+    //Timer::StartLogging();
 
-    LOG_WRITE("Канал 1");
+    //LOG_WRITE("Канал 1");
     if (!FindWave(A))
     {
-        LOG_WRITE("Канал 2");
+        //LOG_WRITE("Канал 2");
         if(!FindWave(B))
         {
             Display::ShowWarningBad(SignalNotFound);
@@ -949,7 +949,7 @@ bool FPGA::FindWave(Channel chan)
     FPGA::SetRShift(chan, RShiftZero);
     FPGA::SetModeCouple(chan, ModeCouple_AC);
     Range range = AccurateFindRange(chan);
-    LOG_WRITE("Range %s", RangeName(range));
+    //LOG_WRITE("Range %s", RangeName(range));
     if(range != RangeSize)
     {
         SET_RANGE(chan) = range;
@@ -991,10 +991,10 @@ Range FPGA::AccurateFindRange(Channel chan)
     FPGA::SetPeackDetMode(PeackDet_Enable);
     for (int range = RangeSize - 1; range >= 0; range--)
     {
-        Timer::LogPointMS("1");
+        //Timer::LogPointMS("1");
         FPGA::Stop(false);
         FPGA::SetRange(chan, (Range)range);
-        Timer::PauseOnTime(100);
+        Timer::PauseOnTime(10);
         FPGA::Start();
 
         for (int i = 0; i < 50; i++)
@@ -1029,10 +1029,12 @@ Range FPGA::AccurateFindRange(Channel chan)
             }
         }
 
+        /*
         if(chan == A)
         {
             LOG_WRITE("min = %d, max = %d", CalculateMinWithout0(buffer), CalculateMaxWithout255(buffer));
         }
+        */
 
         if (CalculateMinWithout0(buffer) < MIN_VALUE || CalculateMaxWithout255(buffer) > MAX_VALUE)
         {
