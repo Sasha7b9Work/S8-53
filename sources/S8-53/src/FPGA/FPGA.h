@@ -136,9 +136,9 @@ private:
 
     static void AutoFind();
 
-    static uint8 CalculateMin(uint8 buffer[100]);
+    static uint8 CalculateMinWithout0(uint8 buffer[100]);
 
-    static uint8 CalculateMax(uint8 buffer[100]);
+    static uint8 CalculateMaxWithout255(uint8 buffer[100]);
 
     static bool ProcessingData();
 

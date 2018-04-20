@@ -853,12 +853,15 @@ void FPGA::StartAutoFind(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::CalculateMin(uint8 buffer[100])
+uint8 FPGA::CalculateMinWithout0(uint8 buffer[100])
 {
-    uint8 min = buffer[0];
+    /// \todo На одном экземпляре был страшенныый глюк, когда без сигнала выбивались значения 0 и 255 в рандомных местах
+    /// Вот такой кастыиль на скорую ногу, чтобы нули выкинуть.
+    uint8 min = 255;
+    
     for (int i = 1; i < 100; i++)
     {
-        if (buffer[i] < min)
+        if (buffer[i] > 0 && buffer[i] < min)
         {
             min = buffer[i];
         }
@@ -867,12 +870,14 @@ uint8 FPGA::CalculateMin(uint8 buffer[100])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::CalculateMax(uint8 buffer[100])
+uint8 FPGA::CalculateMaxWithout255(uint8 buffer[100])
 {
-    uint8 max = buffer[0];
+    /// \todo На одном экземпляре был страшенныый глюк, когда без сигнала выбивались значения 0 и 255 в рандомных местах
+    /// Вот такой кастыиль на скорую ногу, чтобы нули выкинуть.
+    uint8 max = 0;
     for(int i = 1; i < 100; i++)
     {
-        if(buffer[i] > max)
+        if(buffer[i] < 255 && buffer[i] > max)
         {
             max = buffer[i];
         }
@@ -913,9 +918,17 @@ TBase CalculateTBase(float freq)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::AutoFind(void)
 {
-    if (!FindWave(A) && !FindWave(B))
+    LOG_WRITE(" ");
+    Timer::StartLogging();
+
+    LOG_WRITE("Канал 1");
+    if (!FindWave(A))
     {
-        Display::ShowWarningBad(SignalNotFound);
+        LOG_WRITE("Канал 2");
+        if(!FindWave(B))
+        {
+            Display::ShowWarningBad(SignalNotFound);
+        }
     }
 
     Init();
@@ -936,6 +949,7 @@ bool FPGA::FindWave(Channel chan)
     FPGA::SetRShift(chan, RShiftZero);
     FPGA::SetModeCouple(chan, ModeCouple_AC);
     Range range = AccurateFindRange(chan);
+    LOG_WRITE("Range %s", RangeName(range));
     if(range != RangeSize)
     {
         SET_RANGE(chan) = range;
@@ -977,9 +991,10 @@ Range FPGA::AccurateFindRange(Channel chan)
     FPGA::SetPeackDetMode(PeackDet_Enable);
     for (int range = RangeSize - 1; range >= 0; range--)
     {
+        Timer::LogPointMS("1");
         FPGA::Stop(false);
         FPGA::SetRange(chan, (Range)range);
-        Timer::PauseOnTime(10);
+        Timer::PauseOnTime(100);
         FPGA::Start();
 
         for (int i = 0; i < 50; i++)
@@ -1014,7 +1029,12 @@ Range FPGA::AccurateFindRange(Channel chan)
             }
         }
 
-        if (CalculateMin(buffer) < MIN_VALUE || CalculateMax(buffer) > MAX_VALUE)
+        if(chan == A)
+        {
+            LOG_WRITE("min = %d, max = %d", CalculateMinWithout0(buffer), CalculateMaxWithout255(buffer));
+        }
+
+        if (CalculateMinWithout0(buffer) < MIN_VALUE || CalculateMaxWithout255(buffer) > MAX_VALUE)
         {
             if (range < Range_20V)
             {
@@ -1027,7 +1047,7 @@ Range FPGA::AccurateFindRange(Channel chan)
         uint8 min = AVE_VALUE - 30;
         uint8 max = AVE_VALUE + 30;
 
-        if(range == Range_2mV && CalculateMin(buffer) > min && CalculateMax(buffer) < max)
+        if(range == Range_2mV && CalculateMinWithout0(buffer) > min && CalculateMaxWithout255(buffer) < max)
         {
             FPGA::SetPeackDetMode(peackDetMode);
             return RangeSize;
@@ -1056,33 +1076,20 @@ TBase FPGA::AccurateFindTBase(Channel chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 TBase FPGA::FindTBase(Channel chan)
 {
-    Stop(false);
-    SetTrigSource((TrigSource)chan);
     SetTrigInput(TrigInput_Full);
-    Start();
+    Timer::PauseOnTime(10);
+    FPGA::Stop(false);
     float freq = CalculateFreqFromCounterFreq();
 
-    if(freq < 1e3f)
-    {
-        SetTrigInput(TrigInput_LPF);
-        Stop(false);
-        SetTrigSource((TrigSource)chan);
-        Start();
-        freq = CalculateFreqFromCounterFreq();
-    }
+    FPGA::SetTrigInput(freq < 1e6f ? TrigInput_LPF : TrigInput_Full);
 
-    TBase tBase = CalculateTBase(freq);
-    LOG_WRITE("%f");
-    LOG_WRITE((char *)TBaseName(tBase));
-    return tBase;
-
-
-    FPGA::SetTrigInput(freq < 50e3f ? TrigInput_LPF : TrigInput_Full);
     freq = CalculateFreqFromCounterFreq();
 
-    if (freq >= 50e3f)
+    TBase tBase = TBaseSize;
+
+    if (freq >= 50.0f)
     {
-        TBase tBase = CalculateTBase(freq);
+        tBase = CalculateTBase(freq);
         FPGA::SetTBase(tBase);
         FPGA::Start();
         FPGA::SetTrigInput(freq < 500e3 ? TrigInput_LPF : TrigInput_HPF);
@@ -1094,7 +1101,7 @@ TBase FPGA::FindTBase(Channel chan)
         freq = CalculateFreqFromCounterPeriod();
         if (freq > 0.0f)
         {
-            TBase tBase = CalculateTBase(freq);
+            tBase = CalculateTBase(freq);
             FPGA::SetTBase(tBase);
             Timer::PauseOnTime(10);
             FPGA::Start();

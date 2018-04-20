@@ -30,14 +30,14 @@ static uint timeStartLogging = 0;
 static uint timePrevPoint = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_StartLogging(void)
+void Timer::StartLogging()
 {
     timeStartLogging = gTimerTics;
     timePrevPoint = timeStartLogging;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointUS(char *name)
+uint Timer::LogPointUS(char *name)
 {
     uint interval = gTimerTics - timePrevPoint;
     timePrevPoint = gTimerTics;
@@ -46,7 +46,7 @@ uint Timer_LogPointUS(char *name)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointMS(char *name)
+uint Timer::LogPointMS(char *name)
 {
     uint interval = gTimerTics - timePrevPoint;
     timePrevPoint = gTimerTics;

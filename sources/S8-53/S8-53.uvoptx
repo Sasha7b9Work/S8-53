@@ -155,9 +155,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1101</LineNumber>
+          <LineNumber>1038</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134500900</Address>
+          <Address>134501832</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -166,23 +166,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\FPGA\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_53\src/FPGA/FPGA.cpp\1101</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>1055</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\FPGA\FPGA.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\\src/FPGA/FPGA.cpp\1038</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -235,7 +219,7 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>8</SubType>
+          <SubType>256</SubType>
           <ItemText>buffer</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
@@ -246,7 +230,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>0</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
