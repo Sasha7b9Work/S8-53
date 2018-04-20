@@ -942,6 +942,8 @@ bool FPGA::FindWave(Channel chan)
         TBase tBase = AccurateFindTBase(chan);
         if (tBase != TBaseSize)
         {
+            TBASE = tBase;
+            TRIG_SOURCE = (TrigSource)chan;
             return true;
         }
     }
@@ -1054,8 +1056,27 @@ TBase FPGA::AccurateFindTBase(Channel chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 TBase FPGA::FindTBase(Channel chan)
 {
+    Stop(false);
+    SetTrigSource((TrigSource)chan);
     SetTrigInput(TrigInput_Full);
+    Start();
     float freq = CalculateFreqFromCounterFreq();
+
+    if(freq < 1e3f)
+    {
+        SetTrigInput(TrigInput_LPF);
+        Stop(false);
+        SetTrigSource((TrigSource)chan);
+        Start();
+        freq = CalculateFreqFromCounterFreq();
+    }
+
+    TBase tBase = CalculateTBase(freq);
+    LOG_WRITE("%f");
+    LOG_WRITE((char *)TBaseName(tBase));
+    return tBase;
+
+
     FPGA::SetTrigInput(freq < 50e3f ? TrigInput_LPF : TrigInput_Full);
     freq = CalculateFreqFromCounterFreq();
 
