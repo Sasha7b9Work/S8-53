@@ -155,65 +155,46 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1038</LineNumber>
+          <LineNumber>132</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134501832</Address>
+          <Address>134503024</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\FPGA\FPGA.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FPGA\FPGA_Calibration.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/FPGA/FPGA.cpp\1038</Expression>
+          <Expression>\\\src/FPGA/FPGA_Calibration.cpp\132</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>168</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134503196</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\FPGA\FPGA_Calibration.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\\src/FPGA/FPGA_Calibration.cpp\168</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>buffer[pointer]</ItemText>
+          <ItemText>mode</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pBuffer</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>pBuffer</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>word</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>string</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>map</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>eKey</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>length</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>transmitBytes,0x0A</ItemText>
+          <ItemText>range</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -248,7 +229,7 @@
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>
-        <StkLoc>0</StkLoc>
+        <StkLoc>1</StkLoc>
         <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>
         <uProt>0</uProt>

@@ -240,54 +240,32 @@ Settings set;
 
 void Settings::Load(bool _default)
 {
-    set = defaultSettings;
-    
-    FLASH_LoadSettings();
-
     if (_default)                                                               // Если нужно сбросить настройки
     {
-        uint16 rShiftAdd[2][RangeSize][2];                                      // Сначала сохраняем несбрасываемые настройки
-        for (int chan = 0; chan < 2; chan++)
-        {
-            for (int i = 0; i < RangeSize; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    rShiftAdd[chan][i][j] = RSHIFT_ADD(chan, i, j);
-                }
-            }
-        }
+        uint16 rShiftAdd[2][RangeSize][2];                                      
+
+        memcpy((void *)rShiftAdd, (void *)&RSHIFT_ADD(0, 0, 0), 2 * RangeSize * 2); // Сначала сохраняем несбрасываемые настройки
 
         int16  balanceADC0 = BALANCE_ADC_A;
         int16  balanceADC1 = BALANCE_ADC_B;
         int16  numAverageForRand = NUM_AVE_FOR_RAND;
         BalanceADCtype balanceType = BALANCE_ADC_TYPE;
 
-        memcpy((void*)&set, (void*)(&defaultSettings), sizeof(set));            // Потом заполняем значениями по умолчанию
+        memcpy((void*)&set, (void*)(&defaultSettings), sizeof(set));                // Потом заполняем значениями по умолчанию
 
-        for (int chan = 0; chan < 2; chan++)                                    // И восстанавливаем несбрасываемые настройки
-        {
-            for (int i = 0; i < RangeSize; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    RSHIFT_ADD(chan, i, j) = rShiftAdd[chan][i][j];
-                }
-            }
-        }
+        memcpy((void *)&RSHIFT_ADD(0, 0, 0), (void *)rShiftAdd, 2 * RangeSize *2);  // И восстанавливаем несбрасываемые настройки
+
         BALANCE_ADC_A = balanceADC0;
         BALANCE_ADC_B = balanceADC1;
         NUM_AVE_FOR_RAND = numAverageForRand;
         BALANCE_ADC_TYPE = balanceType;
-
-        // Восстанавливаем цвета
-        for (int color = 0; color < NUM_COLORS; color++)
-        {
-            set.display.colors[color] = defaultSettings.display.colors[color];
-        }
-
-        Painter::LoadPalette();
     }
+    else
+    {
+        FLASH_LoadSettings();
+    }
+
+    Painter::LoadPalette();
 
     panel.EnableLEDChannel0(sChannel_Enabled(A));
     panel.EnableLEDChannel1(sChannel_Enabled(B));

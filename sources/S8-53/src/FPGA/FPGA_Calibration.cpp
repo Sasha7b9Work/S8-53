@@ -123,7 +123,7 @@ void FPGA::ProcedureCalibration(void)
                 FPGA::LoadKoeffCalibration(A);
             }
 			
-            for (int range = 0; range <= RangeSize; range++)
+            for (int range = 0; range < RangeSize; range++)
             {
                 for (int mode = 0; mode < 2; mode++)
                 {
