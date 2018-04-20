@@ -1395,11 +1395,6 @@
               <FilePath>.\src\Menu\Pages\PageCursors.h</FilePath>
             </File>
             <File>
-              <FileName>PageDebug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.c</FilePath>
-            </File>
-            <File>
               <FileName>PageDisplay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay.c</FilePath>
@@ -1523,6 +1518,11 @@
               <FileName>PageService.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
             </File>
           </Files>
         </Group>

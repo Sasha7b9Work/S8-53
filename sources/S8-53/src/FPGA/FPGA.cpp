@@ -645,7 +645,7 @@ void FPGA::RestoreState(void)
         {
             for (int range = 0; range < RangeSize; range++)
             {
-                rShiftAdd[chan][range][mode] = set.chan[chan].rShiftAdd[range][mode];
+                rShiftAdd[chan][range][mode] = RSHIFT_ADD(chan, range, mode);
             }
         }
     }
@@ -656,7 +656,7 @@ void FPGA::RestoreState(void)
         {
             for (int range = 0; range < RangeSize; range++)
             {
-                 set.chan[chan].rShiftAdd[range][mode] = rShiftAdd[chan][range][mode];
+                 RSHIFT_ADD(chan, range, mode) = rShiftAdd[chan][range][mode];
             }
         }
     }

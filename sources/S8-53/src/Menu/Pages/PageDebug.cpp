@@ -669,7 +669,7 @@ static void OnPress_ADC_AltRShift_Reset(void)
         {
             for(int range = 0; range < RangeSize; range++)
             {
-                set.chan[chan].rShiftAdd[range][mode] = 0;
+                RSHIFT_ADD(chan, range, mode) = 0;
             }
         }
     }
@@ -684,7 +684,7 @@ static const Governor mbADC_AltRShift_2mV_DC_A
     "Ñì 1ê 2ìÂ ïîñò", "Shift 1ch 2mV DC",
     "",
     "",
-    &set.chan[A].rShiftAdd[Range_2mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_A
+    &RSHIFT_ADD(A, Range_2mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_A
 );
 
 static void OnChanged_ADC_AltRShift_A(void)
@@ -699,7 +699,7 @@ static const Governor mbADC_AltRShift_2mV_DC_B
     "Ñì 2ê 2ìÂ ïîñò", "Shift 2ch 2mV DC",
     "",
     "",
-    &set.chan[B].rShiftAdd[Range_2mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_B
+    &RSHIFT_ADD(B, Range_2mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_B
 );
 
 static void OnChanged_ADC_AltRShift_B(void)
@@ -714,7 +714,7 @@ static const Governor mbADC_AltRShift_5mV_DC_A
     "Ñì 1ê 5ìÂ ïîñò", "Shift 1ch 5mV DC",
     "",
     "",
-    &set.chan[A].rShiftAdd[Range_5mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_A
+    &RSHIFT_ADD(A, Range_5mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_A
 );
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò ---------------------------------------------------------------------------------------------------------
@@ -724,7 +724,7 @@ static const Governor mbADC_AltRShift_5mV_DC_B
     "Ñì 2ê 5ìÂ ïîñò", "Shift 2ch 5mV DC",
     "",
     "",
-    &set.chan[B].rShiftAdd[Range_5mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_B
+    &RSHIFT_ADD(B, Range_5mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_B
 );
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò --------------------------------------------------------------------------------------------------------
@@ -734,7 +734,7 @@ static const Governor mbADC_AltRShift_10mV_DC_A
     "Ñì 1ê 10ìÂ ïîñò", "Shift 1ch 10mV DC",
     "",
     "",
-    &set.chan[A].rShiftAdd[Range_10mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_A
+    &RSHIFT_ADD(A, Range_10mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_A
 );
 
 // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò --------------------------------------------------------------------------------------------------------
@@ -744,7 +744,7 @@ static const Governor mbADC_AltRShift_10mV_DC_B
     "Ñì 2ê 10ìÂ ïîñò", "Shift 2ch 10mV DC",
     "",
     "",
-    &set.chan[B].rShiftAdd[Range_10mV][ModeCouple_DC], -100, 100, OnChanged_ADC_AltRShift_B
+    &RSHIFT_ADD(B, Range_10mV, ModeCouple_DC), -100, 100, OnChanged_ADC_AltRShift_B
 );
 
 

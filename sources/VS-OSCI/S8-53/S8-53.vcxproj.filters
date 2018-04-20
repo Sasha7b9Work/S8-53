@@ -171,9 +171,6 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
@@ -329,6 +326,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp">
+      <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

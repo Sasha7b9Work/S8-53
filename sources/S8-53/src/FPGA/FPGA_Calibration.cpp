@@ -130,9 +130,8 @@ void FPGA::ProcedureCalibration(void)
                     if (!(mode == 0 && (range == Range_2mV || range == Range_5mV || range == Range_10mV)))
                     {
                         FPGA::SetModeCouple(A, (ModeCouple)mode);
-                        set.chan[A].rShiftAdd[range][mode] = 0;
-                        int16 rShiftAdd = CalculateAdditionRShift(A, (Range)range);
-                        set.chan[A].rShiftAdd[range][mode] = rShiftAdd;
+                        RSHIFT_ADD(A, range, mode) = 0;
+                        RSHIFT_ADD(A, range, mode) = CalculateAdditionRShift(A, (Range)range);
                     }
                 }
             }
@@ -167,21 +166,11 @@ void FPGA::ProcedureCalibration(void)
                     if (!(mode == 0 && (range == Range_2mV || range == Range_5mV || range == Range_10mV)))
                     {
                         FPGA::SetModeCouple(B, (ModeCouple)mode);
-                        set.chan[B].rShiftAdd[range][mode] = 0;
-                        set.chan[B].rShiftAdd[range][mode] = CalculateAdditionRShift(B, (Range)range);
+                        RSHIFT_ADD(B, range, mode) = 0;
+                        RSHIFT_ADD(B, range, mode) = CalculateAdditionRShift(B, (Range)range);
                     }
                 }
             }
-
-            /*
-            for (int range = 2; range < RangeSize; range++)
-            {
-                FPGA::SetModeCouple(B, ModeCouple_AC);
-                set.chan[B].rShiftAdd[range][ModeCouple_AC] = 0;
-                set.chan[B].rShiftAdd[range][ModeCouple_AC] = CalculateAdditionRShift(B, (Range)range);
-                set.chan[B].rShiftAdd[range][ModeCouple_DC] = set.chan[B].rShiftAdd[range][ModeCouple_AC];
-            }
-            */
 		}
 
         break;
@@ -247,10 +236,10 @@ void FuncAttScreen(void)
                 Painter::DrawText(10 + dX, 80 + dY, "Поправка нуля 2к :");
                 for (int i = 0; i < RangeSize; i++)
                 {
-                    Painter::DrawFormatText(95 + i * 16 + dX, 55 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][0]);
-                    Painter::DrawFormatText(95 + i * 16 + dX, 65 + dY, COLOR_FILL, "%d", set.chan[A].rShiftAdd[i][1]);
-                    Painter::DrawFormatText(95 + i * 16 + dX, 80 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][0]);
-                    Painter::DrawFormatText(95 + i * 16 + dX, 90 + dY, COLOR_FILL, "%d", set.chan[B].rShiftAdd[i][1]);
+                    Painter::DrawFormatText(95 + i * 16 + dX, 55 + dY, COLOR_FILL, "%d", RSHIFT_ADD(A, i, 0));
+                    Painter::DrawFormatText(95 + i * 16 + dX, 65 + dY, COLOR_FILL, "%d", RSHIFT_ADD(A, i, 1));
+                    Painter::DrawFormatText(95 + i * 16 + dX, 80 + dY, COLOR_FILL, "%d", RSHIFT_ADD(B, i, 0));
+                    Painter::DrawFormatText(95 + i * 16 + dX, 90 + dY, COLOR_FILL, "%d", RSHIFT_ADD(B, i, 1));
                 }
                 
                 Painter::DrawFormatText(10 + dX, 110 + dY, COLOR_FILL, "Коэффициент калибровки 1к : %f, %d", STRETCH_ADC_A, (int)(STRETCH_ADC_A * 0x80));

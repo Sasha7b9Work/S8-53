@@ -302,7 +302,7 @@ void FPGA::LoadRShift(Channel chan)
     Range range = SET_RANGE(chan);
     ModeCouple mode = SET_COUPLE(chan);
     static const int index[3] = {0, 1, 1};
-    int16 rShiftAdd = set.chan[chan].rShiftAdd[range][index[mode]];
+    int16 rShiftAdd = RSHIFT_ADD(chan, range, index[mode]);
 
     uint16 rShift = SET_RSHIFT(chan) + (SET_INVERSE(chan) ? -1 : 1) * rShiftAdd;
 

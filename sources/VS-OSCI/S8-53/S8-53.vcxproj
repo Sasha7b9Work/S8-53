@@ -110,7 +110,7 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c" />

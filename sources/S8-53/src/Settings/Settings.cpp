@@ -253,7 +253,7 @@ void Settings::Load(bool _default)
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    rShiftAdd[chan][i][j] = set.chan[chan].rShiftAdd[i][j];
+                    rShiftAdd[chan][i][j] = RSHIFT_ADD(chan, i, j);
                 }
             }
         }
@@ -271,7 +271,7 @@ void Settings::Load(bool _default)
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    set.chan[chan].rShiftAdd[i][j] = rShiftAdd[chan][i][j];
+                    RSHIFT_ADD(chan, i, j) = rShiftAdd[chan][i][j];
                 }
             }
         }
