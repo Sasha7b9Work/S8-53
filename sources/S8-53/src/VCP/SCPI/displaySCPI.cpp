@@ -9,67 +9,48 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Process_AUTOSEND(uint8 *buffer);
-static void Process_MAPPING(uint8 *buffer);
-static void Process_ACCUM(uint8 *buffer);
-static void Process_ACCUM_NUMBER(uint8 *buffer);
-static void Process_ACCUM_MODE(uint8 *buffer);
-static void Process_ACCUM_CLEAR(uint8 *buffer);
-static void Process_AVERAGE(uint8 *buffer);
-static void Process_AVERAGE_NUMBER(uint8 *buffer);
-static void Process_AVERAGE_MODE(uint8 *buffer);
-static void Process_MINMAX(uint8 *buffer);
-static void Process_FILTR(uint8 *buffer);
-static void Process_FPS(uint8 *buffer);
-static void Process_WINDOW(uint8 *buffer);
-static void Process_GRID(uint8 *buffer);
-static void Process_GRID_TYPE(uint8 *buffer);
-static void Process_GRID_BRIGHTNESS(uint8 *buffer);
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
 ENTER_PARSE_FUNC(SCPI::ProcessDISPLAY)
-    {"AUTOSEND",    Process_AUTOSEND},
-    {"MAPPING",     Process_MAPPING},   // Отображение
-    {"MAP",         Process_MAPPING},
-    {"ACCUMULATION",Process_ACCUM},     // Накопление
-    {"ACCUM",       Process_ACCUM},     
-    {"AVERAGE",     Process_AVERAGE},   // Усреднение
-    {"AVE",         Process_AVERAGE},
-    {"MINMAX",      Process_MINMAX},    // Мин Макс
-    {"FILTR",       Process_FILTR},     // Сглаживание
-    {"FPS",         Process_FPS},       // Частота обновл
-    {"WINDOW",      Process_WINDOW},    // Окно памяти
-    {"GRID",        Process_GRID},      // СЕТКА
+    {"AUTOSEND",    ProcessAUTOSEND},
+    {"MAPPING",     ProcessMAPPING},    // Отображение
+    {"MAP",         ProcessMAPPING},
+    {"ACCUMULATION",ProcessACCUM},      // Накопление
+    {"ACCUM",       ProcessACCUM},     
+    {"AVERAGE",     ProcessAVERAGE},    // Усреднение
+    {"AVE",         ProcessAVERAGE},
+    {"MINMAX",      ProcessMINMAX},     // Мин Макс
+    {"FILTR",       ProcessDispFILTR},  // Сглаживание
+    {"FPS",         ProcessFPS},       // Частота обновл
+    {"WINDOW",      ProcessWINDOW},    // Окно памяти
+    {"GRID",        ProcessGRID},      // СЕТКА
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(Process_GRID)
-    {"TYPE",        Process_GRID_TYPE},
-    {"BRIGHTNESS",  Process_GRID_BRIGHTNESS},
+ENTER_PARSE_FUNC(SCPI::ProcessGRID)
+    {"TYPE",        ProcessGRID_TYPE},
+    {"BRIGHTNESS",  ProcessGRID_BRIGHTNESS},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(Process_ACCUM)
-    {"NUMBER",  Process_ACCUM_NUMBER},
-    {"NUM",     Process_ACCUM_NUMBER},
-    {"MODE",    Process_ACCUM_MODE},
-    {"CLEAR",   Process_ACCUM_CLEAR},
+ENTER_PARSE_FUNC(SCPI::ProcessACCUM)
+    {"NUMBER",  ProcessACCUM_NUMBER},
+    {"NUM",     ProcessACCUM_NUMBER},
+    {"MODE",    ProcessACCUM_MODE},
+    {"CLEAR",   ProcessACCUM_CLEAR},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(Process_AVERAGE)
-    {"NUMBER",  Process_AVERAGE_NUMBER},
-    {"NUM",     Process_AVERAGE_NUMBER},
-    {"MODE",    Process_AVERAGE_MODE},
+ENTER_PARSE_FUNC(SCPI::ProcessAVERAGE)
+    {"NUMBER",  ProcessAVERAGE_NUMBER},
+    {"NUM",     ProcessAVERAGE_NUMBER},
+    {"MODE",    ProcessAVERAGE_MODE},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_AUTOSEND(uint8 *buffer)
+void SCPI::ProcessAUTOSEND(uint8 *buffer)
 {
     static int counter = 0;
     counter++;
@@ -90,7 +71,7 @@ void Process_AUTOSEND(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_MAPPING(uint8 *buffer)
+void SCPI::ProcessMAPPING(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -111,7 +92,7 @@ static void Process_MAPPING(uint8 *buffer)
 extern void OnPress_Accumulation_Clear();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_ACCUM_NUMBER(uint8 *buffer)
+void SCPI::ProcessACCUM_NUMBER(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -138,7 +119,7 @@ static void Process_ACCUM_NUMBER(uint8 *buffer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_ACCUM_MODE(uint8 *buffer)
+void SCPI::ProcessACCUM_MODE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -157,13 +138,13 @@ static void Process_ACCUM_MODE(uint8 *buffer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_ACCUM_CLEAR(uint8 *buffer)
+void SCPI::ProcessACCUM_CLEAR(uint8 *buffer)
 {
     OnPress_Accumulation_Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_AVERAGE_NUMBER(uint8 *buffer)
+void SCPI::ProcessAVERAGE_NUMBER(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -192,7 +173,7 @@ static void Process_AVERAGE_NUMBER(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_AVERAGE_MODE(uint8 *buffer)
+void SCPI::ProcessAVERAGE_MODE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -212,7 +193,7 @@ static void Process_AVERAGE_MODE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_MINMAX(uint8 *buffer)
+void SCPI::ProcessMINMAX(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -240,7 +221,7 @@ static void Process_MINMAX(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_FILTR(uint8 *buffer)
+void SCPI::ProcessDispFILTR(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -274,7 +255,7 @@ extern void OnChanged_RefreshFPS(bool active);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_FPS(uint8 *buffer)
+void SCPI::ProcessFPS(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -297,7 +278,7 @@ static void Process_FPS(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_WINDOW(uint8 *buffer)
+void SCPI::ProcessWINDOW(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -322,7 +303,7 @@ extern void OnChanged_Grid_Brightness();
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_GRID_BRIGHTNESS(uint8 *buffer)
+void SCPI::ProcessGRID_BRIGHTNESS(uint8 *buffer)
 {
     int intVal = 0;
     if (SCPI::FirstIsInt(buffer, &intVal, 0, 100))
@@ -351,7 +332,7 @@ static void Process_GRID_BRIGHTNESS(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void Process_GRID_TYPE(uint8 *buffer)
+void SCPI::ProcessGRID_TYPE(uint8 *buffer)
 {
     static const MapElement map[] =
     {

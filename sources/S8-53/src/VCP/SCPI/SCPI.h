@@ -88,6 +88,24 @@ private:
     static void ProcessRANGE(uint8 *buffer);
     static void ProcessOFFSET(uint8 *buffer);
     static void ProcessFACTOR(uint8 *buffer);
+
+    // DISPlay
+    static void ProcessAUTOSEND(uint8 *buffer);
+    static void ProcessMAPPING(uint8 *buffer);
+    static void ProcessACCUM(uint8 *buffer);
+    static void ProcessACCUM_NUMBER(uint8 *buffer);
+    static void ProcessACCUM_MODE(uint8 *buffer);
+    static void ProcessACCUM_CLEAR(uint8 *buffer);
+    static void ProcessAVERAGE(uint8 *buffer);
+    static void ProcessAVERAGE_NUMBER(uint8 *buffer);
+    static void ProcessAVERAGE_MODE(uint8 *buffer);
+    static void ProcessMINMAX(uint8 *buffer);
+    static void ProcessDispFILTR(uint8 *buffer);
+    static void ProcessFPS(uint8 *buffer);
+    static void ProcessWINDOW(uint8 *buffer);
+    static void ProcessGRID(uint8 *buffer);
+    static void ProcessGRID_TYPE(uint8 *buffer);
+    static void ProcessGRID_BRIGHTNESS(uint8 *buffer);
 };
 
 
