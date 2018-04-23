@@ -20,17 +20,7 @@
 #include "Utils/ProcessingSignal.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FuncOfDraw(void) 
-{
-    Painter::BeginScene(COLOR_FILL);
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static void FuncConnect(int _id);
-//static void FuncReciever(int _id, const char *_buffer, uint _length);
 static void ProcessingSignal();
-static void Init();
 
 #define TICS ((gTimerTics - time) / 120.0f)
 
@@ -39,19 +29,14 @@ extern void main3();
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int main(void)
 {
-    //main3();
     Hardware::Init();
-    Init();
+    VCP_Init();
     Settings::Load(false);
     FPGA::Init();    
     Timer::PauseOnTime(250);
     FPGA::OnPressStartStop();
     LAN::Init();
     Display::Init();
-    if (gBF.tuneTime == 1)
-    {
-        //menu.OpenItemTime();
-    }
 
     while(1)
     {
@@ -114,28 +99,3 @@ void ProcessingSignal()
 
     Cursors_Update();    // В случае, если находимся в режиме курсорных измерений, обновляем их положение, если нужно.
 }
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Init() 
-{
-    VCP_Init();
-}
-
-/*
-void FuncConnect(int _id) {
-    static char message[100];
-    message[0] = '\0'; 
-    strcpy(message, "Connection ");
-    IntToStrCat(message, _id);
-    strcat(message, " is establishes. All ");
-    IntToStrCat(message, TCP_SOCKET_AllConnections());
-    strcat(message, " connections");
-    TCP_SOCKET_SendToOne(_id, message, strlen(message));
-}
-*/
-
-/*
-void FuncReciever(int _id, const char *eBuffer, uint length) {
-    TCP_SOCKET_SendToOne(_id, eBuffer, length);
-}
-*/

@@ -1150,24 +1150,24 @@
           <GroupName>Ethernet</GroupName>
           <Files>
             <File>
-              <FileName>Ethernet.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Ethernet\Ethernet.c</FilePath>
-            </File>
-            <File>
               <FileName>Ethernet.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ethernet\Ethernet.h</FilePath>
             </File>
             <File>
-              <FileName>TcpSocket.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Ethernet\TcpSocket.c</FilePath>
-            </File>
-            <File>
               <FileName>TcpSocket.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Ethernet\TcpSocket.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ethernet\Ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TcpSocket.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Ethernet\TcpSocket.cpp</FilePath>
             </File>
           </Files>
         </Group>
