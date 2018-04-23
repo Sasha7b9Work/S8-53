@@ -24,7 +24,7 @@
 #define SCPI_SEND(...)                                  \
     if(gBF.connectToHost == 1)                          \
     {                                                   \
-        VCP::SendFormatStringAsynch(__VA_ARGS__);        \
+        VCP::SendFormatStringAsynch(__VA_ARGS__);       \
     }                                                   \
     if (CLIENT_LAN_IS_CONNECTED)                        \
     {                                                   \
@@ -40,7 +40,7 @@ void funcName(uint8 *buffer)                            \
 #define LEAVE_PARSE_FUNC                                \
         {0}                                             \
     };                                                  \
-    SCPI::ProcessingCommand(commands, buffer);           \
+    SCPI::ProcessingCommand(commands, buffer);          \
 }
 
 
@@ -66,6 +66,13 @@ private:
     static void ProcessCHANNEL(uint8 *buffer);
     static void ProcessTRIG(uint8 *buffer);
     static void ProcessTBASE(uint8 *buffer);
+    static void ProcessINPUT(uint8 *buffer);
+    static void ProcessCOUPLE(uint8 *buffer);
+    static void ProcessFILTR(uint8 *buffer);
+    static void ProcessINVERSE(uint8 *buffer);
+    static void ProcessRANGE(uint8 *buffer);
+    static void ProcessOFFSET(uint8 *buffer);
+    static void ProcessFACTOR(uint8 *buffer);
 };
 
 

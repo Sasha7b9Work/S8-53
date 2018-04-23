@@ -9,29 +9,21 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Process_INPUT(uint8 *buffer);
-static void Process_COUPLE(uint8 *buffer);
-static void Process_FILTR(uint8 *buffer);
-static void Process_INVERSE(uint8 *buffer);
-static void Process_RANGE(uint8 *buffer);
-static void Process_OFFSET(uint8 *buffer);
-static void Process_FACTOR(uint8 *buffer);
-
 static Channel chan = A;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ENTER_PARSE_FUNC(SCPI::ProcessCHANNEL)
-        {"INPUT",       Process_INPUT},
-        {"COUPLING",    Process_COUPLE},
-        {"COUPL",       Process_COUPLE},
-        {"FILTR",       Process_FILTR},
-        {"SET_INVERSE", Process_INVERSE},
-        {"INV",         Process_INVERSE},
-        {"SET_RANGE",   Process_RANGE},
-        {"OFFSET",      Process_OFFSET},
-        {"FACTOR",      Process_FACTOR},
-        {"FACT",        Process_FACTOR},
+        {"INPUT",       ProcessINPUT},
+        {"COUPLING",    ProcessCOUPLE},
+        {"COUPL",       ProcessCOUPLE},
+        {"FILTR",       ProcessFILTR},
+        {"SET_INVERSE", ProcessINVERSE},
+        {"INV",         ProcessINVERSE},
+        {"SET_RANGE",   ProcessRANGE},
+        {"OFFSET",      ProcessOFFSET},
+        {"FACTOR",      ProcessFACTOR},
+        {"FACT",        ProcessFACTOR},
         {0}
     };
 
@@ -42,7 +34,7 @@ ENTER_PARSE_FUNC(SCPI::ProcessCHANNEL)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_INPUT(uint8 *buffer)
+void SCPI::ProcessINPUT(uint8 *buffer)
 {
     static const MapElement map[] = 
     {
@@ -68,7 +60,7 @@ extern void OnChanged_CoupleB(bool);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_COUPLE(uint8 *buffer)
+void SCPI::ProcessCOUPLE(uint8 *buffer)
 {
     static const pFuncVB func[2] = {OnChanged_CoupleA, OnChanged_CoupleB};
 
@@ -98,7 +90,7 @@ extern void OnChanged_FiltrB(bool activate);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_FILTR(uint8 *buffer)
+void SCPI::ProcessFILTR(uint8 *buffer)
 {
     static const pFuncVB func[2] = {OnChanged_FiltrA, OnChanged_FiltrB};
 
@@ -121,7 +113,7 @@ void Process_FILTR(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_INVERSE(uint8 *buffer)
+void SCPI::ProcessINVERSE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -142,7 +134,7 @@ void Process_INVERSE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_RANGE(uint8 *buffer)
+void SCPI::ProcessRANGE(uint8 *buffer)
 {
     static const MapElement map[] = 
     {
@@ -173,7 +165,7 @@ void Process_RANGE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_OFFSET(uint8 *buffer)
+void SCPI::ProcessOFFSET(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -198,7 +190,7 @@ void Process_OFFSET(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_FACTOR(uint8 *buffer)
+void SCPI::ProcessFACTOR(uint8 *buffer)
 {
     static const MapElement map[] =
     {
