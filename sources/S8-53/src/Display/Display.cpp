@@ -382,7 +382,7 @@ void DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int 
     sDisplay_PointsOnDisplay(&firstPoint, &lastPoint);
     if(data == dataP2P_0 || data == dataP2P_1)
     {
-        if(SELFRECORDER)
+        if(SET_SELFRECORDER)
         {
             LOG_TRACE
         }
@@ -620,7 +620,7 @@ static void DrawDataInModePoint2Point()
 
     if (LAST_AFFECTED_CHANNEL_IS_B)
     {
-        if (SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
+        if (SET_SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
         {
             DrawDataChannel(dataP2P_0, A, ds, GRID_TOP, Grid::ChannelBottom());
             DrawDataChannel(dataP2P_1, B, ds, GRID_TOP, Grid::ChannelBottom());
@@ -633,7 +633,7 @@ static void DrawDataInModePoint2Point()
     }
     else
     {
-        if (SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
+        if (SET_SELFRECORDER || !dataStorage.NumElementsWithCurrentSettings())
         {
             DrawDataChannel(dataP2P_1, B, ds, GRID_TOP, Grid::ChannelBottom());
             DrawDataChannel(dataP2P_0, A, ds, GRID_TOP, Grid::ChannelBottom());
@@ -718,7 +718,7 @@ static bool DrawDataNormal()
     if (!dataP2PIsEmpty)
     {
         static const pFuncVV funcs[2] = {DrawDataInModePoint2Point, DrawDataInModeSelfRecorder};
-        funcs[(int)SELFRECORDER]();
+        funcs[(int)SET_SELFRECORDER]();
     }
     else
     {
@@ -1016,7 +1016,7 @@ void DrawMemoryWindow(void)
     }
 
     int x[] = {leftX, (rightX - leftX) / 2 + leftX + 1, rightX};
-    int x0 = x[TPOS];
+    int x0 = x[SET_TPOS];
 
     // Маркер TPos
     Painter::FillRegionC(x0 - 3, 9, 6, 6, COLOR_BACK);
@@ -1024,7 +1024,7 @@ void DrawMemoryWindow(void)
 
     // Маркер tShift
     float scale = (float)(rightX - leftX + 1) / ((float)sMemory_GetNumPoints(false) - (sMemory_GetNumPoints(false) == 281 ? 1 : 0));
-    float xShift = 1 + (sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, (int)gDSet->length1channel, TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet)) * scale;
+    float xShift = 1 + (sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, (int)gDSet->length1channel, SET_TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet)) * scale;
 
     Painter::FillRegionC(xShift - 1, 3, 6, 6, COLOR_BACK);
     Painter::FillRegionC(xShift, 4, 4, 4, COLOR_FILL);
@@ -1214,7 +1214,7 @@ void Display::DrawCursorsRShift()
 static bool NeedForClearScreen()
 {
     int numAccum = NUM_ACCUM;
-    if (sTime_RandomizeModeEnabled() || numAccum == 1 || MODE_ACCUM_IS_NORESET || SELFRECORDER)
+    if (sTime_RandomizeModeEnabled() || numAccum == 1 || MODE_ACCUM_IS_NORESET || SET_SELFRECORDER)
     {
         return true;
     }
@@ -1738,7 +1738,7 @@ void Display::DrawCursorTShift()
     sDisplay_PointsOnDisplay(&firstPoint, &lastPoint);
 
     // Рисуем TPos
-    int shiftTPos = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, TPOS) - SHIFT_IN_MEMORY;
+    int shiftTPos = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, SET_TPOS) - SHIFT_IN_MEMORY;
     float scale = (lastPoint - firstPoint) / Grid::Width();
     int gridLeft = Grid::Left();
     int x = gridLeft + shiftTPos * scale - 3;
@@ -1748,7 +1748,7 @@ void Display::DrawCursorTShift()
     };
 
     // Рисуем tShift
-    int shiftTShift = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet);
+    int shiftTShift = sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, gDSet->length1channel, SET_TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet);
     if(IntInRange(shiftTShift, firstPoint, lastPoint))
     {
         int x = gridLeft + shiftTShift - firstPoint - 3;
@@ -2245,7 +2245,7 @@ void Display::ResetP2Ppoints(bool empty)
 void Display::AddPoints(uint8 data00, uint8 data01, uint8 data10, uint8 data11)
 {
     dataP2PIsEmpty = false;
-    if (SELFRECORDER)
+    if (SET_SELFRECORDER)
     {
         if (lastP2Pdata == NUM_P2P_POINTS)
         {
@@ -2259,7 +2259,7 @@ void Display::AddPoints(uint8 data00, uint8 data01, uint8 data10, uint8 data11)
     
     dataP2P_0[lastP2Pdata] = data01;
     dataP2P_1[lastP2Pdata++] = data11;
-    if (!SELFRECORDER && lastP2Pdata >= NUM_P2P_POINTS)
+    if (!SET_SELFRECORDER && lastP2Pdata >= NUM_P2P_POINTS)
     {
         lastP2Pdata = 0;
     }

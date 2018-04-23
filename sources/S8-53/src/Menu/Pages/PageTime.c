@@ -158,7 +158,7 @@ static const Choice mcTPos =
         {"Центр",   "Center"},
         {"Право",   "Right"}
     },
-    (int8*)&TPOS, OnChanged_TPos
+    (int8*)&SET_TPOS, OnChanged_TPos
 };
 
 void OnChanged_TPos(bool active)
@@ -180,7 +180,7 @@ static const Choice mcSelfRecorder =
         {DISABLE_RU,    DISABLE_EN},
         {ENABLE_RU,     ENABLE_EN}
     },
-    (int8*)&SELFRECORDER
+    (int8*)&SET_SELFRECORDER
 };
 
 static bool IsActive_SelfRecorder(void)

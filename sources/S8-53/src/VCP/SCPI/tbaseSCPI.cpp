@@ -8,31 +8,21 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Process_RANGE(uint8 *buffer);
-static void Process_OFFSET(uint8 *buffer);
-static void Process_SAMPLING(uint8 *buffer);
-static void Process_PEACKDET(uint8 *buffer);
-static void Process_TPOS(uint8 *buffer);
-static void Process_SELFRECORDER(uint8 *buffer);
-static void Process_FUNCTIMEDIV(uint8 *buffer);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ENTER_PARSE_FUNC(SCPI::ProcessTBASE)
-    {"SET_RANGE",   Process_RANGE},
-    {"OFFSET",      Process_OFFSET},
-    {"SAMPLING",    Process_SAMPLING},
-    {"SAMPL",       Process_SAMPLING},
-    {"PEACKDET",    Process_PEACKDET},
-    {"PEACK",       Process_PEACKDET},
-    {"TPOS",        Process_TPOS},
-    {"SELFRECORDER",Process_SELFRECORDER},
-    {"FUNCTIMEDIV", Process_FUNCTIMEDIV},
+    {"SET_RANGE",   SCPI::TBASE::RANGE},
+    {"OFFSET",      SCPI::TBASE::OFFSET},
+    {"SAMPLING",    SCPI::TBASE::SAMPLING},
+    {"SAMPL",       SCPI::TBASE::SAMPLING},
+    {"PEACKDET",    SCPI::TBASE::PEACKDET},
+    {"PEACK",       SCPI::TBASE::PEACKDET},
+    {"TPOS",        SCPI::TBASE::TPOS},
+    {"SELFRECORDER",SCPI::TBASE::SELFRECORDER},
+    {"FUNCTIMEDIV", SCPI::TBASE::FUNCTIMEDIV},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_RANGE(uint8 *buffer)
+void SCPI::TBASE::RANGE(uint8 *buffer)
 {
     static const MapElement map[] = 
     {
@@ -80,7 +70,7 @@ void Process_RANGE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_OFFSET(uint8 *buffer)
+void SCPI::TBASE::OFFSET(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -107,7 +97,7 @@ void Process_OFFSET(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_SAMPLING(uint8 *buffer)
+void SCPI::TBASE::SAMPLING(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -127,7 +117,7 @@ void Process_SAMPLING(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_PEACKDET(uint8 *buffer)
+void SCPI::TBASE::PEACKDET(uint8 *buffer)
 {
     extern void OnChanged_PeakDet(bool active);  ///< \todo Вообще-то это нехорошо, как нехорошо и дублировать. Надо бы подумать.
 
@@ -149,7 +139,7 @@ void Process_PEACKDET(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_TPOS(uint8 *buffer)
+void SCPI::TBASE::TPOS(uint8 *buffer)
 {
     extern void OnChanged_TPos(bool active);
 
@@ -162,17 +152,17 @@ void Process_TPOS(uint8 *buffer)
         {0}
     };
     ENTER_ANALYSIS
-        if (value < 3)      { TPOS = (TPos)value; OnChanged_TPos(true); }
+        if (value < 3)      { SET_TPOS = (TPos)value; OnChanged_TPos(true); }
         else if (4 == value)
         {
-            SCPI_SEND(":TBASE:TPOS %s", map[TPOS].key);
+            SCPI_SEND(":TBASE:TPOS %s", map[SET_TPOS].key);
         }
     LEAVE_ANALYSIS
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_SELFRECORDER(uint8 *buffer)
+void SCPI::TBASE::SELFRECORDER(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -182,17 +172,17 @@ void Process_SELFRECORDER(uint8 *buffer)
         {0}
     };
     ENTER_ANALYSIS
-        if (value < 2) { SELFRECORDER = (value == 0); }
+        if (value < 2) { SET_SELFRECORDER = (value == 0); }
         else if (2 == value)
         {
-            SCPI_SEND(":TBASE:SELFRECORDER %s", SELFRECORDER ? "ON" : "OFF");
+            SCPI_SEND(":TBASE:SELFRECORDER %s", SET_SELFRECORDER ? "ON" : "OFF");
         }
     LEAVE_ANALYSIS
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_FUNCTIMEDIV(uint8 *buffer)
+void SCPI::TBASE::FUNCTIMEDIV(uint8 *buffer)
 {
     static const MapElement map[] =
     {

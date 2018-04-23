@@ -191,7 +191,7 @@ void FPGA::Update(void)
         return;
     }
 
-    if(SELFRECORDER)
+    if(SET_SELFRECORDER)
     {
         ReadPoint();
     }

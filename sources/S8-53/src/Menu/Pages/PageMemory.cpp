@@ -49,15 +49,15 @@ void ChangeC_Memory_NumPoints(bool active)
     }
     else
     {
-        if(TPOS_IS_LEFT)
+        if(SET_TPOS_IS_LEFT)
         {
             SHIFT_IN_MEMORY = 0;
         }
-        else if(TPOS_IS_CENTER)
+        else if(SET_TPOS_IS_CENTER)
         {
             SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) / 2 - Grid::Width() / 2;
         }
-        else if(TPOS_IS_RIGHT)
+        else if(SET_TPOS_IS_RIGHT)
         {
             SHIFT_IN_MEMORY = sMemory_GetNumPoints(false) - Grid::Width() - 2;
         }

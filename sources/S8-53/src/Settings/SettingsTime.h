@@ -13,17 +13,17 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SET_TBASE                               (set.time.tBase)        ///< SettingTime.tBase
+#define SET_TBASE                           (set.time.tBase)        ///< SettingTime.tBase
 
 #define TSHIFT                              (set.time.tShiftRel)    ///< SettingsTime.tShiftRel
 
 #define TIME_DIV_XPOS                       (set.time.timeDivXPos)  ///< SettingsTime.timeDivXPos
 #define TIME_DIV_XPOS_IS_SHIFT_IN_MEMORY    (TIME_DIV_XPOS == FunctionTime_ShiftInMemory)
 
-#define TPOS                                (set.time.tPos)         ///< SettingsTime.tPos
-#define TPOS_IS_LEFT                        (TPOS == TPos_Left)
-#define TPOS_IS_CENTER                      (TPOS == TPos_Center)
-#define TPOS_IS_RIGHT                       (TPOS == TPos_Right)
+#define SET_TPOS                            (set.time.tPos)         ///< SettingsTime.tPos
+#define SET_TPOS_IS_LEFT                    (SET_TPOS == TPos_Left)
+#define SET_TPOS_IS_CENTER                  (SET_TPOS == TPos_Center)
+#define SET_TPOS_IS_RIGHT                   (SET_TPOS == TPos_Right)
 
 #define SAMPLE_TYPE                         (set.time.sampleType)   ///< SettingsTime.sampleType
 #define SAMPLE_TYPE_IS_EQUAL                (SAMPLE_TYPE == SampleType_Equal)
@@ -33,7 +33,7 @@
 #define PEAKDET_IS_DISABLE                  (PEAKDET == PeackDet_Disable)
 #define PEAKDET_IS_ENABLE                   (PEAKDET == PeackDet_Enable)
 
-#define SELFRECORDER                        (set.time.selfRecorder) ///< SettingsTime.selfRecorder
+#define SET_SELFRECORDER                    (set.time.selfRecorder) ///< SettingsTime.selfRecorder
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -118,6 +118,18 @@ private:
         static void GRID_TYPE(uint8 *buffer);
         static void GRID_BRIGHTNESS(uint8 *buffer);
     };
+
+    class TBASE
+    {
+    public:
+        static void RANGE(uint8 *buffer);
+        static void OFFSET(uint8 *buffer);
+        static void SAMPLING(uint8 *buffer);
+        static void PEACKDET(uint8 *buffer);
+        static void TPOS(uint8 *buffer);
+        static void SELFRECORDER(uint8 *buffer);
+        static void FUNCTIMEDIV(uint8 *buffer);
+    };
 };
 
 
