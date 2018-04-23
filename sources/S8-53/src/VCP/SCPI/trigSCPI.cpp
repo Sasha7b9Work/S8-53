@@ -19,23 +19,14 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Process_MODE(uint8 *buffer);
-static void Process_SOURCE(uint8 *buffer);
-static void Process_POLARITY(uint8 *buffer);
-static void Process_INPUT(uint8 *buffer);
-static void Process_FIND(uint8 *buffer);
-static void Process_OFFSET(uint8 *buffer);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ENTER_PARSE_FUNC(SCPI::ProcessTRIG)
-    {"MODE",        Process_MODE},
-    {"SOURCE",      Process_SOURCE},
-    {"POLARITY",    Process_POLARITY},
-    {"POLAR",       Process_POLARITY},
-    {"INPUT",       Process_INPUT},
-    {"FIND",        Process_FIND},
-    {"OFFSET",      Process_OFFSET},
+    {"MODE",        SCPI::TRIGGER::MODE},
+    {"SOURCE",      SCPI::TRIGGER::SOURCE},
+    {"POLARITY",    SCPI::TRIGGER::POLARITY},
+    {"POLAR",       SCPI::TRIGGER::POLARITY},
+    {"INPUT",       SCPI::TRIGGER::INPUT},
+    {"FIND",        SCPI::TRIGGER::FIND},
+    {"OFFSET",      SCPI::TRIGGER::OFFSET},
 LEAVE_PARSE_FUNC
 
 
@@ -44,7 +35,7 @@ extern void OnPress_Mode(bool active);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_MODE(uint8 *buffer)
+void SCPI::TRIGGER::MODE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -67,7 +58,7 @@ void Process_MODE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_SOURCE(uint8 *buffer)
+void SCPI::TRIGGER::SOURCE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -90,7 +81,7 @@ void Process_SOURCE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_POLARITY(uint8 *buffer)
+void SCPI::TRIGGER::POLARITY(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -111,7 +102,7 @@ void Process_POLARITY(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_INPUT(uint8 *buffer)
+void SCPI::TRIGGER::INPUT(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -136,7 +127,7 @@ void Process_INPUT(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_FIND(uint8 *buffer)
+void SCPI::TRIGGER::FIND(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -159,7 +150,7 @@ void Process_FIND(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_OFFSET(uint8 *buffer)
+void SCPI::TRIGGER::OFFSET(uint8 *buffer)
 {
     static const MapElement map[] =
     {

@@ -130,6 +130,17 @@ private:
         static void SELFRECORDER(uint8 *buffer);
         static void FUNCTIMEDIV(uint8 *buffer);
     };
+
+    class TRIGGER
+    {
+    public:
+        static void MODE(uint8 *buffer);
+        static void SOURCE(uint8 *buffer);
+        static void POLARITY(uint8 *buffer);
+        static void INPUT(uint8 *buffer);
+        static void FIND(uint8 *buffer);
+        static void OFFSET(uint8 *buffer);
+    };
 };
 
 
