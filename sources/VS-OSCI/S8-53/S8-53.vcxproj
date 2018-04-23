@@ -340,9 +340,6 @@
     <ClInclude Include="..\..\S8-53\src\Utils\Strings.h" />
     <ClInclude Include="..\..\S8-53\src\Utils\TablesLog.h" />
     <ClInclude Include="..\..\S8-53\src\Utils\TablesWindow.h" />
-    <ClInclude Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

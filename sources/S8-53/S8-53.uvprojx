@@ -1835,11 +1835,6 @@
           <GroupName>VCP/SCPI</GroupName>
           <Files>
             <File>
-              <FileName>commonSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\VCP\SCPI\commonSCPI.h</FilePath>
-            </File>
-            <File>
               <FileName>controlSCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\VCP\SCPI\controlSCPI.h</FilePath>

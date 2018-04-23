@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Log.h"
 #include "SCPI.h"
-#include "commonSCPI.h"
 #include "controlSCPI.h"
 #include "Utils/Strings.h"
 #include "Utils/GlobalFunctions.h"
@@ -78,13 +77,13 @@ void SCPI::ParseNewCommand(uint8 *buffer)
 {
     static const StructCommand commands[] =
     {
-    {"*IDN ?",      Process_IDN},
-    {"*IDN?",       Process_IDN},
-    {"RUN",         Process_RUN},
-    {"STOP",        Process_STOP},
-    {"RESET",       Process_RESET},
-    {"AUTOSCALE",   Process_AUTOSCALE}, 
-    {"REQUEST ?",   Process_REQUEST},
+    {"*IDN ?",      ProcessIDN},
+    {"*IDN?",       ProcessIDN},
+    {"RUN",         ProcessRUN},
+    {"STOP",        ProcessSTOP},
+    {"RESET",       ProcessRESET},
+    {"AUTOSCALE",   ProcessAUTOSCALE}, 
+    {"REQUEST ?",   ProcessREQUEST},
 
     {"DISPLAY",     ProcessDISPLAY},       // Вначале всегда идёт полное слово, потом сокращение.
     {"DISP",        ProcessDISPLAY},       // Это нужно для правильного парсинга.

@@ -68,6 +68,14 @@ private:
     static void ProcessTRIG(uint8 *buffer);
     static void ProcessTBASE(uint8 *buffer);
 
+    // COMMON
+    static void ProcessIDN(uint8 *buffer);
+    static void ProcessRUN(uint8 *buffer);
+    static void ProcessSTOP(uint8 *buffer);
+    static void ProcessRESET(uint8 *buffer);
+    static void ProcessAUTOSCALE(uint8 *buffer);
+    static void ProcessREQUEST(uint8 *buffer);
+
     // CHANnel
     static void ProcessINPUT(uint8 *buffer);
     static void ProcessCOUPLE(uint8 *buffer);

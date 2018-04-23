@@ -1,47 +1,46 @@
 #include "defines.h"
 #include "SCPI.h"
-#include "commonSCPI.h"
 #include "Hardware/Hardware.h"
 #include "VCP/VCP.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Process_IDN(uint8 *buffer)
+void SCPI::ProcessIDN(uint8 *buffer)
 {
     SCPI_SEND("MNIPI,S8-53/1,V%S,%X", NUM_VER, Hardware::CalculateCRC32());
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_RUN(uint8 *buffer)
+void SCPI::ProcessRUN(uint8 *buffer)
 {
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_STOP(uint8 *buffer)
+void SCPI::ProcessSTOP(uint8 *buffer)
 {
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_RESET(uint8 *buffer)
+void SCPI::ProcessRESET(uint8 *buffer)
 {
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_AUTOSCALE(uint8 *buffer)
+void SCPI::ProcessAUTOSCALE(uint8 *buffer)
 {
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Process_REQUEST(uint8 *buffer)
+void SCPI::ProcessREQUEST(uint8 *buffer)
 {
     SCPI_SEND("S8-53/1");
 }

@@ -368,9 +368,6 @@
     <ClInclude Include="..\..\S8-53\src\VCP\VCP.h">
       <Filter>VCP</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.h">
-      <Filter>VCP\SCPI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.h">
       <Filter>VCP\SCPI</Filter>
     </ClInclude>
