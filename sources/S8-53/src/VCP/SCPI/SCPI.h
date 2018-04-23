@@ -60,12 +60,15 @@ public:
     static void AddNewData(uint8 *buffer, uint length);
     static void ProcessingCommand(const StructCommand *commands, uint8 *buffer);
     static bool FirstIsInt(uint8 *buffer, int *value, int min, int max);
+
+private:
+    static void ProcessDISPLAY(uint8 *buffer);
+    static void ProcessCHANNEL(uint8 *buffer);
+    static void ProcessTRIG(uint8 *buffer);
+    static void ProcessTBASE(uint8 *buffer);
 };
 
-void Process_DISPLAY(uint8 *buffer);
-void Process_CHANNEL(uint8 *buffer);
-void Process_TRIG(uint8 *buffer);
-void Process_TBASE(uint8 *buffer);
+
 
 
 /** @}

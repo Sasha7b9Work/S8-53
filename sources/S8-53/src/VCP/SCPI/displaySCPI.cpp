@@ -28,7 +28,7 @@ static void Process_GRID_BRIGHTNESS(uint8 *buffer);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(Process_DISPLAY)
+ENTER_PARSE_FUNC(SCPI::ProcessDISPLAY)
     {"AUTOSEND",    Process_AUTOSEND},
     {"MAPPING",     Process_MAPPING},   // Отображение
     {"MAP",         Process_MAPPING},

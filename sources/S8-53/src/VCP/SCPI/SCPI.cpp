@@ -86,20 +86,20 @@ void SCPI::ParseNewCommand(uint8 *buffer)
     {"AUTOSCALE",   Process_AUTOSCALE}, 
     {"REQUEST ?",   Process_REQUEST},
 
-    {"DISPLAY",     Process_DISPLAY},       // Вначале всегда идёт полное слово, потом сокращение.
-    {"DISP",        Process_DISPLAY},       // Это нужно для правильного парсинга.
+    {"DISPLAY",     ProcessDISPLAY},       // Вначале всегда идёт полное слово, потом сокращение.
+    {"DISP",        ProcessDISPLAY},       // Это нужно для правильного парсинга.
 
-    {"CHANNEL1",    Process_CHANNEL},
-    {"CHAN1",       Process_CHANNEL},
+    {"CHANNEL1",    ProcessCHANNEL},
+    {"CHAN1",       ProcessCHANNEL},
 
-    {"CHANNEL2",    Process_CHANNEL},
-    {"CHAN2",       Process_CHANNEL},
+    {"CHANNEL2",    ProcessCHANNEL},
+    {"CHAN2",       ProcessCHANNEL},
 
-    {"TRIGGER",     Process_TRIG},
-    {"TRIG",        Process_TRIG},
+    {"TRIGGER",     ProcessTRIG},
+    {"TRIG",        ProcessTRIG},
 
-    {"TBASE",       Process_TBASE},
-    {"TBAS" ,       Process_TBASE},
+    {"TBASE",       ProcessTBASE},
+    {"TBAS" ,       ProcessTBASE},
 
     {"KEY",         Process_KEY},
     {"GOVERNOR",    Process_GOVERNOR},

@@ -1,11 +1,11 @@
-#include "../../defines.h"
+#include "defines.h"
 #include "SCPI.h"
 #include "Log.h"
-#include "../../Settings/Settings.h"
-#include "../../Utils/Map.h"
-#include "../../Utils/GlobalFunctions.h"
-#include "../../VCP/VCP.h"
-#include "../../FPGA/FPGA.h"
+#include "Settings/Settings.h"
+#include "Utils/Map.h"
+#include "Utils/GlobalFunctions.h"
+#include "VCP/VCP.h"
+#include "FPGA/FPGA.h"
 
 
 /*
@@ -28,7 +28,7 @@ static void Process_OFFSET(uint8 *buffer);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ENTER_PARSE_FUNC(Process_TRIG)
+ENTER_PARSE_FUNC(SCPI::ProcessTRIG)
     {"MODE",        Process_MODE},
     {"SOURCE",      Process_SOURCE},
     {"POLARITY",    Process_POLARITY},

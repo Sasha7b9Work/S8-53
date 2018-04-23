@@ -21,7 +21,7 @@ static Channel chan = A;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ENTER_PARSE_FUNC(Process_CHANNEL)
+ENTER_PARSE_FUNC(SCPI::ProcessCHANNEL)
         {"INPUT",       Process_INPUT},
         {"COUPLING",    Process_COUPLE},
         {"COUPL",       Process_COUPLE},
