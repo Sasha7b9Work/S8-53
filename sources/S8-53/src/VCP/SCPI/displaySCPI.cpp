@@ -10,47 +10,47 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ENTER_PARSE_FUNC(SCPI::ProcessDISPLAY)
-    {"AUTOSEND",    ProcessAUTOSEND},
-    {"MAPPING",     ProcessMAPPING},    // Отображение
-    {"MAP",         ProcessMAPPING},
-    {"ACCUMULATION",ProcessACCUM},      // Накопление
-    {"ACCUM",       ProcessACCUM},     
-    {"AVERAGE",     ProcessAVERAGE},    // Усреднение
-    {"AVE",         ProcessAVERAGE},
-    {"MINMAX",      ProcessMINMAX},     // Мин Макс
-    {"FILTR",       ProcessDispFILTR},  // Сглаживание
-    {"FPS",         ProcessFPS},       // Частота обновл
-    {"WINDOW",      ProcessWINDOW},    // Окно памяти
-    {"GRID",        ProcessGRID},      // СЕТКА
+    {"AUTOSEND",    SCPI::DISPLAY::AUTOSEND},
+    {"MAPPING",     SCPI::DISPLAY::MAPPING},    // Отображение
+    {"MAP",         SCPI::DISPLAY::MAPPING},
+    {"ACCUMULATION",SCPI::DISPLAY::ACCUM},      // Накопление
+    {"ACCUM",       SCPI::DISPLAY::ACCUM},     
+    {"AVERAGE",     SCPI::DISPLAY::AVERAGE},    // Усреднение
+    {"AVE",         SCPI::DISPLAY::AVERAGE},
+    {"MINMAX",      SCPI::DISPLAY::MINMAX},     // Мин Макс
+    {"FILTR",       SCPI::DISPLAY::FILTR},  // Сглаживание
+    {"FPS",         SCPI::DISPLAY::FPS},       // Частота обновл
+    {"WINDOW",      SCPI::DISPLAY::WINDOW},    // Окно памяти
+    {"GRID",        SCPI::DISPLAY::GRID},      // СЕТКА
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(SCPI::ProcessGRID)
-    {"TYPE",        ProcessGRID_TYPE},
-    {"BRIGHTNESS",  ProcessGRID_BRIGHTNESS},
+ENTER_PARSE_FUNC(SCPI::DISPLAY::GRID)
+    {"TYPE",        SCPI::DISPLAY::GRID_TYPE},
+    {"BRIGHTNESS",  SCPI::DISPLAY::GRID_BRIGHTNESS},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(SCPI::ProcessACCUM)
-    {"NUMBER",  ProcessACCUM_NUMBER},
-    {"NUM",     ProcessACCUM_NUMBER},
-    {"MODE",    ProcessACCUM_MODE},
-    {"CLEAR",   ProcessACCUM_CLEAR},
+ENTER_PARSE_FUNC(SCPI::DISPLAY::ACCUM)
+    {"NUMBER",  SCPI::DISPLAY::ACCUM_NUMBER},
+    {"NUM",     SCPI::DISPLAY::ACCUM_NUMBER},
+    {"MODE",    SCPI::DISPLAY::ACCUM_MODE},
+    {"CLEAR",   SCPI::DISPLAY::ACCUM_CLEAR},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-ENTER_PARSE_FUNC(SCPI::ProcessAVERAGE)
-    {"NUMBER",  ProcessAVERAGE_NUMBER},
-    {"NUM",     ProcessAVERAGE_NUMBER},
-    {"MODE",    ProcessAVERAGE_MODE},
+ENTER_PARSE_FUNC(SCPI::DISPLAY::AVERAGE)
+    {"NUMBER",  SCPI::DISPLAY::AVERAGE_NUMBER},
+    {"NUM",     SCPI::DISPLAY::AVERAGE_NUMBER},
+    {"MODE",    SCPI::DISPLAY::AVERAGE_MODE},
 LEAVE_PARSE_FUNC
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessAUTOSEND(uint8 *buffer)
+void SCPI::DISPLAY::AUTOSEND(uint8 *buffer)
 {
     static int counter = 0;
     counter++;
@@ -71,7 +71,7 @@ void SCPI::ProcessAUTOSEND(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessMAPPING(uint8 *buffer)
+void SCPI::DISPLAY::MAPPING(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -92,7 +92,7 @@ void SCPI::ProcessMAPPING(uint8 *buffer)
 extern void OnPress_Accumulation_Clear();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessACCUM_NUMBER(uint8 *buffer)
+void SCPI::DISPLAY::ACCUM_NUMBER(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -119,7 +119,7 @@ void SCPI::ProcessACCUM_NUMBER(uint8 *buffer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessACCUM_MODE(uint8 *buffer)
+void SCPI::DISPLAY::ACCUM_MODE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -138,13 +138,13 @@ void SCPI::ProcessACCUM_MODE(uint8 *buffer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessACCUM_CLEAR(uint8 *buffer)
+void SCPI::DISPLAY::ACCUM_CLEAR(uint8 *buffer)
 {
     OnPress_Accumulation_Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessAVERAGE_NUMBER(uint8 *buffer)
+void SCPI::DISPLAY::AVERAGE_NUMBER(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -173,7 +173,7 @@ void SCPI::ProcessAVERAGE_NUMBER(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessAVERAGE_MODE(uint8 *buffer)
+void SCPI::DISPLAY::AVERAGE_MODE(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -193,7 +193,7 @@ void SCPI::ProcessAVERAGE_MODE(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessMINMAX(uint8 *buffer)
+void SCPI::DISPLAY::MINMAX(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -221,7 +221,7 @@ void SCPI::ProcessMINMAX(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessDispFILTR(uint8 *buffer)
+void SCPI::DISPLAY::FILTR(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -255,7 +255,7 @@ extern void OnChanged_RefreshFPS(bool active);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessFPS(uint8 *buffer)
+void SCPI::DISPLAY::FPS(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -278,7 +278,7 @@ void SCPI::ProcessFPS(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessWINDOW(uint8 *buffer)
+void SCPI::DISPLAY::WINDOW(uint8 *buffer)
 {
     static const MapElement map[] =
     {
@@ -303,7 +303,7 @@ extern void OnChanged_Grid_Brightness();
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessGRID_BRIGHTNESS(uint8 *buffer)
+void SCPI::DISPLAY::GRID_BRIGHTNESS(uint8 *buffer)
 {
     int intVal = 0;
     if (SCPI::FirstIsInt(buffer, &intVal, 0, 100))
@@ -332,7 +332,7 @@ void SCPI::ProcessGRID_BRIGHTNESS(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessGRID_TYPE(uint8 *buffer)
+void SCPI::DISPLAY::GRID_TYPE(uint8 *buffer)
 {
     static const MapElement map[] =
     {

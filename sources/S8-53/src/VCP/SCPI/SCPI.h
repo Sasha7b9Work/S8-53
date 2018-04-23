@@ -98,26 +98,27 @@ private:
         static void FACTOR(uint8 *buffer);
     };
 
-    // DISPlay
-    static void ProcessAUTOSEND(uint8 *buffer);
-    static void ProcessMAPPING(uint8 *buffer);
-    static void ProcessACCUM(uint8 *buffer);
-    static void ProcessACCUM_NUMBER(uint8 *buffer);
-    static void ProcessACCUM_MODE(uint8 *buffer);
-    static void ProcessACCUM_CLEAR(uint8 *buffer);
-    static void ProcessAVERAGE(uint8 *buffer);
-    static void ProcessAVERAGE_NUMBER(uint8 *buffer);
-    static void ProcessAVERAGE_MODE(uint8 *buffer);
-    static void ProcessMINMAX(uint8 *buffer);
-    static void ProcessDispFILTR(uint8 *buffer);
-    static void ProcessFPS(uint8 *buffer);
-    static void ProcessWINDOW(uint8 *buffer);
-    static void ProcessGRID(uint8 *buffer);
-    static void ProcessGRID_TYPE(uint8 *buffer);
-    static void ProcessGRID_BRIGHTNESS(uint8 *buffer);
+    class DISPLAY
+    {
+    public:
+        static void AUTOSEND(uint8 *buffer);
+        static void MAPPING(uint8 *buffer);
+        static void ACCUM(uint8 *buffer);
+        static void ACCUM_NUMBER(uint8 *buffer);
+        static void ACCUM_MODE(uint8 *buffer);
+        static void ACCUM_CLEAR(uint8 *buffer);
+        static void AVERAGE(uint8 *buffer);
+        static void AVERAGE_NUMBER(uint8 *buffer);
+        static void AVERAGE_MODE(uint8 *buffer);
+        static void MINMAX(uint8 *buffer);
+        static void FILTR(uint8 *buffer);
+        static void FPS(uint8 *buffer);
+        static void WINDOW(uint8 *buffer);
+        static void GRID(uint8 *buffer);
+        static void GRID_TYPE(uint8 *buffer);
+        static void GRID_BRIGHTNESS(uint8 *buffer);
+    };
 };
-
-
 
 
 /** @}
