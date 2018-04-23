@@ -26,7 +26,7 @@ static int pointer = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Processing (uint8 *data, uint length)
+void SCPI::Processing (uint8 *data, uint length)
 {
     memcpy(&buffer[pointer], data, length);
     pointer += length;

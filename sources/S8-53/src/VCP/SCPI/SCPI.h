@@ -62,10 +62,13 @@ public:
     static bool FirstIsInt(uint8 *buffer, int *value, int min, int max);
 
 private:
+    static void Processing (uint8 *data, uint length);
     static void ProcessDISPLAY(uint8 *buffer);
     static void ProcessCHANNEL(uint8 *buffer);
     static void ProcessTRIG(uint8 *buffer);
     static void ProcessTBASE(uint8 *buffer);
+
+    // CHANnel
     static void ProcessINPUT(uint8 *buffer);
     static void ProcessCOUPLE(uint8 *buffer);
     static void ProcessFILTR(uint8 *buffer);
