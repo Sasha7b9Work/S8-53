@@ -62,7 +62,7 @@ public:
     static bool FirstIsInt(uint8 *buffer, int *value, int min, int max);
 
 private:
-    static void Processing (uint8 *data, uint length);
+    static void Processing(uint8 *data, uint length);
     static void ProcessDISPLAY(uint8 *buffer);
     static void ProcessCHANNEL(uint8 *buffer);
     static void ProcessTRIG(uint8 *buffer);
@@ -86,14 +86,17 @@ private:
         static void GOVERNOR(uint8 *buffer);
     };
 
-    // CHANnel
-    static void ProcessINPUT(uint8 *buffer);
-    static void ProcessCOUPLE(uint8 *buffer);
-    static void ProcessFILTR(uint8 *buffer);
-    static void ProcessINVERSE(uint8 *buffer);
-    static void ProcessRANGE(uint8 *buffer);
-    static void ProcessOFFSET(uint8 *buffer);
-    static void ProcessFACTOR(uint8 *buffer);
+    class CHANNEL
+    {
+    public:
+        static void INPUT(uint8 *buffer);
+        static void COUPLE(uint8 *buffer);
+        static void FILTR(uint8 *buffer);
+        static void INVERSE(uint8 *buffer);
+        static void RANGE(uint8 *buffer);
+        static void OFFSET(uint8 *buffer);
+        static void FACTOR(uint8 *buffer);
+    };
 
     // DISPlay
     static void ProcessAUTOSEND(uint8 *buffer);

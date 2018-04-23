@@ -144,8 +144,8 @@ void FPGA::SetAttribChannelsAndTrig(TypeWriteAnalog type)
         {0x0000, 0x0100}
     };
 
-    data |= maskFiltr[A][FILTR_A];
-    data |= maskFiltr[B][FILTR_B];
+    data |= maskFiltr[A][SET_FILTR_A];
+    data |= maskFiltr[B][SET_FILTR_B];
 
 
     // Параметры синхронизации
@@ -532,6 +532,6 @@ void FPGA::SetModeCouple(Channel chan, ModeCouple modeCoupe)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::EnableChannelFiltr(Channel chan, bool enable)
 {
-    FILTR(chan) = enable;
+    SET_FILTR(chan) = enable;
     SetAttribChannelsAndTrig(chan == A ? TypeWriteAnalog_ChanParam0 : TypeWriteAnalog_ChanParam1);
 }

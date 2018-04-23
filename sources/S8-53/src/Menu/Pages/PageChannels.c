@@ -148,12 +148,12 @@ static const Choice mcFiltrA =
         {DISABLE_RU,    DISABLE_EN},
         {ENABLE_RU,     ENABLE_EN}
     },
-    (int8*)&FILTR_A, OnChanged_FiltrA
+    (int8*)&SET_FILTR_A, OnChanged_FiltrA
 };
 
 void OnChanged_FiltrA(bool active)
 {
-    FPGA::EnableChannelFiltr(A, FILTR_A);
+    FPGA::EnableChannelFiltr(A, SET_FILTR_A);
 }
 
 
@@ -274,12 +274,12 @@ static const Choice mcFiltrB =
         {DISABLE_RU,    DISABLE_EN},
         {ENABLE_RU,     ENABLE_EN}
     },
-    (int8*)&FILTR_B, OnChanged_FiltrB
+    (int8*)&SET_FILTR_B, OnChanged_FiltrB
 };
 
 void OnChanged_FiltrB(bool active)
 {
-    FPGA::EnableChannelFiltr(B, FILTR_B);
+    FPGA::EnableChannelFiltr(B, SET_FILTR_B);
 }
 
 

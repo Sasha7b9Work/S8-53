@@ -44,16 +44,16 @@
 #define SET_ENABLED_B           SET_ENABLED(B)                  ///< set.chan[B].enable
 
 #define SET_BALANCE_ADC(ch)     (set.chan[ch].balanceShiftADC)  ///< SettingsChannel.balanceShiftADC
-#define SET_BALANCE_ADC_A       (SET_BALANCE_ADC(A))          ///< set.chan[A].balanceShiftADC
-#define SET_BALANCE_ADC_B       (SET_BALANCE_ADC(B))          ///< set.chan[B].balanceShiftADC
+#define SET_BALANCE_ADC_A       (SET_BALANCE_ADC(A))            ///< set.chan[A].balanceShiftADC
+#define SET_BALANCE_ADC_B       (SET_BALANCE_ADC(B))            ///< set.chan[B].balanceShiftADC
 
 #define STRETCH_ADC(ch)         (set.chan[ch].stretchADC)       ///< SettingsChannel.stretchADC
 #define STRETCH_ADC_A           (STRETCH_ADC(A))                ///< set.chan[A].stretchADC
 #define STRETCH_ADC_B           (STRETCH_ADC(B))                ///< set.chan[B].stretchADC
 
-#define FILTR(ch)               (set.chan[ch].filtr)            ///< SettingsChannel.filtr
-#define FILTR_A                 (FILTR(A))                      ///< set.chan[A].filtr
-#define FILTR_B                 (FILTR(B))                      ///< set.chan[B].filtr
+#define SET_FILTR(ch)           (set.chan[ch].filtr)            ///< SettingsChannel.filtr
+#define SET_FILTR_A             (SET_FILTR(A))                  ///< set.chan[A].filtr
+#define SET_FILTR_B             (SET_FILTR(B))                  ///< set.chan[B].filtr
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
