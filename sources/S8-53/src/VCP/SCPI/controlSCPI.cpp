@@ -1,13 +1,12 @@
-#include "../../defines.h"
+#include "defines.h"
+#include "VCP/SCPI/SCPI.h"
+#include "Panel/Panel.h"
+#include "Utils/Strings.h"
+#include "Utils/Map.h"
 
 
-#include "controlSCPI.h"
-#include "../Panel/Panel.h"
-#include "../../Utils/Strings.h"
-#include "../../Utils/Map.h"
-
-
-void Process_KEY(uint8 *buffer)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void SCPI::ProcessKEY(uint8 *buffer)
 {
     static const MapElement keys[] =
     {
@@ -63,7 +62,8 @@ void Process_KEY(uint8 *buffer)
     }
 }
 
-void Process_GOVERNOR(uint8 *buffer)
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SCPI::ProcessGOVERNOR(uint8 *buffer)
 {
     static const MapElement governors[] =
     {

@@ -76,6 +76,10 @@ private:
     static void ProcessAUTOSCALE(uint8 *buffer);
     static void ProcessREQUEST(uint8 *buffer);
 
+    // CONTROL
+    static void ProcessKEY(uint8 *buffer);
+    static void ProcessGOVERNOR(uint8 *buffer);
+
     // CHANnel
     static void ProcessINPUT(uint8 *buffer);
     static void ProcessCOUPLE(uint8 *buffer);

@@ -1745,8 +1745,8 @@
       <Doc>
         <Name>&lt;1&gt;.\src\VCP\SCPI\SCPI.cpp</Name>
         <ColumnNumber>27</ColumnNumber>
-        <TopLine>42</TopLine>
-        <CurrentLine>86</CurrentLine>
+        <TopLine>48</TopLine>
+        <CurrentLine>101</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>

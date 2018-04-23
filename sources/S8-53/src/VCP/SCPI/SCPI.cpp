@@ -1,11 +1,8 @@
 #include "defines.h"
 #include "Log.h"
 #include "SCPI.h"
-#include "controlSCPI.h"
 #include "Utils/Strings.h"
 #include "Utils/GlobalFunctions.h"
-
-
 #include <ctype.h>
 
 
@@ -100,8 +97,8 @@ void SCPI::ParseNewCommand(uint8 *buffer)
     {"TBASE",       ProcessTBASE},
     {"TBAS" ,       ProcessTBASE},
 
-    {"KEY",         Process_KEY},
-    {"GOVERNOR",    Process_GOVERNOR},
+    {"KEY",         ProcessKEY},
+    {"GOVERNOR",    ProcessGOVERNOR},
     {0}
     };
     
