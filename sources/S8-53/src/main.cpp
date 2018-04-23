@@ -30,7 +30,7 @@ extern void main3();
 int main(void)
 {
     Hardware::Init();
-    VCP_Init();
+    VCP::Init();
     Settings::Load(false);
     FPGA::Init();    
     Timer::PauseOnTime(250);

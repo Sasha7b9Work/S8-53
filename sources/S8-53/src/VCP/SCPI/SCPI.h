@@ -24,7 +24,7 @@
 #define SCPI_SEND(...)                                  \
     if(gBF.connectToHost == 1)                          \
     {                                                   \
-        VCP_SendFormatStringAsynch(__VA_ARGS__);        \
+        VCP::SendFormatStringAsynch(__VA_ARGS__);        \
     }                                                   \
     if (CLIENT_LAN_IS_CONNECTED)                        \
     {                                                   \

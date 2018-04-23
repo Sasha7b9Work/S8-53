@@ -165,7 +165,7 @@ void Painter::SendToVCP(uint8 *pointer, int size)
 {
     if(stateTransmit == StateTransmit_InProcess)
     {
-        VCP_SendDataSynch(pointer, size);
+        VCP::SendDataSynch(pointer, size);
         TCPSocket_Send((const char *)pointer, size);
     }
 }
@@ -566,7 +566,7 @@ void Painter::EndScene(bool endScene)
     }
     if (stateTransmit == StateTransmit_InProcess)
     {
-        VCP_Flush();
+        VCP::Flush();
         stateTransmit = StateTransmit_Free;
     }
 

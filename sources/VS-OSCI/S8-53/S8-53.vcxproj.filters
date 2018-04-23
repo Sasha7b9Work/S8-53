@@ -156,12 +156,6 @@
     <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.c">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.c">
-      <Filter>Ethernet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Ethernet\TcpSocket.c">
-      <Filter>Ethernet</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Log.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -329,6 +323,12 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.cpp">
+      <Filter>Ethernet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Ethernet\TcpSocket.cpp">
+      <Filter>Ethernet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
