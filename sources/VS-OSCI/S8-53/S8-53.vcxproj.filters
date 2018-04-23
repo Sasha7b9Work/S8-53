@@ -75,30 +75,6 @@
     <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\VCP.c">
-      <Filter>VCP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\displaySCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\SCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\tbaseSCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\trigSCPI.c">
-      <Filter>VCP\SCPI</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\font\Font.c">
       <Filter>Display\fonts</Filter>
     </ClCompile>
@@ -329,6 +305,30 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Ethernet\TcpSocket.cpp">
       <Filter>Ethernet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\VCP.cpp">
+      <Filter>VCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\trigSCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\tbaseSCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\SCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\displaySCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.cpp">
+      <Filter>VCP\SCPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

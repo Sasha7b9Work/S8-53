@@ -160,28 +160,28 @@
     <ClCompile Include="..\..\S8-53\src\Utils\ProcessingSignal.c" />
     <ClCompile Include="..\..\S8-53\src\Utils\Stack2500uint16.cpp" />
     <ClCompile Include="..\..\S8-53\src\Utils\Strings.c" />
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\commonSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\controlSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\displaySCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\displaySCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\SCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\SCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\tbaseSCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\tbaseSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\trigSCPI.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\SCPI\trigSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\VCP\VCP.c">
+    <ClCompile Include="..\..\S8-53\src\VCP\VCP.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c" />
