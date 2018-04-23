@@ -15,6 +15,7 @@
 *.sym
 *.tre
 *.tmp
+*~*
 
 JLinkLog.txt
 

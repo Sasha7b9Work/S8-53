@@ -13,7 +13,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define TBASE                               (set.time.tBase)        ///< SettingTime.tBase
+#define SET_TBASE                               (set.time.tBase)        ///< SettingTime.tBase
 
 #define TSHIFT                              (set.time.tShiftRel)    ///< SettingsTime.tShiftRel
 

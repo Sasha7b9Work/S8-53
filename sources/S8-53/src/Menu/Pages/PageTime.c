@@ -99,7 +99,7 @@ static const Choice mcPeakDet =
 
 static bool IsActive_PeakDet(void)
 {
-    return (TBASE >= MIN_TBASE_PEC_DEAT);
+    return (SET_TBASE >= MIN_TBASE_PEC_DEAT);
 }
 
 void OnChanged_PeakDet(bool active)
@@ -107,7 +107,7 @@ void OnChanged_PeakDet(bool active)
     if (active)
     {
         FPGA::SetPeackDetMode(PEAKDET);
-        FPGA::SetTBase(TBASE);
+        FPGA::SetTBase(SET_TBASE);
         if (PEAKDET_IS_DISABLE)
         {
             int8 shift[2][3] =
@@ -185,7 +185,7 @@ static const Choice mcSelfRecorder =
 
 static bool IsActive_SelfRecorder(void)
 {
-    return TBASE >= MIN_TBASE_P2P;
+    return SET_TBASE >= MIN_TBASE_P2P;
 }
 
 // пюгбепрйю - т-ЖХЪ бп/дек --------------------------------------------------------------------------------------------------------------------------

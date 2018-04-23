@@ -839,7 +839,7 @@ void DrawDataInRect(int x, int width, const uint8 *data, int numElems, Channel c
     uint8 max[300];
 
 
-    if (TBASE >= TBase_20ms && PEAKDET)
+    if (SET_TBASE >= TBase_20ms && PEAKDET)
     {
         for (int col = 0; col < width; col++)
         {
@@ -1095,8 +1095,8 @@ void Display::WriteCursors()
             Painter::DrawText(x, y1, sCursors_GetCursorTime(source, 0, buffer));
             Painter::DrawText(x, y2, sCursors_GetCursorTime(source, 1, buffer));
             x = startX + 153;
-            float pos0 = Math_TimeCursor(CURS_POS_T0(source), TBASE);
-            float pos1 = Math_TimeCursor(CURS_POS_T1(source) , TBASE);
+            float pos0 = Math_TimeCursor(CURS_POS_T0(source), SET_TBASE);
+            float pos1 = Math_TimeCursor(CURS_POS_T1(source), SET_TBASE);
             float delta = fabs(pos1 - pos0);
             Painter::DrawText(x, y1, ":dT=");
             char buffer[20];
@@ -2015,7 +2015,7 @@ void Display::DrawLowPart()
     x += 98;
     char buffer[100] = {0};
 
-    TBase tBase = TBASE;
+    TBase tBase = SET_TBASE;
     int16 tShift = TSHIFT;
 
     if (!MODE_WORK_IS_DIRECT)
