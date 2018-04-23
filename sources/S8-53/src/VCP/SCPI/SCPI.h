@@ -40,7 +40,7 @@ void funcName(uint8 *buffer)                            \
 #define LEAVE_PARSE_FUNC                                \
         {0}                                             \
     };                                                  \
-    SCPI_ProcessingCommand(commands, buffer);           \
+    SCPI::ProcessingCommand(commands, buffer);           \
 }
 
 
@@ -53,14 +53,20 @@ typedef struct
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SCPI_ParseNewCommand(uint8 *buffer);   ///< \todo Временно. Потом доделать
-void SCPI_AddNewData(uint8 *buffer, uint length);
-void SCPI_ProcessingCommand(const StructCommand *commands, uint8 *buffer);
+class SCPI
+{
+public:
+    static void ParseNewCommand(uint8 *buffer);   ///< \todo Временно. Потом доделать
+    static void AddNewData(uint8 *buffer, uint length);
+    static void ProcessingCommand(const StructCommand *commands, uint8 *buffer);
+    static bool FirstIsInt(uint8 *buffer, int *value, int min, int max);
+};
+
 void Process_DISPLAY(uint8 *buffer);
 void Process_CHANNEL(uint8 *buffer);
 void Process_TRIG(uint8 *buffer);
 void Process_TBASE(uint8 *buffer);
-bool SCPI_FirstIsInt(uint8 *buffer, int *value, int min, int max);
+
 
 /** @}
  */

@@ -48,7 +48,7 @@ static void FuncReceiver(const char *buffer, uint length)
     LOG_WRITE(temp);
     */
 
-    SCPI_AddNewData((uint8 *)buffer, length);
+    SCPI::AddNewData((uint8 *)buffer, length);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------

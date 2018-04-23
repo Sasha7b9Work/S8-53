@@ -325,7 +325,7 @@ extern void OnChanged_Grid_Brightness();
 static void Process_GRID_BRIGHTNESS(uint8 *buffer)
 {
     int intVal = 0;
-    if (SCPI_FirstIsInt(buffer, &intVal, 0, 100))
+    if (SCPI::FirstIsInt(buffer, &intVal, 0, 100))
     {
         BRIGHTNESS_GRID = intVal;
         Display::RunAfterDraw(OnChanged_Grid_Brightness);

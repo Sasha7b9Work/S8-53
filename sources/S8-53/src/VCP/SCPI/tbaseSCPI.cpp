@@ -89,7 +89,7 @@ void Process_OFFSET(uint8 *buffer)
     };
 
     int intVal = 0;
-    if (SCPI_FirstIsInt(buffer, &intVal, -1024, 15000))
+    if (SCPI::FirstIsInt(buffer, &intVal, -1024, 15000))
     {
         int tShift = intVal + 1024;
         FPGA::SetTShift(tShift);

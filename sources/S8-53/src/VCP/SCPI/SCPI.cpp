@@ -45,7 +45,7 @@ label_another:
                 ++pBuffer;
             }
 
-            SCPI_ParseNewCommand(pBuffer);
+            SCPI::ParseNewCommand(pBuffer);
             if (i == pointer - 1)
             {
                 pointer = 0;                // Если буфер пуст - выходим
@@ -67,14 +67,14 @@ label_another:
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI_AddNewData(uint8 *data, uint length)
+void SCPI::AddNewData(uint8 *data, uint length)
 {
     Processing(data, length);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI_ParseNewCommand(uint8 *buffer)
+void SCPI::ParseNewCommand(uint8 *buffer)
 {
     static const StructCommand commands[] =
     {
@@ -106,12 +106,12 @@ void SCPI_ParseNewCommand(uint8 *buffer)
     {0}
     };
     
-    SCPI_ProcessingCommand(commands, buffer);
+    SCPI::ProcessingCommand(commands, buffer);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI_ProcessingCommand(const StructCommand *commands, uint8 *buffer) 
+void SCPI::ProcessingCommand(const StructCommand *commands, uint8 *buffer) 
 {
     int sizeNameCommand = FindNumSymbolsInCommand(buffer);
     if (sizeNameCommand == 0) 
@@ -154,7 +154,7 @@ int FindNumSymbolsInCommand(uint8 *buffer)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-bool SCPI_FirstIsInt(uint8 *buffer, int *value, int min, int max)
+bool SCPI::FirstIsInt(uint8 *buffer, int *value, int min, int max)
 {
     Word param;
     if (GetWord(buffer, &param, 0))

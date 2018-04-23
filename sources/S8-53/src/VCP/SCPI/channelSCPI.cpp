@@ -37,7 +37,7 @@ ENTER_PARSE_FUNC(Process_CHANNEL)
 
     chan = (char)(*(buffer - 2)) == '1' ? A : B;
 
-    SCPI_ProcessingCommand(commands, buffer);
+    SCPI::ProcessingCommand(commands, buffer);
 }
 
 
@@ -181,7 +181,7 @@ void Process_OFFSET(uint8 *buffer)
         {0}
     };
     int intVal = 0;
-    if (SCPI_FirstIsInt(buffer, &intVal, -240, 240))
+    if (SCPI::FirstIsInt(buffer, &intVal, -240, 240))
     {
         int rShift = RShiftZero + 2 * intVal;
         FPGA::SetRShift(chan, rShift);
