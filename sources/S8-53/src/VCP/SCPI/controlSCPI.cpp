@@ -6,7 +6,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SCPI::ProcessKEY(uint8 *buffer)
+void SCPI::CONTROL::KEY(uint8 *buffer)
 {
     static const MapElement keys[] =
     {
@@ -63,7 +63,7 @@ void SCPI::ProcessKEY(uint8 *buffer)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessGOVERNOR(uint8 *buffer)
+void SCPI::CONTROL::GOVERNOR(uint8 *buffer)
 {
     static const MapElement governors[] =
     {
