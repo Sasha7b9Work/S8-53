@@ -200,6 +200,7 @@ namespace S8_53_USB {
             {
                 if(socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
                 {
+                    needForDisconnect = true;
                     buttonConnectLAN.Text = "Подкл";
                     textBoxIP.Enabled = true;
                     textBoxPort.Enabled = true;
@@ -261,7 +262,6 @@ namespace S8_53_USB {
 
         private void DataReceiveHandlerLAN(object sender, EventArgs args)
         {
-            //Console.WriteLine("ReceiveLAN enter");
             try
             {
                 EventArgsReceiveSocketTCP a = (EventArgsReceiveSocketTCP)args;
@@ -277,8 +277,6 @@ namespace S8_53_USB {
             {
                 Console.WriteLine(e.ToString());
             }
-
-            //Console.WriteLine("ReceiveLAN leave");
         }
 
         private void DataReceiveHandlerUSB(object sender, SerialDataReceivedEventArgs args)
@@ -356,6 +354,7 @@ namespace S8_53_USB {
                                 while(commands.Count != 0)
                                 {
                                     socket.SendString(commands.Dequeue());
+                                    Thread.Sleep(150);
                                 }
                                 socket.SendString("DISPLAY:AUTOSEND 2");
                             }

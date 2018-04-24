@@ -203,16 +203,6 @@ namespace LibraryS8_53
             }
         }
 
-        public bool DeviceExistOnAddress(string ip, int port)
-        {
-            return false;
-        }
-
-        public int BytesToRead()
-        {
-            return socket.Available;
-        }
-
         public void Read(byte[] buffer, int numBytes)
         {
             int recvBytes = socket.Receive(buffer, numBytes, SocketFlags.None);
