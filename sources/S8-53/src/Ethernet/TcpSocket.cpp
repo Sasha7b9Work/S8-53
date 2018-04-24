@@ -1,6 +1,5 @@
-
-
 #include "TcpSocket.h"
+#include "Log.h"
 #include <lwip/tcp.h>
 #include <string.h>
 #include <stdarg.h>
@@ -419,9 +418,7 @@ bool SocketTCP::Send(const char *buffer, uint length)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 void SocketTCP::SendFormatString(char *format, ...)
 {
-#undef SIZE_BUFFER
-#define SIZE_BUFFER 200
-    static char buffer[SIZE_BUFFER];
+    static char buffer[200];
     va_list args;
     va_start(args, format);
     vsprintf(buffer, format, args);

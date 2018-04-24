@@ -29,6 +29,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
 #define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
+#define VCP_CONNECTED_TO_HOST    (gBF.connectToHost)
 
 
 typedef struct
