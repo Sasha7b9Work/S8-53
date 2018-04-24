@@ -70,7 +70,7 @@ namespace S8_53_USB {
             mapButtons.Add(btnF4,          "4");
             mapButtons.Add(btnF5,          "5");
 
-            LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
+            LibraryS8_53.ComPort.port.ReceivedBytesThreshold = 1;
 
             buttonUpdatePorts_Click(null, null);
 
@@ -113,6 +113,8 @@ namespace S8_53_USB {
                 buttonUpdatePorts.Enabled = true;
                 needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
 
+                LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
+
                 textBoxIP.Enabled = true;
                 textBoxPort.Enabled = true;
                 buttonConnectLAN.Enabled = true;
@@ -121,6 +123,8 @@ namespace S8_53_USB {
             {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
+                    LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
+
                     needForDisconnect = false;
 
                     textBoxIP.Enabled = false;
@@ -244,24 +248,33 @@ namespace S8_53_USB {
 
         private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
         {
-            string indata = LibraryS8_53.ComPort.port.ReadExisting();
-
             SerialPort port = LibraryS8_53.ComPort.port;
 
-            mutexData.WaitOne();
-            while(port.BytesToRead != 0)
+            if (port.BytesToRead != 0)
             {
-                data.Enqueue((byte)port.ReadByte());
-            }
-            mutexData.ReleaseMutex();
 
-            RunData();
+                Console.WriteLine("Приняты данные");
+
+                mutexData.WaitOne();
+                while (port.BytesToRead != 0)
+                {
+                    data.Enqueue((byte)port.ReadByte());
+                }
+                mutexData.ReleaseMutex();
+
+                if (data.Count != 0)
+                {
+                    RunData();
+                }
+            }
         }
 
         // Выполнить имеющиеся данные
         private void RunData()
         {
             mutexData.WaitOne();
+
+            Console.WriteLine("Начинаем выполнять " + data.Count + " байт");
 
             while(data.Count != 0)
             {
