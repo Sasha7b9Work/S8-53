@@ -41,13 +41,6 @@ char *GetStringFromBuffer(const char *buffer, uint length, char *string)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FuncReceiver(const char *buffer, uint length)
 {
-    /*
-    char *temp = (char *)malloc(length + 1);
-    memcpy(temp, buffer, length);
-    temp[length] = 0;
-    LOG_WRITE(temp);
-    */
-
     SCPI::AddNewData((uint8 *)buffer, length);
 }
 

@@ -81,7 +81,7 @@ namespace LibraryS8_53
 
         public override void SendString(string str)
         {
-            mutex.WaitOne();
+            //mutex.WaitOne();
 
             if (port.IsOpen)
             {
@@ -89,7 +89,7 @@ namespace LibraryS8_53
                 port.Write(":" + str + "\x0d");
             }
 
-            mutex.ReleaseMutex();
+            //mutex.ReleaseMutex();
         }
 
         public void SendBytes(byte[] buffer)

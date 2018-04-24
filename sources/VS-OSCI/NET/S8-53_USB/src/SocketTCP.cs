@@ -30,7 +30,7 @@ namespace LibraryS8_53
     {
         private Mutex mutex = new Mutex();
 
-        private Socket socket = null;
+        public Socket socket = null;
 
         private String response = String.Empty;
 
@@ -113,16 +113,6 @@ namespace LibraryS8_53
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-            }
-        }
-
-        public void ClearRecvBuffer()
-        {
-            while (socket.Available > 0)
-            {
-                int size = socket.Available;
-                byte[] buffer = new byte[size];
-                socket.Receive(buffer, size, SocketFlags.None);
             }
         }
 
@@ -242,11 +232,6 @@ namespace LibraryS8_53
             {
                 Console.WriteLine("Error");
             }
-        }
-
-        public Socket GetSocket()
-        {
-            return socket;
         }
     }
 }

@@ -78,24 +78,30 @@ namespace S8_53_USB {
         }
 
         private void button_MouseDown(object sender, MouseEventArgs args) {
-            try
+            if ((Button)sender != buttonConnectUSB)
             {
-                commands.Enqueue("KEY:" + StringToSendForButton(sender) + " DOWN");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                try
+                {
+                    commands.Enqueue("KEY:" + StringToSendForButton(sender) + " DOWN");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
 
         private void button_MouseUp(object sender, MouseEventArgs args) {
-            try
+            if ((Button)sender != buttonConnectUSB)
             {
-                commands.Enqueue("KEY:" + StringToSendForButton(sender) + " UP");
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                try
+                {
+                    commands.Enqueue("KEY:" + StringToSendForButton(sender) + " UP");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
 
@@ -201,6 +207,8 @@ namespace S8_53_USB {
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
+                        //socket.ReceiveEvent += 
+
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
                         textBoxPort.Enabled = false;
@@ -249,6 +257,7 @@ namespace S8_53_USB {
 
         private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
         {
+            //Console.WriteLine("DataReceiveHandler enter");
             try
             {
                 SerialPort port = LibraryS8_53.ComPort.port;
@@ -261,22 +270,24 @@ namespace S8_53_USB {
                         data.Enqueue((byte)port.ReadByte());
                     }
                     mutexData.ReleaseMutex();
-
-                    if (data.Count != 0)
-                    {
-                        RunData();
-                    }
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
+            //Console.WriteLine("DataReceiveHandler leave");
+
+            if (data.Count != 0)
+            {
+                RunData();
+            }
         }
 
         // Выполнить имеющиеся данные
         private void RunData()
         {
+            //Console.WriteLine("RunData enter");
             try
             {
                 mutexData.WaitOne();
@@ -287,7 +298,9 @@ namespace S8_53_USB {
 
                     if ((Command)command == Command.SET_COLOR)
                     {
+                        //Console.WriteLine("SET_COLOR ENTER");
                         Display.SetColor((uint)int8());
+                        //Console.WriteLine("SET_COLOR_LEAVE");
                     }
                     else if ((Command)command == Command.SET_PALETTE)
                     {
@@ -299,6 +312,7 @@ namespace S8_53_USB {
                     }
                     else if ((Command)command == Command.END_SCENE)
                     {
+                        //Console.WriteLine("END_SCENE enter");
                         // Выводим нарисованную картинку
                         Display.EndScene();
 
@@ -317,6 +331,7 @@ namespace S8_53_USB {
                             // И делаем запрос на следующий фрейм
                             port.SendString("DISPLAY:AUTOSEND 2");
                         }
+                        //Console.WriteLine("END_SCENE leave");
                     }
                     else if ((Command)command == Command.DRAW_HLINE)
                     {
@@ -443,6 +458,7 @@ namespace S8_53_USB {
             {
                 Console.WriteLine(e.ToString());
             }
+            //Console.WriteLine("RunData leave");
         }
 
         private int int8()
