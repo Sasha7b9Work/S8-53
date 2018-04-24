@@ -15,9 +15,6 @@ using ControlLibraryS8_53;
 namespace S8_53_USB {
 
     public partial class MainForm : Form {
-
-        private bool needForDisconnect = false;
-
         // Этот порт используется для соединения по USB
         private LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         // Этот сокет используется для соединения по LAN
@@ -30,6 +27,9 @@ namespace S8_53_USB {
         private Queue<byte> data = new Queue<byte>();
         // Mutex на буфер data
         private Mutex mutexData = new Mutex();
+        // Признак того, что нужно отключиться от портов при первой возможности
+        private bool needForDisconnect = false;
+
         private enum Command : byte
         {
             SET_COLOR = 1,
@@ -70,6 +70,7 @@ namespace S8_53_USB {
             mapButtons.Add(btnF4,          "4");
             mapButtons.Add(btnF5,          "5");
 
+            // Устанавливаем количество байт в приёмном буфере, при котором будет вызываться обработчик приёма
             LibraryS8_53.ComPort.port.ReceivedBytesThreshold = 1;
 
             buttonUpdatePorts_Click(null, null);
@@ -108,10 +109,10 @@ namespace S8_53_USB {
         {
             if (port.IsOpen())                                  // Если порт открыт - идёт обмен с прибором. Будем отключать
             {
+                needForDisconnect = true;
                 buttonConnectUSB.Text = "Подкл";
                 comboBoxPorts.Enabled = true;
                 buttonUpdatePorts.Enabled = true;
-                needForDisconnect = true;                       // сообщаем прибору, что нужно отключиться при первой возможности
 
                 LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
 
@@ -123,9 +124,8 @@ namespace S8_53_USB {
             {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
-                    LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
-
                     needForDisconnect = false;
+                    LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
 
                     textBoxIP.Enabled = false;
                     textBoxPort.Enabled = false;
@@ -150,15 +150,12 @@ namespace S8_53_USB {
                     textBoxIP.Enabled = true;
                     textBoxPort.Enabled = true;
                     buttonUpdatePorts.Enabled = true;
-                    needForDisconnect = true;
                     EnableControlsUSB(true);
                 }
                 else                                                                // А по этой ветке подключаемся
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
-                        needForDisconnect = false;
-
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
                         textBoxPort.Enabled = false;
@@ -185,54 +182,13 @@ namespace S8_53_USB {
             }
         }
 
-        private ManualResetEvent waitForSend = new ManualResetEvent(false);
-
-        private void OnEndFrameEvent(object sender, EventArgs e)
-        {
-            if (port.IsOpen())                                      // Если идёт обмен по USB
-            {
-                if (needForDisconnect)
-                {
-                    port.Stop();
-                }
-                else
-                {
-                    while (commands.Count != 0)
-                    {
-                        Thread.Sleep(10);
-                        port.SendString(commands.Dequeue());
-                        Thread.Sleep(10);
-                    }
-                    Thread.Sleep(10);
-                    port.SendString("DISPLAY:AUTOSEND 2");
-                }
-            }
-            else                                                    // Если обмен идёт по LAN
-            {
-                if(needForDisconnect)
-                {
-                    socket.Disconnect();
-                }
-                else
-                {
-                    while(commands.Count != 0)
-                    {
-                        Thread.Sleep(50);
-                        socket.SendString(commands.Dequeue());
-                        Thread.Sleep(50);
-                    }
-
-                    Thread.Sleep(50);
-                    socket.SendString("DISPLAY:AUTOSEND 2");
-                }
-            }
-        }
-
         private void MainForm_Closed(object sender, EventArgs e)
         {
-            // Закрывать порт непосредственно по закрытии формы нельзя, чтобы поток не завис.
-            needForDisconnect = true;                           // Поэтому устанавливаем признако того, что порт надо закрыть
-            while(port.IsOpen() || socket.IsConnected()) { }    // И ждём пока это произойдёт
+            needForDisconnect = true;
+
+            while (port.IsOpen() || socket.IsConnected())
+            {
+            };
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB
@@ -250,11 +206,8 @@ namespace S8_53_USB {
         {
             SerialPort port = LibraryS8_53.ComPort.port;
 
-            if (port.BytesToRead != 0)
+            if (port.IsOpen && port.BytesToRead != 0)
             {
-
-                Console.WriteLine("Приняты данные");
-
                 mutexData.WaitOne();
                 while (port.BytesToRead != 0)
                 {
@@ -294,7 +247,18 @@ namespace S8_53_USB {
                 }
                 else if ((Command)command == Command.END_SCENE)
                 {
+                    // Выводим нарисованную картинку
                     Display.EndScene();
+
+                    if (needForDisconnect)
+                    {
+                        port.Stop();
+                    }
+                    else
+                    {
+                        // И делаем запрос на следующий фрейм
+                        port.SendString("DISPLAY:AUTOSEND 2");
+                    }
                 }
                 else if ((Command)command == Command.DRAW_HLINE)
                 {
