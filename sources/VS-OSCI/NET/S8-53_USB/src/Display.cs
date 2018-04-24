@@ -19,32 +19,6 @@ namespace ControlLibraryS8_53
 {
     public partial class Display : UserControl
     {
-        enum Command : byte
-        {
-            SET_COLOR = 1,
-            FILL_REGION = 2,
-            END_SCENE = 3,
-            DRAW_HLINE = 4,
-            DRAW_VLINE = 5,
-            SET_POINT = 6,
-            DRAW_SIGNAL_LINES = 7,
-            DRAW_TEXT = 8,
-            SET_PALETTE = 9,
-            SET_FONT = 10,
-            DRAW_VLINES_ARRAY = 13,
-            DRAW_SIGNAL_POINTS = 14,
-            DRAW_MULTI_HPOINT_LINES_2 = 17,
-            DRAW_MULTI_VPOINT_LINES = 18,
-            LOAD_FONT = 19
-        };
-
-        enum ModeRun : byte
-        {
-            STOP = 0,
-            USB = 1,
-            LAN = 2
-        };
-
         [DllImport("gdi32")]
         private extern static int SetDIBitsToDevice(HandleRef hDC, int xDest, int yDest, int dwWidth, int dwHeight, int XSrc, int YSrc, int uStartScan,
             int cScanLines, ref int lpvBits, ref BITMAPINFO lpbmi, uint fuColorUse);
@@ -114,27 +88,17 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static MyFont []fonts = new MyFont[4];
+        public static MyFont []fonts = new MyFont[4];
 
         private static Color color = Color.Black;
 
         private static Color[] colors = new Color[16];
 
-        private static Thread processThread = null;
-
         private static PictureBox display;
 
         private static Stopwatch stopWatch = new Stopwatch();
 
-        private static SerialPort port;
-
-        private static LibraryS8_53.SocketTCP socket;
-
-        private static int currentFont = 0;
-
-        private static ModeRun modeRun = ModeRun.STOP;
-
-        static public event EventHandler<EventArgs> EndFrameEvent;
+        public static int currentFont = 0;
 
         public Display()
         {
@@ -164,7 +128,7 @@ namespace ControlLibraryS8_53
             stopWatch.Start();
         }
 
-        private static void SetPoint(int x, int y)
+        public static void SetPoint(int x, int y)
         {
             if(x >= 0 && x < 320 && y >= 0 && y < 240)
             {
@@ -172,7 +136,7 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static void EndScene()
+        public static void EndScene()
         {
             Bitmap bmp = new Bitmap(320, 240, PixelFormat.Format32bppArgb);
             BitmapData bmData = bmp.LockBits(new Rectangle(0, 0, 320, 240), ImageLockMode.ReadWrite, bmp.PixelFormat);
@@ -183,7 +147,7 @@ namespace ControlLibraryS8_53
             g.DrawImage(bmp, new Rectangle(0, 0, 639, 479), 0, 0, 319, 239, GraphicsUnit.Pixel);
         }
 
-        private static void FillRegion(int x, int y, int width, int height)
+        public static void FillRegion(int x, int y, int width, int height)
         {
             for(int col = x; col <= x + width; col++)
             {
@@ -194,7 +158,7 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static void DrawHLine(int y, int x0, int x1)
+        public static void DrawHLine(int y, int x0, int x1)
         {
             if(x1 < x0)
             {
@@ -208,7 +172,7 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static void DrawVLine(int x, int y0, int y1)
+        public static void DrawVLine(int x, int y0, int y1)
         {
             if(y1 < y0)
             {
@@ -222,7 +186,7 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static void SetColor(uint numColor)
+        public static void SetColor(uint numColor)
         {
             if(numColor < 16)
             {
@@ -235,7 +199,7 @@ namespace ControlLibraryS8_53
             return (value >> numBit) & 1;
         }
 
-        private static void DrawText(int x, int y, char[] str)
+        public static void DrawText(int x, int y, char[] str)
         {
             for (int numSymbol = 0; numSymbol < str.Length; numSymbol++)
             {
@@ -258,7 +222,7 @@ namespace ControlLibraryS8_53
             }
         }
 
-        private static void SetPalette(byte numColor, UInt16 color)
+        public static void SetPalette(byte numColor, UInt16 color)
         {
             colors[numColor] = ColorFromUINT16(color);
         }
@@ -272,239 +236,6 @@ namespace ControlLibraryS8_53
             int g = (color >> 5) & 63;
             int b = color & 31;
             return Color.FromArgb((int)(r * kRed), (int)(g * kGreen), (int)(b * kBlue));
-        }
-
-
-        private static void Processing()
-        {
-            while(modeRun != ModeRun.STOP)
-            {
-                byte command = (byte)int8();
-
-                if((Command)command == Command.SET_COLOR)
-                {
-                    //Console.WriteLine("SetColor");
-                    SetColor((uint)int8());
-                }
-                else if((Command)command == Command.SET_PALETTE)
-                {
-                    //Console.WriteLine("SetPalette");
-                    SetPalette((byte)int8(), (ushort)int16());
-                }
-                else if((Command)command == Command.FILL_REGION)
-                {
-                    //Console.WriteLine("FillRegion");
-                    FillRegion(int16(), int8(), int16(), int8());
-                }
-                else if((Command)command == Command.END_SCENE)
-                {
-                    //Console.WriteLine("EndScene");
-                    EndScene();
-                    modeRun = ModeRun.STOP;
-                }
-                else if((Command)command == Command.DRAW_HLINE)
-                {
-                    //Console.WriteLine("DrawHLine");
-                    DrawHLine(int8(), int16(), int16());
-                }
-                else if((Command)command == Command.DRAW_VLINE)
-                {
-                    //Console.WriteLine("DrawVLine");
-                    DrawVLine(int16(), int8(), int8());
-                }
-                else if((Command)command == Command.SET_POINT)
-                {
-                    //Console.WriteLine("SetPoint");
-                    SetPoint(int16(), int8());
-                }
-                else if((Command)command == Command.DRAW_SIGNAL_POINTS)
-                {
-                    int x0 = int16();
-
-                    //Console.WriteLine("DRAW_SIGNAL_POINTS");
-                    for(int i = 0; i < 281; i++)
-                    {
-                        SetPoint(x0 + i, int8());
-                    }
-                    //Console.WriteLine("EXIT                   DRAW_SIGNAL_POINTS");
-                }
-                else if((Command)command == Command.DRAW_SIGNAL_LINES)
-                {
-                    int x0 = int16();
-
-                    int prevX = int8();
-
-                    //Console.WriteLine("DRAW_SIGNAL_LINES");
-                    for(int i = 0; i < 280; i++)
-                    {
-                        int nextX = int8();
-                        DrawVLine(x0 + i, prevX, nextX);
-                        prevX = nextX;
-                    }
-                    //Console.WriteLine("EXIT                     DRAW_SIGNAL_LINES");
-                }
-                else if((Command)command == Command.DRAW_MULTI_HPOINT_LINES_2)
-                {
-                    //Console.WriteLine("DRAW_MULTI_HPOINT_LINES_2");
-                    int numLines = int8();
-                    int x0 = int16();
-                    int numPoints = int8();
-                    int dX = int8();
-                    for(int i = 0; i < numLines; i++)
-                    {
-                        int y = int8();
-
-                        for(int point = 0; point < numPoints; point++)
-                        {
-                            SetPoint(x0 + dX * point, y);
-                        }
-                    }
-                    //Console.WriteLine("EXIT                          DRAW_MULTI_HPOINT_LINES_2");
-                }
-                else if((Command)command == Command.DRAW_MULTI_VPOINT_LINES)
-                {
-                    //Console.WriteLine("DRAW_MULTI_VPOINT_LINES");
-                    int numLines = int8();
-                    int y0 = int8();
-                    int numPoints = int8();
-                    int dY = int8();
-                    int8();
-                    for(int i = 0; i < numLines; i++)
-                    {
-                        int x = int16();
-
-                        for(int point = 0; point < numPoints; point++)
-                        {
-                            SetPoint(x, y0 + dY * point);
-                        }
-                    }
-                    //Console.WriteLine("EXIT                           DRAW_MULTI_VPOINT_LIINES");
-                }
-                else if((Command)command == Command.DRAW_VLINES_ARRAY)
-                {
-                    //Console.WriteLine("DRAW_VLINES_ARRAY");
-                    int x0 = int16();
-                    int numLines = int8();
-                    for(int i = 0; i < numLines; i++)
-                    {
-                        DrawVLine(x0 + i, int8(), int8());
-                    }
-                    //Console.WriteLine("EXIT                              DRAW_VLINES_ARRAY");
-                }
-                else if((Command)command == Command.LOAD_FONT)
-                {
-                    //Console.WriteLine("LOAD_FONT");
-
-                    int typeFont = int8();
-                    if (typeFont < 4)
-                    {
-                        fonts[typeFont] = new MyFont();
-                        fonts[typeFont].height = int8();
-                        int8();
-                        int8();
-                        int8();
-                        for (int i = 0; i < 256; i++)
-                        {
-                            fonts[typeFont].symbols[i] = new Symbol();
-                            fonts[typeFont].symbols[i].width = int8();
-                            for (int j = 0; j < 8; j++)
-                            {
-                                fonts[typeFont].symbols[i].bytes[j] = int8();
-                            }
-                        }
-                    }
-                    
-                    //Console.WriteLine("EXIT________LOAD_FONT");
-                }
-                else if((Command)command == Command.SET_FONT)
-                {
-                    //Console.WriteLine("SET_FONT");
-                    currentFont = int8();
-                }
-                else if((Command)command == Command.DRAW_TEXT)
-                {
-                    //Console.WriteLine("DRAW_TEXT");
-                    int x0 = int16();
-                    int y0 = int8();
-                    int numSymbols = int8();
-                    char[] str = new char[numSymbols];
-                    for(int i = 0; i < numSymbols; i++)
-                    {
-                        str[i] = (char)int8();
-                    }
-                    DrawText(x0, y0, str);
-                }
-                else
-                {
-                    Console.WriteLine("Неизвестная команда " + command);
-                }
-            }
-            SendEndFrameEvent();
-        }
-
-        private static byte[] recData = new byte[0];
-        private static int pointer = 1;
-
-        public void ClearRecvData()
-        {
-            recData = new byte[0];
-        }
-
-        private static int int8()
-        {
-            //Console.WriteLine("Принимаю байт");
-            if (modeRun == ModeRun.USB)
-            {
-                if (pointer < recData.Length)
-                {
-                    return recData[pointer++];
-                }
-                while (port.BytesToRead == 0)
-                {
-                };
-                int length = port.BytesToRead;
-                recData = new byte[length];
-                port.Read(recData, 0, length);
-                pointer = 1;
-                return recData[0];
-            }
-            else if(modeRun == ModeRun.LAN)
-            {
-                recData = new byte[1];
-                socket.Read(recData, 1);
-                return recData[0];
-            }
-            return 0;
-        }
-
-        private static int int16()
-        {
-            return int8() + (int8() << 8);
-        }
-
-        public void StartDrawing(SerialPort port_)
-        {
-            processThread = new Thread(Processing);
-            port = port_;
-            modeRun = ModeRun.USB;
-            processThread.Start();
-        }
-
-        public void StartDrawing(LibraryS8_53.SocketTCP socket_)
-        {
-            processThread = new Thread(Processing);
-            socket = socket_;
-            modeRun = ModeRun.LAN;
-            processThread.Start();
-        }
-
-        private static void SendEndFrameEvent()
-        {
-            EventHandler<EventArgs> handler = EndFrameEvent;
-            if(handler != null)
-            {
-                handler(null, new EventArgs());
-            }
         }
     }
 }

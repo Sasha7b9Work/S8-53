@@ -15,15 +15,22 @@ typedef enum
 
 static int FindNumSymbolsInCommand(uint8 *buffer);
 
-#undef SIZE_BUFFER
-#define SIZE_BUFFER 100
+static const int SIZE_BUFFER = 100;
+/// —юда добавл€ем новые данные
 static uint8 buffer[SIZE_BUFFER];
+/// ”казатель на первый свободный байт буфера
 static int pointer = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SCPI::Processing (uint8 *data, uint length)
+void SCPI::AddNewData(uint8 *data, uint length)
 {
+    uint8 *temp = (uint8 *)malloc(length + 1);
+    memcpy(temp, data, length);
+    temp[length] = 0;
+    LOG_WRITE((char *)temp);
+    free(temp);
+
     memcpy(&buffer[pointer], data, length);
     pointer += length;
 
@@ -60,12 +67,6 @@ label_another:
             }
         }
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::AddNewData(uint8 *data, uint length)
-{
-    Processing(data, length);
 }
 
 

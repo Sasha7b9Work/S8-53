@@ -20,20 +20,15 @@ namespace LibraryS8_53
 
     public class ComPort : Interface
     {
-        private static SerialPort port;
+        public static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
-        // Если true, то будет включён обработчик события SerialPort
-        private bool dataReceivedHandlerEnable = false;
-        public event EventHandler<EventArgs> ReceiveEvent;
 
         public ComPort()
         {
             port = new SerialPort();
             port.ReadTimeout = 100;
             port.BaudRate = 125000;
-
-            port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
         }
 
         public override void Stop()
@@ -49,6 +44,10 @@ namespace LibraryS8_53
 
         public bool DeviceConnectToPort(int numPort)
         {
+            if(port.IsOpen)
+            {
+                port.Close();
+            }
             port.PortName = ports[numPort];
             string answer;
             try
@@ -126,8 +125,6 @@ namespace LibraryS8_53
 
         public bool Connect(int numPort, bool handlerEnable)
         {
-            dataReceivedHandlerEnable = handlerEnable;
-
             try
             {
                 port.PortName = ports[numPort];
@@ -136,11 +133,9 @@ namespace LibraryS8_53
                 {
                     SendString("REQUEST ?");
                     string answer = ReadLine();
-                    if (answer == "S8-53")
+                    if (answer != "S8-53" && answer != "S8-53/1")
                     {
-                    }
-                    else if (answer == "S8-53/1")
-                    {
+                        port.Close();
                     }
                 }
             }
@@ -161,25 +156,6 @@ namespace LibraryS8_53
         public bool IsOpen()
         {
             return port.IsOpen;
-        }
-
-        private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
-        {
-            if(IsOpen() && dataReceivedHandlerEnable)
-            {
-                SerialPort sp = (SerialPort)sender;
-                if(sp != null)
-                {
-                    string indata = sp.ReadExisting();
-
-                    EventHandler<EventArgs> handler = ReceiveEvent;
-
-                    if(handler != null)
-                    {
-                        handler(null, new EventArgsReceiveComPort(indata));
-                    }
-                }
-            }
         }
     }
 }
