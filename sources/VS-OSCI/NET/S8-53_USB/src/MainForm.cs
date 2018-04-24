@@ -21,7 +21,6 @@ namespace S8_53_USB {
         private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
 
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
-
         private Queue<string> commands = new Queue<string>();
         // Сюда будем считывать данные из порта
         private Queue<byte> data = new Queue<byte>();
@@ -78,31 +77,77 @@ namespace S8_53_USB {
             buttonConnectLAN.Enabled = true;
         }
 
-        private void button_MouseDown(object sender, MouseEventArgs e) {
-            commands.Enqueue("KEY:" + StringToSendForButton(sender) + " DOWN");
+        private void button_MouseDown(object sender, MouseEventArgs args) {
+            try
+            {
+                commands.Enqueue("KEY:" + StringToSendForButton(sender) + " DOWN");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
-        private void button_MouseUp(object sender, MouseEventArgs e) {
-            commands.Enqueue("KEY:" + StringToSendForButton(sender) + " UP");
+        private void button_MouseUp(object sender, MouseEventArgs args) {
+            try
+            {
+                commands.Enqueue("KEY:" + StringToSendForButton(sender) + " UP");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
-        private void governor_RotateLeft(object sender, EventArgs e) {
-            commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " LEFT");
+        private void governor_RotateLeft(object sender, EventArgs args) {
+            try
+            {
+                commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " LEFT");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
-        private void governor_RotateRight(object sender, EventArgs e) {
-            commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " RIGHT");
+        private void governor_RotateRight(object sender, EventArgs args) {
+            try
+            {
+                commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " RIGHT");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         private string StringToSendForButton(object btn) {
-            return mapButtons[(Button)btn];
+            string retValue = "";
+            
+            try
+            {
+                retValue = mapButtons[(Button)btn];
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return retValue;
         }
 
-        private void buttonUpdatePorts_Click(object sender, EventArgs e) {
-            string[] ports = port.GetPorts();
-            comboBoxPorts.Items.Clear();
-            comboBoxPorts.Items.AddRange(ports);
-            comboBoxPorts.SelectedIndex = ports.Length - 1;
+        private void buttonUpdatePorts_Click(object sender, EventArgs args) {
+            try
+            {
+                string[] ports = port.GetPorts();
+                comboBoxPorts.Items.Clear();
+                comboBoxPorts.Items.AddRange(ports);
+                comboBoxPorts.SelectedIndex = ports.Length - 1;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         private void buttonConnectUSB_Click(object sender, EventArgs e)
@@ -204,183 +249,200 @@ namespace S8_53_USB {
 
         private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
         {
-            SerialPort port = LibraryS8_53.ComPort.port;
-
-            if (port.IsOpen && port.BytesToRead != 0)
+            try
             {
-                mutexData.WaitOne();
-                while (port.BytesToRead != 0)
-                {
-                    data.Enqueue((byte)port.ReadByte());
-                }
-                mutexData.ReleaseMutex();
+                SerialPort port = LibraryS8_53.ComPort.port;
 
-                if (data.Count != 0)
+                if (port.IsOpen && port.BytesToRead != 0)
                 {
-                    RunData();
+                    mutexData.WaitOne();
+                    while (port.BytesToRead != 0)
+                    {
+                        data.Enqueue((byte)port.ReadByte());
+                    }
+                    mutexData.ReleaseMutex();
+
+                    if (data.Count != 0)
+                    {
+                        RunData();
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
 
         // Выполнить имеющиеся данные
         private void RunData()
         {
-            mutexData.WaitOne();
-
-            Console.WriteLine("Начинаем выполнять " + data.Count + " байт");
-
-            while(data.Count != 0)
+            try
             {
-                byte command = (byte)int8();
+                mutexData.WaitOne();
 
-                if((Command)command == Command.SET_COLOR)
+                while (data.Count != 0)
                 {
-                    Display.SetColor((uint)int8());
-                }
-                else if((Command)command == Command.SET_PALETTE)
-                {
-                    Display.SetPalette((byte)int8(), (ushort)int16());
-                }
-                else if ((Command)command == Command.FILL_REGION)
-                {
-                    Display.FillRegion(int16(), int8(), int16(), int8());
-                }
-                else if ((Command)command == Command.END_SCENE)
-                {
-                    // Выводим нарисованную картинку
-                    Display.EndScene();
+                    byte command = (byte)int8();
 
-                    if (needForDisconnect)
+                    if ((Command)command == Command.SET_COLOR)
                     {
-                        port.Stop();
+                        Display.SetColor((uint)int8());
                     }
-                    else
+                    else if ((Command)command == Command.SET_PALETTE)
                     {
-                        // И делаем запрос на следующий фрейм
-                        port.SendString("DISPLAY:AUTOSEND 2");
+                        Display.SetPalette((byte)int8(), (ushort)int16());
                     }
-                }
-                else if ((Command)command == Command.DRAW_HLINE)
-                {
-                    Display.DrawHLine(int8(), int16(), int16());
-                }
-                else if ((Command)command == Command.DRAW_VLINE)
-                {
-                    Display.DrawVLine(int16(), int8(), int8());
-                }
-                else if ((Command)command == Command.SET_POINT)
-                {
-                    Display.SetPoint(int16(), int8());
-                }
-                else if ((Command)command == Command.DRAW_SIGNAL_POINTS)
-                {
-                    int x0 = int16();
-
-                    for (int i = 0; i < 281; i++)
+                    else if ((Command)command == Command.FILL_REGION)
                     {
-                        Display.SetPoint(x0 + i, int8());
+                        Display.FillRegion(int16(), int8(), int16(), int8());
                     }
-                }
-                else if ((Command)command == Command.DRAW_SIGNAL_LINES)
-                {
-                    int x0 = int16();
-
-                    int prevX = int8();
-
-                    for (int i = 0; i < 280; i++)
+                    else if ((Command)command == Command.END_SCENE)
                     {
-                        int nextX = int8();
-                        Display.DrawVLine(x0 + i, prevX, nextX);
-                        prevX = nextX;
-                    }
-                }
-                else if ((Command)command == Command.DRAW_MULTI_HPOINT_LINES_2)
-                {
-                    int numLines = int8();
-                    int x0 = int16();
-                    int numPoints = int8();
-                    int dX = int8();
-                    for (int i = 0; i < numLines; i++)
-                    {
-                        int y = int8();
+                        // Выводим нарисованную картинку
+                        Display.EndScene();
 
-                        for (int point = 0; point < numPoints; point++)
+                        if (needForDisconnect)
                         {
-                            Display.SetPoint(x0 + dX * point, y);
+                            port.Stop();
                         }
-                    }
-                }
-                else if ((Command)command == Command.DRAW_MULTI_VPOINT_LINES)
-                {
-                    int numLines = int8();
-                    int y0 = int8();
-                    int numPoints = int8();
-                    int dY = int8();
-                    int8();
-                    for (int i = 0; i < numLines; i++)
-                    {
-                        int x = int16();
-
-                        for (int point = 0; point < numPoints; point++)
+                        else
                         {
-                            Display.SetPoint(x, y0 + dY * point);
-                        }
-                    }
-                }
-                else if ((Command)command == Command.DRAW_VLINES_ARRAY)
-                {
-                    int x0 = int16();
-                    int numLines = int8();
-                    for (int i = 0; i < numLines; i++)
-                    {
-                        Display.DrawVLine(x0 + i, int8(), int8());
-                    }
-                }
-                else if ((Command)command == Command.LOAD_FONT)
-                {
-                    Console.WriteLine("LOAD FONT");
-                    int typeFont = int8();
-                    if (typeFont < 4)
-                    {
-                        Display.fonts[typeFont] = new Display.MyFont();
-                        Display.fonts[typeFont].height = int8();
-                        int8();
-                        int8();
-                        int8();
-                        for (int i = 0; i < 256; i++)
-                        {
-                            Display.fonts[typeFont].symbols[i] = new Display.Symbol();
-                            Display.fonts[typeFont].symbols[i].width = int8();
-                            for (int j = 0; j < 8; j++)
+                            // Посылаем имеющиеся команды
+                            while (commands.Count != 0)
                             {
-                                Display.fonts[typeFont].symbols[i].bytes[j] = int8();
+                                port.SendString(commands.Dequeue());
+                            }
+
+                            // И делаем запрос на следующий фрейм
+                            port.SendString("DISPLAY:AUTOSEND 2");
+                        }
+                    }
+                    else if ((Command)command == Command.DRAW_HLINE)
+                    {
+                        Display.DrawHLine(int8(), int16(), int16());
+                    }
+                    else if ((Command)command == Command.DRAW_VLINE)
+                    {
+                        Display.DrawVLine(int16(), int8(), int8());
+                    }
+                    else if ((Command)command == Command.SET_POINT)
+                    {
+                        Display.SetPoint(int16(), int8());
+                    }
+                    else if ((Command)command == Command.DRAW_SIGNAL_POINTS)
+                    {
+                        int x0 = int16();
+
+                        for (int i = 0; i < 281; i++)
+                        {
+                            Display.SetPoint(x0 + i, int8());
+                        }
+                    }
+                    else if ((Command)command == Command.DRAW_SIGNAL_LINES)
+                    {
+                        int x0 = int16();
+
+                        int prevX = int8();
+
+                        for (int i = 0; i < 280; i++)
+                        {
+                            int nextX = int8();
+                            Display.DrawVLine(x0 + i, prevX, nextX);
+                            prevX = nextX;
+                        }
+                    }
+                    else if ((Command)command == Command.DRAW_MULTI_HPOINT_LINES_2)
+                    {
+                        int numLines = int8();
+                        int x0 = int16();
+                        int numPoints = int8();
+                        int dX = int8();
+                        for (int i = 0; i < numLines; i++)
+                        {
+                            int y = int8();
+
+                            for (int point = 0; point < numPoints; point++)
+                            {
+                                Display.SetPoint(x0 + dX * point, y);
                             }
                         }
                     }
-                }
-                else if ((Command)command == Command.SET_FONT)
-                {
-                    Display.currentFont = int8();
-                }
-                else if ((Command)command == Command.DRAW_TEXT)
-                {
-                    int x0 = int16();
-                    int y0 = int8();
-                    int numSymbols = int8();
-                    char[] str = new char[numSymbols];
-                    for (int i = 0; i < numSymbols; i++)
+                    else if ((Command)command == Command.DRAW_MULTI_VPOINT_LINES)
                     {
-                        str[i] = (char)int8();
-                    }
-                    Display.DrawText(x0, y0, str);
-                }
-                else
-                {
-                    Console.WriteLine("Неизвестная команда " + command);
-                }
-            }
+                        int numLines = int8();
+                        int y0 = int8();
+                        int numPoints = int8();
+                        int dY = int8();
+                        int8();
+                        for (int i = 0; i < numLines; i++)
+                        {
+                            int x = int16();
 
-            mutexData.ReleaseMutex();
+                            for (int point = 0; point < numPoints; point++)
+                            {
+                                Display.SetPoint(x, y0 + dY * point);
+                            }
+                        }
+                    }
+                    else if ((Command)command == Command.DRAW_VLINES_ARRAY)
+                    {
+                        int x0 = int16();
+                        int numLines = int8();
+                        for (int i = 0; i < numLines; i++)
+                        {
+                            Display.DrawVLine(x0 + i, int8(), int8());
+                        }
+                    }
+                    else if ((Command)command == Command.LOAD_FONT)
+                    {
+                        int typeFont = int8();
+                        if (typeFont < 4)
+                        {
+                            Display.fonts[typeFont] = new Display.MyFont();
+                            Display.fonts[typeFont].height = int8();
+                            int8();
+                            int8();
+                            int8();
+                            for (int i = 0; i < 256; i++)
+                            {
+                                Display.fonts[typeFont].symbols[i] = new Display.Symbol();
+                                Display.fonts[typeFont].symbols[i].width = int8();
+                                for (int j = 0; j < 8; j++)
+                                {
+                                    Display.fonts[typeFont].symbols[i].bytes[j] = int8();
+                                }
+                            }
+                        }
+                    }
+                    else if ((Command)command == Command.SET_FONT)
+                    {
+                        Display.currentFont = int8();
+                    }
+                    else if ((Command)command == Command.DRAW_TEXT)
+                    {
+                        int x0 = int16();
+                        int y0 = int8();
+                        int numSymbols = int8();
+                        char[] str = new char[numSymbols];
+                        for (int i = 0; i < numSymbols; i++)
+                        {
+                            str[i] = (char)int8();
+                        }
+                        Display.DrawText(x0, y0, str);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неизвестная команда " + command);
+                    }
+                }
+
+                mutexData.ReleaseMutex();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         private int int8()
