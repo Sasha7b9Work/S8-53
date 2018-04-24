@@ -176,28 +176,32 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef *hpcd)
 USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     /* Change Systick prioity */
-    NVIC_SetPriority (SysTick_IRQn, 0);  
-  
-    /*Set LL Driver parameters */
-    handlePCD.Instance = USB_OTG_FS;
-    handlePCD.Init.dev_endpoints = 4; 
-    handlePCD.Init.use_dedicated_ep1 = 0;
-    handlePCD.Init.ep0_mps = 0x40;  
-    handlePCD.Init.dma_enable = 0;
-    handlePCD.Init.low_power_enable = 0;
-    handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED; 
-    handlePCD.Init.Sof_enable = 0;
-    handlePCD.Init.speed = PCD_SPEED_FULL;
-    handlePCD.Init.vbus_sensing_enable = 1;
-    /* Link The driver to the stack */
-    handlePCD.pData = pdev;
-    pdev->pData = &handlePCD;
-    /*Initialize LL Driver */
-    HAL_PCD_Init(&handlePCD);
-  
-    HAL_PCD_SetRxFiFo(&handlePCD, 0x80);
-    HAL_PCD_SetTxFiFo(&handlePCD, 0, 0x40);
-    HAL_PCD_SetTxFiFo(&handlePCD, 1, 0x80); 
+
+    if (pdev->id == 0)
+    {
+        NVIC_SetPriority(SysTick_IRQn, 0);
+
+        /*Set LL Driver parameters */
+        handlePCD.Instance = USB_OTG_FS;
+        handlePCD.Init.dev_endpoints = 4;
+        handlePCD.Init.use_dedicated_ep1 = 0;
+        handlePCD.Init.ep0_mps = 0x40;
+        handlePCD.Init.dma_enable = 0;
+        handlePCD.Init.low_power_enable = 0;
+        handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED;
+        handlePCD.Init.Sof_enable = 0;
+        handlePCD.Init.speed = PCD_SPEED_FULL;
+        handlePCD.Init.vbus_sensing_enable = 1;
+        /* Link The driver to the stack */
+        handlePCD.pData = pdev;
+        pdev->pData = &handlePCD;
+        /*Initialize LL Driver */
+        HAL_PCD_Init(&handlePCD);
+
+        HAL_PCD_SetRxFiFo(&handlePCD, 0x80);
+        HAL_PCD_SetTxFiFo(&handlePCD, 0, 0x40);
+        HAL_PCD_SetTxFiFo(&handlePCD, 1, 0x80);
+    }
 
     return USBD_OK;
 }

@@ -287,12 +287,12 @@ namespace S8_53_USB {
 
                 if (port.IsOpen && port.BytesToRead != 0)
                 {
-                    mutexData.WaitOne();
                     while (port.BytesToRead != 0)
                     {
+                        mutexData.WaitOne();
                         data.Enqueue((byte)port.ReadByte());
+                        mutexData.ReleaseMutex();
                     }
-                    mutexData.ReleaseMutex();
                 }
             }
             catch (Exception e)
@@ -358,8 +358,8 @@ namespace S8_53_USB {
 
                                 // И делаем запрос на следующий фрейм
                                 port.SendString("DISPLAY:AUTOSEND 2");
-                                port.Stop();
-                                port.Connect();
+                                //port.Stop();
+                                //port.Connect();
                                 Console.WriteLine("Посылаю AutoSend 2");
                                 firstByte = true;
                             }
