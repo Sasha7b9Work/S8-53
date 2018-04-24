@@ -53,7 +53,7 @@ void LAN::Init(void)
     // Configure the Network interface
     Netif_Config();
 
-    TCPSocket_Init(FuncConnect, FuncReceiver);
+    SocketTCP::Init(FuncConnect, FuncReceiver);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------

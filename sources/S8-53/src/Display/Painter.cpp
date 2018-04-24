@@ -166,7 +166,7 @@ void Painter::SendToVCP(uint8 *pointer, int size)
     if(stateTransmit == StateTransmit_InProcess)
     {
         VCP::SendDataSynch(pointer, size);
-        TCPSocket_Send((const char *)pointer, size);
+        SocketTCP::Send((const char *)pointer, size);
     }
 }
 

@@ -351,11 +351,19 @@ namespace S8_53_USB {
                             }
                             else
                             {
-                                while(commands.Count != 0)
+                                bool needDelay = commands.Count > 1;
+
+                                while (commands.Count != 0)
                                 {
                                     socket.SendString(commands.Dequeue());
                                     Thread.Sleep(150);
                                 }
+
+                                if(needDelay)
+                                { 
+                                    //Thread.Sleep(300);
+                                }
+                                
                                 socket.SendString("DISPLAY:AUTOSEND 2");
                             }
                         }
