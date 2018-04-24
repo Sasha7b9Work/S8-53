@@ -19,8 +19,8 @@ namespace LibraryS8_53
 
     public class EventArgsReceiveSocketTCP : EventArgs
     {
-        public String data;
-        public EventArgsReceiveSocketTCP(String data)
+        public byte[] data;
+        public EventArgsReceiveSocketTCP(byte[] data)
         {
             this.data = data;
         }
@@ -34,7 +34,7 @@ namespace LibraryS8_53
 
         private String response = String.Empty;
 
-        public event EventHandler<EventArgs> ReceiveEvent;
+        static public event EventHandler<EventArgs> ReceiveEvent;
 
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
@@ -94,6 +94,8 @@ namespace LibraryS8_53
                 Console.WriteLine(e.ToString());
             }
 
+            Receive();
+
             return socket != null && socket.Connected;
         }
 
@@ -118,16 +120,16 @@ namespace LibraryS8_53
 
         public void SendString(string data)
         {
-            Console.WriteLine("Засылаю " + data);
-            mutex.WaitOne();
+            //mutex.WaitOne();
 
             if (socket.Connected)
             {
                 byte[] byteData = Encoding.ASCII.GetBytes(":" + data + "\x0d");
+                Console.WriteLine("Засылаю " + data);
                 socket.Send(byteData);
             }
 
-            mutex.ReleaseMutex();
+            //mutex.ReleaseMutex();
         }
 
         public string ReadString()
@@ -173,9 +175,12 @@ namespace LibraryS8_53
 
                         if (handler != null)
                         {
-                            state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                            String data = state.sb.ToString();
-                            handler(null, new EventArgsReceiveSocketTCP(data.Substring(0, data.Length - 2)));
+                            byte[] data = new byte[bytesRead];
+                            for(int i = 0; i < bytesRead; i++)
+                            {
+                                data[i] = state.buffer[i];
+                            }
+                            handler(null, new EventArgsReceiveSocketTCP(data));
                         }
 
 

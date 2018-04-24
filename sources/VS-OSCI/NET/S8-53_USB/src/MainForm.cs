@@ -11,23 +11,27 @@ using System.Windows.Forms;
 using System.IO.Ports;
 
 using ControlLibraryS8_53;
+using LibraryS8_53;
 
 namespace S8_53_USB {
 
     public partial class MainForm : Form {
         // Этот порт используется для соединения по USB
-        private LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
+        private static LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         // Этот сокет используется для соединения по LAN
         private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
-
+        // Этот процесс будет заниматься непосредственно рисованием
+        private static Thread runProcess;
+        // true, если рисующий поток работает
+        private static bool isRunning = false;
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
-        private Queue<string> commands = new Queue<string>();
+        private static Queue<string> commands = new Queue<string>();
         // Сюда будем считывать данные из порта
-        private Queue<byte> data = new Queue<byte>();
+        private static Queue<byte> data = new Queue<byte>();
         // Mutex на буфер data
-        private Mutex mutexData = new Mutex();
+        private static Mutex mutexData = new Mutex();
         // Признак того, что нужно отключиться от портов при первой возможности
-        private bool needForDisconnect = false;
+        private static bool needForDisconnect = false;
 
         private enum Command : byte
         {
@@ -165,8 +169,6 @@ namespace S8_53_USB {
                 comboBoxPorts.Enabled = true;
                 buttonUpdatePorts.Enabled = true;
 
-                LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
-
                 textBoxIP.Enabled = true;
                 textBoxPort.Enabled = true;
                 buttonConnectLAN.Enabled = true;
@@ -176,7 +178,7 @@ namespace S8_53_USB {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
                     needForDisconnect = false;
-                    LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
+                    LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandlerUSB);
 
                     textBoxIP.Enabled = false;
                     textBoxPort.Enabled = false;
@@ -186,6 +188,7 @@ namespace S8_53_USB {
                     buttonUpdatePorts.Enabled = false;
 
                     buttonConnectUSB.Text = "Откл";
+                    StartDrawing();
                     port.SendString("DISPLAY:AUTOSEND 1");
                 }
             }
@@ -207,7 +210,7 @@ namespace S8_53_USB {
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
-                        //socket.ReceiveEvent += 
+                        SocketTCP.ReceiveEvent += DataReceiveHandlerLAN;
 
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
@@ -255,9 +258,35 @@ namespace S8_53_USB {
             buttonUpdatePorts.Enabled = enable;
         }
 
-        private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
+        private void DataReceiveHandlerLAN(object sender, EventArgs args)
         {
-            //Console.WriteLine("DataReceiveHandler enter");
+            Console.WriteLine("ReceiveLAN enter");
+            try
+            {
+                EventArgsReceiveSocketTCP a = (EventArgsReceiveSocketTCP)args;
+
+                Console.WriteLine("Принято от LAN " + a.data.Length + " байт");
+
+                for(int i = 0; i < a.data.Length; i++)
+                {
+                    data.Enqueue(a.data[i]);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine("ReceiveLAN leave");
+
+            if(data.Count != 0)
+            {
+                RunData();
+            }
+        }
+
+        private void DataReceiveHandlerUSB(object sender, SerialDataReceivedEventArgs args)
+        {
             try
             {
                 SerialPort port = LibraryS8_53.ComPort.port;
@@ -276,23 +305,15 @@ namespace S8_53_USB {
             {
                 Console.WriteLine(e.ToString());
             }
-            //Console.WriteLine("DataReceiveHandler leave");
-
-            if (data.Count != 0)
-            {
-                RunData();
-            }
         }
 
         // Выполнить имеющиеся данные
-        private void RunData()
+        private static void RunData()
         {
-            //Console.WriteLine("RunData enter");
+            Console.WriteLine("RunData enter");
             try
             {
-                mutexData.WaitOne();
-
-                while (data.Count != 0)
+                while (isRunning)
                 {
                     byte command = (byte)int8();
 
@@ -319,6 +340,7 @@ namespace S8_53_USB {
                         if (needForDisconnect)
                         {
                             port.Stop();
+                            isRunning = false;
                         }
                         else
                         {
@@ -451,24 +473,46 @@ namespace S8_53_USB {
                         Console.WriteLine("Неизвестная команда " + command);
                     }
                 }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            Console.WriteLine("RunData leave");
+        }
 
+        private static int int8()
+        {
+            int retValue = 0;
+            try
+            {
+                while (data.Count == 0 && isRunning) { };
+
+                mutexData.WaitOne();
+                retValue = data.Dequeue();
                 mutexData.ReleaseMutex();
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
-            //Console.WriteLine("RunData leave");
+
+            return retValue;
         }
 
-        private int int8()
+        private static int int16()
         {
-            return data.Dequeue();
-        }
+            while (data.Count < 2) { };
 
-        private int int16()
-        {
             return int8() + (int8() << 8);
+        }
+
+        private static void StartDrawing()
+        {
+            data.Clear();
+            isRunning = true;
+            runProcess = new Thread(RunData);
+            runProcess.Start();
         }
     }
 }
