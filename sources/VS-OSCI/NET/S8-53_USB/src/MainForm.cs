@@ -19,7 +19,7 @@ namespace S8_53_USB {
         // Этот порт используется для соединения по USB
         private static LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         // Этот сокет используется для соединения по LAN
-        private LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
+        private static LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
         // Этот процесс будет заниматься непосредственно рисованием
         private static Thread runProcess;
         // true, если рисующий поток работает
@@ -220,6 +220,7 @@ namespace S8_53_USB {
                         buttonUpdatePorts.Enabled = false;
                         buttonConnectUSB.Enabled = false;
 
+                        StartDrawing();
                         socket.SendString("DISPLAY:AUTOSEND 3");
                     }
                 }
@@ -260,29 +261,24 @@ namespace S8_53_USB {
 
         private void DataReceiveHandlerLAN(object sender, EventArgs args)
         {
-            Console.WriteLine("ReceiveLAN enter");
+            //Console.WriteLine("ReceiveLAN enter");
             try
             {
                 EventArgsReceiveSocketTCP a = (EventArgsReceiveSocketTCP)args;
 
-                Console.WriteLine("Принято от LAN " + a.data.Length + " байт");
-
+                mutexData.WaitOne();
                 for(int i = 0; i < a.data.Length; i++)
                 {
                     data.Enqueue(a.data[i]);
                 }
+                mutexData.ReleaseMutex();
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
-            Console.WriteLine("ReceiveLAN leave");
-
-            if(data.Count != 0)
-            {
-                RunData();
-            }
+            //Console.WriteLine("ReceiveLAN leave");
         }
 
         private void DataReceiveHandlerUSB(object sender, SerialDataReceivedEventArgs args)
@@ -333,27 +329,37 @@ namespace S8_53_USB {
                     }
                     else if ((Command)command == Command.END_SCENE)
                     {
-                        //Console.WriteLine("END_SCENE enter");
                         // Выводим нарисованную картинку
                         Display.EndScene();
 
                         if (needForDisconnect)
                         {
                             port.Stop();
+                            socket.Disconnect();
                             isRunning = false;
                         }
                         else
                         {
-                            // Посылаем имеющиеся команды
-                            while (commands.Count != 0)
+                            if (port.IsOpen())
                             {
-                                port.SendString(commands.Dequeue());
-                            }
+                                // Посылаем имеющиеся команды
+                                while (commands.Count != 0)
+                                {
+                                    port.SendString(commands.Dequeue());
+                                }
 
-                            // И делаем запрос на следующий фрейм
-                            port.SendString("DISPLAY:AUTOSEND 2");
+                                // И делаем запрос на следующий фрейм
+                                port.SendString("DISPLAY:AUTOSEND 2");
+                            }
+                            else
+                            {
+                                while(commands.Count != 0)
+                                {
+                                    socket.SendString(commands.Dequeue());
+                                }
+                                socket.SendString("DISPLAY:AUTOSEND 2");
+                            }
                         }
-                        //Console.WriteLine("END_SCENE leave");
                     }
                     else if ((Command)command == Command.DRAW_HLINE)
                     {

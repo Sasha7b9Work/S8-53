@@ -12,9 +12,8 @@ namespace LibraryS8_53
 {
     public class StateObject
     {
-        public const int BUFFER_SIZE = 256;
+        public const int BUFFER_SIZE = 1;
         public byte[] buffer = new byte[BUFFER_SIZE];
-        public StringBuilder sb = new StringBuilder();
     }
 
     public class EventArgsReceiveSocketTCP : EventArgs
@@ -28,8 +27,6 @@ namespace LibraryS8_53
 
     public class SocketTCP
     {
-        private Mutex mutex = new Mutex();
-
         public Socket socket = null;
 
         private String response = String.Empty;
@@ -120,16 +117,11 @@ namespace LibraryS8_53
 
         public void SendString(string data)
         {
-            //mutex.WaitOne();
-
             if (socket.Connected)
             {
                 byte[] byteData = Encoding.ASCII.GetBytes(":" + data + "\x0d");
-                Console.WriteLine("Засылаю " + data);
                 socket.Send(byteData);
             }
-
-            //mutex.ReleaseMutex();
         }
 
         public string ReadString()
@@ -185,14 +177,6 @@ namespace LibraryS8_53
 
 
                         Receive();
-                    }
-                    else
-                    {
-                        if (state.sb.Length > 1)
-                        {
-                            response = state.sb.ToString();
-                            Console.WriteLine(response);
-                        }
                     }
                 }
             }
