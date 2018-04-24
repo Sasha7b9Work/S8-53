@@ -231,5 +231,3 @@ extern void *extraMEM;      // Это специальный указатель. Используется для выдел
                                             NameStruct *name = (NameStruct*)extraMEM
 #define ACCESS_EXTRAMEM(NameStruct, name)   NameStruct *name = (NameStruct*)extraMEM
 #define FREE_EXTRAMEM()                     free(extraMEM)
-
-extern int transmitBytes;

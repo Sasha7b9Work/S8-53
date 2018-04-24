@@ -68,7 +68,12 @@ void VCP::SendDataSynch(const uint8 *buffer, int size)
         return;
     }
 
-    LOG_WRITE("Посылаю %d байт", size);
+    //static bool 
+
+    if(buffer[0] == 2 && buffer[1] == 0 && buffer[2] == 0 && buffer[3] == 0)
+    {
+        LOG_WRITE("Посылаю FILL_REGION 0 0");
+    }
 
     USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
 

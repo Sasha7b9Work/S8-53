@@ -514,7 +514,8 @@ void Painter::BeginScene(Color color)
 {
     if (stateTransmit == StateTransmit_NeedForTransmitFirst || stateTransmit == StateTransmit_NeedForTransmitSecond)
     {
-        bool needForLoadFontsAndPalette = stateTransmit == StateTransmit_NeedForTransmitFirst;
+        bool needForLoadFontsAndPalette = (stateTransmit == StateTransmit_NeedForTransmitFirst);
+        LOG_WRITE("Начинаю посылать сцену");
         stateTransmit = StateTransmit_InProcess;
         if(needForLoadFontsAndPalette) 
         {
@@ -543,14 +544,6 @@ void Painter::RunDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(bool endScene)
 {
-
-    if(transmitBytes)
-    {
-        volatile int temp = transmitBytes;
-    }
-
-
-
     if (gBF.framesElapsed != 1)
     {
         gBF.framesElapsed = 1;
