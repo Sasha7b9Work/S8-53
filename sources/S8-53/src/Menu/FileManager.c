@@ -160,7 +160,7 @@ static void DrawNameCurrentDir(int left, int top)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FM_Draw(void)
 {
-    if (gBF.needRedrawFileManager == 0)
+    if (NEED_REDRAW_FILEMANAGER == 0)
     {
         return;
     }
@@ -170,7 +170,7 @@ void FM_Draw(void)
     int width = 297;
     int left2col = width / 2;
 
-    if (gBF.needRedrawFileManager == 1)
+    if (NEED_REDRAW_FILEMANAGER == 1)
     {
         Painter::BeginScene(COLOR_BACK);
         Menu::Draw();
@@ -182,27 +182,25 @@ void FM_Draw(void)
         Painter::DrawHLine(top + 15, 0, width);
     }
 
-    if (gBF.needRedrawFileManager != 3)
+    if (NEED_REDRAW_FILEMANAGER != 3)
     {
         DrawDirs(left + 2, top + 18);
     }
 
-    if (gBF.needRedrawFileManager != 2)
+    if (NEED_REDRAW_FILEMANAGER != 2)
     {
         DrawFiles(left2col + 3, top + 18);
     }
 
     Painter::EndScene();
 
-    //Painter::SaveScreenToFlashDrive();
-
-    gBF.needRedrawFileManager = 0;
+    NEED_REDRAW_FILEMANAGER = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PressSB_FM_Tab(void)
 {
-    gBF.needRedrawFileManager = 1;
+    NEED_REDRAW_FILEMANAGER = 1;
 
     if (gBF.cursorInDirs == 1)
     {
@@ -223,7 +221,7 @@ void PressSB_FM_Tab(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PressSB_FM_LevelDown(void)
 {
-    gBF.needRedrawFileManager = 1;
+    NEED_REDRAW_FILEMANAGER = 1;
     if (gBF.cursorInDirs == 0)
     {
         return;
@@ -247,7 +245,7 @@ void PressSB_FM_LevelDown(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PressSB_FM_LevelUp(void)
 {
-    gBF.needRedrawFileManager = 1;
+    NEED_REDRAW_FILEMANAGER = 1;
     if (strlen(currentDir) == 1)
     {
         return;
@@ -341,12 +339,12 @@ void FM_RotateRegSet(int angle)
     if (gBF.cursorInDirs == 1)
     {
         angle > 0 ? DecCurrentDir() : IncCurrentDir();
-        gBF.needRedrawFileManager = 2;
+        NEED_REDRAW_FILEMANAGER = 2;
     }
     else
     {
         angle > 0 ? DecCurrentFile() : IncCurrentFile();
-        gBF.needRedrawFileManager = 3;
+        NEED_REDRAW_FILEMANAGER = 3;
     }
 }
 

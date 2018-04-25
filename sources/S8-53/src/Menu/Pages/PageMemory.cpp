@@ -1213,7 +1213,7 @@ void OnPressMemoryExtFileManager()
     {
         Menu::OpenPageAndSetItCurrent(PageMemory::FileManager::GetPointer());
         Display::SetDrawMode(DrawMode_Hand, FM_Draw);
-        gBF.needRedrawFileManager = 1;
+        NEED_REDRAW_FILEMANAGER = 1;
     }
 }
 
