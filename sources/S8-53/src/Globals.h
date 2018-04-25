@@ -29,7 +29,6 @@ extern DAC_HandleTypeDef handleDAC;
 #define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
 #define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
-#define VCP_CONNECTED_TO_HOST    (gBF.connectToHost)
 
 
 typedef struct
@@ -231,3 +230,5 @@ extern void *extraMEM;      // Это специальный указатель. Используется для выдел
                                             NameStruct *name = (NameStruct*)extraMEM
 #define ACCESS_EXTRAMEM(NameStruct, name)   NameStruct *name = (NameStruct*)extraMEM
 #define FREE_EXTRAMEM()                     free(extraMEM)
+
+extern int transmitBytes;

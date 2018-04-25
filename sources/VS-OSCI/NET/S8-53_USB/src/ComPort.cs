@@ -123,21 +123,10 @@ namespace LibraryS8_53
             port.Close();
         }
 
-        int prevNumPort = 0;
-
-        public bool Connect(int numPort = -1)
+        public bool Connect(int numPort, bool handlerEnable)
         {
             try
             {
-                if(numPort == -1)
-                {
-                    numPort = prevNumPort;
-                }
-                else
-                {
-                    prevNumPort = numPort;
-                }
-
                 port.PortName = ports[numPort];
                 port.Open();
                 if (port.IsOpen)

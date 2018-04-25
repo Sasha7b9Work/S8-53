@@ -166,7 +166,7 @@ void Painter::SendToVCP(uint8 *pointer, int size)
     if(stateTransmit == StateTransmit_InProcess)
     {
         VCP::SendDataSynch(pointer, size);
-        SocketTCP::Send((const char *)pointer, size);
+        TCPSocket_Send((const char *)pointer, size);
     }
 }
 
@@ -514,8 +514,7 @@ void Painter::BeginScene(Color color)
 {
     if (stateTransmit == StateTransmit_NeedForTransmitFirst || stateTransmit == StateTransmit_NeedForTransmitSecond)
     {
-        bool needForLoadFontsAndPalette = (stateTransmit == StateTransmit_NeedForTransmitFirst);
-        LOG_WRITE("Начинаю посылать сцену");
+        bool needForLoadFontsAndPalette = stateTransmit == StateTransmit_NeedForTransmitFirst;
         stateTransmit = StateTransmit_InProcess;
         if(needForLoadFontsAndPalette) 
         {
@@ -544,6 +543,14 @@ void Painter::RunDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(bool endScene)
 {
+
+    if(transmitBytes)
+    {
+        volatile int temp = transmitBytes;
+    }
+
+
+
     if (gBF.framesElapsed != 1)
     {
         gBF.framesElapsed = 1;

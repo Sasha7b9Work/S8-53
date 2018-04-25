@@ -175,7 +175,7 @@ namespace S8_53_USB {
             }
             else
             {
-                if (port.Connect(comboBoxPorts.SelectedIndex)) // иначе делаем попыткую подключиться
+                if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
                     needForDisconnect = false;
                     LibraryS8_53.ComPort.port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandlerUSB);
@@ -287,12 +287,12 @@ namespace S8_53_USB {
 
                 if (port.IsOpen && port.BytesToRead != 0)
                 {
+                    mutexData.WaitOne();
                     while (port.BytesToRead != 0)
                     {
-                        mutexData.WaitOne();
                         data.Enqueue((byte)port.ReadByte());
-                        mutexData.ReleaseMutex();
                     }
+                    mutexData.ReleaseMutex();
                 }
             }
             catch (Exception e)
@@ -300,8 +300,6 @@ namespace S8_53_USB {
                 Console.WriteLine(e.ToString());
             }
         }
-
-        static bool firstByte = true;
 
         // Выполнить имеющиеся данные
         private static void RunData()
@@ -325,18 +323,10 @@ namespace S8_53_USB {
                     }
                     else if ((Command)command == Command.FILL_REGION)
                     {
-                        int x = int16();
-                        int y = int8();
-
-                        if (x == 0 && y == 0)
-                        {
-                            Console.WriteLine("Получил FILL_REGION 0 0");
-                        }
-                        Display.FillRegion(x, y, int16(), int8());
+                        Display.FillRegion(int16(), int8(), int16(), int8());
                     }
                     else if ((Command)command == Command.END_SCENE)
                     {
-                        Console.WriteLine("EndScene enter");
                         // Выводим нарисованную картинку
                         Display.EndScene();
 
@@ -358,26 +348,14 @@ namespace S8_53_USB {
 
                                 // И делаем запрос на следующий фрейм
                                 port.SendString("DISPLAY:AUTOSEND 2");
-                                //port.Stop();
-                                //port.Connect();
-                                Console.WriteLine("Посылаю AutoSend 2");
-                                firstByte = true;
                             }
                             else
                             {
-                                bool needDelay = commands.Count > 1;
-
-                                while (commands.Count != 0)
+                                while(commands.Count != 0)
                                 {
                                     socket.SendString(commands.Dequeue());
                                     Thread.Sleep(150);
                                 }
-
-                                if(needDelay)
-                                { 
-                                    //Thread.Sleep(300);
-                                }
-                                
                                 socket.SendString("DISPLAY:AUTOSEND 2");
                             }
                         }
@@ -510,23 +488,10 @@ namespace S8_53_USB {
 
         private static int int8()
         {
-            if(firstByte)
-            {
-                Console.WriteLine("Принимаю первый байт");
-            }
-
             int retValue = 0;
             try
             {
-                long startTime = CurrentTime();
-                while (data.Count == 0 && isRunning)
-                {
-                    if(CurrentTime() - startTime > 1000)
-                    {
-                        Console.WriteLine("Долго ждём");
-                        startTime = CurrentTime();
-                    }
-                };
+                while (data.Count == 0 && isRunning) { };
 
                 mutexData.WaitOne();
                 retValue = data.Dequeue();
@@ -537,18 +502,7 @@ namespace S8_53_USB {
                 Console.WriteLine(e.ToString());
             }
 
-            if(firstByte)
-            {
-                firstByte = false;
-                Console.WriteLine("Принял первый байт");
-            }
-
             return retValue;
-        }
-
-        private static long CurrentTime()
-        {
-            return DateTime.Now.Ticks / 10000;
         }
 
         private static int int16()

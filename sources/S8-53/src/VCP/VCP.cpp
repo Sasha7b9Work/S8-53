@@ -1,11 +1,12 @@
 #include "defines.h"
 #include "VCP.h"
-#include "Log.h"
 #include "Utils/Math.h"
 #include "SCPI/SCPI.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"
 #include "Hardware/Timer.h"
+
+
 #include <usbd_cdc.h>
 #include <usbd_def.h>
 #include <stdarg.h>
@@ -63,18 +64,9 @@ void VCP::Flush()
 
 void VCP::SendDataSynch(const uint8 *buffer, int size)
 {
-    /*
-    if (VCP_CONNECTED_TO_HOST == 0)
+    if (gBF.connectToHost == 0)
     {
         return;
-    }
-    */
-
-    //static bool 
-
-    if(buffer[0] == 2 && buffer[1] == 0 && buffer[2] == 0 && buffer[3] == 0)
-    {
-       // LOG_WRITE("Посылаю FILL_REGION 0 0");
     }
 
     USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;

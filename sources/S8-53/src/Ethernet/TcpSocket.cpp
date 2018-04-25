@@ -1,5 +1,6 @@
+
+
 #include "TcpSocket.h"
-#include "Log.h"
 #include <lwip/tcp.h>
 #include <string.h>
 #include <stdarg.h>
@@ -47,7 +48,7 @@ void CloseConnection(struct tcp_pcb *tpcb, struct State *ss)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void SendPacket(struct tcp_pcb *_tpcb, struct State *_ss)
+void Send(struct tcp_pcb *_tpcb, struct State *_ss)
 {
     struct pbuf *ptr;
     err_t wr_err = ERR_OK;
@@ -102,7 +103,7 @@ err_t CallbackOnSent(void *_arg, struct tcp_pcb *_tpcb, u16_t _len)
 
     if (ss->p != NULL)
     {
-        SendPacket(_tpcb, ss);
+        Send(_tpcb, ss);
     }
     else
     {
@@ -130,7 +131,7 @@ void SendAnswer(void *_arg, struct tcp_pcb *_tpcb)
     pbuf_take(tcpBuffer, policy, strlen(policy));
     struct State *s = (struct State *)_arg;
     s->p = tcpBuffer;
-    SendPacket(_tpcb, s);
+    Send(_tpcb, s);
 }
 
 
@@ -266,7 +267,7 @@ err_t CallbackOnPoll(void *_arg, struct tcp_pcb *_tpcb)
         {
             // there is a remaining pbuf (chain)
             //tcp_sent(_tpcb, CallbackOnSent);
-            SendPacket(_tpcb, ss);
+            Send(_tpcb, ss);
         }
         else
         {
@@ -347,7 +348,7 @@ err_t CallbackOnAcceptPolicyPort(void *_arg, struct tcp_pcb *_newPCB, err_t _err
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SocketTCP::Init(void(*_funcConnect)(void), void(*_funcReciever)(const char *_buffer, uint _length))
+bool TCPSocket_Init(void(*_funcConnect)(void), void(*_funcReciever)(const char *_buffer, uint _length))
 {
     struct tcp_pcb *pcb = tcp_new();
     if (pcb != NULL)
@@ -398,16 +399,17 @@ bool SocketTCP::Init(void(*_funcConnect)(void), void(*_funcReciever)(const char 
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SocketTCP::Send(const char *buffer, uint length)
+bool TCPSocket_Send(const char *buffer, uint length)
 {
     if (pcbClient)
     {
         struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, length, PBUF_POOL);
         tcpBuffer->flags = 1;
         pbuf_take(tcpBuffer, buffer, length);
+        transmitBytes += length;
         struct State *ss = (struct State*)mem_malloc(sizeof(struct State));
         ss->p = tcpBuffer;
-        SendPacket(pcbClient, ss);
+        Send(pcbClient, ss);
         mem_free(ss);
     }
     return pcbClient != 0;
@@ -415,13 +417,15 @@ bool SocketTCP::Send(const char *buffer, uint length)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void SocketTCP::SendFormatString(char *format, ...)
+void TCPSocket_SendFormatString(char *format, ...)
 {
-    static char buffer[200];
+#undef SIZE_BUFFER
+#define SIZE_BUFFER 200
+    static char buffer[SIZE_BUFFER];
     va_list args;
     va_start(args, format);
     vsprintf(buffer, format, args);
     va_end(args);
     strcat(buffer, "\r\n");
-    Send(buffer, strlen(buffer));
+    TCPSocket_Send(buffer, strlen(buffer));
 }

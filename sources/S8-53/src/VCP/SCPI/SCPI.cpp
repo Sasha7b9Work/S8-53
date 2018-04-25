@@ -25,11 +25,13 @@ static int pointer = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SCPI::AddNewData(uint8 *data, uint length)
 {
+    /*
     uint8 *temp = (uint8 *)malloc(length + 1);
     memcpy(temp, data, length);
     temp[length] = 0;
     LOG_WRITE((char *)temp);
     free(temp);
+    */
 
     memcpy(&buffer[pointer], data, length);
     pointer += length;

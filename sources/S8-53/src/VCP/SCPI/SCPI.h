@@ -22,13 +22,13 @@
 
 
 #define SCPI_SEND(...)                                  \
-    if(VCP_CONNECTED_TO_HOST)                           \
+    if(gBF.connectToHost == 1)                          \
     {                                                   \
         VCP::SendFormatStringAsynch(__VA_ARGS__);       \
     }                                                   \
     if (CLIENT_LAN_IS_CONNECTED)                        \
     {                                                   \
-        SocketTCP::SendFormatString(__VA_ARGS__);       \
+        TCPSocket_SendFormatString(__VA_ARGS__);        \
     }
 
 #define ENTER_PARSE_FUNC(funcName)                      \
