@@ -147,7 +147,7 @@ void Choice::StartChange(int delta)
         return;
     }
     sound.GovernorChangedValue();
-    if (gBF.showHelpHints)
+    if (SHOW_HELP_HINTS)
     {
         SetItemForHint(this);
     }

@@ -108,7 +108,7 @@ void Menu::Draw()
         }
     }
 
-    if (gBF.showHelpHints)
+    if (SHOW_HELP_HINTS)
     {
         int x = 0;
         int y = 0;

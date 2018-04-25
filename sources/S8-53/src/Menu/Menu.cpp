@@ -74,11 +74,11 @@ void Menu::UpdateInput()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ShortPressureButton(PanelButton button)
 {
-    if (!gBF.showHelpHints)
+    if (!SHOW_HELP_HINTS)
     {
         if(button == B_Help)
         {
-            gBF.showHelpHints++;
+            SHOW_HELP_HINTS++;
             gStringForHint = 0;
             gItemHint = 0;
         }
@@ -90,7 +90,7 @@ void Menu::ShortPressureButton(PanelButton button)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::LongPressureButton(PanelButton button)
 {
-    if (gBF.showHelpHints == 0)
+    if (SHOW_HELP_HINTS == 0)
     {
         longPressureButton = button;
         Display::Redraw();
@@ -224,7 +224,7 @@ static void ProcessButtonForHint(PanelButton button)
 void Menu::PressButton(PanelButton button)
 {
     sound.ButtonPress();
-    if (gBF.showHelpHints)
+    if (SHOW_HELP_HINTS)
     {
         ProcessButtonForHint(button);
         return;
@@ -255,7 +255,7 @@ void Menu::PressButton(PanelButton button)
 void Menu::ReleaseButton(PanelButton button)
 {
     sound.ButtonRelease();
-    if (gBF.showHelpHints == 0)
+    if (SHOW_HELP_HINTS == 0)
     {
         releaseButton = button;
     }
@@ -264,7 +264,7 @@ void Menu::ReleaseButton(PanelButton button)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::RotateRegSetRight(void)
 {   
-    if (gBF.showHelpHints == 0)
+    if (SHOW_HELP_HINTS == 0)
     {
         angleRegSet++;
         Display::Redraw();
@@ -274,7 +274,7 @@ void Menu::RotateRegSetRight(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::RotateRegSetLeft(void)
 {
-    if (gBF.showHelpHints == 0)
+    if (SHOW_HELP_HINTS == 0)
     {
         angleRegSet--;
         Display::Redraw();
@@ -378,7 +378,7 @@ void Menu::ProcessingShortPressureButton()
             else if (MenuIsShown() && IsFunctionalButton(button))       // Если меню показано и нажата функциональная клавиша
             {
                 void *item = ItemUnderButton(button);
-                if (gBF.showHelpHints)
+                if (SHOW_HELP_HINTS)
                 {
                     SetItemForHint(item);
                 }

@@ -19,7 +19,7 @@ static void ChangeRShift(int *prevTime, void(*f)(Channel, int16), Channel chan, 
 
 void HelpLong(void)
 {
-    gBF.showHelpHints++;
+    SHOW_HELP_HINTS++;
     gStringForHint = 0;
     gItemHint = 0;
 }
