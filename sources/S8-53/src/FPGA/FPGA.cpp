@@ -93,7 +93,7 @@ void FPGA::Start(void)
     FillDataPointer(&ds);
     timeStart = gTimerMS;
     stateWork = StateWorkFPGA_Wait;
-    gBF.FPGAcritiacalSituation = 0;
+    FPGA_CRITICAL_SITUATION = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,17 +113,17 @@ bool FPGA::ProcessingData(void)
    for (int i = 0; i < num; i++)
    {
         uint8 flag = ReadFlag();
-        if (gBF.FPGAcritiacalSituation == 1)
+        if (FPGA_CRITICAL_SITUATION)
         {
             if (gTimerMS - timeStart > 500)
             {
                 SwitchingTrig();
                 gBF.FPGAtrigAutoFind = 1;
-                gBF.FPGAcritiacalSituation = 0;
+                FPGA_CRITICAL_SITUATION = 0;
             }
             else if (_GET_BIT(flag, BIT_TRIG))
             {
-                gBF.FPGAcritiacalSituation = 0;
+                FPGA_CRITICAL_SITUATION = 0;
             }
         }
         else if (_GET_BIT(flag, BIT_DATA_READY))
@@ -153,7 +153,7 @@ bool FPGA::ProcessingData(void)
             {
                 if (START_MODE_IS_AUTO)
                 {
-                    gBF.FPGAcritiacalSituation = 1;
+                    FPGA_CRITICAL_SITUATION = 1;
                 }
                 timeStart = gTimerMS;
             }
