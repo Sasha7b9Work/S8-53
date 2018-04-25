@@ -31,6 +31,8 @@ extern DAC_HandleTypeDef handleDAC;
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
 #define NEED_RESET_SETTINGS      (gBF.needResetSettings)
 #define NEED_FINISH_REDRAW       (gBF.needFinishDraw)
+#define SHOW_LEVEL_RSHIFT_0      (gBF.showLevelRShift0)
+#define SHOW_LEVEL_RSHIFT_1      (gBF.showLevelRShift1)
 
 
 typedef struct

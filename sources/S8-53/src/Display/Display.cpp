@@ -111,7 +111,7 @@ void Display::RotateRShift(Channel chan)
     LAST_AFFECTED_CHANNEL = chan;
     if(TIME_SHOW_LEVELS)
     {
-        (chan == A) ? (gBF.showLevelRShift0 = 1) : (gBF.showLevelRShift1 = 1);
+        (chan == A) ? (SHOW_LEVEL_RSHIFT_0 = 1) : (SHOW_LEVEL_RSHIFT_1 = 1);
         Timer::Enable((chan == A) ? kShowLevelRShift0 : kShowLevelRShift1, TIME_SHOW_LEVELS  * 1000, (chan == A) ? FuncOnTimerDisableShowLevelRShiftA :
                      FuncOnTimerDisableShowLevelRShiftB);
     };
@@ -1712,7 +1712,7 @@ void Display::DrawCursorRShift(Channel chan)
     else
     {
         Painter::DrawCharC(x - 8, y - 4, SYMBOL_RSHIFT_NORMAL, ColorChannel(chan));
-        if(((chan == A) ? (gBF.showLevelRShift0 == 1) : (gBF.showLevelRShift1 == 1)) && MODE_WORK_IS_DIRECT)
+        if(((chan == A) ? (SHOW_LEVEL_RSHIFT_0 == 1) : (SHOW_LEVEL_RSHIFT_1 == 1)) && MODE_WORK_IS_DIRECT)
         {
             Painter::DrawDashedHLine(y, Grid::Left(), Grid::Right(), 7, 3, 0);
         }
@@ -2208,14 +2208,14 @@ void Display::DrawTimeForFrame(uint timeTicks)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DisableShowLevelRShiftA()
 {
-    gBF.showLevelRShift0 = 0;
+    SHOW_LEVEL_RSHIFT_0 = 0;
     Timer::Disable(kShowLevelRShift0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DisableShowLevelRShiftB()
 {
-    gBF.showLevelRShift1 = 0;
+    SHOW_LEVEL_RSHIFT_1 = 0;
     Timer::Disable(kShowLevelRShift1);
 }
 
