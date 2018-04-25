@@ -672,7 +672,7 @@ bool DrawDataInModeNormal()
         DrawBothChannels(0, 0);
         if (prevAddr == 0 || prevAddr != ds->addrPrev)
         {
-            gBF.numDrawingSignals++;
+            NUM_DRAWING_SIGNALS++;
             prevAddr = ds->addrPrev;
         }
     }
@@ -1223,9 +1223,9 @@ static bool NeedForClearScreen()
         NEED_FINISH_REDRAW = 0;
         return true;
     }
-    if (MODE_ACCUM_IS_RESET && gBF.numDrawingSignals >= numAccum)
+    if (MODE_ACCUM_IS_RESET && NUM_DRAWING_SIGNALS >= numAccum)
     {
-        gBF.numDrawingSignals = 0;
+        NUM_DRAWING_SIGNALS = 0;
         return true;
     }
     return false;
