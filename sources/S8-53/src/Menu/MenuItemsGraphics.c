@@ -52,7 +52,7 @@ void DrawGovernorChoiceColorFormulaHiPart(void *item, int x, int y, bool pressed
         if (type == Item_Governor)
         {
             symbol = GetSymbolForGovernor(*((Governor*)item)->cell);
-            gBF.addressGovernor = (uint)item;
+            ADDRESS_GOVERNOR = (uint)item;
         }
         else if (type == Item_Governor || type == Item_ChoiceReg ||  (Menu::ItemIsOpened(item) && type == Item_Choice))
         {

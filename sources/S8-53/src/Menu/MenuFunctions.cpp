@@ -292,7 +292,7 @@ int Menu::NumItemsInPage(const Page * const page)
 {
     if (page->name == Page_MainPage)
     {
-        return (gBF.showDebugMenu == 0) ? 10 : 11;
+        return (SHOW_DEBUG_MENU == 0) ? 10 : 11;
     }
     else if (PageIsSB(page))
     {

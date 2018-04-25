@@ -18,11 +18,11 @@ int8 gCurDigit = 0;
 void Governor_StartChange(Governor *governor, int delta)
 {
     sound.GovernorChangedValue();
-    if (delta > 0 && gBF.addressGovernor == (uint)governor && gBF.inMoveIncrease == 1)
+    if (delta > 0 && ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveIncrease == 1)
     {
         *governor->cell = Governor_NextValue(governor);
     }
-    else if (delta < 0 && gBF.addressGovernor == (uint)governor && gBF.inMoveDecrease == 1)
+    else if (delta < 0 && ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveDecrease == 1)
     {
         *governor->cell = Governor_PrevValue(governor);
     }
@@ -115,7 +115,7 @@ float Governor_Step(Governor *governor)
 {
     static const float speed = 0.05f;
     static const int numLines = 10;
-    if (gBF.addressGovernor == (uint)governor && gBF.inMoveDecrease == 1)
+    if (ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveDecrease == 1)
     {
         float delta = -speed * (gTimerMS - gBF.timeStartMS);
         if (delta == 0.0f)
@@ -134,7 +134,7 @@ float Governor_Step(Governor *governor)
         }
         return delta;
     }
-    if (gBF.addressGovernor == (uint)governor && gBF.inMoveIncrease == 1)
+    if (ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveIncrease == 1)
     {
         float delta = speed * (gTimerMS - gBF.timeStartMS);
         if (delta == 0.0f)

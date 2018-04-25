@@ -55,6 +55,8 @@ extern DAC_HandleTypeDef handleDAC;
 #define NEED_REDRAW_FILEMANAGER  (gBF.needRedrawFileManager)
 #define CURSORS_IN_DIRS          (gBF.cursorInDirs)
 #define SHOW_HELP_HINTS          (gBF.showHelpHints)
+#define SHOW_DEBUG_MENU          (gBF.showDebugMenu)
+#define ADDRESS_GOVERNOR         (gBF.addressGovernor)
 
 
 typedef struct

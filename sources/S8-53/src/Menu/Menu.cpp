@@ -244,7 +244,7 @@ void Menu::PressButton(PanelButton button)
       
         if (memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS) == 0)
         {
-            gBF.showDebugMenu = 1;
+            SHOW_DEBUG_MENU = 1;
             Display::ShowWarningGood(MenuDebugEnabled);
         }
     }
