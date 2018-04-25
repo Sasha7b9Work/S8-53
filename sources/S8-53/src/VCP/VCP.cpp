@@ -67,7 +67,7 @@ void VCP::Flush()
 
 void VCP::SendDataSynch(const uint8 *buffer, int size)
 {
-    if (VCP_CONNECT_TO_HOST == 0)
+    if (CLIENT_VCP_IS_CONNECTED == 0)
     {
         return;
     }

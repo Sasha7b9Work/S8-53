@@ -22,10 +22,14 @@ extern ADC_HandleTypeDef handleADC;
 extern DAC_HandleTypeDef handleDAC;
 
 
-#define SETTINGS_IS_LOADED       (gBF.settingsLoaded)
-#define NEED_OPEN_FILE_MANAGER   (gBF.needOpenFileMananger)
 #define CLIENT_LAN_IS_CONNECTED  (gBF.clientLANisConnected)
 #define CABLE_LAN_IS_CONNECTED   (gBF.cableLANisConnected)
+#define CLIENT_VCP_IS_CONNECTED  (gBF.connectToHost)
+#define CABLE_VCP_IS_CONNECTED   (gBF.cableVCPisConnected)
+
+
+#define SETTINGS_IS_LOADED       (gBF.settingsLoaded)
+#define NEED_OPEN_FILE_MANAGER   (gBF.needOpenFileMananger)
 #define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
 #define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
@@ -38,8 +42,6 @@ extern DAC_HandleTypeDef handleDAC;
 #define TRIG_ENABLE              (gBF.trigEnable)
 #define DRAW_RSHIFT_MARKERS      (gBF.drawRShiftMarkers)
 #define TOP_MEASURES             (gBF.topMeasures)
-#define VCP_CONNECT_TO_HOST      (gBF.connectToHost)
-#define CABLE_VCP_CONNECTED      (gBF.cableVCPisConnected)
 
 
 typedef struct
