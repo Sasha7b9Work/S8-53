@@ -1599,7 +1599,7 @@ void DrawScaleLine(int x, bool forTrigLev)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawCursorsWindow()
 {
-    if((!MenuIsMinimize() || !MenuIsShown()) && gBF.drawRShiftMarkers == 1)
+    if((!MenuIsMinimize() || !MenuIsShown()) && DRAW_RSHIFT_MARKERS)
     {
         DrawScaleLine(2, false);
     }
@@ -1651,7 +1651,7 @@ void Display::DrawCursorTrigLevel()
     Painter::DrawCharC(x + 5, y - 9 + dY, simbols[TRIG_SOURCE], COLOR_BACK);
     Painter::SetFont(TypeFont_8);
 
-    if (gBF.drawRShiftMarkers == 1 && !MenuIsMinimize())
+    if (DRAW_RSHIFT_MARKERS && !MenuIsMinimize())
     {
         DrawScaleLine(SCREEN_WIDTH - 11, true);
         int left = Grid::Right() + 9;
@@ -1721,7 +1721,7 @@ void Display::DrawCursorRShift(Channel chan)
     Painter::SetFont(TypeFont_5);
     int dY = 0;
 
-    if((!MenuIsMinimize() || !MenuIsShown()) && gBF.drawRShiftMarkers == 1)
+    if((!MenuIsMinimize() || !MenuIsShown()) && DRAW_RSHIFT_MARKERS)
     {
         Painter::FillRegionC(4, yFull - 3, 4, 6, ColorChannel(chan));
         Painter::DrawCharC(5, yFull - 9 + dY, chan == A ? '1' : '2', COLOR_BACK);
@@ -2300,7 +2300,7 @@ void Display::ShiftScreen(int delta)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::ChangedRShiftMarkers()
 {
-    gBF.drawRShiftMarkers = ALT_MARKERS_HIDE ? 0 : 1;
+    DRAW_RSHIFT_MARKERS = ALT_MARKERS_HIDE ? 0 : 1;
     Timer::Enable(kRShiftMarkersAutoHide, 5000, FuncOnTimerRShiftMarkersAutoHide);
 }
 
@@ -2312,7 +2312,7 @@ static void FuncOnTimerRShiftMarkersAutoHide()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::OnRShiftMarkersAutoHide()
 {
-    gBF.drawRShiftMarkers = 0;
+    DRAW_RSHIFT_MARKERS = 0;
     Timer::Disable(kRShiftMarkersAutoHide);
 }
 

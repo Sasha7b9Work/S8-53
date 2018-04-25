@@ -47,8 +47,8 @@ BitField gBF =
     0,  // showLevelRShift0
     0,  // showLevelRShift1
     0,  // showLevelTrigLev
-    0,
-    0,
+    0,  // trigEnable
+    0,  // drawRShiftMarkers
     1,  // needFinishDraw
     0,  // framesElapsed
     0,  // numDrawingSignals
