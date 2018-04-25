@@ -18,7 +18,7 @@ int8 gCurDigit = 0;
 void Governor_StartChange(Governor *governor, int delta)
 {
     sound.GovernorChangedValue();
-    if (delta > 0 && ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveIncrease == 1)
+    if (delta > 0 && ADDRESS_GOVERNOR == (uint)governor && IN_MOVE_INCREASE)
     {
         *governor->cell = Governor_NextValue(governor);
     }
@@ -30,7 +30,7 @@ void Governor_StartChange(Governor *governor, int delta)
     {
         gBF.timeStartMS = gTimerMS;   
     }
-    gBF.inMoveIncrease = (delta > 0) ? 1 : 0;
+    IN_MOVE_INCREASE = (delta > 0) ? 1 : 0;
     gBF.inMoveDecrease = (delta < 0) ? 1 : 0;
 }
 
@@ -124,7 +124,7 @@ float Governor_Step(Governor *governor)
         }
         if (delta < -numLines)
         {
-            gBF.inMoveDecrease = gBF.inMoveIncrease = 0;
+            gBF.inMoveDecrease = IN_MOVE_INCREASE = 0;
             *governor->cell = Governor_PrevValue(governor);
             if (governor->funcOfChanged)
             {
@@ -134,7 +134,7 @@ float Governor_Step(Governor *governor)
         }
         return delta;
     }
-    if (ADDRESS_GOVERNOR == (uint)governor && gBF.inMoveIncrease == 1)
+    if (ADDRESS_GOVERNOR == (uint)governor && IN_MOVE_INCREASE)
     {
         float delta = speed * (gTimerMS - gBF.timeStartMS);
         if (delta == 0.0f)
@@ -143,7 +143,7 @@ float Governor_Step(Governor *governor)
         }
         if (delta > numLines)
         {
-            gBF.inMoveDecrease = gBF.inMoveIncrease = 0;
+            gBF.inMoveDecrease = IN_MOVE_INCREASE = 0;
             *governor->cell = Governor_NextValue(governor);
             if(governor->funcOfChanged)
             {
