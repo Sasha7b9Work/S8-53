@@ -28,7 +28,7 @@ void Governor_StartChange(Governor *governor, int delta)
     }
     else
     {
-        gBF.timeStartMS = gTimerMS;   
+        TIME_START_MS = gTimerMS;   
     }
     IN_MOVE_INCREASE = (delta > 0) ? 1 : 0;
     IN_MOVE_DECREASE = (delta < 0) ? 1 : 0;
@@ -117,7 +117,7 @@ float Governor_Step(Governor *governor)
     static const int numLines = 10;
     if (ADDRESS_GOVERNOR == (uint)governor && IN_MOVE_DECREASE)
     {
-        float delta = -speed * (gTimerMS - gBF.timeStartMS);
+        float delta = -speed * (gTimerMS - TIME_START_MS);
         if (delta == 0.0f)
         {
             return -0.001f;
@@ -136,7 +136,7 @@ float Governor_Step(Governor *governor)
     }
     if (ADDRESS_GOVERNOR == (uint)governor && IN_MOVE_INCREASE)
     {
-        float delta = speed * (gTimerMS - gBF.timeStartMS);
+        float delta = speed * (gTimerMS - TIME_START_MS);
         if (delta == 0.0f)
         {
             return 0.001f;
