@@ -135,7 +135,7 @@ void Display::RotateTrigLev()
 {
     if (TIME_SHOW_LEVELS)
     {
-        gBF.showLevelTrigLev = 1;
+        SHOW_LEVEL_TRIGLEV = 1;
         Timer::Enable(kShowLevelTrigLev, TIME_SHOW_LEVELS * 1000, FuncOnTimerDisableShowLevelTrigLev);
     }
     Display::Redraw();
@@ -1316,7 +1316,7 @@ void Display::Update(bool endScene)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::WriteValueTrigLevel()
 {
-    if (gBF.showLevelTrigLev == 1 && MODE_WORK_IS_DIRECT)
+    if (SHOW_LEVEL_TRIGLEV && MODE_WORK_IS_DIRECT)
     {
         float trigLev = RSHIFT_2_ABS(TRIG_LEVEL_SOURCE, SET_RANGE(TRIG_SOURCE));     // WARN Здесь для внешней синхронизации неправильно рассчитывается уровень.
         TrigSource trigSource = TRIG_SOURCE;
@@ -2222,7 +2222,7 @@ void Display::DisableShowLevelRShiftB()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DisableShowLevelTrigLev()
 {
-    gBF.showLevelTrigLev = 0;
+    SHOW_LEVEL_TRIGLEV = 0;
     Timer::Disable(kShowLevelTrigLev);
 }
 

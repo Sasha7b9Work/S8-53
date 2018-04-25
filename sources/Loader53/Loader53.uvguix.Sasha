@@ -21,7 +21,7 @@
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1028 154 154 100</TableColWidths>
+      <TableColWidths>1028</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -36,7 +36,7 @@
       <WinId>1936</WinId>
       <ViewName>Watch 1</ViewName>
       <UserString></UserString>
-      <TableColWidths>286 70 70</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1937</WinId>
@@ -48,7 +48,7 @@
       <WinId>1935</WinId>
       <ViewName>Call Stack + Locals</ViewName>
       <UserString></UserString>
-      <TableColWidths>304 184 70</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>2506</WinId>
