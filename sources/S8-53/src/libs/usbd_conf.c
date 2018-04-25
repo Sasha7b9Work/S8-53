@@ -67,14 +67,14 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
         {                                                           //
             if (prevLength != 0)                                    //
             {                                                       //
-                gBF.connectToHost = 1;                              // GOVNOCODE ����� ��� ������������ ������� ����������, ��� � ��� �������������� ���� (
+                VCP_CONNECT_TO_HOST = 1;                            // GOVNOCODE
             }                                                       //
             else                                                    //
             {                                                       //
-                gBF.connectToHost = 0;                              //
-                Settings::Save();                                   // ��� ��������������� ��������� ��������� // WARN ��������, ��� �� ����� ������
+                VCP_CONNECT_TO_HOST = 0;                            //
+                Settings::Save();                                   //
             }                                                       //
-            gBF.connectToHost = (prevLength != 0) ? 1 : 0;          // 
+            VCP_CONNECT_TO_HOST = (prevLength != 0) ? 1 : 0;          // 
         }                                                           //
     }                                                               //
     prevLength = request.wLength;                                   //

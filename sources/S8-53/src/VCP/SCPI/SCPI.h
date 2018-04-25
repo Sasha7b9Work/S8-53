@@ -22,7 +22,7 @@
 
 
 #define SCPI_SEND(...)                                  \
-    if(gBF.connectToHost == 1)                          \
+    if(VCP_CONNECT_TO_HOST)                             \
     {                                                   \
         VCP::SendFormatStringAsynch(__VA_ARGS__);       \
     }                                                   \
