@@ -491,12 +491,16 @@ namespace S8_53_USB {
             int retValue = 0;
             try
             {
+                long startTime = CurrentTime();
                 while (data.Count == 0 && isRunning)
                 {
                     int numBytes = LibraryS8_53.ComPort.port.BytesToRead;
-                    if (numBytes > 0)
+                    if (numBytes > 0 && CurrentTime() - startTime > 1000)
                     {
                         Console.WriteLine(LibraryS8_53.ComPort.port.BytesToRead + " байт доступно");
+                        mutexData.WaitOne();
+                        data.Enqueue((byte)LibraryS8_53.ComPort.port.ReadByte());
+                        mutexData.ReleaseMutex();
                     }
                 };
 
@@ -525,6 +529,11 @@ namespace S8_53_USB {
             isRunning = true;
             runProcess = new Thread(RunData);
             runProcess.Start();
+        }
+
+        private static long CurrentTime()
+        {
+            return DateTime.Now.Ticks / 10000;
         }
     }
 }
