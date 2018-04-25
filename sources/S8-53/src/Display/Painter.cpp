@@ -543,17 +543,14 @@ void Painter::RunDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(bool endScene)
 {
-
     if(transmitBytes)
     {
         volatile int temp = transmitBytes;
     }
 
-
-
-    if (gBF.framesElapsed != 1)
+    if (FRAMES_ELAPSED != 1)
     {
-        gBF.framesElapsed = 1;
+        FRAMES_ELAPSED = 1;
         return;
     }
     uint8 command[4];

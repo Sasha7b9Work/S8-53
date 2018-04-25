@@ -73,7 +73,7 @@ void FPGA::SetNumSignalsInSec(int numSigInSec)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void OnTimerCanReadData(void)
 {
-    gBF.FPGAcanReadData = 1;
+    FPGA_CAN_READ_DATA = 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -185,8 +185,8 @@ void FPGA::Update(void)
 		return;
 	}
 
-    //if(((gBF.FPGAcanReadData == 0) && !sTime_RandomizeModeEnabled()) || (stateWork == StateWorkFPGA_Stop))
-    if((gBF.FPGAcanReadData == 0) || (stateWork == StateWorkFPGA_Stop))
+    //if(((FPGA_CAN_READ_DATA == 0) && !sTime_RandomizeModeEnabled()) || (stateWork == StateWorkFPGA_Stop))
+    if((FPGA_CAN_READ_DATA == 0) || (stateWork == StateWorkFPGA_Stop))
     {
         return;
     }
@@ -198,7 +198,7 @@ void FPGA::Update(void)
 
     ProcessingData();
 
-    gBF.FPGAcanReadData = 0;
+    FPGA_CAN_READ_DATA = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
