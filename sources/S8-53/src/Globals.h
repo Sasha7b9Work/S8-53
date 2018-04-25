@@ -29,6 +29,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FLASH_DRIVE_IS_CONNECTED (gBF.flashDriveIsConnected)
 #define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
+#define NEED_RESET_SETTINGS      (gBF.needResetSettings)
 
 
 typedef struct
@@ -99,6 +100,7 @@ typedef struct
                                             // они ничего не перекрывали
     uint needOpenFileMananger       : 1;    // Если 1, то нужно открыть файловый менеджер (сработало автоподключение)
     uint needClosePageSB            : 1;    // Если 1, нужно закрывать страницу малых кнопок
+    uint needResetSettings          : 1;    // Если 1, то необходим сброс настроек
 } BitField;
 
 

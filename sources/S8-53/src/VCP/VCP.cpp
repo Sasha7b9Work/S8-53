@@ -1,12 +1,11 @@
 #include "defines.h"
 #include "VCP.h"
+#include "Log.h"
 #include "Utils/Math.h"
 #include "SCPI/SCPI.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"
 #include "Hardware/Timer.h"
-
-
 #include <usbd_cdc.h>
 #include <usbd_def.h>
 #include <stdarg.h>
@@ -16,6 +15,8 @@
 
 USBD_HandleTypeDef handleUSBD;
 PCD_HandleTypeDef handlePCD;
+
+uint VCP::lastTimeSend = 0;
 
 
 void VCP::Init()
@@ -32,8 +33,10 @@ static bool PrevSendingComplete(void)
     return pCDC->TxState == 0;
 }
 
-void VCP_SendDataAsinch(uint8 *buffer, int size)
+void VCP::SendDataAsinch(uint8 *buffer, int size)
 {
+    lastTimeSend = gTimerMS;
+
     const int SIZE_BUFFER = 64;
     static uint8 trBuf[SIZE_BUFFER];
 
@@ -69,6 +72,8 @@ void VCP::SendDataSynch(const uint8 *buffer, int size)
         return;
     }
 
+    lastTimeSend = gTimerMS;
+
     USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
 
     do 
@@ -99,9 +104,9 @@ void SendData(const uint8 *buffer, int size)
 
 }
 
-void VCP_SendStringAsinch(char *data)
+void VCP::SendStringAsinch(char *data)
 {
-    VCP_SendDataAsinch((uint8*)data, strlen(data));
+    SendDataAsinch((uint8*)data, strlen(data));
 }
 
 void VCP::SendStringSynch(char *data)
@@ -118,7 +123,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
     vsprintf(buffer, format, args);
     va_end(args);
     strcat(buffer, "\n");
-    VCP_SendDataAsinch((uint8*)buffer, strlen(buffer));
+    SendDataAsinch((uint8*)buffer, strlen(buffer));
 }
 
 void VCP::SendFormatStringSynch(char *format, ...) {
@@ -132,9 +137,13 @@ void VCP::SendFormatStringSynch(char *format, ...) {
     SendDataSynch((uint8*)buffer, strlen(buffer));
 }
 
-void VCP::SendByte(uint8 byte)
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void VCP::Update()
 {
-    SendDataSynch(&byte, 1);
+    if(gTimerMS - lastTimeSend > 1000)
+    {
+        LOG_WRITE("Долго нет засылок");
+    }
 }
 
 #ifdef __cplusplus

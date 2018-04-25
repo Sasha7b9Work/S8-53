@@ -93,7 +93,8 @@ BitField gBF =
     GRID_BOTTOM, // topMeasures
  
     0,  // needOpenFileManager
-    1   // needClosePageSB
+    1,  // needClosePageSB
+    0   // needResetSettings
 };
 
 

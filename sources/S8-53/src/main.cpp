@@ -40,13 +40,20 @@ int main(void)
 
     while(1)
     {
+        if(NEED_RESET_SETTINGS)
+        {
+            Settings::Load(true);
+            NEED_RESET_SETTINGS = 0;
+        }
+
         Timer::StartMultiMeasurement();      // Сброс таймера для замера длительности временных интервалов в течение одной итерации цикла.
         FlashDrive::Update();
         LAN::Update(0);
         FPGA::Update();                      // Обновляем аппаратную часть.
         ProcessingSignal();
-        Display::Update();               // Рисуем экран.
+        Display::Update();                   // Рисуем экран.
         Menu::UpdateInput();                 // Обновляем состояние меню
+        //VCP::Update();
     }
 }
 

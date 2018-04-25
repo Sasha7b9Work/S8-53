@@ -22,7 +22,7 @@ void Log_Write(char *format, ...)
     Display::AddStringToIndicating(buffer);
     if(loggerUSB)
     {
-        VCP::SendFormatStringAsynch(buffer);
+        //VCP::SendFormatStringAsynch(buffer);
     }
 }
 
@@ -48,8 +48,8 @@ void Log_Error(const char *module, const char *func, int numLine, char *format, 
     Display::AddStringToIndicating(buffer);
     if(loggerUSB)
     {
-        VCP::SendFormatStringAsynch(message);
-        VCP::SendFormatStringAsynch(buffer);
+        //VCP::SendFormatStringAsynch(message);
+        //VCP::SendFormatStringAsynch(buffer);
     }
 }
 

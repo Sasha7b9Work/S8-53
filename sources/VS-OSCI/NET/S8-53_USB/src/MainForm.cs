@@ -491,7 +491,14 @@ namespace S8_53_USB {
             int retValue = 0;
             try
             {
-                while (data.Count == 0 && isRunning) { };
+                while (data.Count == 0 && isRunning)
+                {
+                    int numBytes = LibraryS8_53.ComPort.port.BytesToRead;
+                    if (numBytes > 0)
+                    {
+                        Console.WriteLine(LibraryS8_53.ComPort.port.BytesToRead + " байт доступно");
+                    }
+                };
 
                 mutexData.WaitOne();
                 retValue = data.Dequeue();

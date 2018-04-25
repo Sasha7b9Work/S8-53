@@ -81,7 +81,7 @@ void SCPI::ParseNewCommand(uint8 *buffer)
     {"*IDN?",       SCPI::COMMON::IDN},
     {"RUN",         SCPI::COMMON::RUN},
     {"STOP",        SCPI::COMMON::STOP},
-    {"RESET",       SCPI::COMMON::RESET},
+    {"*RST",        SCPI::COMMON::RESET},
     {"AUTOSCALE",   SCPI::COMMON::AUTOSCALE}, 
     {"REQUEST ?",   SCPI::COMMON::REQUEST},
 
