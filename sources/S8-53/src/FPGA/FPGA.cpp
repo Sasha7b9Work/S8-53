@@ -378,7 +378,7 @@ void FPGA::ReadRealMode(bool necessaryShift)
         uint8 *p0max = p0min + 512;
         uint8 *p1min = p1;
         uint8 *p1max = p1min + 512;
-        while (p0max < endP && gBF.FPGAinProcessingOfRead == 1)
+        while (p0max < endP && FPGA_IN_PROCESS_READ)
         {
             uint8 data = *RD_ADC_B2;
             *p1max++ = data;
@@ -392,7 +392,7 @@ void FPGA::ReadRealMode(bool necessaryShift)
     }
     else
     {
-        while (p0 < endP && gBF.FPGAinProcessingOfRead == 1)
+        while (p0 < endP && FPGA_IN_PROCESS_READ)
         {
             *p1++ = *RD_ADC_B2;
             *p1++ = *RD_ADC_B1;
@@ -439,7 +439,7 @@ void FPGA::ReadRealMode(bool necessaryShift)
 void FPGA::DataRead(bool necessaryShift, bool saveToStorage) 
 {
     panel.EnableLEDTrig(false);
-    gBF.FPGAinProcessingOfRead = 1;
+    FPGA_IN_PROCESS_READ = 1;
     if((TBase)ds.tBase < TBase_100ns)
     {
         ReadRandomizeMode();
@@ -468,7 +468,7 @@ void FPGA::DataRead(bool necessaryShift, bool saveToStorage)
             TRIG_AUTO_FIND = 0;
         }
     }
-    gBF.FPGAinProcessingOfRead = 0;
+    FPGA_IN_PROCESS_READ = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -588,10 +588,10 @@ void FPGA::WriteToHardware(uint8 *address, uint8 value, bool restart)
     gBF.FPGAfirstAfterWrite = 1;
     if(restart)
     {
-        if(gBF.FPGAinProcessingOfRead == 1)
+        if(FPGA_IN_PROCESS_READ)
         {
             FPGA::Stop(true);
-            gBF.FPGAinProcessingOfRead = 0;
+            FPGA_IN_PROCESS_READ = 0;
             FSMC_Write(address, value);
             FPGA::Start();
         }

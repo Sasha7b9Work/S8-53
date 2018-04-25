@@ -47,6 +47,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FPGA_CRITICAL_SITUATION  (gBF.FPGAcritiacalSituation)
 #define TRIG_AUTO_FIND           (gBF.FPGAtrigAutoFind)
 #define FPGA_TEMPORARY_PAUSE     (gBF.FPGAtemporaryPause)
+#define FPGA_IN_PROCESS_READ     (gBF.FPGAinProcessingOfRead)
 
 
 typedef struct
