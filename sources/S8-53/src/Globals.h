@@ -58,6 +58,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define SHOW_DEBUG_MENU          (gBF.showDebugMenu)
 #define ADDRESS_GOVERNOR         (gBF.addressGovernor)
 #define IN_MOVE_INCREASE         (gBF.inMoveIncrease)
+#define IN_MOVE_DECREASE         (gBF.inMoveDecrease)
 
 
 typedef struct
