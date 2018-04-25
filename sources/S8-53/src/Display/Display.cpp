@@ -1133,7 +1133,7 @@ void Display::DrawHiRightPart()
 
         x += 2;
 
-        if (gBF.trigEnable == 1)
+        if (TRIG_ENABLE)
         {
             Painter::FillRegion(x, 1 + y, GRID_TOP - 3, GRID_TOP - 7);
             Painter::DrawTextC(x + 3, 3 + y, set.common.lang == Russian ? "ях" : "Tr", COLOR_BACK);
@@ -2229,7 +2229,7 @@ void Display::DisableShowLevelTrigLev()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::EnableTrigLabel(bool enable)
 {
-    gBF.trigEnable = enable ? 1 : 0;
+    TRIG_ENABLE = enable ? 1 : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
