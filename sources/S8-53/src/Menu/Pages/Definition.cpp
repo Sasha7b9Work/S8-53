@@ -90,30 +90,6 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
     }
 }
 
-/*
-void PressSmallButtonExit()
-{
-    NamePage namePage = GetNameOpenedPage();
-    if (namePage == Page_NoPage)
-    {
-        return;
-    }
-    if (namePage == Page_SB_MemInt)
-    {   // Для режимов работы с памятью выход из режима малых кнопок означает возвращение в режим нормальных измерений
-        set.memory.modeWork = ModeWork_Direct;
-        if (RUN_FPGA_AFTER_SMALL_BUTTONS == 1)
-        {
-            FPGA_Start();
-            RUN_FPGA_AFTER_SMALL_BUTTONS = 0;
-        }
-    }
-
-    Display::RemoveAddDrawFunction();
-    gBF.ledRegSetNeedEnabled = 0;
-}
-*/
-
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawSB_Exit(int x, int y)
 {

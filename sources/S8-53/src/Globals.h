@@ -51,6 +51,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FPGA_FIRST_AFTER_WRITE   (gBF.FPGAfirstAfterWrite)
 #define SOUND_IS_BEEP            (gBF.soundIsBeep)
 #define SOUND_WARN_IS_BEEP       (gBF.soundWarnIsBeep)
+#define BUTTON_IS_PRESSED        (gBF.buttonIsPressed)
 
 
 typedef struct
