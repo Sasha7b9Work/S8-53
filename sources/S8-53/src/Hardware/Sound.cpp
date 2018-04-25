@@ -56,13 +56,13 @@ static void Stop(void)
 {
     HAL_DAC_Stop_DMA(&handleDAC, DAC_CHANNEL_1);
     SOUND_IS_BEEP = 0;
-    gBF.soundWarnIsBeep = 0;
+    SOUND_WARN_IS_BEEP = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound_Beep(TypeWave typeWave_, float frequency_, float amplitude_, int duration)
 {
-    if (gBF.soundWarnIsBeep == 1)
+    if (SOUND_WARN_IS_BEEP)
     {
         return;
     }
@@ -130,7 +130,7 @@ void Sound::RegulatorSwitchRotate(void)
 void Sound::WarnBeepBad(void)
 {
     Sound_Beep(TypeWave_Meandr, 250.0f, 1.0f, 500);
-    gBF.soundWarnIsBeep = 1;
+    SOUND_WARN_IS_BEEP = 1;
     gBF.buttonIsPressed = 0;
 }
 
