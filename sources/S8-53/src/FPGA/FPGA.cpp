@@ -480,9 +480,9 @@ void FPGA::SetAdditionShift(int shift)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 {   
-    if(gBF.FPGAfirstAfterWrite == 1)
+    if(FPGA_FIRST_AFTER_WRITE)
     {
-        gBF.FPGAfirstAfterWrite = 0;
+        FPGA_FIRST_AFTER_WRITE = 0;
         return false;
     }
     
@@ -585,7 +585,7 @@ int FPGA::CalculateShift(void)            // \todo Не забыть восстановить функци
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteToHardware(uint8 *address, uint8 value, bool restart)
 {
-    gBF.FPGAfirstAfterWrite = 1;
+    FPGA_FIRST_AFTER_WRITE = 1;
     if(restart)
     {
         if(FPGA_IN_PROCESS_READ)
