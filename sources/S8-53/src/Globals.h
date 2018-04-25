@@ -49,6 +49,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FPGA_TEMPORARY_PAUSE     (gBF.FPGAtemporaryPause)
 #define FPGA_IN_PROCESS_READ     (gBF.FPGAinProcessingOfRead)
 #define FPGA_FIRST_AFTER_WRITE   (gBF.FPGAfirstAfterWrite)
+#define SOUND_IS_BEEP            (gBF.soundIsBeep)
 
 
 typedef struct
@@ -113,8 +114,6 @@ typedef struct
 
     uint showDebugMenu              : 1;
     
-    uint tuneTime                   : 1;    // ≈сли 1, то после загрузки настроек нужно вызвать страницу установки текущего времени
-
     int topMeasures                 : 9;    // ¬ерх таблицы вывода измерений. Ёто значение нужно дл€ нормального вывода сообщений на экран - чтобы 
                                             // они ничего не перекрывали
     uint needOpenFileMananger       : 1;    // ≈сли 1, то нужно открыть файловый менеджер (сработало автоподключение)

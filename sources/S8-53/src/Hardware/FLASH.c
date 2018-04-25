@@ -499,7 +499,7 @@ void EraseSector(uint startAddress)
     flashITD.VoltageRange = VOLTAGE_RANGE_3;
 
     uint32_t error = 0;
-    while (gBF.soundIsBeep == 1) {};
+    while (SOUND_IS_BEEP) {};
     HAL_FLASHEx_Erase(&flashITD, &error);
 
     HAL_FLASH_Lock();

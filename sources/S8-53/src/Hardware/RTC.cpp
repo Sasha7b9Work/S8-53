@@ -61,7 +61,6 @@ void RTC_Init(void)
         {
             HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef*)&rtcHandle, RTC_BKP_DR0, VALUE_FOR_RTC);
         }
-        gBF.tuneTime = 1;
     }
 }
 

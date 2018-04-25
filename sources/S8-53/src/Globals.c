@@ -88,8 +88,6 @@ BitField gBF =
 
     0,  // showDebugMenu
 
-    0,  // tuneTime
-
     GRID_BOTTOM, // topMeasures
  
     0,  // needOpenFileManager

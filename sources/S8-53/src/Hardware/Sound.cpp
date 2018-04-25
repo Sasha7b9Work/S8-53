@@ -55,7 +55,7 @@ void Sound::Init(void)
 static void Stop(void)
 {
     HAL_DAC_Stop_DMA(&handleDAC, DAC_CHANNEL_1);
-    gBF.soundIsBeep = 0;
+    SOUND_IS_BEEP = 0;
     gBF.soundWarnIsBeep = 0;
 }
 
@@ -82,7 +82,7 @@ void Sound_Beep(TypeWave typeWave_, float frequency_, float amplitude_, int dura
 
     Stop();
     
-    gBF.soundIsBeep = 1;
+    SOUND_IS_BEEP = 1;
     HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD, DAC_ALIGN_8B_R);
 
     Timer::Enable(kStopSound, duration, Stop);
