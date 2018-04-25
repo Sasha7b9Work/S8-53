@@ -1845,7 +1845,7 @@ void Display::DrawMeasures()
 {
     if(!SHOW_MEASURES)
     {
-        gBF.topMeasures = GRID_BOTTOM;
+        TOP_MEASURES = GRID_BOTTOM;
         return;
     }
 
@@ -1883,7 +1883,7 @@ void Display::DrawMeasures()
             {
                 Painter::FillRegionC(x, y, dX, dY, COLOR_BACK);
                 Painter::DrawRectangleC(x, y, dX, dY, COLOR_FILL);
-                gBF.topMeasures = Math_MinFrom2Int(gBF.topMeasures, y);
+                TOP_MEASURES = Math_MinFrom2Int(TOP_MEASURES, y);
             }
             if(active)
             {

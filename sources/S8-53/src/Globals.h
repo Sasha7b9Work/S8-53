@@ -37,6 +37,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define NUM_DRAWING_SIGNALS      (gBF.numDrawingSignals)
 #define TRIG_ENABLE              (gBF.trigEnable)
 #define DRAW_RSHIFT_MARKERS      (gBF.drawRShiftMarkers)
+#define TOP_MEASURES             (gBF.topMeasures)
 
 
 typedef struct
