@@ -53,6 +53,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define SOUND_WARN_IS_BEEP       (gBF.soundWarnIsBeep)
 #define BUTTON_IS_PRESSED        (gBF.buttonIsPressed)
 #define NEED_REDRAW_FILEMANAGER  (gBF.needRedrawFileManager)
+#define CURSORS_IN_DIRS          (gBF.cursorInDirs)
 
 
 typedef struct

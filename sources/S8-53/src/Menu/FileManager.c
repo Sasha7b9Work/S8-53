@@ -82,11 +82,11 @@ static void DrawDirs(int x, int y)
     if (FlashDrive::GetNameDir(currentDir, numFirstDir, nameDir, &sfrd))
     {
         int  drawingDirs = 0;
-        DrawLongString(x, y, nameDir, gBF.cursorInDirs == 1 && ( numFirstDir + drawingDirs == numCurDir));
+        DrawLongString(x, y, nameDir, CURSORS_IN_DIRS && ( numFirstDir + drawingDirs == numCurDir));
         while (drawingDirs < (RECS_ON_PAGE - 1) && FlashDrive::GetNextNameDir(nameDir, &sfrd))
         {
             drawingDirs++;
-            DrawLongString(x, y + drawingDirs * 9, nameDir, gBF.cursorInDirs == 1 && ( numFirstDir + drawingDirs == numCurDir));
+            DrawLongString(x, y + drawingDirs * 9, nameDir, CURSORS_IN_DIRS && ( numFirstDir + drawingDirs == numCurDir));
         }
     }
 }
@@ -101,11 +101,11 @@ static void DrawFiles(int x, int y)
     if (FlashDrive::GetNameFile(currentDir, numFirstFile, nameFile, &sfrd))
     {
         int drawingFiles = 0;
-        DrawLongString(x, y, nameFile, gBF.cursorInDirs == 0 && (numFirstFile + drawingFiles == numCurFile));
+        DrawLongString(x, y, nameFile, CURSORS_IN_DIRS == 0 && (numFirstFile + drawingFiles == numCurFile));
         while (drawingFiles < (RECS_ON_PAGE - 1) && FlashDrive::GetNextNameFile(nameFile, &sfrd))
         {
             drawingFiles++;
-            DrawLongString(x, y + drawingFiles * 9, nameFile, gBF.cursorInDirs == 0 && (numFirstFile + drawingFiles == numCurFile));
+            DrawLongString(x, y + drawingFiles * 9, nameFile, CURSORS_IN_DIRS == 0 && (numFirstFile + drawingFiles == numCurFile));
         }
     }
 }
@@ -202,18 +202,18 @@ void PressSB_FM_Tab(void)
 {
     NEED_REDRAW_FILEMANAGER = 1;
 
-    if (gBF.cursorInDirs == 1)
+    if (CURSORS_IN_DIRS)
     {
         if (numFiles != 0)
         {
-            gBF.cursorInDirs = 0;
+            CURSORS_IN_DIRS = 0;
         }
     }
     else
     {
         if (numDirs != 0)
         {
-            gBF.cursorInDirs = 1;
+            CURSORS_IN_DIRS = 1;
         }
     }
 }
@@ -222,7 +222,7 @@ void PressSB_FM_Tab(void)
 void PressSB_FM_LevelDown(void)
 {
     NEED_REDRAW_FILEMANAGER = 1;
-    if (gBF.cursorInDirs == 0)
+    if (CURSORS_IN_DIRS == 0)
     {
         return;
     }
@@ -257,7 +257,7 @@ void PressSB_FM_LevelUp(void)
     }
     *pointer = '\0';
     numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
-    gBF.cursorInDirs = 1;
+    CURSORS_IN_DIRS = 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ static void DecCurrentFile(void)
 void FM_RotateRegSet(int angle)
 {
     sound.RegulatorSwitchRotate();
-    if (gBF.cursorInDirs == 1)
+    if (CURSORS_IN_DIRS)
     {
         angle > 0 ? DecCurrentDir() : IncCurrentDir();
         NEED_REDRAW_FILEMANAGER = 2;
