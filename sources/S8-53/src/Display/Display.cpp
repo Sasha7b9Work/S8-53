@@ -150,7 +150,7 @@ static void FuncOnTimerDisableShowLevelTrigLev()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Redraw(void)
 {
-    gBF.needFinishDraw = 1;
+    NEED_FINISH_REDRAW = 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1218,9 +1218,9 @@ static bool NeedForClearScreen()
     {
         return true;
     }
-    if (gBF.needFinishDraw == 1)
+    if (NEED_FINISH_REDRAW)
     {
-        gBF.needFinishDraw = 0;
+        NEED_FINISH_REDRAW = 0;
         return true;
     }
     if (MODE_ACCUM_IS_RESET && gBF.numDrawingSignals >= numAccum)

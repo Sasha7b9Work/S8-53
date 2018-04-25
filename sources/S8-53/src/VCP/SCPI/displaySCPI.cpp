@@ -18,10 +18,10 @@ ENTER_PARSE_FUNC(SCPI::ProcessDISPLAY)
     {"AVERAGE",     SCPI::DISPLAY::AVERAGE},    // Усреднение
     {"AVE",         SCPI::DISPLAY::AVERAGE},
     {"MINMAX",      SCPI::DISPLAY::MINMAX},     // Мин Макс
-    {"FILTR",       SCPI::DISPLAY::FILTR},  // Сглаживание
-    {"FPS",         SCPI::DISPLAY::FPS},       // Частота обновл
-    {"WINDOW",      SCPI::DISPLAY::WINDOW},    // Окно памяти
-    {"GRID",        SCPI::DISPLAY::GRID},      // СЕТКА
+    {"FILTR",       SCPI::DISPLAY::FILTR},      // Сглаживание
+    {"FPS",         SCPI::DISPLAY::FPS},        // Частота обновл
+    {"WINDOW",      SCPI::DISPLAY::WINDOW},     // Окно памяти
+    {"GRID",        SCPI::DISPLAY::GRID},       // СЕТКА
 LEAVE_PARSE_FUNC
 
 
@@ -132,7 +132,7 @@ void SCPI::DISPLAY::ACCUM_MODE(uint8 *buffer)
         if (value <= 1) { MODE_ACCUM = (ModeAccumulation)value; }
         else if (2 == value)
         {
-            SCPI_SEND(":DISPLAY:ACCUMULATION:MODE %s", map[ENUM_ACCUM].key);
+            SCPI_SEND(":DISPLAY:ACCUMULATION:MODE %s", map[MODE_ACCUM].key);
         }
     LEAVE_ANALYSIS
 }

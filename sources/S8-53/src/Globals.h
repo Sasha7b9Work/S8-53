@@ -30,6 +30,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define NEED_CLOSE_PAGE_SB       (gBF.needClosePageSB)
 #define AUTO_FIND_IN_PROGRESS    (gBF.FPGAautoFindInProgress)
 #define NEED_RESET_SETTINGS      (gBF.needResetSettings)
+#define NEED_FINISH_REDRAW       (gBF.needFinishDraw)
 
 
 typedef struct

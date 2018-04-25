@@ -491,16 +491,26 @@ namespace S8_53_USB {
             int retValue = 0;
             try
             {
+                SerialPort port = LibraryS8_53.ComPort.port;
                 long startTime = CurrentTime();
                 while (data.Count == 0 && isRunning)
                 {
-                    int numBytes = LibraryS8_53.ComPort.port.BytesToRead;
-                    if (numBytes > 0 && CurrentTime() - startTime > 1000)
+                    if (port.IsOpen)
                     {
-                        Console.WriteLine(LibraryS8_53.ComPort.port.BytesToRead + " байт доступно");
-                        mutexData.WaitOne();
-                        data.Enqueue((byte)LibraryS8_53.ComPort.port.ReadByte());
-                        mutexData.ReleaseMutex();
+                        if (port.BytesToRead > 0)
+                        {
+                            Console.WriteLine(port.BytesToRead + " байт доступно");
+                        }
+                        if (port.BytesToRead > 0 && CurrentTime() - startTime > 1000)
+                        {
+                            Console.WriteLine(port.BytesToRead + " байт доступно");
+                            mutexData.WaitOne();
+                            while (port.BytesToRead > 0)
+                            {
+                                data.Enqueue((byte)port.ReadByte());
+                            }
+                            mutexData.ReleaseMutex();
+                        }
                     }
                 };
 

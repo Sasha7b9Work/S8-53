@@ -541,7 +541,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 520);
             this.MinimumSize = new System.Drawing.Size(1000, 520);
             this.Name = "MainForm";
-            this.Text = "C8-54 USB Пульт оператора";
+            this.Text = "C8-53_Interface";
             this.Closed += new System.EventHandler(this.MainForm_Closed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
