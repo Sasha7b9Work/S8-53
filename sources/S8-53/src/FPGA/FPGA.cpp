@@ -174,7 +174,7 @@ void FPGA::Update(void)
         FPGA::ProcedureCalibration();            // выполняем её.
         gStateFPGA.needCalibration = false;
     }
-    if (gBF.FPGAtemporaryPause == 1)
+    if (FPGA_TEMPORARY_PAUSE)
     {
         return;
     }
@@ -1117,14 +1117,14 @@ TBase FPGA::FindTBase(Channel chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void StopTemporaryPause(void)
 {
-    gBF.FPGAtemporaryPause = 0;
+    FPGA_TEMPORARY_PAUSE = 0;
     Timer::Disable(kTemporaryPauseFPGA);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::TemporaryPause(void)
 {
-    gBF.FPGAtemporaryPause = 1;
+    FPGA_TEMPORARY_PAUSE = 1;
     Timer::Enable(kTemporaryPauseFPGA, 500, StopTemporaryPause);
 }
 
