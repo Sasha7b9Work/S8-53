@@ -209,7 +209,7 @@ bool Panel::ProcessingCommandFromPIC(uint16 command)
         pressedButton = pressButton;
     }
 
-    if(gBF.panelIsRunning == 0)
+    if(PANEL_IS_RUNNING == 0)
     {
         return true;
     }
@@ -348,12 +348,12 @@ uint16 Panel::NextData()
 
 void Panel::Disable()
 {
-    gBF.panelIsRunning = 0;
+    PANEL_IS_RUNNING = 0;
 }
 
 void Panel::Enable()
 {
-    gBF.panelIsRunning = 1;
+    PANEL_IS_RUNNING = 1;
 }
 
 /*
