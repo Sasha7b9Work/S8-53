@@ -45,6 +45,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define FRAMES_ELAPSED           (gBF.framesElapsed)
 #define FPGA_CAN_READ_DATA       (gBF.FPGAcanReadData)
 #define FPGA_CRITICAL_SITUATION  (gBF.FPGAcritiacalSituation)
+#define TRIG_AUTO_FIND           (gBF.FPGAtrigAutoFind)
 
 
 typedef struct

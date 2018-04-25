@@ -118,7 +118,7 @@ bool FPGA::ProcessingData(void)
             if (gTimerMS - timeStart > 500)
             {
                 SwitchingTrig();
-                gBF.FPGAtrigAutoFind = 1;
+                TRIG_AUTO_FIND = 1;
                 FPGA_CRITICAL_SITUATION = 0;
             }
             else if (_GET_BIT(flag, BIT_TRIG))
@@ -462,10 +462,10 @@ void FPGA::DataRead(bool necessaryShift, bool saveToStorage)
 
         dataStorage.AddData(dataRel0, dataRel1, ds);
 
-        if (TRIG_MODE_FIND_IS_AUTO && gBF.FPGAtrigAutoFind == 1)
+        if (TRIG_MODE_FIND_IS_AUTO && TRIG_AUTO_FIND)
         {
             FPGA::FindAndSetTrigLevel();
-            gBF.FPGAtrigAutoFind = 0;
+            TRIG_AUTO_FIND = 0;
         }
     }
     gBF.FPGAinProcessingOfRead = 0;
