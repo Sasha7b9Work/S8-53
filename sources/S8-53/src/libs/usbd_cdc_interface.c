@@ -42,7 +42,7 @@ USBD_CDC_ItfTypeDef USBD_CDC_fops =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SetAttributeConnected()
 {
-    gBF.cableVCPisConnected = 1;
+    CABLE_VCP_CONNECTED = 1;
     VCP_CONNECT_TO_HOST = 0;
     Timer::Disable(kTemp);
 }
@@ -60,7 +60,7 @@ static int8_t CDC_Itf_Init(void)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_DeInit(void)
 {
-    gBF.cableVCPisConnected = 0;
+    CABLE_VCP_CONNECTED = 0;
     VCP_CONNECT_TO_HOST = 0;
 
     return (USBD_OK);

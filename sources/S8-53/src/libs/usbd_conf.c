@@ -63,7 +63,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
                                                                     //
     if (request.wLength == 0)                                       //
     {                                                               //
-        if (gBF.cableVCPisConnected == 1)                           //
+        if (CABLE_VCP_CONNECTED)                                    //
         {                                                           //
             if (prevLength != 0)                                    //
             {                                                       //
@@ -74,7 +74,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
                 VCP_CONNECT_TO_HOST = 0;                            //
                 Settings::Save();                                   //
             }                                                       //
-            VCP_CONNECT_TO_HOST = (prevLength != 0) ? 1 : 0;          // 
+            VCP_CONNECT_TO_HOST = (prevLength != 0) ? 1 : 0;        //
         }                                                           //
     }                                                               //
     prevLength = request.wLength;                                   //

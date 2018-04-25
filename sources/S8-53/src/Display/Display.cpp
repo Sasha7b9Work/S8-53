@@ -2143,7 +2143,7 @@ void Display::DrawLowPart()
         Painter::Draw4SymbolsInRectC(x + 87, GRID_BOTTOM + 2, SYMBOL_ETHERNET, CLIENT_LAN_IS_CONNECTED ? COLOR_FILL : COLOR_FLASH_01);
     }
 
-    if (VCP_CONNECT_TO_HOST || gBF.cableVCPisConnected == 1)
+    if (VCP_CONNECT_TO_HOST || CABLE_VCP_CONNECTED)
     {
         Painter::Draw4SymbolsInRectC(x + 72, GRID_BOTTOM + 2, SYMBOL_USB, VCP_CONNECT_TO_HOST ? COLOR_FILL : COLOR_FLASH_01);
     }

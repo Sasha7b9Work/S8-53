@@ -39,6 +39,7 @@ extern DAC_HandleTypeDef handleDAC;
 #define DRAW_RSHIFT_MARKERS      (gBF.drawRShiftMarkers)
 #define TOP_MEASURES             (gBF.topMeasures)
 #define VCP_CONNECT_TO_HOST      (gBF.connectToHost)
+#define CABLE_VCP_CONNECTED      (gBF.cableVCPisConnected)
 
 
 typedef struct
