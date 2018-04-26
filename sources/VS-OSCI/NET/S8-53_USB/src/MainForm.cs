@@ -33,8 +33,6 @@ namespace S8_53_USB {
         private static LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
         // Этот процесс будет заниматься непосредственно рисованием
         private static Thread runThread;
-        // true, если рисующий поток работает
-        private static bool isRunning = false;
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
         private static Queue<string> commands = new Queue<string>();
         // Сюда будем считывать данные из порта
@@ -46,6 +44,8 @@ namespace S8_53_USB {
 
         // Будет использоваться для чтения данных из VCP
         private BackgroundWorker readerUSB = new BackgroundWorker();
+        // Признак того, что нужно засылать первый кадр. Нужно на случай, если первый кадр придёт неправильный - повторить засылку стартового кадра.
+        //private bool firstFrame = false;
 
         private enum Command : byte
         {
@@ -195,18 +195,14 @@ namespace S8_53_USB {
                 if (port.Connect(comboBoxPorts.SelectedIndex, false)) // иначе делаем попыткую подключиться
                 {
                     needForDisconnect = false;
-
                     textBoxIP.Enabled = false;
                     textBoxPort.Enabled = false;
                     buttonConnectLAN.Enabled = false;
-
                     comboBoxPorts.Enabled = false;
                     buttonUpdatePorts.Enabled = false;
-
                     buttonConnectUSB.Text = "Откл";
-
+//                    firstFrame = true;
                     port.SendString("DISPLAY:AUTOSEND 1");
-
                     readerUSB.RunWorkerAsync();
                 }
             }
@@ -227,7 +223,7 @@ namespace S8_53_USB {
                     data.Enqueue((byte)port.ReadByte());
                     time = CurrentTime();
                 }
-                else if(CurrentTime() - time > 100)                  // Если прошло слишком много времени с последнего приёма данных - выходим
+                else if(CurrentTime() - time > 10)                  // Если прошло слишком много времени с последнего приёма данных - выходим
                 {
                     break;
                 }
@@ -236,17 +232,13 @@ namespace S8_53_USB {
 
         private void ReaderUSB_Completed(object sender, RunWorkerCompletedEventArgs args)
         {
-            if (data.Count == 0)
-            {
-                Console.WriteLine("ERROR!!!            Не получены данные");
-            }
-            else
+            if (data.Count != 0)
             {
                 byte[] bytes = data.ToArray();
-                if (bytes[data.Count - 1] == (byte)Command.END_SCENE)
+                if (bytes[data.Count - 1] == (byte)Command.END_SCENE && (bytes[0] == (byte)Command.SET_PALETTE || bytes[0] == (byte)Command.SET_COLOR))
                 {
-                    Console.WriteLine("Получено " + data.Count + " байт. Данные верны");
                     RunData();
+                    //firstFrame = false;                      // Устанавливаем признак того, что первый кадр запрашивать больше не нужно.
                 }
                 else
                 {
@@ -254,9 +246,22 @@ namespace S8_53_USB {
                 }
             }
 
-            port.SendString("DISPLAY:AUTOSEND 2");
-
-            readerUSB.RunWorkerAsync();
+            if (needForDisconnect)
+            {
+                port.Stop();
+                needForDisconnect = false;
+                textBoxIP.Enabled = true;
+                textBoxPort.Enabled = true;
+                buttonConnectLAN.Enabled = true;
+                comboBoxPorts.Enabled = true;
+                buttonUpdatePorts.Enabled = true;
+                buttonConnectUSB.Text = "Подкл";
+            }
+            else
+            {
+                port.SendString("DISPLAY:AUTOSEND 2");
+                readerUSB.RunWorkerAsync();
+            }
         }
 
         private void buttonConnectLAN_Click(object sender, EventArgs e)
@@ -308,10 +313,6 @@ namespace S8_53_USB {
         private void MainForm_Closed(object sender, EventArgs e)
         {
             needForDisconnect = true;
-
-            while (port.IsOpen() || socket.IsConnected())
-            {
-            };
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB
@@ -339,29 +340,6 @@ namespace S8_53_USB {
                 mutexData.ReleaseMutex();
             }
             catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
-
-        private void DataReceiveHandlerUSB(object sender, SerialDataReceivedEventArgs args)
-        {
-            try
-            {
-                SerialPort port = LibraryS8_53.ComPort.port;
-
-                if (port.IsOpen && port.BytesToRead != 0)
-                {
-                    mutexData.WaitOne();
-                    while (port.BytesToRead != 0)
-                    {
-                        data.Enqueue((byte)port.ReadByte());
-                        Thread.Sleep(0);
-                    }
-                    mutexData.ReleaseMutex();
-                }
-            }
-            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -400,7 +378,6 @@ namespace S8_53_USB {
                         {
                             port.Stop();
                             socket.Disconnect();
-                            isRunning = false;
                         }
                         else
                         {
@@ -565,7 +542,6 @@ namespace S8_53_USB {
         private static void StartDrawing()
         {
             data.Clear();
-            isRunning = true;
             runThread = new Thread(RunData);
             runThread.Start();
         }
