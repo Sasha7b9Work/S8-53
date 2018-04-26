@@ -41,6 +41,8 @@ namespace S8_53_USB {
         private static bool needForDisconnect = false;
         // Будет использоваться для чтения данных из VCP
         private BackgroundWorker readerUSB = new BackgroundWorker();
+        // Будет использоваться для чтения данных из LAN
+        private BackgroundWorker readerLAN = new BackgroundWorker();
 
         private enum Command : byte
         {
@@ -88,6 +90,9 @@ namespace S8_53_USB {
 
             readerUSB.DoWork += ReaderUSB_DoWork;
             readerUSB.RunWorkerCompleted += ReaderUSB_Completed;
+
+            readerLAN.DoWork += ReaderLAN_DoWork;
+            readerLAN.RunWorkerCompleted += ReaderLAN_Completed;
         }
 
         private void button_MouseDown(object sender, MouseEventArgs args) {
@@ -177,7 +182,6 @@ namespace S8_53_USB {
                 buttonConnectUSB.Text = "Подкл";
                 comboBoxPorts.Enabled = true;
                 buttonUpdatePorts.Enabled = true;
-
                 textBoxIP.Enabled = true;
                 textBoxPort.Enabled = true;
                 buttonConnectLAN.Enabled = true;
@@ -193,7 +197,6 @@ namespace S8_53_USB {
                     comboBoxPorts.Enabled = false;
                     buttonUpdatePorts.Enabled = false;
                     buttonConnectUSB.Text = "Откл";
-//                    firstFrame = true;
                     port.SendString("DISPLAY:AUTOSEND 1");
                     readerUSB.RunWorkerAsync();
                 }
@@ -270,13 +273,72 @@ namespace S8_53_USB {
                         comboBoxPorts.Enabled = false;
                         buttonUpdatePorts.Enabled = false;
                         buttonConnectUSB.Enabled = false;
+                        socket.Clear();
                         socket.SendString("DISPLAY:AUTOSEND 3");
+                        readerLAN.RunWorkerAsync();
                     }
                 }
             }
             catch(Exception)
             {
 
+            }
+        }
+
+        private void ReaderLAN_DoWork(object sender, DoWorkEventArgs args)
+        {
+            data.Clear();
+            byte[] bytes = socket.ReadBytes(500);
+            if (bytes.Length != 0)
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    data.Enqueue(bytes[i]);
+                }
+            }
+        }
+
+        private void ReaderLAN_Completed(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (data.Count != 0)
+            {
+                byte[] bytes = data.ToArray();
+                if (bytes[data.Count - 1] == (byte)Command.END_SCENE && (bytes[0] == (byte)Command.SET_PALETTE || bytes[0] == (byte)Command.SET_COLOR))
+                {
+                    RunData();
+
+                    if (commands.Count != 0)
+                    {
+                        while (commands.Count != 0)
+                        {
+                            socket.Clear();
+                            socket.SendString(commands.Dequeue());
+                            socket.Clear();
+                        }
+                        Thread.Sleep(100);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("ERROR!!!          Получено " + data.Count + " байт. Данные неверны");
+                }
+            }
+
+            if (needForDisconnect)
+            {
+                socket.Disconnect();
+                textBoxIP.Enabled = true;
+                textBoxPort.Enabled = true;
+                buttonConnectLAN.Enabled = true;
+                comboBoxPorts.Enabled = true;
+                buttonUpdatePorts.Enabled = true;
+                buttonConnectLAN.Text = "Подкл";
+            }
+            else
+            {
+                socket.Clear();
+                socket.SendString("DISPLAY:AUTOSEND 2");
+                readerLAN.RunWorkerAsync();
             }
         }
 

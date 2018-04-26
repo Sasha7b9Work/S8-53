@@ -27,13 +27,17 @@ namespace LibraryS8_53
 
     public class SocketTCP
     {
-        public Socket socket = null;
+        private Socket socket = null;
 
         private String response = String.Empty;
 
         static public event EventHandler<EventArgs> ReceiveEvent;
 
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
+
+        public SocketTCP()
+        {
+        }
 
         ~SocketTCP()
         {
@@ -64,6 +68,8 @@ namespace LibraryS8_53
 
                 socket = new Socket(remoteEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
+                socket.SendTimeout = 1;
+
                 socket.ReceiveBufferSize = 100 * 1024;
 
                 connectDone.Reset();
@@ -90,8 +96,6 @@ namespace LibraryS8_53
             {
                 Console.WriteLine(e.ToString());
             }
-
-            Receive();
 
             return socket != null && socket.Connected;
         }
@@ -210,6 +214,42 @@ namespace LibraryS8_53
             if(recvBytes != numBytes)
             {
                 Console.WriteLine("Error");
+            }
+        }
+
+        public byte[] ReadBytes(long timeWaitMS)
+        {
+            long timeLast = CurrentTime();
+            int numPrevBytes = 0;
+            while(CurrentTime() - timeLast < timeWaitMS)
+            {
+                if(socket.Available != numPrevBytes)
+                {
+                    timeLast = CurrentTime();
+                    numPrevBytes = socket.Available;
+                }
+            }
+
+            int numBytes = socket.Available;
+            byte[] bytes = new byte[numBytes];
+            socket.Receive(bytes, numBytes, SocketFlags.None);
+            return bytes;
+        }
+
+        private static long CurrentTime()
+        {
+            return DateTime.Now.Ticks / 10000;
+        }
+
+        public void Clear()
+        {
+            if (socket.Connected)
+            {
+                while(socket.Available != 0)
+                {
+                    byte[] bytes = new byte[1];
+                    socket.Receive(bytes, 1, SocketFlags.None);
+                }
             }
         }
     }
