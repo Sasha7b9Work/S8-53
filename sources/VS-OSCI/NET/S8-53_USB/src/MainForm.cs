@@ -87,9 +87,6 @@ namespace S8_53_USB {
             mapButtons.Add(btnF4,          "4");
             mapButtons.Add(btnF5,          "5");
 
-            // Устанавливаем количество байт в приёмном буфере, при котором будет вызываться обработчик приёма
-            LibraryS8_53.ComPort.port.ReceivedBytesThreshold = 1;
-
             buttonUpdatePorts_Click(null, null);
 
             buttonConnectLAN.Enabled = true;
@@ -210,23 +207,10 @@ namespace S8_53_USB {
 
         private void ReaderUSB_DoWork(object sender, DoWorkEventArgs args)
         {
-            SerialPort port = LibraryS8_53.ComPort.port;
-
-            data.Clear();
-
-            long time = CurrentTime();
-
-            while(true)
+            byte[] bytes = port.ReadBytes(20);
+            for(int i = 0; i < bytes.Length; i++)
             {
-               if(port.BytesToRead > 0)
-                {
-                    data.Enqueue((byte)port.ReadByte());
-                    time = CurrentTime();
-                }
-                else if(CurrentTime() - time > 10)                  // Если прошло слишком много времени с последнего приёма данных - выходим
-                {
-                    break;
-                }
+                data.Enqueue(bytes[i]);
             }
         }
 
@@ -313,6 +297,9 @@ namespace S8_53_USB {
         private void MainForm_Closed(object sender, EventArgs e)
         {
             needForDisconnect = true;
+            port.Stop();
+            socket.Disconnect();
+            while (port.IsOpen() || socket.IsConnected()) { };
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB

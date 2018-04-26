@@ -20,7 +20,7 @@ namespace LibraryS8_53
 
     public class ComPort : Interface
     {
-        public static SerialPort port;
+        private static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
 
@@ -29,6 +29,8 @@ namespace LibraryS8_53
             port = new SerialPort();
             port.ReadTimeout = 100;
             port.BaudRate = 125000;
+            // Устанавливаем количество байт в приёмном буфере, при котором будет вызываться обработчик приёма
+            port.ReceivedBytesThreshold = 1;
         }
 
         public override void Stop()
@@ -67,6 +69,26 @@ namespace LibraryS8_53
                 port.Close();
             }
             return false;
+        }
+
+        // Прочитать данные из буфера. Данные будут считываться до тех пор, пока не пройдёт timeWaitMS с момента приёма последнего байта
+        public byte[] ReadBytes(long timeWaitMS)
+        {
+            long timeLast = CurrentTime();
+            int numBytesPrev = 0;
+            while(CurrentTime() - timeLast < timeWaitMS)
+            {
+                if(port.BytesToRead != numBytesPrev)
+                {
+                    timeLast = CurrentTime();
+                    numBytesPrev = port.BytesToRead;
+                }
+            }
+
+            int numBytes = port.BytesToRead;
+            byte[] bytes = new byte[numBytes];
+            port.Read(bytes, 0, numBytes);
+            return bytes;
         }
 
         public override void SendByte(byte data)
@@ -156,6 +178,11 @@ namespace LibraryS8_53
         public bool IsOpen()
         {
             return port.IsOpen;
+        }
+
+        private static long CurrentTime()
+        {
+            return DateTime.Now.Ticks / 10000;
         }
     }
 }
