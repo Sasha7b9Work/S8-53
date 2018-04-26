@@ -31,21 +31,16 @@ namespace S8_53_USB {
         private static LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         // Этот сокет используется для соединения по LAN
         private static LibraryS8_53.SocketTCP socket = new LibraryS8_53.SocketTCP();
-        // Этот процесс будет заниматься непосредственно рисованием
-        private static Thread runThread;
+
         private Dictionary<Button, string> mapButtons = new Dictionary<Button, string>();
+
         private static Queue<string> commands = new Queue<string>();
         // Сюда будем считывать данные из порта
         private static Queue<byte> data = new Queue<byte>();
-        // Mutex на буфер data
-        private static Mutex mutexData = new Mutex();
         // Признак того, что нужно отключиться от портов при первой возможности
         private static bool needForDisconnect = false;
-
         // Будет использоваться для чтения данных из VCP
         private BackgroundWorker readerUSB = new BackgroundWorker();
-        // Признак того, что нужно засылать первый кадр. Нужно на случай, если первый кадр придёт неправильный - повторить засылку стартового кадра.
-        //private bool firstFrame = false;
 
         private enum Command : byte
         {
@@ -222,7 +217,6 @@ namespace S8_53_USB {
                 if (bytes[data.Count - 1] == (byte)Command.END_SCENE && (bytes[0] == (byte)Command.SET_PALETTE || bytes[0] == (byte)Command.SET_COLOR))
                 {
                     RunData();
-                    //firstFrame = false;                      // Устанавливаем признак того, что первый кадр запрашивать больше не нужно.
                 }
                 else
                 {
@@ -265,17 +259,12 @@ namespace S8_53_USB {
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
-                        SocketTCP.ReceiveEvent += DataReceiveHandlerLAN;
-
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
                         textBoxPort.Enabled = false;
-
                         comboBoxPorts.Enabled = false;
                         buttonUpdatePorts.Enabled = false;
                         buttonConnectUSB.Enabled = false;
-
-                        StartDrawing();
                         socket.SendString("DISPLAY:AUTOSEND 3");
                     }
                 }
@@ -311,25 +300,6 @@ namespace S8_53_USB {
             }
             comboBoxPorts.Enabled = enable;
             buttonUpdatePorts.Enabled = enable;
-        }
-
-        private void DataReceiveHandlerLAN(object sender, EventArgs args)
-        {
-            try
-            {
-                EventArgsReceiveSocketTCP a = (EventArgsReceiveSocketTCP)args;
-
-                mutexData.WaitOne();
-                for(int i = 0; i < a.data.Length; i++)
-                {
-                    data.Enqueue(a.data[i]);
-                }
-                mutexData.ReleaseMutex();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
         }
 
         // Выполнить имеющиеся данные
@@ -524,13 +494,6 @@ namespace S8_53_USB {
         private static int int16()
         {
             return int8() + (int8() << 8);
-        }
-
-        private static void StartDrawing()
-        {
-            data.Clear();
-            runThread = new Thread(RunData);
-            runThread.Start();
         }
 
         private static long CurrentTime()
