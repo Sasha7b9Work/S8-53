@@ -217,6 +217,11 @@ namespace S8_53_USB {
                 if (bytes[data.Count - 1] == (byte)Command.END_SCENE && (bytes[0] == (byte)Command.SET_PALETTE || bytes[0] == (byte)Command.SET_COLOR))
                 {
                     RunData();
+
+                    while (commands.Count != 0)
+                    {
+                        port.SendString(commands.Dequeue());
+                    }
                 }
                 else
                 {
@@ -330,35 +335,7 @@ namespace S8_53_USB {
                     {
                         // Выводим нарисованную картинку
                         Display.EndScene();
-
-                        if (needForDisconnect)
-                        {
-                            port.Stop();
-                            socket.Disconnect();
-                        }
-                        else
-                        {
-                            if (port.IsOpen())
-                            {
-                                // Посылаем имеющиеся команды
-                                while (commands.Count != 0)
-                                {
-                                    port.SendString(commands.Dequeue());
-                                }
-
-                                // И делаем запрос на следующий фрейм
-                                port.SendString("DISPLAY:AUTOSEND 2");
-                            }
-                            else
-                            {
-                                while(commands.Count != 0)
-                                {
-                                    socket.SendString(commands.Dequeue());
-                                    Thread.Sleep(150);
-                                }
-                                socket.SendString("DISPLAY:AUTOSEND 2");
-                            }
-                        }
+                        return;
                     }
                     else if ((Command)command == Command.DRAW_HLINE)
                     {
