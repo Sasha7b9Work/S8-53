@@ -53,7 +53,7 @@ void SCPI::CONTROL::KEY(uint8 *buffer)
                 {
                     code += 128;
                 }
-                panel.ProcessingCommandFromPIC(code);
+                Panel::ProcessingCommandFromPIC(code);
                 return;
             }
             numKey++;
@@ -93,7 +93,7 @@ void SCPI::CONTROL::GOVERNOR(uint8 *buffer)
                 {
                     code += 128;
                 }
-                panel.ProcessingCommandFromPIC(code);
+                Panel::ProcessingCommandFromPIC(code);
                 return;
             }
             numGov++;

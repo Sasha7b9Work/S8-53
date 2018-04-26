@@ -133,7 +133,7 @@ bool FPGA::ProcessingData(void)
                 char buffer[9];
                 LOG_WRITE("флаг готовности %s", Bin2String(flag, buffer));
             }
-            panel.EnableLEDTrig(true);
+            Panel::EnableLEDTrig(true);
             FPGA::Stop(true);
             DataRead(_GET_BIT(flag, BIT_SIGN_SHIFT_POINT), (num == 1) || (i == num - 1));
             retValue = true;
@@ -158,7 +158,7 @@ bool FPGA::ProcessingData(void)
                 timeStart = gTimerMS;
             }
         }
-        panel.EnableLEDTrig(_GET_BIT(flag, BIT_TRIG) ? true : false);
+        Panel::EnableLEDTrig(_GET_BIT(flag, BIT_TRIG) ? true : false);
     }
 
     return retValue;
@@ -438,7 +438,7 @@ void FPGA::ReadRealMode(bool necessaryShift)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::DataRead(bool necessaryShift, bool saveToStorage) 
 {
-    panel.EnableLEDTrig(false);
+    Panel::EnableLEDTrig(false);
     FPGA_IN_PROCESS_READ = 1;
     if((TBase)ds.tBase < TBase_100ns)
     {

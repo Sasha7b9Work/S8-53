@@ -497,10 +497,6 @@ namespace S8_53_USB {
                 {
                     if (port.IsOpen)
                     {
-                        if (port.BytesToRead > 0)
-                        {
-                            Console.WriteLine(port.BytesToRead + " байт доступно");
-                        }
                         if (port.BytesToRead > 0 && CurrentTime() - startTime > 1000)
                         {
                             Console.WriteLine(port.BytesToRead + " байт доступно");

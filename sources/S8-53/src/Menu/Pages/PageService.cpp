@@ -131,18 +131,18 @@ static const Button bResetSettings
 
 static void OnPress_ResetSettings(void)
 {
-    panel.Disable();
+    Panel::Disable();
     Display::SetDrawMode(DrawMode_Hand, FuncDraw);
     Timer::Enable(kTimerDrawHandFunction, 100, OnTimerDraw);
 
-    if (panel.WaitPressingButton() == B_Start)
+    if (Panel::WaitPressingButton() == B_Start)
     {
         Settings::Load(true);
     }
 
     Timer::Disable(kTimerDrawHandFunction);
     Display::SetDrawMode(DrawMode_Auto, 0);
-    panel.Enable();
+    Panel::Enable();
 }
 
 static void FuncDraw(void)

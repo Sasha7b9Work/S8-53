@@ -267,8 +267,8 @@ void Settings::Load(bool _default)
 
     Painter::LoadPalette();
 
-    panel.EnableLEDChannel0(sChannel_Enabled(A));
-    panel.EnableLEDChannel1(sChannel_Enabled(B));
+    Panel::EnableLEDChannel0(sChannel_Enabled(A));
+    Panel::EnableLEDChannel1(sChannel_Enabled(B));
     Menu::SetAutoHide(true);
     Display::ChangedRShiftMarkers();
 

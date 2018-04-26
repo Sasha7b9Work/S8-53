@@ -16,9 +16,6 @@
 #include "PanelFunctions.c"
 
 
-Panel panel;
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MAX_DATA            20
 
@@ -280,12 +277,12 @@ bool Panel::ProcessingCommandFromPIC(uint16 command)
 
 void Panel::EnableLEDChannel0(bool enable)
 {
-    panel.TransmitData(enable ? LED_CHAN0_ENABLE : LED_CHAN0_DISABLE);
+    Panel::TransmitData(enable ? LED_CHAN0_ENABLE : LED_CHAN0_DISABLE);
 }
 
 void Panel::EnableLEDChannel1(bool enable)
 {
-    panel.TransmitData(enable ? LED_CHAN1_ENABLE : LED_CHAN1_DISABLE);
+    Panel::TransmitData(enable ? LED_CHAN1_ENABLE : LED_CHAN1_DISABLE);
 }
 
 void Panel::EnableLEDTrig(bool enable)
@@ -295,7 +292,7 @@ void Panel::EnableLEDTrig(bool enable)
     static bool fired = false;
     if(first)
     {
-        panel.TransmitData(LED_TRIG_DISABLE);
+        Panel::TransmitData(LED_TRIG_DISABLE);
         Display::EnableTrigLabel(false);
         timeEnable = gTimerMS;
         first = false;
@@ -310,13 +307,13 @@ void Panel::EnableLEDTrig(bool enable)
     {
         if(enable)
         {
-            panel.TransmitData(LED_TRIG_ENABLE);
+            Panel::TransmitData(LED_TRIG_ENABLE);
             Display::EnableTrigLabel(true);
             fired = true;
         }
         else if(gTimerMS - timeEnable > 100)
         {
-            panel.TransmitData(LED_TRIG_DISABLE);
+            Panel::TransmitData(LED_TRIG_DISABLE);
             Display::EnableTrigLabel(false);
             fired = false;
         }
@@ -411,7 +408,7 @@ void Panel::Init()
     isGPIOG.Alternate = GPIO_AF0_MCO;
     HAL_GPIO_Init(GPIOG, &isGPIOG);
 
-    panel.EnableLEDRegSet(false);
+    Panel::EnableLEDRegSet(false);
 }
 
 void Panel::EnableLEDRegSet(bool enable)
@@ -439,11 +436,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t pin)
 
 void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef* handleSPI)
 {
-    if (!panel.ProcessingCommandFromPIC(dataSPIfromPanel))
+    if (!Panel::ProcessingCommandFromPIC(dataSPIfromPanel))
     {
         HAL_SPI_DeInit(handleSPI);
         HAL_SPI_Init(handleSPI);
     }
-    uint16 data = panel.NextData();
+    uint16 data = Panel::NextData();
     SPI1->DR = data;
 }

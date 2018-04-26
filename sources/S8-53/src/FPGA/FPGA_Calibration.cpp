@@ -72,7 +72,7 @@ void FPGA::ProcedureCalibration(void)
     bar0.fullTime = bar0.passedTime = bar1.fullTime = bar1.passedTime = 0;
 
     FPGA::SaveState();                               // Сохраняем текущее состояние.
-    panel.Disable();                                // Отлкючаем панель управления.
+    Panel::Disable();                                // Отлкючаем панель управления.
 
     while(1)
     {
@@ -105,7 +105,7 @@ void FPGA::ProcedureCalibration(void)
 
         koeffCal0 = koeffCal1 = ERROR_VALUE_FLOAT;
 
-		if(panel.WaitPressingButton() == B_Start)             // Ожидаем подтверждения или отмены процедуры калибровки первого канала.
+        if(Panel::WaitPressingButton() == B_Start)             // Ожидаем подтверждения или отмены процедуры калибровки первого канала.
         {
 			gStateFPGA.stateCalibration = StateCalibration_RShift0inProgress;
 
@@ -113,7 +113,7 @@ void FPGA::ProcedureCalibration(void)
 			if(koeffCal0 == ERROR_VALUE_FLOAT)
             {
 				gStateFPGA.stateCalibration = StateCalibration_ErrorCalibration0;
-				panel.WaitPressingButton();
+				Panel::WaitPressingButton();
                 DEBUG_STRETCH_ADC_TYPE = StretchADC_Hand;
                 LoadStretchADC(A);
             }
@@ -141,7 +141,7 @@ void FPGA::ProcedureCalibration(void)
 
         HAL_Delay(500);
 
-		if(panel.WaitPressingButton() == B_Start)                 // Ожидаем подтверждения или отмены процедуры калибровки второго канала.
+		if(Panel::WaitPressingButton() == B_Start)                 // Ожидаем подтверждения или отмены процедуры калибровки второго канала.
         {
 			gStateFPGA.stateCalibration = StateCalibration_RShift1inProgress;
 
@@ -149,7 +149,7 @@ void FPGA::ProcedureCalibration(void)
 			if(koeffCal1 == ERROR_VALUE_FLOAT)
             {
 				gStateFPGA.stateCalibration = StateCalibration_ErrorCalibration1;
-				panel.WaitPressingButton();
+				Panel::WaitPressingButton();
                 DEBUG_STRETCH_ADC_TYPE = StretchADC_Hand;
                 LoadStretchADC(B);
 			}
@@ -194,8 +194,8 @@ void FPGA::ProcedureCalibration(void)
     FPGA::LoadKoeffCalibration(B);
 
     gStateFPGA.stateCalibration = StateCalibration_None;
-    panel.WaitPressingButton();
-    panel.Enable();
+    Panel::WaitPressingButton();
+    Panel::Enable();
     Timer::Disable(kTimerDrawHandFunction);
     Display::SetDrawMode(DrawMode_Auto, 0);
     gStateFPGA.stateCalibration = StateCalibration_None;
