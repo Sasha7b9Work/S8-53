@@ -63,30 +63,6 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsCursors.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDebug.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDisplay.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMeasures.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsService.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Globals.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Panel\Controls.c">
       <Filter>Panel</Filter>
     </ClCompile>
@@ -134,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Utils\Strings.c">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMemory.c">
-      <Filter>Settings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
       <Filter>USBD</Filter>
@@ -332,6 +305,33 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsCursors.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDebug.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDisplay.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMeasures.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMemory.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsService.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Globals.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

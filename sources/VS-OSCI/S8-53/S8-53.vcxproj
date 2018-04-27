@@ -62,7 +62,7 @@
     <ClCompile Include="..\..\S8-53\src\FPGA\FPGA_Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Globals.c">
+    <ClCompile Include="..\..\S8-53\src\Globals.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\ADC.cpp">
@@ -129,28 +129,28 @@
     <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsCursors.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsCursors.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDebug.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDebug.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDisplay.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsDisplay.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMeasures.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMeasures.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMemory.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsMemory.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsService.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsService.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.c">
+    <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsTypes.cpp" />

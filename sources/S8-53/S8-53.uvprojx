@@ -912,11 +912,6 @@
               <FilePath>.\src\Tables.h</FilePath>
             </File>
             <File>
-              <FileName>Globals.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Globals.c</FilePath>
-            </File>
-            <File>
               <FileName>Globals.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Globals.h</FilePath>
@@ -988,6 +983,11 @@
               <FileName>Tables.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Tables.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Globals.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1620,19 +1620,9 @@
               <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsChannel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsChannel.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsChannel.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsChannel.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsDisplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsDisplay.c</FilePath>
             </File>
             <File>
               <FileName>SettingsDisplay.h</FileName>
@@ -1640,19 +1630,9 @@
               <FilePath>.\src\Settings\SettingsDisplay.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsMemory.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsMemory.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsMemory.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsMemory.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsTime.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsTime.c</FilePath>
             </File>
             <File>
               <FileName>SettingsTime.h</FileName>
@@ -1660,29 +1640,14 @@
               <FilePath>.\src\Settings\SettingsTime.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsService.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsService.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsService.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsService.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsCursors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsCursors.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsCursors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsCursors.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsDebug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\SettingsDebug.c</FilePath>
             </File>
             <File>
               <FileName>SettingsDebug.h</FileName>
@@ -1708,6 +1673,51 @@
               <FileName>Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsChannel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsChannel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsCursors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsCursors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsDisplay.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsDisplay.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsMeasures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMeasures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsMeasures.h</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsMemory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsMemory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\SettingsTime.cpp</FilePath>
             </File>
           </Files>
         </Group>
