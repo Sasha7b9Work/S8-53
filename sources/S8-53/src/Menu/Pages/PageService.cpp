@@ -335,7 +335,7 @@ static void OnRegSet_Math_Function(int delta)
             if (SET_RANGE_MATH < RangeSize - 1)
             {
                 ++SET_RANGE_MATH;
-                SET_RSHIFT_MATH = Math_RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (int16)Math_RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -345,7 +345,7 @@ static void OnRegSet_Math_Function(int delta)
             if (SET_RANGE_MATH > 0)
             {
                 --SET_RANGE_MATH;
-                SET_RSHIFT_MATH = Math_RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (int16)Math_RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -681,7 +681,7 @@ static bool IsActive_Math_FFT_Cursors(void)
 
 static void OnRegSet_Math_FFT_Cursors(int angle)
 {
-    FFT_POS_CURSOR(FFT_CUR_CURSOR) += angle;
+    FFT_POS_CURSOR(FFT_CUR_CURSOR) += (uint8)angle;
     Sound::RegulatorShiftRotate();
 }
 
@@ -712,7 +712,7 @@ static const SmallButton cMath_FFT_Cursors_Source
 
 static void OnPress_Math_FFT_Cursors_Source(void)
 {
-    FFT_CUR_CURSOR = (FFT_CUR_CURSOR + 1) % 2;
+    FFT_CUR_CURSOR = (uint8)((FFT_CUR_CURSOR + 1) % 2);
 }
 
 static void Draw_Math_FFT_Cursors_Source(int x, int y)

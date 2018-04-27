@@ -2,7 +2,7 @@
 #include "Settings/SettingsTypes.h"
 #include "PageMemory.h"
 #include "Definition.h"
-#include "../FileManager.h"
+#include "Menu/FileManager.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/DataStorage.h"
 #include "Display/Colors.h"
@@ -365,7 +365,7 @@ void PressSB_SetMask_Insert()
         }
         else
         {
-            FILE_NAME_MASK[size] = index;
+            FILE_NAME_MASK[size] = (int8)index;
             FILE_NAME_MASK[size + 1] = '\0';
         }
     }
@@ -665,7 +665,7 @@ static void DrawSB_MemInt_ShowSignalAlways(int x, int y)
 
 static void PressSB_MemInt_ShowSignalAlways()
 {
-    INT_SHOW_ALWAYS = (INT_SHOW_ALWAYS == 0) ? 1 : 0;
+    INT_SHOW_ALWAYS = (INT_SHOW_ALWAYS == 0) ? 1U : 0U;
 }
 
 extern const Page mspMemInt;
@@ -1138,7 +1138,7 @@ static void PressSB_MemLast_Exit()
 void OnPressMemoryLatest()
 {
     CURRENT_NUM_LATEST_SIGNAL = 0;
-    RUN_FPGA_AFTER_SMALL_BUTTONS = FPGA::IsRunning() ? 1 : 0;
+    RUN_FPGA_AFTER_SMALL_BUTTONS = FPGA::IsRunning() ? 1U : 0U;
     FPGA::Stop(false);
     MODE_WORK = ModeWork_Latest;
 }
