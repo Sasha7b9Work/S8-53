@@ -6,7 +6,6 @@
 
 
 typedef signed      char        int8;
-typedef signed      char        int8_t;
 typedef signed      short   int int16;
 typedef unsigned    char        uint8;
 typedef unsigned    short   int uint16;

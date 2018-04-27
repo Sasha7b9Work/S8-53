@@ -867,19 +867,9 @@
               <FilePath>.\src\libs\usbd_desc.h</FilePath>
             </File>
             <File>
-              <FileName>app_ethernet.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\app_ethernet.c</FilePath>
-            </File>
-            <File>
               <FileName>app_ethernet.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\app_ethernet.h</FilePath>
-            </File>
-            <File>
-              <FileName>ethernetif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\ethernetif.c</FilePath>
             </File>
             <File>
               <FileName>ethernetif.h</FileName>
@@ -890,6 +880,16 @@
               <FileName>lwipopts.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\lwipopts.h</FilePath>
+            </File>
+            <File>
+              <FileName>app_ethernet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\app_ethernet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ethernetif.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\ethernetif.cpp</FilePath>
             </File>
           </Files>
         </Group>

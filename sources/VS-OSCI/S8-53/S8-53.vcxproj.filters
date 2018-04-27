@@ -55,7 +55,7 @@
     <Filter Include="HAL">
       <UniqueIdentifier>{3210115b-0d60-46e4-8194-3c5111056155}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_vs">
+    <Filter Include="_VS">
       <UniqueIdentifier>{95614ff2-fdb6-422e-90f9-b4112092c840}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -122,12 +122,6 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Log.c">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\ethernetif.c">
-      <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_hal_msp.c">
       <Filter>libs</Filter>
@@ -332,6 +326,12 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\DisplayPrimitives.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\ethernetif.cpp">
+      <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -603,34 +603,34 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="src\string.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\stdint.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\stdio.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\stdlib.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\core_cminstr.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\core_cm3.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\math.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\limits.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\ctype.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\stdarg.h">
-      <Filter>_vs</Filter>
+      <Filter>_VS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
