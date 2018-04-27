@@ -28,7 +28,7 @@
 
 #define ROUND(x) (x += 0.5f, x)
 
-#define PI 3.141592653589793
+#define PI 3.141592653589793f
 
 extern const float tableScalesRange[RangeSize];
 extern const float absStepRShift[];

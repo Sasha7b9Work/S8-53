@@ -9,7 +9,7 @@
 #include <math.h>
 
 
-const float tableScalesRange[RangeSize] = {2e-3, 5e-3, 10e-3, 20e-3, 50e-3, 100e-3, 200e-3, 500e-3, 1.0f, 2.0f, 5.0f, 10.0f, 20.0f};
+const float tableScalesRange[RangeSize] = {2e-3f, 5e-3f, 10e-3f, 20e-3f, 50e-3f, 100e-3f, 200e-3f, 500e-3f, 1.0f, 2.0f, 5.0f, 10.0f, 20.0f};
 /*
 static const float tableScalesTBase[TBaseSize] = 
     {2e-9, 5e-9, 10e-9, 20e-9, 50e-9, 100e-9, 200e-9, 500e-9,
@@ -20,36 +20,36 @@ static const float tableScalesTBase[TBaseSize] =
 
 const float absStepRShift[] =
 {
-    2e-3 / 20 / STEP_RSHIFT,
-    5e-3 / 20 / STEP_RSHIFT,
-    10e-3 / 20 / STEP_RSHIFT,
-    20e-3 / 20 / STEP_RSHIFT,
-    50e-3 / 20 / STEP_RSHIFT,
-    100e-3 / 20 / STEP_RSHIFT,
-    200e-3 / 20 / STEP_RSHIFT,
-    500e-3 / 20 / STEP_RSHIFT,
-    1.0 / 20 / STEP_RSHIFT,
-    2.0 / 20 / STEP_RSHIFT,
-    5.0 / 20 / STEP_RSHIFT,
-    10.0 / 20 / STEP_RSHIFT,
-    20.0 / 20 / STEP_RSHIFT
+    2e-3f / 20 / STEP_RSHIFT,
+    5e-3f / 20 / STEP_RSHIFT,
+    10e-3f / 20 / STEP_RSHIFT,
+    20e-3f / 20 / STEP_RSHIFT,
+    50e-3f / 20 / STEP_RSHIFT,
+    100e-3f / 20 / STEP_RSHIFT,
+    200e-3f / 20 / STEP_RSHIFT,
+    500e-3f / 20 / STEP_RSHIFT,
+    1.0f / 20 / STEP_RSHIFT,
+    2.0f / 20 / STEP_RSHIFT,
+    5.0f / 20 / STEP_RSHIFT,
+    10.0f / 20 / STEP_RSHIFT,
+    20.0f / 20 / STEP_RSHIFT
 };
 
 const float voltsInPixel[] =
 {
-    2e-3 / 20,      // 2mV
-    5e-3 / 20,      // 5mV
-    10e-3 / 20,     // 10mV
-    20e-3 / 20,     // 20mV
-    50e-3 / 20,     // 50mV
-    100e-3 / 20,    // 100mV
-    200e-3 / 20,    // 200mV
-    500e-3 / 20,    // 500mV
-    1.0 / 20,       // 1V
-    2.0 / 20,       // 2V
-    5.0 / 20,       // 5V
-    10.0 / 20,      // 10V
-    20.0 / 20       // 20V
+    2e-3f / 20,      // 2mV
+    5e-3f / 20,      // 5mV
+    10e-3f / 20,     // 10mV
+    20e-3f / 20,     // 20mV
+    50e-3f / 20,     // 50mV
+    100e-3f / 20,    // 100mV
+    200e-3f / 20,    // 200mV
+    500e-3f / 20,    // 500mV
+    1.0f / 20,       // 1V
+    2.0f / 20,       // 2V
+    5.0f / 20,       // 5V
+    10.0f / 20,      // 10V
+    20.0f / 20       // 20V
 };
 
 const int voltsInPixelInt[] =   // Коэффициент 20000
@@ -71,10 +71,10 @@ const int voltsInPixelInt[] =   // Коэффициент 20000
 
 const float absStepTShift[] =
 {
-    2e-9 / 20, 5e-9 / 20, 10e-9 / 20, 20e-9 / 20, 50e-9 / 20, 100e-9 / 20, 200e-9 / 20, 500e-9 / 20,
-    1e-6 / 20, 2e-6 / 20, 5e-6 / 20, 10e-6 / 20, 20e-6 / 20, 50e-6 / 20, 100e-6 / 20, 200e-6 / 20, 500e-6 / 20,
-    1e-3 / 20, 2e-3 / 20, 5e-3 / 20, 10e-3 / 20, 20e-3 / 20, 50e-3 / 20, 100e-3 / 20, 200e-3 / 20, 500e-3 / 20,
-    1.0 / 20, 2.0 / 20, 5.0 / 20, 10.0 / 20
+    2e-9f / 20, 5e-9f / 20, 10e-9f / 20, 20e-9f / 20, 50e-9f / 20, 100e-9f / 20, 200e-9f / 20, 500e-9f / 20,
+    1e-6f / 20, 2e-6f / 20, 5e-6f / 20, 10e-6f / 20, 20e-6f / 20, 50e-6f / 20, 100e-6f / 20, 200e-6f / 20, 500e-6f / 20,
+    1e-3f / 20, 2e-3f / 20, 5e-3f / 20, 10e-3f / 20, 20e-3f / 20, 50e-3f / 20, 100e-3f / 20, 200e-3f / 20, 500e-3f / 20,
+    1.0f / 20, 2.0f / 20, 5.0f / 20, 10.0f / 20
 };
 
 int Math_MinFrom2Int(int val0, int val1)
@@ -161,7 +161,7 @@ void Math_PointsRelToVoltage(const uint8 *points, int numPoints, Range range, in
     float maxVoltsOnScreen = MAX_VOLTAGE_ON_SCREEN(range);
     float rShiftAbs = RSHIFT_2_ABS(rShift, range);
     int diff = (MIN_VALUE * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3;;
-    float koeff = 1.0f / 20e3;
+    float koeff = 1.0f / 20e3f;
     for (int i = 0; i < numPoints; i++)
     {
         voltage[i] = (points[i] * voltInPixel - diff) * koeff;
