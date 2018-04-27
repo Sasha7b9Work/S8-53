@@ -832,11 +832,6 @@
               <FilePath>.\src\libs\usbd_cdc_interface.h</FilePath>
             </File>
             <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\usbd_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\usbd_conf.h</FilePath>
@@ -890,6 +885,11 @@
               <FileName>stm32f2xx_it.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\stm32f2xx_it.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbd_conf.cpp</FilePath>
             </File>
           </Files>
         </Group>

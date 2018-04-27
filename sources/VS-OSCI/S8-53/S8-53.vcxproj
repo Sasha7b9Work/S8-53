@@ -97,7 +97,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\usbd_cdc_interface.cpp" />
-    <ClCompile Include="..\..\S8-53\src\libs\usbd_conf.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_conf.cpp" />
     <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c" />
     <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.cpp" />
     <ClCompile Include="..\..\S8-53\src\Log.c" />

@@ -10,3 +10,6 @@
 #define uint64_t unsigned long long
 #define __IO volatile
 #define uintptr_t uint32_t *
+
+
+#define NVIC_SetPriority(x, y)
