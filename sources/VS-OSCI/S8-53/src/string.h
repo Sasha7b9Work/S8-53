@@ -7,3 +7,6 @@ void strcat(void *, const void *);
 void memset(void *, int, int);
 void memcpy(void *, const void *, int);
 char toupper(char);
+int strcmp(const void *, const void *);
+void snprintf(const void *, ...);
+int memcmp(const void *, const void *, int);

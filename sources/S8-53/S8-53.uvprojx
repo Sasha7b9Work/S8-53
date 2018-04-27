@@ -1095,11 +1095,6 @@
           <GroupName>Display/font</GroupName>
           <Files>
             <File>
-              <FileName>Font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\font\Font.c</FilePath>
-            </File>
-            <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\Font.h</FilePath>
@@ -1143,6 +1138,11 @@
               <FileName>fontUGOdisplay.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\fontUGOdisplay.inc</FilePath>
+            </File>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\font\Font.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\S8-53\src\Display\DisplayPrimitives.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\font\Font.c" />
+    <ClCompile Include="..\..\S8-53\src\Display\font\Font.cpp" />
     <ClCompile Include="..\..\S8-53\src\Display\Grid.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -43,7 +43,9 @@
     <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.cpp">
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
+    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Ethernet\TcpSocket.cpp" />
     <ClCompile Include="..\..\S8-53\src\FlashDrive\FlashDrive.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -357,6 +359,7 @@
     <ClInclude Include="src\core_cm3.h" />
     <ClInclude Include="src\core_cminstr.h" />
     <ClInclude Include="src\ctype.h" />
+    <ClInclude Include="src\inttypes.h" />
     <ClInclude Include="src\limits.h" />
     <ClInclude Include="src\math.h" />
     <ClInclude Include="src\stdarg.h" />

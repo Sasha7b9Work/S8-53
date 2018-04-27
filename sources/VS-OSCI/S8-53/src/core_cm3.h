@@ -9,3 +9,4 @@
 #define int16_t signed short
 #define uint64_t unsigned long long
 #define __IO volatile
+#define uintptr_t uint32_t *

@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\font\Font.c">
-      <Filter>Display\fonts</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.c">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -332,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.cpp">
       <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Display\font\Font.cpp">
+      <Filter>Display\fonts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -630,6 +630,9 @@
       <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="src\stdarg.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\inttypes.h">
       <Filter>_VS</Filter>
     </ClInclude>
   </ItemGroup>

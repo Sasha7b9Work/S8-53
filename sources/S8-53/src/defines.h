@@ -1,4 +1,11 @@
 #pragma once
+
+#ifdef WIN32
+#define __attribute__(x)
+#define __packed__
+#endif
+
+
 #include <stm32f2xx_hal.h>
 
 

@@ -112,7 +112,7 @@ void Menu::ProcessButtonForHint(PanelButton button)
             "2. At the open menu deduction of the button during 0.5s closes the menu.\n"
 #pragma push
 #pragma diag_suppress 192
-            "3. At control \"SERVICE\x99Mode btn MENU\x99\Close\" current becomes the page of the previous level of the menu. If the root page is current, the menu is closed.\n"
+            "3. At control \"SERVICE\x99Mode btn MENU\x99\x43lose\" current becomes the page of the previous level of the menu. If the root page is current, the menu is closed.\n"
 #pragma pop
             "4. At control \"SERVICE\x99Mode btn MENU\x99Toggle\" current becomes the page of the current level of the menu. If the current page the last in the current level, happens transition to the previous level of the menu.\n"
             "5. If the menu is in the mode of small buttons, pressing closes the page.";
@@ -207,7 +207,7 @@ void Menu::ProcessButtonForHint(PanelButton button)
             "1. яхмуп button opens a menu settings synchronization.\n"
 #pragma push
 #pragma diag_suppress 192
-            "2. Pressing and holding the button яхмуп for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99\Autolevel\" automatically adjust the trigger level.\n"
+            "2. Pressing and holding the button яхмуп for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99\x41utolevel\" automatically adjust the trigger level.\n"
 #pragma pop
             "3. Pressing and holding the button яхмуп for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99SReset trig level\" sets the trigger level 0V.";
     }
