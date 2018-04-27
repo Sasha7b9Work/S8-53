@@ -55,7 +55,7 @@
     <Filter Include="HAL">
       <UniqueIdentifier>{3210115b-0d60-46e4-8194-3c5111056155}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vs">
+    <Filter Include="_vs">
       <UniqueIdentifier>{95614ff2-fdb6-422e-90f9-b4112092c840}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -603,22 +603,34 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="src\string.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
     </ClInclude>
     <ClInclude Include="src\stdint.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
     </ClInclude>
     <ClInclude Include="src\stdio.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
     </ClInclude>
     <ClInclude Include="src\stdlib.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
     </ClInclude>
     <ClInclude Include="src\core_cminstr.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
     </ClInclude>
     <ClInclude Include="src\core_cm3.h">
-      <Filter>vs</Filter>
+      <Filter>_vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math.h">
+      <Filter>_vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\limits.h">
+      <Filter>_vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctype.h">
+      <Filter>_vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdarg.h">
+      <Filter>_vs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

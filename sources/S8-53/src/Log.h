@@ -2,6 +2,11 @@
 #include "defines.h"
 
 
+#ifdef WIN32
+#define __MODULE__ ""
+#endif
+
+
 #define LOG_WRITE(...)  Log_Write(__VA_ARGS__)
 #define LOG_ERROR(...)  Log_Error(__MODULE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 #define LOG_FUNC_ENTER  Log_Write("%s enter", __FUNCTION__);

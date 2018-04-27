@@ -354,6 +354,10 @@
     <ClInclude Include="src\cmsis_gcc.h" />
     <ClInclude Include="src\core_cm3.h" />
     <ClInclude Include="src\core_cminstr.h" />
+    <ClInclude Include="src\ctype.h" />
+    <ClInclude Include="src\limits.h" />
+    <ClInclude Include="src\math.h" />
+    <ClInclude Include="src\stdarg.h" />
     <ClInclude Include="src\stdint.h" />
     <ClInclude Include="src\stdio.h" />
     <ClInclude Include="src\stdlib.h" />
@@ -435,7 +439,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
-      <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4099;4996;4838</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
