@@ -267,6 +267,7 @@ namespace S8_53_USB {
                 {
                     if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
+                        needForDisconnect = false;
                         buttonConnectLAN.Text = "Откл";
                         textBoxIP.Enabled = false;
                         textBoxPort.Enabled = false;
@@ -287,8 +288,9 @@ namespace S8_53_USB {
 
         private void ReaderLAN_DoWork(object sender, DoWorkEventArgs args)
         {
+            Console.WriteLine("Do work enter");
             data.Clear();
-            byte[] bytes = socket.ReadBytes(500);
+            byte[] bytes = socket.ReadBytes(400);
             if (bytes.Length != 0)
             {
                 for (int i = 0; i < bytes.Length; i++)
@@ -296,10 +298,12 @@ namespace S8_53_USB {
                     data.Enqueue(bytes[i]);
                 }
             }
+            Console.WriteLine("Do work leave");
         }
 
         private void ReaderLAN_Completed(object sender, RunWorkerCompletedEventArgs args)
         {
+            Console.WriteLine("Completed enter");
             if (data.Count != 0)
             {
                 byte[] bytes = data.ToArray();
@@ -340,6 +344,7 @@ namespace S8_53_USB {
                 socket.SendString("DISPLAY:AUTOSEND 2");
                 readerLAN.RunWorkerAsync();
             }
+            Console.WriteLine("Completed leave");
         }
 
         private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)

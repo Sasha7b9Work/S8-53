@@ -219,20 +219,31 @@ namespace LibraryS8_53
 
         public byte[] ReadBytes(long timeWaitMS)
         {
-            long timeLast = CurrentTime();
-            int numPrevBytes = 0;
-            while(CurrentTime() - timeLast < timeWaitMS)
+            byte[] bytes = new byte[0];
+            try
             {
-                if(socket.Available != numPrevBytes)
+                long timeLast = CurrentTime();
+                int numPrevBytes = 0;
+                while (CurrentTime() - timeLast < timeWaitMS)
                 {
-                    timeLast = CurrentTime();
-                    numPrevBytes = socket.Available;
+                    if (socket.Available != numPrevBytes)
+                    {
+                        timeLast = CurrentTime();
+                        numPrevBytes = socket.Available;
+                    }
+                }
+
+                int numBytes = socket.Available;
+                if (numBytes != 0)
+                {
+                    bytes = new byte[numBytes];
+                    socket.Receive(bytes, numBytes, SocketFlags.None);
                 }
             }
-
-            int numBytes = socket.Available;
-            byte[] bytes = new byte[numBytes];
-            socket.Receive(bytes, numBytes, SocketFlags.None);
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
             return bytes;
         }
 

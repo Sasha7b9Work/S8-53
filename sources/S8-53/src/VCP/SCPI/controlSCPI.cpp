@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "VCP/SCPI/SCPI.h"
 #include "Panel/Panel.h"
 #include "Utils/Strings.h"
@@ -53,6 +54,7 @@ void SCPI::CONTROL::KEY(uint8 *buffer)
                 {
                     code += 128;
                 }
+                //LOG_WRITE("to panel %d", code);
                 Panel::ProcessingCommandFromPIC(code);
                 return;
             }
@@ -93,6 +95,7 @@ void SCPI::CONTROL::GOVERNOR(uint8 *buffer)
                 {
                     code += 128;
                 }
+                //LOG_WRITE("to panel %d", code);
                 Panel::ProcessingCommandFromPIC(code);
                 return;
             }

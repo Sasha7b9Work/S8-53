@@ -29,7 +29,22 @@ void SCPI::AddNewData(uint8 *data, uint length)
     uint8 *temp = (uint8 *)malloc(length + 1);
     memcpy(temp, data, length);
     temp[length] = 0;
-    LOG_WRITE((char *)temp);
+
+    int count = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (data[i] == ':')
+        {
+            ++count;
+        }
+    }
+
+    if(data[1] != 'D')
+    {
+        data[1] = data[1];
+    }
+
     free(temp);
     */
 
@@ -45,7 +60,7 @@ label_another:
         if (buffer[i] == 0x0d || buffer[i] == 0x0a)
         {
             uint8 *pBuffer = buffer;
-            while (*pBuffer == ':')
+            while (*pBuffer == ':' || *pBuffer == 0x0d || *pBuffer == 0x0a)
             {
                 ++pBuffer;
             }
