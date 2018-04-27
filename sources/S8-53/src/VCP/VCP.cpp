@@ -44,7 +44,7 @@ void VCP::SendDataAsinch(uint8 *buffer, int size)
     while (!PrevSendingComplete())  {};
     memcpy(trBuf, buffer, size);
 
-    USBD_CDC_SetTxBuffer(&handleUSBD, trBuf, size);
+    USBD_CDC_SetTxBuffer(&handleUSBD, trBuf, (uint16)size);
     USBD_CDC_TransmitPacket(&handleUSBD);
 }
 
@@ -58,7 +58,7 @@ void VCP::Flush()
     {
         USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
         while (pCDC->TxState == 1) {};
-        USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, sizeBuffer);
+        USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, (uint16)sizeBuffer);
         USBD_CDC_TransmitPacket(&handleUSBD);
         while (pCDC->TxState == 1) {};
     }

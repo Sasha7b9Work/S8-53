@@ -55,6 +55,8 @@ int sChannel_MultiplierRel2Abs(Divider multiplier)
     {
         case Divider_10:
             return 10;
+        case Divider_1:
+            return 1;
     }
     return 1;
 }

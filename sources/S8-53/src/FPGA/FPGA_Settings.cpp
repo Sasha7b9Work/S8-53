@@ -92,8 +92,8 @@ void FPGA::LoadSettings(void)
     switch(BALANCE_ADC_TYPE) 
     {
         case BalanceADC_Settings:
-            WriteToHardware(WR_ADD_RSHIFT_DAC1, SET_BALANCE_ADC_A, false);
-            WriteToHardware(WR_ADD_RSHIFT_DAC2, SET_BALANCE_ADC_B, false);
+            WriteToHardware(WR_ADD_RSHIFT_DAC1, (uint8)SET_BALANCE_ADC_A, false);
+            WriteToHardware(WR_ADD_RSHIFT_DAC2, (uint8)SET_BALANCE_ADC_B, false);
             break;
         case BalanceADC_Hand:
             SetPeackDetMode(PEAKDET);
@@ -105,9 +105,11 @@ void FPGA::LoadSettings(void)
             }
             else
             {
-                WriteToHardware(WR_ADD_RSHIFT_DAC1, BALANCE_ADC_A, false);
-                WriteToHardware(WR_ADD_RSHIFT_DAC2, BALANCE_ADC_B, false);
+                WriteToHardware(WR_ADD_RSHIFT_DAC1, (uint8)BALANCE_ADC_A, false);
+                WriteToHardware(WR_ADD_RSHIFT_DAC2, (uint8)BALANCE_ADC_B, false);
             }
+            break;
+        case BalanceADC_Disable:
             break;
     }
 }
@@ -172,8 +174,8 @@ void FPGA::SetRange(Channel chan, Range range)
         sChannel_SetRange(chan, range);
         if (LINKING_RSHIFT_IS_VOLTAGE)
         {
-            SET_RSHIFT(chan) = Math_RShift2Rel(rShiftAbs, range);
-            TRIG_LEVEL(chan) = Math_RShift2Rel(trigLevAbs, range);
+            SET_RSHIFT(chan) = (int16)Math_RShift2Rel(rShiftAbs, range);
+            TRIG_LEVEL(chan) = (int16)Math_RShift2Rel(trigLevAbs, range);
         }
         LoadRange(chan);
     }
@@ -304,17 +306,17 @@ void FPGA::LoadRShift(Channel chan)
     static const int index[3] = {0, 1, 1};
     int16 rShiftAdd = RSHIFT_ADD(chan, range, index[mode]);
 
-    uint16 rShift = SET_RSHIFT(chan) + (SET_INVERSE(chan) ? -1 : 1) * rShiftAdd;
+    uint16 rShift = (uint16)(SET_RSHIFT(chan) + (SET_INVERSE(chan) ? -1 : 1) * rShiftAdd);
 
     int16 delta = -(rShift - RShiftZero);
     if (SET_INVERSE(chan))
     {
         delta = -delta;
     }
-    rShift = delta + RShiftZero;
+    rShift = (uint16)(delta + RShiftZero);
 
-    rShift = RShiftMax + RShiftMin - rShift;
-    WriteToDAC(chan == A ? TypeWriteDAC_RShiftA : TypeWriteDAC_RShiftB, mask[chan] | (rShift << 2));
+    rShift = (uint16)(RShiftMax + RShiftMin - rShift);
+    WriteToDAC(chan == A ? TypeWriteDAC_RShiftA : TypeWriteDAC_RShiftB, (uint16)(mask[chan] | (rShift << 2)));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -348,8 +350,8 @@ void FPGA::SetTrigLev(TrigSource chan, int16 trigLev)
 void FPGA::LoadTrigLev(void)
 {
     uint16 data = 0xa000;
-    uint16 trigLev = TRIG_LEVEL_SOURCE;
-    trigLev = TrigLevMax + TrigLevMin - trigLev;
+    uint16 trigLev = (uint16)TRIG_LEVEL_SOURCE;
+    trigLev = (uint16)(TrigLevMax + TrigLevMin - trigLev);
     data |= trigLev << 2;
     // FPGA_WriteToHardware(WR_DAC_LOW, data.byte[0], true);
     // FPGA_WriteToHardware(WR_DAC_HI, data.byte[1], true);
@@ -370,7 +372,7 @@ void FPGA::SetTShift(int tShift)
         Display::ShowWarningBad(LimitSweep_TShift);
     }
 
-    sTime_SetTShift(tShift);
+    sTime_SetTShift((int16)tShift);
     LoadTShift();
     Display::Redraw();
 };
@@ -439,12 +441,12 @@ void FPGA::LoadTShift(void)
     }
     int additionShift = (tShiftOld % k[tBase]) * 2;
     FPGA::SetAdditionShift(additionShift);
-    uint16 post = tShift;
-    post = (~post);
+    uint16 post = (uint16)tShift;
+    post = (uint16)(~post);
     WriteToHardware(WR_POST_LOW, (uint8)post, true);
     WriteToHardware(WR_POST_HI, (uint8)(post >> 8), true);
-    uint16 pred = (tShift > 511) ? 1023 : (511 - post);
-    pred = (~(pred - 1)) & 0x1ff;
+    uint16 pred = (uint16)((tShift > 511) ? 1023 : (511 - post));
+    pred = (uint16)((~(pred - 1)) & 0x1ff);
     WriteToHardware(WR_PRED_LOW, (uint8)pred, true);
     WriteToHardware(WR_PRED_HI, (uint8)(pred >> 8), true);
 }
@@ -511,7 +513,7 @@ void FPGA::SetTrigPolarity(TrigPolarity polarity)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadTrigPolarity(void)
 {
-    WriteToHardware(WR_TRIG_F, TRIG_POLARITY_IS_FRONT ? 0x01 : 0x00, true);
+    WriteToHardware(WR_TRIG_F, TRIG_POLARITY_IS_FRONT ? 0x01U : 0x00U, true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

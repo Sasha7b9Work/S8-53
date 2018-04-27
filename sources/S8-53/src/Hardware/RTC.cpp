@@ -92,9 +92,9 @@ bool RTC_SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minute
     RTC_DateTypeDef dateStruct =
     {
         RTC_WEEKDAY_MONDAY,
-        month,
-        day,
-        year
+        (uint8)month,
+        (uint8)day,
+        (uint8)year
     };
 
     if(HAL_RTC_SetDate((RTC_HandleTypeDef*)&rtcHandle, &dateStruct, FORMAT_BIN) != HAL_OK)
@@ -104,9 +104,9 @@ bool RTC_SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minute
 
     RTC_TimeTypeDef timeStruct =
     {
-        hours,
-        minutes,
-        seconds,
+        (uint8)hours,
+        (uint8)minutes,
+        (uint8)seconds,
         RTC_HOURFORMAT_24,
         RTC_DAYLIGHTSAVING_NONE,
         RTC_STOREOPERATION_SET

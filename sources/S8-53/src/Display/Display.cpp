@@ -1961,14 +1961,14 @@ void Display::WriteTextVoltage(Channel chan, int x, int y)
         Painter::DrawTextC(x + 1, y, buffer, colorDraw);
 
         char bufferTemp[20];
-        sprintf(buffer, "\xa5%s", sChannel_RShift2String(rShift, range, multiplier, bufferTemp));
+        sprintf(buffer, "\xa5%s", sChannel_RShift2String((int16)rShift, range, multiplier, bufferTemp));
         Painter::DrawText(x + 46, y, buffer);
     }
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::WriteStringAndNumber(char *text, int16 x, int16 y, int number)
+void Display::WriteStringAndNumber(char *text, int x, int y, int number)
 {
     char buffer[100];
     Painter::DrawTextC(x, y, text, COLOR_FILL);
@@ -2100,7 +2100,7 @@ void Display::DrawLowPart()
     if (MODE_WORK_IS_DIRECT)
     {
         char mesFreq[20] = "\x7c=";
-        char buffer[20];
+        char buf[20];
         float freq = FPGA::GetFreq();
         if (freq == -1.0f) //-V550
         {
@@ -2108,7 +2108,7 @@ void Display::DrawLowPart()
         }
         else
         {
-            strcat(mesFreq, Freq2String(freq, false, buffer));
+            strcat(mesFreq, Freq2String(freq, false, buf));
         }
         Painter::DrawText(x + 3, GRID_BOTTOM + 2, mesFreq);
     }
@@ -2217,7 +2217,7 @@ void Display::DisableShowLevelTrigLev()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::EnableTrigLabel(bool enable)
 {
-    TRIG_ENABLE = enable ? 1 : 0;
+    TRIG_ENABLE = enable ? 1U : 0U;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2288,7 +2288,7 @@ void Display::ShiftScreen(int delta)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::ChangedRShiftMarkers()
 {
-    DRAW_RSHIFT_MARKERS = ALT_MARKERS_HIDE ? 0 : 1;
+    DRAW_RSHIFT_MARKERS = ALT_MARKERS_HIDE ? 0U : 1U;
     Timer::Enable(kRShiftMarkersAutoHide, 5000, FuncOnTimerRShiftMarkersAutoHide);
 }
 
@@ -2443,18 +2443,18 @@ void Display::DrawConsole()
     int height = Font_GetSize();
 
     int lastString = FirstEmptyString() - 1;
-    int numString = NUM_STRINGS;
-    if(height == 8 && numString > 22)
+    int numStr = NUM_STRINGS;
+    if(height == 8 && numStr > 22)
     {
-        numString = 22;
+        numStr = 22;
     }
     int delta = 0;
     if(SHOW_STRING_NAVIGATION)
     {
-        numString -= ((height == 8) ? 1 : 2);
+        numStr -= ((height == 8) ? 1 : 2);
         delta = 10;
     }
-    int firstString = lastString - numString + 1;
+    int firstString = lastString - numStr + 1;
     if(firstString < 0)
     {
         firstString = 0;

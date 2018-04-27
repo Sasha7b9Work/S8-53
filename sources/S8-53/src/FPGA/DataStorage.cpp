@@ -73,7 +73,7 @@ void DataStorage::ClearLimitsAndSums(void)
 static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss)
 {
     int numAveData = dataStorage.NumElementsWithCurrentSettings();
-    int size = dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2);
+    int size = (int)(dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2));
     if (numAveData == 1)
     {
         for (int i = 0; i < size; i++)
@@ -108,7 +108,6 @@ static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::AddData(uint8 *data0, uint8 *data1, DataSettings dss)
 {
-    uint time = gTimerTics;
     dss.time = RTC_GetPackedTime();
 
     if(dss.enableCh0 == 0 && dss.enableCh1 == 0)
@@ -134,7 +133,7 @@ int DataStorage::AllDatas(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
 {
-    int numElements = dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2);
+    uint numElements = dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2);
 
     if(dataStorage.NumElementsInStorage() == 0 || NUM_MIN_MAX == 1 || (!SettingsIsEquals(dss, GetSettingsDataFromEnd(0))))
     {
@@ -183,7 +182,7 @@ void DataStorage::CalculateSums(void)
 
     dataStorage.GetDataFromEnd(0, &ds, &data0, &data1);
     
-    int numPoints = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
+    uint numPoints = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
 
     int numAveragings = 0;
 
@@ -331,14 +330,14 @@ bool DataStorage::CopyData(DataSettings *ds, Channel chan, uint8 datatImportRel[
 
     uint8* address = ((uint8*)ds + sizeof(DataSettings));
 
-    int length = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
+    uint length = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
 
     if(chan == B && ds->enableCh0 == 1)
     {
         address += length;
     }
 
-    memcpy(pointer, address, length);
+    memcpy(pointer, address, (int)length);
 
     return true;
 }
@@ -364,7 +363,7 @@ uint8* DataStorage::GetAverageData(Channel chan)
         return 0;
     }
 
-    int numPoints = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
+    uint numPoints = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
 
     if (sDisplay_ModeAveraging() == Averaging_Around)
     {
@@ -427,8 +426,8 @@ void VerifyAddress(uint8 *dst, uint size)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 #define COPY_AND_INCREASE(address, data, length)    \
-    memcpy(address, data, length);                  \
-    address += length;
+    memcpy((address), (data), (int)(length));       \
+    address += (length);
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::PushData(DataSettings *dp, uint8 *data0, uint8 *data1)

@@ -17,7 +17,7 @@ static int FindNumSymbolsInCommand(uint8 *buffer);
 
 static const int SIZE_BUFFER = 100;
 /// Сюда добавляем новые данные
-static uint8 buffer[SIZE_BUFFER];
+static uint8 bufData[SIZE_BUFFER];
 /// Указатель на первый свободный байт буфера
 static int pointer = 0;
 
@@ -48,18 +48,18 @@ void SCPI::AddNewData(uint8 *data, uint length)
     free(temp);
     */
 
-    memcpy(&buffer[pointer], data, length);
+    memcpy(&bufData[pointer], data, (int)length);
     pointer += length;
 
 label_another:
 
     for (int i = 0; i < pointer; i++)
     {
-        buffer[i] = toupper(buffer[i]);
+        bufData[i] = (uint8)toupper((int8)bufData[i]);
 
-        if (buffer[i] == 0x0d || buffer[i] == 0x0a)
+        if (bufData[i] == 0x0d || bufData[i] == 0x0a)
         {
-            uint8 *pBuffer = buffer;
+            uint8 *pBuffer = bufData;
             while (*pBuffer == ':' || *pBuffer == 0x0d || *pBuffer == 0x0a)
             {
                 ++pBuffer;
@@ -73,12 +73,12 @@ label_another:
             }
             else                            // Если в буфере есть есть данные
             {
-                uint8 *pBuffer = buffer;
+                uint8 *pBuf = bufData;
                 for (++i; i < pointer; i++)
                 {
-                    *pBuffer = buffer[i];   // копируем их в начало
-                    ++pBuffer;
-                    pointer = pBuffer - buffer;
+                    *pBuf = bufData[i];   // копируем их в начало
+                    ++pBuf;
+                    pointer = pBuf - bufData;
                 }
                 goto label_another;         // и проверяем буфер ещё раз
             }
@@ -88,7 +88,7 @@ label_another:
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ParseNewCommand(uint8 *buffer)
+void SCPI::ParseNewCommand(uint8 *buf)
 {
     static const StructCommand commands[] =
     {
@@ -120,7 +120,7 @@ void SCPI::ParseNewCommand(uint8 *buffer)
     {0}
     };
     
-    SCPI::ProcessingCommand(commands, buffer);
+    SCPI::ProcessingCommand(commands, buf);
 }
 
 
@@ -134,7 +134,7 @@ void SCPI::ProcessingCommand(const StructCommand *commands, uint8 *buffer)
     }
     for (int i = 0; i < sizeNameCommand; i++)
     {
-        buffer[i] = toupper(buffer[i]);
+        buffer[i] = (uint8)toupper((int8)buffer[i]);
     }
     int numCommand = -1;
     char *name = 0;

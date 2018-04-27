@@ -103,7 +103,7 @@ void EPROM::LoadSettings(void)
         
         if (addressPrev != 0)                   // Если по этому адресу что-то записано
         {
-            memcpy(&set, (const void *)addressPrev, READ_WORD(addressPrev));    // Счтываем сохранённые настройки
+            memcpy(&set, (const void *)addressPrev, (int)READ_WORD(addressPrev));    // Счтываем сохранённые настройки
         }
     }
     set.common.countEnables++;
@@ -393,13 +393,13 @@ void EPROM::SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1)
     
     if (ds->enableCh0 == 1)
     {
-        WriteBufferBytes(address, (uint8*)data0, ds->length1channel);       // Сохраняем первый канал
+        WriteBufferBytes(address, (uint8*)data0, (int)ds->length1channel);       // Сохраняем первый канал
         address += ds->length1channel;
     }
 
     if (ds->enableCh1 == 1)
     {
-        WriteBufferBytes(address, (uint8*)data1, ds->length1channel);       // Сохраняем второй канал
+        WriteBufferBytes(address, (uint8*)data1, (int)ds->length1channel);       // Сохраняем второй канал
         address += ds->length1channel;
     }
 

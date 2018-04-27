@@ -22,16 +22,13 @@ static struct netif gnetif;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void FuncConnect(void)
 {
-    volatile int i = 0;
-
-    //TCPSocket_Send("Test String", 5);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *GetStringFromBuffer(const char *buffer, uint length, char *string)
 {
-    memcpy(string, buffer, length);
+    memcpy(string, buffer, (int)length);
     string[length] = 'E';
     string[length + 1] = '\0';
     return string;
@@ -63,7 +60,7 @@ void LAN::Update(uint timeMS)
 
     do 
     {
-        CABLE_LAN_IS_CONNECTED = gTimerMS - gEthTimeLastEthifInput <= 1500;
+        CABLE_LAN_IS_CONNECTED = (gTimerMS - gEthTimeLastEthifInput <= 1500) ? 1U : 0U;
 
         ethernetif_input(&gnetif);
         sys_check_timeouts();

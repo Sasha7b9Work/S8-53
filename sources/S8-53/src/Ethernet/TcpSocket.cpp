@@ -89,6 +89,7 @@ void Send(struct tcp_pcb *_tpcb, struct State *_ss)
         {
             // other probler
             volatile err_t err_ = wr_err;
+            err_ = err_;
         }
     }
 }
@@ -126,9 +127,9 @@ void SendAnswer(void *_arg, struct tcp_pcb *_tpcb)
         "<allow-access-from domain=\"*\" to-ports=\"9999\" />"                                                 \
         "</cross-domain-policy>"                                                                            \
         "\0";
-    struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, strlen(policy), PBUF_POOL);
+    struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, (uint16)strlen(policy), PBUF_POOL);
     tcpBuffer->flags = 1;
-    pbuf_take(tcpBuffer, policy, strlen(policy));
+    pbuf_take(tcpBuffer, policy, (uint16)strlen(policy));
     struct State *s = (struct State *)_arg;
     s->p = tcpBuffer;
     Send(_tpcb, s);
@@ -403,9 +404,9 @@ bool TCPSocket_Send(const char *buffer, uint length)
 {
     if (pcbClient)
     {
-        struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, length, PBUF_POOL);
+        struct pbuf *tcpBuffer = pbuf_alloc(PBUF_RAW, (uint16)length, PBUF_POOL);
         tcpBuffer->flags = 1;
-        pbuf_take(tcpBuffer, buffer, length);
+        pbuf_take(tcpBuffer, buffer, (uint16)length);
         transmitBytes += length;
         struct State *ss = (struct State*)mem_malloc(sizeof(struct State));
         ss->p = tcpBuffer;
@@ -427,5 +428,5 @@ void TCPSocket_SendFormatString(char *format, ...)
     vsprintf(buffer, format, args);
     va_end(args);
     strcat(buffer, "\r\n");
-    TCPSocket_Send(buffer, strlen(buffer));
+    TCPSocket_Send(buffer, (uint)strlen(buffer));
 }

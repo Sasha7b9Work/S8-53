@@ -312,7 +312,7 @@ bool MenuIsShown()
 
 void ShowMenu(bool show)
 {
-    set.menu.isShown = show;
+    set.menu.isShown = show ? 1U : 0U;
     Menu::SetAutoHide(true);
 }
 

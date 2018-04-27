@@ -87,7 +87,7 @@ bool WelcomeScreen_Run()
 
     Painter::DrawRectangleC(0, 0, 319, 239, COLOR_FILL);
 
-    static float y = 0.0f;
+    static float y0 = 0.0f;
 
     if (isDown)
     {
@@ -100,21 +100,21 @@ bool WelcomeScreen_Run()
     {
         float g = 98.0f * 4.0f;
         float time0 = 0.0f;
-        float y0 = g * time0 * time0 / 2.0f;
+        y0 = g * time0 * time0 / 2.0f;
         float time = (gTimerMS - startTime) / 1000.0f + time0;
-        y = -y0 + g * time * time / 2.0f + 10.0f;
+        y0 = -y0 + g * time * time / 2.0f + 10.0f;
 
         static const float MAX_Y = 130.0f;
 
-        if (y > MAX_Y)
+        if (y0 > MAX_Y)
         {
-            y = MAX_Y;
+            y0 = MAX_Y;
             isDown = true;
             startTime = gTimerMS;
         }
     }
 
-    Painter::DrawBigText(45, y, 8, "МНИПИ");
+    Painter::DrawBigText(45, y0, 8, "МНИПИ");
 
     Painter::DrawStringInCenterRect(0, 190, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
     Painter::DrawStringInCenterRect(0, 205, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
@@ -125,8 +125,7 @@ bool WelcomeScreen_Run()
     return isRun;
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void WelcomeScreen_Update() {
     Painter::BeginScene(COLOR_WHITE);
     for(int num = 0; num < 12; num++) {

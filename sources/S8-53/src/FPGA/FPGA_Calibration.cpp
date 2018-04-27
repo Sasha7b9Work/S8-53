@@ -417,7 +417,7 @@ int16 CalculateAdditionRShift(Channel chan, Range range)
     int sum = 0;
     int numPoints = 0;
 
-    int time = gTimerMS;
+    uint time = gTimerMS;
 
     while(gTimerMS - time < 50) {};
 
@@ -448,7 +448,7 @@ int16 CalculateAdditionRShift(Channel chan, Range range)
         uint8 *addressRead1 = chan == A ? RD_ADC_A1 : RD_ADC_B1;
         uint8 *addressRead2 = chan == A ? RD_ADC_A2 : RD_ADC_B2;
 
-        for(int i = 0; i < FPGA_MAX_POINTS; i += 2)
+        for(int j = 0; j < FPGA_MAX_POINTS; j += 2)
         {
             sum += FSMC_Read(addressRead1);
             sum += FSMC_Read(addressRead2);
@@ -511,7 +511,7 @@ float CalculateKoeffCalibration(Channel chan)
         uint8 *addressRead1 = chan == A ? RD_ADC_A1 : RD_ADC_B1;
         uint8 *addressRead2 = chan == A ? RD_ADC_A2 : RD_ADC_B2;
 
-        for(int i = 0; i < FPGA_MAX_POINTS; i += 2)
+        for(int j = 0; j < FPGA_MAX_POINTS; j += 2)
         {
             uint8 val0 = FSMC_Read(addressRead1);
             if(val0 > AVE_VALUE + 60)

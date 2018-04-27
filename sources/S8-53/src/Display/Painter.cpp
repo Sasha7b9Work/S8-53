@@ -166,7 +166,7 @@ void Painter::SendToVCP(uint8 *pointer, int size)
     if(stateTransmit == StateTransmit_InProcess)
     {
         VCP::SendDataSynch(pointer, size);
-        TCPSocket_Send((const char *)pointer, size);
+        TCPSocket_Send((const char *)pointer, (uint)size);
     }
 }
 
@@ -234,7 +234,7 @@ void Painter::DrawHLine(int y, int x0, int x1)
     CalculateCurrentColor();
     uint8 command[8];
     command[0] = DRAW_HLINE;
-    *(command + 1) = (int8)y;
+    *(command + 1) = (uint8)y;
     *((int16*)(command + 2)) = (int16)x0;
     *((int16*)(command + 4)) = (int16)x1;
     SendToDisplay(command, 8);
@@ -255,8 +255,8 @@ void Painter::DrawVLine(int x, int y0, int y1)
     uint8 command[8];
     command[0] = DRAW_VLINE;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y0;
-    *(command + 4) = (int8)y1;
+    *(command + 3) = (uint8)y0;
+    *(command + 4) = (uint8)y1;
     SendToDisplay(command, 8);
     SendToVCP(command, 5);
 }
@@ -279,13 +279,13 @@ void Painter::DrawLineC(int x0, int y0, int x1, int y1, Color color)
 void Painter::DrawVPointLine(int x, int y0, int y1, float delta, Color color)
 {
     SetColor(color);
-    int8 numPoints = (y1 - y0) / delta;
+    uint8 numPoints = (y1 - y0) / delta;
     uint8 command[6];
     command[0] = DRAW_VPOINT_LINE;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = y0;
+    *(command + 3) = (uint8)y0;
     *(command + 4) = delta;
-    *(command + 5) = numPoints;
+    *(command + 5) = (uint8)numPoints;
     SendToDisplay(command, 6);
 }
 
@@ -304,7 +304,7 @@ void Painter::SetPoint(int x, int y)
     uint8 command[4];
     command[0] = SET_POINT;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
+    *(command + 3) = (uint8)y;
     SendToDisplay(command, 4);
     SendToVCP(command, 4);
 }
@@ -321,10 +321,10 @@ void Painter::DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, in
     SetColor(color);
     uint8 command[60];
     command[0] = DRAW_MULTI_VPOINT_LINES;
-    *(command + 1) = numLines;
-    *(command + 2) = y;
-    *(command + 3) = count;
-    *(command + 4) = delta;
+    *(command + 1) = (uint8)numLines;
+    *(command + 2) = (uint8)y;
+    *(command + 3) = (uint8)count;
+    *(command + 4) = (uint8)delta;
     *(command + 5) = 0;
     uint8 *pointer = command + 6;
     for(int i = 0; i < numLines; i++) 
@@ -352,10 +352,10 @@ void Painter::DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int
     SetColor(color);
     uint8 command[30];
     command[0] = DRAW_MULTI_HPOINT_LINES_2;
-    *(command + 1) = numLines;
-    *((uint16*)(command + 2)) = x;
-    *(command + 4) = count;
-    *(command + 5) = delta;
+    *(command + 1) = (uint8)numLines;
+    *((uint16*)(command + 2)) = (uint16)x;
+    *(command + 4) = (uint8)count;
+    *(command + 5) = (uint8)delta;
     uint8 *pointer = command + 6;
     for (int i = 0; i < numLines; i++)
     {
@@ -396,9 +396,9 @@ void Painter::FillRegion(int x, int y, int width, int height)
     uint8 command[8];
     command[0] = FILL_REGION;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
+    *(command + 3) = (uint8)y;
     *((int16*)(command + 4)) = (int16)width;
-    *(command + 6) = (int8)height;
+    *(command + 6) = (uint8)height;
     SendToDisplay(command, 8);
     SendToVCP(command, 7);
 }
@@ -471,7 +471,7 @@ void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
     {
         numLines = 255;
     }
-    *(command + 3) = numLines;
+    *(command + 3) = (uint8)numLines;
     for (int i = 0; i < numLines; i++)
     {
         *(command + 4 + i * 2) = *(y0y1 + i * 2);
@@ -543,11 +543,6 @@ void Painter::RunDisplay()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(bool endScene)
 {
-    if(transmitBytes)
-    {
-        volatile int temp = transmitBytes;
-    }
-
     if (FRAMES_ELAPSED != 1)
     {
         FRAMES_ELAPSED = 1;
@@ -576,7 +571,7 @@ Color Painter::GetColor(int x, int y)
     uint8 command[4];
     command[0] = GET_POINT;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
+    *(command + 3) = (uint8)y;
     SendToDisplay(command, 4);
 
     Get4Bytes(command);
@@ -590,7 +585,7 @@ void Painter::Get8Points(int x, int y, uint8 buffer[4])
     uint8 command[4];
     command[0] = GET_POINT;
     *((int16*)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
+    *(command + 3) = (uint8)y;
     SendToDisplay(command, 4);
     Get4Bytes(buffer);
 }
@@ -612,11 +607,11 @@ void Painter::DrawPicture(int x, int y, int width, int height, uint8 *address)
 {
     uint8 command[4];
     command[0] = DRAW_PICTURE;
-    *((uint16*)(command + 1)) = x;
-    *(command + 3) = y;
+    *((uint16*)(command + 1)) = (uint16)x;
+    *(command + 3) = (uint8)y;
     SendToDisplay(command, 4);
-    *((uint16*)(command)) = width;
-    *(command + 2) = height;
+    *((uint16*)(command)) = (uint16)width;
+    *(command + 2) = (uint8)height;
     *(command + 3) = 0;
     SendToDisplay(command, 4);
     for (int i = 0; i < width * height / 2 / 4; i++)
@@ -774,7 +769,7 @@ bool Painter::SaveScreenToFlashDrive(void) {
                 color = color;
             }
 
-            buffer[x / 2] = ((color & 0x0f) << 4) + (color >> 4);
+            buffer[x / 2] = (uint8)(((color & 0x0f) << 4) + (color >> 4));
         }
         FlashDrive::WriteToFile(buffer, 160, &structForWrite);
     }

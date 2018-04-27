@@ -81,7 +81,7 @@ ENumSignalsInSec Tables_NumSignalsInSecToENUM(int enumSignalsInSec)
     {
         return NumSignalsInSec_10;
     }
-    else if(NumSignalsInSec_25 == 25)
+    else if(enumSignalsInSec == 25)
     {
         return NumSignalsInSec_25;
     }
