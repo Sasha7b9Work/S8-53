@@ -56,7 +56,7 @@ void Menu::SetCurrentItem(const void *item, bool active)
         }
         else
         {
-            for(int i = 0; i < NumItemsInPage(page); i++)
+            for(int8 i = 0; i < NumItemsInPage(page); i++)
             {
                 if(Item(page, i) == item)
                 {

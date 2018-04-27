@@ -73,7 +73,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             {                                                       //
                 CLIENT_VCP_IS_CONNECTED = 0;                        //
             }                                                       //
-            CLIENT_VCP_IS_CONNECTED = (prevLength != 0) ? 1 : 0;    //
+            CLIENT_VCP_IS_CONNECTED = (prevLength != 0) ? 1U : 0U;  //
         }                                                           //
     }                                                               //
     prevLength = request.wLength;                                   //
