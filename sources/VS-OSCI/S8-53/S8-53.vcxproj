@@ -34,7 +34,7 @@
     <ClCompile Include="..\..\S8-53\src\Display\Painter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\PainterMem.c">
+    <ClCompile Include="..\..\S8-53\src\Display\PainterMem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\PainterText.c">

@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\S8-53\src\Display\Math3D.c">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\PainterMem.c">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\PainterText.c">
       <Filter>Display</Filter>
     </ClCompile>
@@ -332,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Tables.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Display\PainterMem.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

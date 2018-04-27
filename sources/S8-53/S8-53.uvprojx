@@ -1075,11 +1075,6 @@
               <FilePath>.\src\Display\PainterText.c</FilePath>
             </File>
             <File>
-              <FileName>PainterMem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\PainterMem.c</FilePath>
-            </File>
-            <File>
               <FileName>PainterMem.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\PainterMem.h</FilePath>
@@ -1088,6 +1083,11 @@
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
+            </File>
+            <File>
+              <FileName>PainterMem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterMem.cpp</FilePath>
             </File>
           </Files>
         </Group>
