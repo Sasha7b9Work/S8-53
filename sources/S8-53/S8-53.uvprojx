@@ -822,11 +822,6 @@
               <FilePath>.\src\libs\stm32f2xx_hal_msp.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_conf.c</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\usbh_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbh_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\usbh_conf.h</FilePath>
@@ -835,11 +830,6 @@
               <FileName>ffconf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\ffconf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\usbd_cdc_interface.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc_interface.h</FileName>
@@ -890,6 +880,16 @@
               <FileName>ethernetif.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\ethernetif.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbd_cdc_interface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_conf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\usbh_conf.cpp</FilePath>
             </File>
           </Files>
         </Group>

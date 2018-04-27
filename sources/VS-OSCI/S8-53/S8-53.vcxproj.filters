@@ -132,16 +132,10 @@
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\usbd_cdc_interface.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\usbd_conf.c">
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.c">
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Utils\Generator.c">
@@ -331,6 +325,12 @@
       <Filter>libs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\ethernetif.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_cdc_interface.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.cpp">
       <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
