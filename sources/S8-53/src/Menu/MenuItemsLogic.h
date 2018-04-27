@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include "defines.h"
 #include "MenuItems.h"
 

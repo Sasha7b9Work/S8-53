@@ -99,6 +99,32 @@ private:
     static void DrawConsole();
     /// Написать предупреждения.
     static void DrawWarnings();
+    
+    static int CalculateCountV();
+    
+    static int CalculateFreeSize();
+    
+    static bool ChannelNeedForDraw(const uint8 *data, Channel chan, const DataSettings *ds);
+    
+    static void DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int maxY);
+    
+    static void DrawBothChannels(uint8 *data0, uint8 *data1);
+    
+    static void DrawDataMemInt();
+    
+    static void DrawDataInModeWorkLatest();
+    
+    static void DrawDataInModePoint2Point();
+    
+    static bool DrawDataInModeNormal();
+    
+    static void DrawDataMinMax();
+    
+    static bool DrawDataNormal();
+    
+    static bool DrawData();
+    /// Нарисовать окно памяти
+    static void DrawMemoryWindow();
 
     static void DrawTimeForFrame(uint timeMS);
     /// Нарисовать горизонтальный курсор курсорных измерений.
@@ -114,5 +140,12 @@ private:
     /// Вывести значение уровня синхронизации. 
     static void WriteValueTrigLevel();
 
+    static void AddString(const char *string);
+                                
+    static int CalculateCountH();
+                                
+    static void DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY);
+
+    static void DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY);
 };
 

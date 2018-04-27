@@ -1355,11 +1355,6 @@
               <FilePath>.\src\Menu\MenuItemsLogic.h</FilePath>
             </File>
             <File>
-              <FileName>Menu_reference.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Menu_reference.txt</FilePath>
-            </File>
-            <File>
               <FileName>MenuFunctions.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuFunctions.cpp</FilePath>

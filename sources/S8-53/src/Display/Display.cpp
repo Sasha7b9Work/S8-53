@@ -154,7 +154,7 @@ void Display::Redraw(void)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ChannelNeedForDraw(const uint8 *data, Channel chan, const DataSettings *ds)
+bool Display::ChannelNeedForDraw(const uint8 *data, Channel chan, const DataSettings *ds)
 {
     if (!data)
     {
@@ -348,7 +348,7 @@ static void DrawSignalPointed(const uint8 *data, const DataSettings *ds, int sta
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // Если data == 0, то данные брать из Processing_GetData
-void DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int maxY)
+void Display::DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int maxY)
 {
     bool calculateFiltr = true;
     if (data == 0)
@@ -573,7 +573,7 @@ void Display::DrawSpectrum()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawBothChannels(uint8 *data0, uint8 *data1)
+void Display::DrawBothChannels(uint8 *data0, uint8 *data1)
 {
 	if (LAST_AFFECTED_CHANNEL_IS_B)
     {
@@ -589,7 +589,7 @@ void DrawBothChannels(uint8 *data0, uint8 *data1)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawDataMemInt()
+void Display::DrawDataMemInt()
 {
     if(gDSmemInt != 0)
      {
@@ -600,7 +600,7 @@ void DrawDataMemInt()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawDataInModeWorkLatest()
+void Display::DrawDataInModeWorkLatest()
 {
     if (gDSmemLast != 0)
     {
@@ -611,7 +611,7 @@ void DrawDataInModeWorkLatest()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDataInModePoint2Point()
+void Display::DrawDataInModePoint2Point()
 {
     uint8 *data0 = 0;
     uint8 *data1 = 0;
@@ -655,7 +655,7 @@ static void DrawDataInModeSelfRecorder()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-bool DrawDataInModeNormal()
+bool Display::DrawDataInModeNormal()
 {
     static void* prevAddr = 0;
     bool retValue = true;
@@ -689,7 +689,7 @@ bool DrawDataInModeNormal()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawDataMinMax()
+void Display::DrawDataMinMax()
 {
     ModeDrawSignal modeDrawSignalOld = MODE_DRAW_SIGNAL;
     MODE_DRAW_SIGNAL = ModeDrawSignal_Lines;
@@ -712,7 +712,7 @@ void DrawDataMinMax()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static bool DrawDataNormal()
+bool Display::DrawDataNormal()
 {
     bool retValue = true;
     if (!dataP2PIsEmpty)
@@ -729,7 +729,7 @@ static bool DrawDataNormal()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-bool DrawData()
+bool Display::DrawData()
 {
     bool retValue = true;
 
@@ -939,8 +939,7 @@ void DrawChannelInWindowMemory(int timeWindowRectWidth, int xVert0, int xVert1, 
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-// Нарисовать окно памяти
-void DrawMemoryWindow(void)
+void Display::DrawMemoryWindow()
 {
     uint8 *dat0 = gData0memInt;
     uint8 *dat1 = gData1memInt;
@@ -1406,7 +1405,7 @@ void Display::DrawFullGrid()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static int CalculateCountV(void)
+int Display::CalculateCountV()
 {
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -1429,7 +1428,7 @@ static int CalculateCountV(void)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static int CalculateCountH(void)
+int Display::CalculateCountH()
 {
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -1447,7 +1446,7 @@ static int CalculateCountH(void)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
+void Display::DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
 {
     uint16 masX[17];
     masX[0] = left + 1;
@@ -1488,7 +1487,7 @@ static void DrawGridType1(int left, int top, int right, int bottom, float center
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
+void Display::DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
 { 
     uint16 masX[15];
     masX[0] = left + 1;
@@ -2330,7 +2329,7 @@ int FirstEmptyString()
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-int CalculateFreeSize()
+int Display::CalculateFreeSize()
 {
     int firstEmptyString = FirstEmptyString();
     if(firstEmptyString == 0)
@@ -2365,7 +2364,7 @@ void DeleteFirstString()
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void AddString(const char *string)
+void Display::AddString(const char *string)
 {
     if(CONSOLE_IN_PAUSE)
     {
