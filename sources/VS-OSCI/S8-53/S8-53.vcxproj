@@ -91,7 +91,7 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.cpp" />
     <ClCompile Include="..\..\S8-53\src\libs\ethernetif.cpp" />
-    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_hal_msp.c" />
+    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_hal_msp.cpp" />
     <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_it.cpp" />
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

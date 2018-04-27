@@ -812,11 +812,6 @@
               <FilePath>.\src\libs\stm32f2xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f2xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f2xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>usbh_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\usbh_conf.h</FilePath>
@@ -890,6 +885,11 @@
               <FileName>usbd_conf.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\usbd_conf.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f2xx_hal_msp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\stm32f2xx_hal_msp.cpp</FilePath>
             </File>
           </Files>
         </Group>
