@@ -29,8 +29,12 @@
 
 #define MAX_NUM_SAVED_WAVES 23  ///< Пока ограничено количеством квадратиков, которые можно вывести в одну линию внизу сетки
 
+class RecordConfig;
+
 class EPROM
 {
+friend class OTP;
+    
 public:
     static void LoadSettings();
     static void SaveSettings(bool verifyLoaded = false);
@@ -42,6 +46,20 @@ public:
     static void DeleteData(int num);
     /// Стирает сектора с данными
     static void EraseData();
+
+private:
+    
+    static void EraseSector(uint startAddress);
+    static void PrepareSectorForData();
+    static void WriteWord(uint address, uint word);
+    static bool TheFirstInclusion();
+    static RecordConfig* RecordConfigForRead();
+    static void WriteAddressDataInRecord(RecordConfig *record);
+    static RecordConfig *FirstRecord();
+    static void WriteBufferBytes(uint address, uint8 *buffer, int size);
+    static RecordConfig *FirstEmptyRecord();
+    static uint CalculatFreeMemory();
+    static void CompactMemory();
 };
 
 class OTP
