@@ -112,7 +112,7 @@ static void RotateSB_MemLast(int angle)
 {
     if (dataStorage.AllDatas() > 1)
     {
-        sound.RegulatorSwitchRotate();
+        Sound::RegulatorSwitchRotate();
     }
     if (Math_Sign(angle) > 0)
     {
@@ -403,7 +403,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
         INDEX_SYMBOL = maxIndex - 1;
     }
     func[Math_Sign(angle) + 1](&INDEX_SYMBOL, 0, maxIndex - 1);
-    sound.RegulatorSwitchRotate();
+    Sound::RegulatorSwitchRotate();
 
 }
 
@@ -624,7 +624,7 @@ void PressSB_MemInt_SaveToFlashDrive()
 
 static void FuncOnRegSetMemInt(int delta)
 {
-    sound.RegulatorSwitchRotate();
+    Sound::RegulatorSwitchRotate();
     if (delta < 0)
     {
         CircleDecreaseInt8(&CURRENT_NUM_INT_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);

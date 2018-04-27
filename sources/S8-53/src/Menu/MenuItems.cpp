@@ -146,7 +146,7 @@ void Choice::StartChange(int delta)
     {
         return;
     }
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     if (SHOW_HELP_HINTS)
     {
         SetItemForHint(this);
@@ -241,6 +241,6 @@ void Choice::ChangeValue(int delta)
         *cell = value;
     }
     FuncOnChanged(Menu::ItemIsActive(this));
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     Display::Redraw();
 }

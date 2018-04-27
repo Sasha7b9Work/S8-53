@@ -987,7 +987,7 @@ static void OnRegSet_SerialNumber(int angle)
     {
         p(&s->year, 2014, 2050);
     }
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
 }
 
 // ОТЛАДКА - С/Н - Выход -----------------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "Settings/Settings.h"
 
@@ -19,22 +17,19 @@ class Sound
 {
 public:
 
-    void Init();
+    static void Init();
 
-    void ButtonPress();
+    static void ButtonPress();
     /// Функция вызовет звук отпускаемой кнопки только если перед этим проигрывался звук нажатия кнопки.
-    void ButtonRelease();
+    static void ButtonRelease();
 
-    void GovernorChangedValue();
+    static void GovernorChangedValue();
 
-    void RegulatorShiftRotate();
+    static void RegulatorShiftRotate();
 
-    void RegulatorSwitchRotate();
+    static void RegulatorSwitchRotate();
 
-    void WarnBeepBad();
+    static void WarnBeepBad();
 
-    void WarnBeepGood();
+    static void WarnBeepGood();
 };
-
-
-extern Sound sound;

@@ -220,7 +220,7 @@ void Menu::ProcessButtonForHint(PanelButton button)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::PressButton(PanelButton button)
 {
-    sound.ButtonPress();
+    Sound::ButtonPress();
     if (SHOW_HELP_HINTS)
     {
         ProcessButtonForHint(button);
@@ -251,7 +251,7 @@ void Menu::PressButton(PanelButton button)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ReleaseButton(PanelButton button)
 {
-    sound.ButtonRelease();
+    Sound::ButtonRelease();
     if (SHOW_HELP_HINTS == 0)
     {
         releaseButton = button;

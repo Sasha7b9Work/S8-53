@@ -334,7 +334,7 @@ void FM::DecCurrentFile(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FM::RotateRegSet(int angle)
 {
-    sound.RegulatorSwitchRotate();
+    Sound::RegulatorSwitchRotate();
     if (CURSORS_IN_DIRS)
     {
         angle > 0 ? DecCurrentDir() : IncCurrentDir();

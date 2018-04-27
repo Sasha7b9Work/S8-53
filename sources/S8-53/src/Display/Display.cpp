@@ -2554,7 +2554,7 @@ void Display::ShowWarningBad(Warning warning)
 {
     Painter::ResetFlash();
     ShowWarn(Tables_GetWarning(warning));
-    sound.WarnBeepBad();
+    Sound::WarnBeepBad();
 }
 
 
@@ -2563,7 +2563,7 @@ void Display::ShowWarningGood(Warning warning)
 {
     Painter::ResetFlash();
     ShowWarn(Tables_GetWarning(warning));
-    sound.WarnBeepGood();
+    Sound::WarnBeepGood();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------

@@ -321,7 +321,7 @@ static void OnRotate_RegSet_Set(int angle)
     {
         MoveCursTonPercentsOrPoints(angle);
     }
-    sound.RegulatorShiftRotate();
+    Sound::RegulatorShiftRotate();
 }
 
 static void MoveCursUonPercentsOrPoints(int delta)

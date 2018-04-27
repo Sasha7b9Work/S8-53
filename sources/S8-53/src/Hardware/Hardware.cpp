@@ -109,7 +109,7 @@ void Hardware::Init(void)
         HARDWARE_ERROR
     }
 
-    sound.Init();
+    Sound::Init();
     
     Panel::Init();
 

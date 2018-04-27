@@ -17,7 +17,7 @@ int8 gCurDigit = 0;
 
 void Governor_StartChange(Governor *governor, int delta)
 {
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     if (delta > 0 && ADDRESS_GOVERNOR == (uint)governor && IN_MOVE_INCREASE)
     {
         *governor->cell = Governor_NextValue(governor);
@@ -44,7 +44,7 @@ void Governor_ChangeValue(Governor *governor, int delta)
         {
             governor->funcOfChanged();
         }
-        sound.GovernorChangedValue();
+        Sound::GovernorChangedValue();
     }
 }
 
@@ -80,7 +80,7 @@ void IPaddress_ChangeValue(IPaddress *ip, int delta)
         {
             ip->ip0[numByte] = newValue;
         }
-        sound.GovernorChangedValue();
+        Sound::GovernorChangedValue();
         Display::ShowWarningGood(NeedRebootDevice2);
         Display::ShowWarningGood(NeedRebootDevice1);
     }
@@ -90,7 +90,7 @@ void MACaddress_ChangeValue(MACaddress *mac, int delta)
 {
     uint8 *value = mac->mac0 + gCurDigit;
     *value += delta > 0 ? 1 : -1;
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     Display::ShowWarningGood(NeedRebootDevice2);
     Display::ShowWarningGood(NeedRebootDevice1);
 }
@@ -214,7 +214,7 @@ void ItemTime_SelectNextPosition(Time *time)
 
 void ItemTime_IncCurrentPosition(Time *time)
 {
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     int8 *value[] = {0, time->day, time->month, time->year, time->hours, time->minutes, time->seconds};
     int8 position = *time->curField;
     if (position != iSET && position != iEXIT)
@@ -231,7 +231,7 @@ void ItemTime_IncCurrentPosition(Time *time)
 
 void ItemTime_DecCurrentPosition(Time *time)
 {
-    sound.GovernorChangedValue();
+    Sound::GovernorChangedValue();
     static const int8 max[] = {0, 31, 12, 99, 23, 59, 59};
     static const int8 min[] = {0, 1, 1, 15, 0, 0, 0};
     int8 *value[] = {0, time->day, time->month, time->year, time->hours, time->minutes, time->seconds};
