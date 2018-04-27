@@ -125,8 +125,59 @@ private:
     static bool DrawData();
     /// Нарисовать окно памяти
     static void DrawMemoryWindow();
+    
+    static void DRAW_SPECTRUM(const uint8 *data, int numPoints, Channel channel);
+    
+    static void DrawGridSpectrum();
+    
+    static void DrawMarkersForMeasure(float scale, Channel chan);
+    
+    static void DrawScaleLine(int x, bool forTrigLev);
+    
+    static void WriteParametersFFT(Channel chan, float freq0, float density0, float freq1, float density1);
+    
+    static void WriteTextVoltage(Channel chan, int x, int y);
+    
+    static void FuncOnTimerDisableShowLevelRShiftA();
+    
+    static void FuncOnTimerDisableShowLevelRShiftB();
+    
+    static void FuncOnTimerDisableShowLevelTrigLev();
+    
+    static void FuncOnTimerRShiftMarkersAutoHide();
+    
+    static void OnTimerShowWarning();
+    
+    static void DrawSignalLined(const uint8 *data, const DataSettings *ds, int startPoint, int endPoint, int minY, int maxY, float scaleY, 
+        float scaleX, bool calculateFiltr);
+    
+    static void DrawSignalPointed(const uint8 *data, const DataSettings *ds, int startPoint, int endPoint, int minY, int maxY, float scaleY, 
+        float scaleX);
+    
+    static void DrawSpectrumChannel(const float *spectrum, Color color);
+    
+    static void DrawStringInRectangle(int x, int y, char const *text);
+    
+    static void DrawStringNavigation();
+    
+    static int FirstEmptyString();
+    
+    static bool NeedForClearScreen();
+    
+    static void WriteStringAndNumber(char *text, int16 x, int16 y, int number);
+    
+    static void DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX, int stepY);
+    
+    static void DrawChannelInWindowMemory(int timeWindowRectWidth, int xVert0, int xVert1, int startI, int endI, const uint8 *data, int rightX, 
+        Channel chan, int shiftForPeakDet);
+    
+    static void DrawDataInModeSelfRecorder();
+    
+    static void DrawDataInRect(int x, int width, const uint8 *data, int numElems, Channel chan, int shiftForPeakDet);
 
     static void DrawTimeForFrame(uint timeMS);
+    
+    static void DeleteFirstString();
     /// Нарисовать горизонтальный курсор курсорных измерений.
     static void DrawHorizontalCursor
                                 (int y,             ///< числовое значение курсора.
