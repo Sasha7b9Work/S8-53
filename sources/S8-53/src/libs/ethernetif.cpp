@@ -506,6 +506,8 @@ void ethernetif_update_config(struct netif *netif)
   ethernetif_notify_conn_changed(netif);
 }
 
+#ifndef WIN32
+
 /**
   * @brief  This function notify user about link status changement.
   * @param  netif: the network interface
@@ -518,3 +520,5 @@ __weak void ethernetif_notify_conn_changed(struct netif *netif)
   */  
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+#endif

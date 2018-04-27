@@ -127,7 +127,9 @@
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.cpp" />
     <ClCompile Include="..\..\S8-53\src\Panel\Controls.cpp" />
     <ClCompile Include="..\..\S8-53\src\Panel\Panel.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -406,7 +408,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -441,12 +443,12 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
-      <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4099;4996;4838</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4005;4018;4024;4028;4047;4068;4099;4113;4133;4244;4623;4820;4838;4996</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>

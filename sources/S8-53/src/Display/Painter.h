@@ -2,6 +2,7 @@
 #include "Colors.h"
 #include "DisplayTypes.h"
 #include "PainterC.h"
+//#include <ff.h>
 
 
 class Painter 
@@ -74,11 +75,8 @@ public:
 
     static void DrawPicture(int x, int y, int width, int height, uint8 *address);
 
-#if _USE_LFN > 0
-    static void SaveScreenToFlashDrive(TCHAR *fileName);
-#else
     static bool SaveScreenToFlashDrive();
-#endif
+
     static void SetFont(TypeFont typeFont);
     /// Загрузить шрифта в дисплей.
     static void LoadFont(TypeFont typeFont);
