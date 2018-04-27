@@ -191,7 +191,7 @@ void Math_PointsVoltageToRel(const float *voltage, int numPoints, Range range, i
             points[i] = 255;
             continue;
         }
-        points[i] = value;
+        points[i] = (uint8)value;
     }
 }
 
@@ -199,7 +199,7 @@ uint8 Math_VoltageToPoint(float voltage, Range range, int16 rShift)
 {
     int relValue = (voltage + MAX_VOLTAGE_ON_SCREEN(range) + RSHIFT_2_ABS(rShift, range)) / voltsInPixel[range] + MIN_VALUE;
     LIMITATION(relValue, relValue, 0, 255);
-    return relValue;
+    return (uint8)relValue;
 }
 
 float Math_GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
@@ -335,10 +335,10 @@ void Math_CalculateFFT(float *dataR, int numPoints, float *result, float *freq0,
 {
     float scale = 1.0 / absStepTShift[SET_TBASE] / 1024.0;
 
-    float k = 1024.0 / numPoints;
+    float K = 1024.0 / numPoints;
 
-    *freq0 = scale * FFT_POS_CURSOR_0 * k;
-    *freq1 = scale * FFT_POS_CURSOR_1 * k;
+    *freq0 = scale * FFT_POS_CURSOR_0 * K;
+    *freq1 = scale * FFT_POS_CURSOR_1 * K;
     if (PEAKDET)
     {
         *freq0 *= 2;
@@ -687,7 +687,7 @@ uint8 Math_CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmooth
         }
     }
 
-    return sum / count;
+    return (uint8)(sum / count);
 }
 
 void Math_CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing)
@@ -727,7 +727,7 @@ void Math_CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints
                 }
             }
 
-            dataOut[i] = sum / count;
+            dataOut[i] = (uint8)(sum / count);
         }
     }
 }

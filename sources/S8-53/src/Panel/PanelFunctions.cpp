@@ -102,7 +102,7 @@ int CalculateCount(int *prevTime)
 {
     uint time = gTimerMS;
     uint delta = time - *prevTime;
-    *prevTime = time;
+    *prevTime = (int)time;
 
     if (delta > 75)
     {
@@ -172,10 +172,10 @@ void ChangeRShift(int *prevTime, void(*f)(Channel, int16), Channel chan, int16 r
     {
         rShift = RShiftZero;
     }
-    if (CanChangeRShiftOrTrigLev((TrigSource)chan, rShift))
+    if (CanChangeRShiftOrTrigLev((TrigSource)chan, (int16)rShift))
     {
         Sound::RegulatorShiftRotate();
-        f(chan, rShift);
+        f(chan, (int16)rShift);
     }
 }
 
@@ -188,10 +188,10 @@ void ChangeTrigLev(int *prevTime, void(*f)(TrigSource, int16), TrigSource trigSo
     {
         trigLev = TrigLevZero;
     }
-    if (CanChangeRShiftOrTrigLev(trigSource, trigLev))
+    if (CanChangeRShiftOrTrigLev(trigSource, (int16)trigLev))
     {
         Sound::RegulatorShiftRotate();
-        f(trigSource, trigLev);
+        f(trigSource, (int16)trigLev);
     }
 }
 
@@ -313,7 +313,7 @@ void XShift(int delta)
     }
     else
     {
-        ChangeTShift(&prevTime, SetTShift, delta);
+        ChangeTShift(&prevTime, SetTShift, (int16)delta);
     }
 }
 

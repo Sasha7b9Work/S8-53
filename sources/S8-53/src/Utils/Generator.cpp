@@ -54,14 +54,14 @@ uint8 GetSampleWave(Channel channel)
     return (type[channel] == Wave_Sinus) ? GetSampleSinusWave(channel, (numSample[channel])++) : GetSampleMeanderWave(channel, (numSample[channel])++);
 }
 
-uint8 GetSampleSinusWave(Channel channel, int numSample)
+uint8 GetSampleSinusWave(Channel channel, int numSample_)
 {
-    float dT = numSample * TSHIFT_2_ABS(1, SET_TBASE);
+    float dT = numSample_ * TSHIFT_2_ABS(1, SET_TBASE);
     float voltage = ampl[channel] * sin(2 * M_PI * freq[channel] * dT + angle[channel]) + NewNoiseValue(channel);
     return Math_VoltageToPoint(voltage, SET_RANGE(channel), SET_RSHIFT(channel));
 }
 
-uint8 GetSampleMeanderWave(Channel channel, int numSample)
+uint8 GetSampleMeanderWave(Channel channel, int numSample_)
 {
     return 0;
 }

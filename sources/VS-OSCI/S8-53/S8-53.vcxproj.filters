@@ -66,9 +66,6 @@
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Utils\Stack2500uint16.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -332,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Utils\Strings.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.cpp">
+      <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

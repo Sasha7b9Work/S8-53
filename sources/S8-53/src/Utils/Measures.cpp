@@ -162,14 +162,14 @@ void Measure_RotateRegSet(int angle)
 {
     static const int8 step = 3;
     static int8 currentAngle = 0;
-    currentAngle += angle;
+    currentAngle += (int8)angle;
     if (currentAngle < step && currentAngle > -step)
     {
         return;
     }
     if (PageMeasures::choiceMeasuresIsActive)
     {
-        posOnPageChoice += Math_Sign(currentAngle);
+        posOnPageChoice += (int8)Math_Sign(currentAngle);
         Sound::RegulatorSwitchRotate();
         if (posOnPageChoice < 0)
         {

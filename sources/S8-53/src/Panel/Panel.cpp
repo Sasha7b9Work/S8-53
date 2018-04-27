@@ -19,10 +19,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MAX_DATA            20
 
-#define LED_CHAN0_ENABLE    129
-#define LED_CHAN0_DISABLE   1
-#define LED_CHAN1_ENABLE    130
-#define LED_CHAN1_DISABLE   2
+#define LED_CHAN0_ENABLE    129U
+#define LED_CHAN0_DISABLE   1U
+#define LED_CHAN1_ENABLE    130U
+#define LED_CHAN1_DISABLE   2U
 #define LED_TRIG_ENABLE     131
 #define LED_TRIG_DISABLE    3
 #define POWER_OFF           4
@@ -434,12 +434,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t pin)
 }
 
 
-void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef* handleSPI)
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef* handle)
 {
     if (!Panel::ProcessingCommandFromPIC(dataSPIfromPanel))
     {
-        HAL_SPI_DeInit(handleSPI);
-        HAL_SPI_Init(handleSPI);
+        HAL_SPI_DeInit(handle);
+        HAL_SPI_Init(handle);
     }
     uint16 data = Panel::NextData();
     SPI1->DR = data;

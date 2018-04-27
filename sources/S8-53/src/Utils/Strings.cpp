@@ -1,9 +1,5 @@
-#include "../defines.h"
-
-
+#include "defines.h"
 #include "Strings.h"
-
-
 #include <ctype.h>
 
 
@@ -50,7 +46,7 @@ bool GetWord(const uint8 *string, Word *word, const int numWord)
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = toupper(*pointer);
+                *pointer = (uint8)toupper((int8)*pointer);
                 pointer++;
             }
             return true;

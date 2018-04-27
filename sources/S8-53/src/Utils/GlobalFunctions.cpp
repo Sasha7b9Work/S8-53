@@ -163,7 +163,7 @@ char*    Bin2String(uint8 value, char buffer[9])
 char*   Bin2String16(uint16 value, char valBuffer[19])
 {
     char buffer[9];
-    strcpy(valBuffer, Bin2String(value >> 8, buffer));
+    strcpy(valBuffer, Bin2String((uint8)(value >> 8), buffer));
     strcpy((valBuffer[8] = ' ', valBuffer + 9), Bin2String((uint8)value, buffer));
     return valBuffer;
 }
@@ -467,7 +467,7 @@ void IntToStrCat(char *_buffer, int _value)
 
     while(_value > 0)
     {
-        buffer[pointer] = (unsigned char)(_value % 10);
+        buffer[pointer] = (int8)(_value % 10);
         _value /= 10;
         pointer--;
     }
