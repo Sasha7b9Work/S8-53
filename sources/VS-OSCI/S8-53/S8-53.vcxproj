@@ -100,7 +100,7 @@
     <ClCompile Include="..\..\S8-53\src\libs\usbd_conf.cpp" />
     <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.c" />
     <ClCompile Include="..\..\S8-53\src\libs\usbh_conf.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Log.c" />
+    <ClCompile Include="..\..\S8-53\src\Log.cpp" />
     <ClCompile Include="..\..\S8-53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -112,17 +112,17 @@
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.cpp" />
     <ClCompile Include="..\..\S8-53\src\Panel\Controls.c" />
     <ClCompile Include="..\..\S8-53\src\Panel\Panel.cpp" />
     <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.c" />

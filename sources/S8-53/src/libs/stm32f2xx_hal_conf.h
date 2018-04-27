@@ -41,6 +41,10 @@
 #ifndef __STM32F2xx_HAL_CONF_H
 #define __STM32F2xx_HAL_CONF_H
 
+#ifdef WIN32
+#define __attribute__(x)
+#endif
+
 #ifdef __cplusplus
  extern "C" {
 #endif

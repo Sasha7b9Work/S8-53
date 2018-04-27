@@ -960,11 +960,6 @@
               </FileOption>
             </File>
             <File>
-              <FileName>Log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Log.c</FilePath>
-            </File>
-            <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
@@ -988,6 +983,11 @@
               <FileName>Globals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Globals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Log.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1385,74 +1385,9 @@
               <FilePath>.\src\Menu\Pages\Definition.h</FilePath>
             </File>
             <File>
-              <FileName>PageChannels.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageChannels.c</FilePath>
-            </File>
-            <File>
               <FileName>PageCursors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageCursors.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageDisplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay.c</FilePath>
-            </File>
-            <File>
-              <FileName>PageHelp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageHelp.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>2</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>0</vShortEn>
-                    <vShortWch>0</vShortWch>
-                    <v6Lto>0</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
             </File>
             <File>
               <FileName>PageHelp.h</FileName>
@@ -1460,34 +1395,14 @@
               <FilePath>.\src\Menu\Pages\PageHelp.h</FilePath>
             </File>
             <File>
-              <FileName>PageMeasures.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageMeasures.c</FilePath>
-            </File>
-            <File>
               <FileName>PageMemory.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory.h</FilePath>
             </File>
             <File>
-              <FileName>PageTime.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageTime.c</FilePath>
-            </File>
-            <File>
-              <FileName>PageTrig.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\PageTrig.c</FilePath>
-            </File>
-            <File>
               <FileName>HelpContent.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\HelpContent.h</FilePath>
-            </File>
-            <File>
-              <FileName>HelpContent.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Pages\HelpContent.c</FilePath>
             </File>
             <File>
               <FileName>HelpContentPages.h</FileName>
@@ -1523,6 +1438,101 @@
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HelpContent.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\HelpContent.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageChannels.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageChannels.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDebug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageDisplay.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageHelp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageHelp.cpp</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>0</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>PageMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageService.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageTime.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTime.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageTrig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTrig.cpp</FilePath>
             </File>
           </Files>
         </Group>
