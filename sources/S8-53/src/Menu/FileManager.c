@@ -174,17 +174,16 @@ void FM_Draw(void)
     {
         Painter::BeginScene(COLOR_BACK);
         Menu::Draw();
-        Painter::DrawRectangleC(0, 0, width, 239, COLOR_FILL);
-        Painter::FillRegionC(left, top, Grid::Width() - 2, Grid::FullHeight() - 2, COLOR_BACK);
+        Painter::DrawRectangleC(1, 0, width, 239, COLOR_FILL);
         FlashDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
-        DrawNameCurrentDir(left, top + 2);
+        DrawNameCurrentDir(left + 1, top + 2);
         Painter::DrawVLineC(left2col, top + 16, 239, COLOR_FILL);
         Painter::DrawHLine(top + 15, 0, width);
     }
 
     if (NEED_REDRAW_FILEMANAGER != 3)
     {
-        DrawDirs(left + 2, top + 18);
+        DrawDirs(left + 3, top + 18);
     }
 
     if (NEED_REDRAW_FILEMANAGER != 2)
