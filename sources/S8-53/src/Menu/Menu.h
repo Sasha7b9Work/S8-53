@@ -167,6 +167,10 @@ private:
     static void *RetLastOpened(Page *_page, TypeItem *_type);
     
     static void OpenFileManager();
+    /// Обработка события таймера автоматического сокрытия меню.
+    static void OnTimerAutoHide();
+    
+    static void ProcessButtonForHint(PanelButton button);
 };
 
 /** @}

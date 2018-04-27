@@ -46,9 +46,6 @@ static const int stepAngleRegSet = 2;
 /// кнопка не нажата.
 static void* itemUnderKey = 0;
 
-/// Обработка события таймера автоматического сокрытия меню.
-static void OnTimerAutoHide();
-
 #define SIZE_BUFFER_FOR_BUTTONS 5
 static PanelButton bufferForButtons[SIZE_BUFFER_FOR_BUTTONS] = {B_Empty, B_Empty, B_Empty, B_Empty, B_Empty};
 static const PanelButton sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS] = {B_F5, B_F4, B_F3, B_F2, B_F1};
@@ -98,7 +95,7 @@ void Menu::LongPressureButton(PanelButton button)
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ProcessButtonForHint(PanelButton button)
+void Menu::ProcessButtonForHint(PanelButton button)
 {
     if (button == B_Menu)
     {
@@ -339,7 +336,7 @@ char* Menu::StringNavigation(char buffer[100])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void OnTimerAutoHide(void)
+void Menu::OnTimerAutoHide()
 {
     ShowMenu(false);
     Timer::Disable(kMenuAutoHide);
