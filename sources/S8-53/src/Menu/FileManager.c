@@ -34,14 +34,14 @@ static int numFiles = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FM_Init(void)
+void FM::Init(void)
 {
     strcpy(currentDir, "\\");
     numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawLongString(int x, int y, char *string, bool hightlight)
+void FM::DrawLongString(int x, int y, char *string, bool hightlight)
 {
     int length = Font_GetLengthText(string);
 
@@ -64,7 +64,7 @@ static void DrawLongString(int x, int y, char *string, bool hightlight)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawHat(int x, int y, char *string, int num1, int num2)
+void FM::DrawHat(int x, int y, char *string, int num1, int num2)
 {
     Painter::FillRegionC(x - 1, y, WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11, COLOR_BACK);
     Painter::DrawFormatText(x + 60, y, COLOR_FILL, string, num1, num2);
@@ -72,7 +72,7 @@ static void DrawHat(int x, int y, char *string, int num1, int num2)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDirs(int x, int y)
+void FM::DrawDirs(int x, int y)
 {
     FlashDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
     DrawHat(x, y, "Каталог : %d/%d", numCurDir + ((numDirs == 0) ? 0 : 1), numDirs);
@@ -92,7 +92,7 @@ static void DrawDirs(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawFiles(int x, int y)
+void FM::DrawFiles(int x, int y)
 {
     DrawHat(x, y, "Файл : %d/%d", numCurFile + ((numFiles == 0) ? 0 : 1), numFiles);
     char nameFile[255];
@@ -111,7 +111,7 @@ static void DrawFiles(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FM_FileIsExist(char name[255])
+bool FM::FileIsExist(char name[255])
 {
     char nameFile[255];
     FlashDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
@@ -130,7 +130,7 @@ bool FM_FileIsExist(char name[255])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawNameCurrentDir(int left, int top)
+void FM::DrawNameCurrentDir(int left, int top)
 {
     Painter::SetColor(COLOR_FILL);
     int length = Font_GetLengthText(currentDir);
@@ -158,7 +158,7 @@ static void DrawNameCurrentDir(int left, int top)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FM_Draw(void)
+void FM::Draw(void)
 {
     if (NEED_REDRAW_FILEMANAGER == 0)
     {
@@ -197,7 +197,7 @@ void FM_Draw(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void PressSB_FM_Tab(void)
+void FM::PressTab(void)
 {
     NEED_REDRAW_FILEMANAGER = 1;
 
@@ -218,7 +218,7 @@ void PressSB_FM_Tab(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void PressSB_FM_LevelDown(void)
+void FM::PressLevelDown(void)
 {
     NEED_REDRAW_FILEMANAGER = 1;
     if (CURSORS_IN_DIRS == 0)
@@ -242,7 +242,7 @@ void PressSB_FM_LevelDown(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void PressSB_FM_LevelUp(void)
+void FM::PressLevelUp(void)
 {
     NEED_REDRAW_FILEMANAGER = 1;
     if (strlen(currentDir) == 1)
@@ -260,7 +260,7 @@ void PressSB_FM_LevelUp(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void IncCurrentDir(void)
+void FM::IncCurrentDir(void)
 {
     if (numDirs > 1)
     {
@@ -278,7 +278,7 @@ static void IncCurrentDir(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DecCurrentDir(void)
+void FM::DecCurrentDir(void)
 {
     if (numDirs > 1)
     {
@@ -296,7 +296,7 @@ static void DecCurrentDir(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void IncCurrentFile(void)
+void FM::IncCurrentFile(void)
 {
     if (numFiles > 1)
     {
@@ -314,7 +314,7 @@ static void IncCurrentFile(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DecCurrentFile(void)
+void FM::DecCurrentFile(void)
 {
     if (numFiles > 1)
     {
@@ -332,7 +332,7 @@ static void DecCurrentFile(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FM_RotateRegSet(int angle)
+void FM::RotateRegSet(int angle)
 {
     sound.RegulatorSwitchRotate();
     if (CURSORS_IN_DIRS)
@@ -348,7 +348,7 @@ void FM_RotateRegSet(int angle)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool FM_GetNameForNewFile(char name[255])
+bool FM::GetNameForNewFile(char name[255])
 {
     char buffer[20];
     int number = 1;
@@ -418,7 +418,7 @@ LabelNextNumber:
 
         strcat(name, MODE_SAVE_SIGNAL_IS_BMP ? "bmp" : "txt");
 
-        if(FM_FileIsExist(name))
+        if(FileIsExist(name))
         {
             number++;
             goto LabelNextNumber;

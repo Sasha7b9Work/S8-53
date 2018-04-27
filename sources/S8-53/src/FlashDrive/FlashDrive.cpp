@@ -51,7 +51,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id)
             break;
         case HOST_USER_CLASS_ACTIVE:
             FLASH_DRIVE_IS_CONNECTED = 1;
-            FM_Init();
+            FM::Init();
             Menu::ChangeStateFlashDrive();
             if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0) != FR_OK)
             {

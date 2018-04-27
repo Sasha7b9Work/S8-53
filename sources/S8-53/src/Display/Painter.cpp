@@ -703,7 +703,7 @@ bool Painter::SaveScreenToFlashDrive(void) {
     StructForWrite structForWrite;
     char fileName[255];
     
-    if(!FM_GetNameForNewFile(fileName))
+    if(!FM::GetNameForNewFile(fileName))
     {
         return false;
     }

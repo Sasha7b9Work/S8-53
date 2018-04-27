@@ -504,8 +504,6 @@ static void DrawSB_FM_Tab(int x, int y)
     Painter::SetFont(TypeFont_8);
 }
 
-extern void PressSB_FM_Tab();
-
 extern const Page mspFileManager;
 
 const SmallButton sbFileManagerTab
@@ -514,7 +512,7 @@ const SmallButton sbFileManagerTab
     "Tab", "Tab",
     "Переход между каталогами и файлами",
     "The transition between the directories and files",
-    PressSB_FM_Tab,
+    FM::PressTab,
     DrawSB_FM_Tab
 );
 
@@ -524,7 +522,7 @@ const SmallButton sbFileManagerLevelDown
     "Войти", "Enter",
     "Переход в выбранный каталог",
     "Transition to the chosen catalog",
-    PressSB_FM_LevelDown,
+    FM::PressLevelDown,
     DrawSB_FM_LevelDown
 );
 
@@ -534,7 +532,7 @@ const SmallButton sbFileManagerLevelUp
     "Выйти", "Leave",
     "Переход в родительский каталог",
     "Transition to the parental catalog",
-    PressSB_FM_LevelUp,
+    FM::PressLevelUp,
     DrawSB_FM_LevelUp
 );
 
@@ -1212,7 +1210,7 @@ void OnPressMemoryExtFileManager()
     if(FLASH_DRIVE_IS_CONNECTED)
     {
         Menu::OpenPageAndSetItCurrent(PageMemory::FileManager::GetPointer());
-        Display::SetDrawMode(DrawMode_Hand, FM_Draw);
+        Display::SetDrawMode(DrawMode_Hand, FM::Draw);
         NEED_REDRAW_FILEMANAGER = 1;
     }
 }
@@ -1256,7 +1254,7 @@ static const Page mspFileManager
     "КАТАЛОГ", "DIRECTORY",
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
-    Page_SB_FileManager, &itemsFileManager, OnPressMemoryExtFileManager, EmptyFuncVV, FM_RotateRegSet
+    Page_SB_FileManager, &itemsFileManager, OnPressMemoryExtFileManager, EmptyFuncVV, FM::RotateRegSet
 );
 
 // ПАМЯТЬ - ВНЕШН ЗУ /////////////////////////////////////////////////////////////////
