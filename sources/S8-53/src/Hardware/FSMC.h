@@ -1,7 +1,5 @@
 #pragma once
-
-
-#include "../defines.h"
+#include "defines.h"
 
 
 #define ADDR_BANK           0x60000000

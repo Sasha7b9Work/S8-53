@@ -180,8 +180,8 @@ void FPGA::ProcedureCalibration(void)
 
     SET_BALANCE_ADC_A = shiftADC0;
     SET_BALANCE_ADC_B = shiftADC1;
-    FSMC_Write(WR_ADD_RSHIFT_DAC1, SET_BALANCE_ADC_A);
-    FSMC_Write(WR_ADD_RSHIFT_DAC2, SET_BALANCE_ADC_B);
+    FSMC_Write(WR_ADD_RSHIFT_DAC1, (uint8)SET_BALANCE_ADC_A);
+    FSMC_Write(WR_ADD_RSHIFT_DAC2, (uint8)SET_BALANCE_ADC_B);
 
     FPGA::SetRShift(A, SET_RSHIFT_A);
     FPGA::SetRShift(B, SET_RSHIFT_B);
@@ -397,8 +397,8 @@ void AlignmentADC(void)
     SET_BALANCE_ADC_A = shiftADC0;
     shiftADC1 = (deltaADCold[1] > 0) ? (deltaADCold[1] + 0.5) : (deltaADCold[1] - 0.5);
     SET_BALANCE_ADC_B = shiftADC1;
-    FSMC_Write(WR_ADD_RSHIFT_DAC1, SET_BALANCE_ADC_A);
-    FSMC_Write(WR_ADD_RSHIFT_DAC2, SET_BALANCE_ADC_B);
+    FSMC_Write(WR_ADD_RSHIFT_DAC1, (uint8)SET_BALANCE_ADC_A);
+    FSMC_Write(WR_ADD_RSHIFT_DAC2, (uint8)SET_BALANCE_ADC_B);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

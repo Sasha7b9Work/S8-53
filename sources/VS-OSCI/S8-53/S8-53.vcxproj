@@ -448,7 +448,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
-      <DisableSpecificWarnings>4005;4018;4024;4028;4047;4068;4099;4113;4133;4244;4623;4820;4838;4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4005;4018;4024;4028;4047;4068;4099;4100;4113;4133;4244;4514;4623;4626;4820;4838;4996;5027</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>

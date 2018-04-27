@@ -58,7 +58,7 @@ void Color_ComponentChange(ColorType *colorType, int delta);
 
 const char* NameColorFromValue(uint16 colorValue);
 const char* NameColor(Color color);
-#define MAKE_COLOR(r, g, b) (((b) & 0x1f) + (((g) & 0x3f) << 5) + (((r) & 0x1f) << 11))
+#define MAKE_COLOR(r, g, b) ((uint16)(((b) & 0x1f) + (((g) & 0x3f) << 5) + (((r) & 0x1f) << 11)))
 #define R_FROM_COLOR(color) (((uint16)(color) >> 11) & (uint16)0x1f)
 #define G_FROM_COLOR(color) (((uint16)(color) >> 5) & (uint16)0x3f)
 #define B_FROM_COLOR(color) ((uint16)(color) & 0x1f)
