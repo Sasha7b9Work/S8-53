@@ -275,9 +275,13 @@ void FLASH_EraseData()
     FLASH_EraseInitTypeDef flashITD;
     flashITD.TypeErase = TYPEERASE_SECTORS;
     flashITD.Sector = FLASH_SECTOR_8;
+    flashITD.NbSectors = 2;
     flashITD.VoltageRange = VOLTAGE_RANGE_3;
 
     uint error = 0;
+
+    while(SOUND_IS_BEEP) {};
+
     HAL_FLASHEx_Erase(&flashITD, &error);
 
     HAL_FLASH_Lock();
