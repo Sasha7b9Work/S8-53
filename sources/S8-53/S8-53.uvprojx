@@ -1025,11 +1025,6 @@
               <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
-              <FileName>Colors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Colors.c</FilePath>
-            </File>
-            <File>
               <FileName>DisplayPrimitives.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Display\DisplayPrimitives.c</FilePath>
@@ -1088,6 +1083,11 @@
               <FileName>PainterMem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\PainterMem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
           </Files>
         </Group>
