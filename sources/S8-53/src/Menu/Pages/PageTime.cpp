@@ -116,8 +116,8 @@ void OnChanged_PeakDet(bool active)
                 {0, SET_BALANCE_ADC_B, BALANCE_ADC_B}
             };
 
-            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, shift[0][BALANCE_ADC_TYPE], false);
-            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, shift[1][BALANCE_ADC_TYPE], false);
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC1, (uint8)shift[0][BALANCE_ADC_TYPE], false);
+            FPGA::WriteToHardware(WR_ADD_RSHIFT_DAC2, (uint8)shift[1][BALANCE_ADC_TYPE], false);
         }
         else
         {

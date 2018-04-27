@@ -70,9 +70,9 @@ static uint8 dataOut1[FPGA_MAX_POINTS];
 static DataSettings *dataSet = 0;
 static uint8 dataIn[2][FPGA_MAX_POINTS];
 
-static int firstPoint = 0;
-static int lastPoint = 0;
-static int numPoints = 0;
+static int firstP = 0;
+static int lastP = 0;
+static int numP = 0;
 
 static const MeasureCalculate measures[Measure_NumMeasures] =
 {
@@ -247,7 +247,7 @@ float CalculateVoltageVybrosPlus(Channel chan)
         markerHor[chan][1] = maxSteady;
     }
 
-    int16 rShift = chan == A ? dataSet->rShiftCh0 : dataSet->rShiftCh1;
+    int16 rShift = chan == A ? (int16)dataSet->rShiftCh0 : (int16)dataSet->rShiftCh1;
     return fabsf(POINT_2_VOLTAGE(maxSteady, dataSet->range[chan], rShift) - POINT_2_VOLTAGE(max, dataSet->range[chan], rShift)) * VALUE_MULTIPLIER(chan);
 }
 
@@ -263,7 +263,7 @@ float CalculateVoltageVybrosMinus(Channel chan)
         markerHor[chan][1] = minSteady;
     }
 
-    int16 rShift = chan == A ? dataSet->rShiftCh0 : dataSet->rShiftCh1;
+    int16 rShift = chan == A ? (int16)dataSet->rShiftCh0 : (int16)dataSet->rShiftCh1;
     return fabsf(POINT_2_VOLTAGE(minSteady, dataSet->range[chan], rShift) - POINT_2_VOLTAGE(min, dataSet->range[chan], rShift)) * VALUE_MULTIPLIER(chan);
 }
 
@@ -289,7 +289,7 @@ float CalculateVoltageAverage(Channel chan)
     EXIT_IF_ERROR_INT(period);
 
     int sum = 0;
-    uint8 *data = &dataIn[chan][firstPoint];
+    uint8 *data = &dataIn[chan][firstP];
     for(int i = 0; i < period; i++)
     {
         sum += *data++;
@@ -312,8 +312,8 @@ float CalculateVoltageRMS(Channel chan)
     EXIT_IF_ERROR_INT(period);
 
     float rms = 0.0f;
-    int16 rShift = chan == A ? dataSet->rShiftCh0 : dataSet->rShiftCh1;
-    for(int i = firstPoint; i < firstPoint + period; i++)
+    int16 rShift = chan == A ? (int16)dataSet->rShiftCh0 : (int16)dataSet->rShiftCh1;
+    for(int i = firstP; i < firstP + period; i++)
     {
         float volts = POINT_2_VOLTAGE(dataIn[chan][i], dataSet->range[chan], rShift);
         rms +=  volts * volts;
@@ -381,12 +381,12 @@ int CalculatePeriodAccurately(Channel chan)
             EXIT_FROM_PERIOD_ACCURACY
         }
         int delta = pic * 5;
-        sums[firstPoint] = dataIn[chan][firstPoint];
+        sums[firstP] = dataIn[chan][firstP];
 
-        int i = firstPoint + 1;
+        int i = firstP + 1;
         int *sum = &sums[i];
         uint8 *data = &dataIn[chan][i];
-        uint8 *end = &dataIn[chan][lastPoint];
+        uint8 *end = &dataIn[chan][lastP];
 
         while (data < end)
         {
@@ -399,24 +399,24 @@ int CalculatePeriodAccurately(Channel chan)
             sum++;
         }
 
-        int addShift = firstPoint - 1;
-        int maxPeriod = numPoints * 0.95f;
+        int addShift = firstP - 1;
+        int maxPeriod = numP * 0.95f;
 
         for(int nextPeriod = 10; nextPeriod < maxPeriod; nextPeriod++)
         {
-            int sum = sums[addShift + nextPeriod];
+            int s = sums[addShift + nextPeriod];
 
             int maxDelta = 0;
-            int maxStart = numPoints - nextPeriod;
+            int maxStart = numP - nextPeriod;
 
-            int *pSums = &sums[firstPoint + 1];
+            int *pSums = &sums[firstP + 1];
             for(int start = 1; start < maxStart; start++)
             {
                 int nextSum = *(pSums + nextPeriod) - (*pSums);
                 pSums++;
 
-                int nextDelta = nextSum - sum;
-                if (nextSum < sum)
+                int nextDelta = nextSum - s;
+                if (nextSum < s)
                 {
                     nextDelta = -nextDelta;
                 }
@@ -458,8 +458,8 @@ float CalculateFreq(Channel chan)
 float FindIntersectionWithHorLine(Channel chan, int numIntersection, bool downToUp, uint8 yLine)
 {
     int num = 0;
-    int x = firstPoint;
-    int compValue = lastPoint - 1;
+    int x = firstP;
+    int compValue = lastP - 1;
 
     uint8 *data = &dataIn[chan][0];
 
@@ -641,8 +641,8 @@ float CalculateMinSteadyRel(Channel chan)
         {
             int sum = 0;
             int numSums = 0;
-            uint8 *data = &dataIn[chan][firstPoint];
-            const uint8 * const end = &dataIn[chan][lastPoint];
+            uint8 *data = &dataIn[chan][firstP];
+            const uint8 * const end = &dataIn[chan][lastP];
             while(data <= end)
             {
                 uint8 d = *data++;
@@ -666,7 +666,7 @@ float CalculateMinSteadyRel(Channel chan)
             {
                 float value = pic / 9.0f;
 
-                data = &dataIn[chan][firstPoint];
+                data = &dataIn[chan][firstP];
                 float _min = min[chan];
                 while (data <= end)
                 {
@@ -715,8 +715,8 @@ float CalculateMaxSteadyRel(Channel chan)
         {
             int sum = 0;
             int numSums = 0;
-            uint8 *data = &dataIn[chan][firstPoint];
-            const uint8 * const end = &dataIn[chan][lastPoint];
+            uint8 *data = &dataIn[chan][firstP];
+            const uint8 * const end = &dataIn[chan][lastP];
             while (data <= end)
             {
                 uint8 d = *data++;
@@ -741,7 +741,7 @@ float CalculateMaxSteadyRel(Channel chan)
             {
                 float value = pic / 9.0f;
 
-                data = &dataIn[chan][firstPoint];
+                data = &dataIn[chan][firstP];
                 uint8 _max = max[chan];
                 while (data <= end)
                 {
@@ -780,7 +780,7 @@ float CalculateMaxRel(Channel chan)
 
     if(!maxIsCalculating[chan])
     {
-        uint8 val = Math_GetMaxFromArrayWithErrorCode(dataIn[chan], firstPoint, lastPoint);
+        uint8 val = Math_GetMaxFromArrayWithErrorCode(dataIn[chan], firstP, lastP);
         max[chan] = val == ERROR_VALUE_UINT8 ? ERROR_VALUE_FLOAT : val;
         maxIsCalculating[chan] = true;
     }
@@ -794,7 +794,7 @@ float CalculateMinRel(Channel chan)
 
     if (!minIsCalculating[chan])
     {
-        uint8 val = Math_GetMinFromArrayWithErrorCode(dataIn[chan], firstPoint, lastPoint);
+        uint8 val = Math_GetMinFromArrayWithErrorCode(dataIn[chan], firstP, lastP);
         min[chan] = val == ERROR_VALUE_UINT8 ? ERROR_VALUE_FLOAT : val;
         minIsCalculating[chan] = true;
     }
@@ -931,13 +931,13 @@ float CalculatePhazaMinus(Channel chan)
 
 void Processing_SetSignal(uint8 *data0, uint8 *data1, DataSettings *ds, int _firstPoint, int _lastPoint)
 {
-    firstPoint = _firstPoint;
-    lastPoint = _lastPoint;
-    numPoints = lastPoint - firstPoint;
+    firstP = _firstPoint;
+    lastP = _lastPoint;
+    numP = lastP - firstP;
     
     int numSmoothing = sDisplay_NumPointSmoothing();
 
-    int length = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
+    int length = (int)ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
 
     Math_CalculateFiltrArray(data0, &dataIn[A][0], length, numSmoothing);
     Math_CalculateFiltrArray(data1, &dataIn[B][0], length, numSmoothing);
@@ -967,12 +967,12 @@ float Processing_GetCursU(Channel chan, float posCurT)
         return 0;
     }
     
-    int firstPoint = 0;
-    int lastPoint = 0;
-    sDisplay_PointsOnDisplay(&firstPoint, &lastPoint);
+    int first = 0;
+    int last = 0;
+    sDisplay_PointsOnDisplay(&first, &last);
 
     float retValue = 0.0f;
-    LIMITATION(retValue, 200 - (dataIn[chan])[firstPoint + (int)posCurT] + MIN_VALUE, 0, 200);
+    LIMITATION(retValue, 200 - (dataIn[chan])[first + (int)posCurT] + MIN_VALUE, 0, 200);
     return retValue;
 }
 
@@ -1180,7 +1180,7 @@ void CountedToCurrentSettings()
     memset(dataOut0, 0, FPGA_MAX_POINTS);
     memset(dataOut1, 0, FPGA_MAX_POINTS);
     
-    int numPoints = dataSet->length1channel * (dataSet->peakDet == PeackDet_Disable ? 1 : 2);
+    int numPoints = (int)dataSet->length1channel * (dataSet->peakDet == PeackDet_Disable ? 1 : 2);
 
     int16 dataTShift = dataSet->tShift;
     int16 curTShift = TSHIFT;
@@ -1196,7 +1196,7 @@ void CountedToCurrentSettings()
         }
     }
  
-    if (dataSet->enableCh0 == 1 && (dataSet->range[0] != SET_RANGE_A || dataSet->rShiftCh0 != SET_RSHIFT_A))
+    if (dataSet->enableCh0 == 1U && (dataSet->range[0] != SET_RANGE_A || dataSet->rShiftCh0 != (uint)SET_RSHIFT_A))
     {
         Range range = SET_RANGE_A;
         int16 rShift = SET_RSHIFT_A;
@@ -1208,10 +1208,10 @@ void CountedToCurrentSettings()
 
             if (relValue < MIN_VALUE)       { dataOut0[i] = MIN_VALUE; }
             else if (relValue > MAX_VALUE)  { dataOut0[i] = MAX_VALUE; }
-            else                            { dataOut0[i] = relValue; }
+            else                            { dataOut0[i] = (uint8)relValue; }
         }
     }
-    if (dataSet->enableCh1 == 1 && (dataSet->range[1] != SET_RANGE_B || dataSet->rShiftCh1 != SET_RSHIFT_B))
+    if (dataSet->enableCh1 == 1 && (dataSet->range[1] != SET_RANGE_B || dataSet->rShiftCh1 != (uint)SET_RSHIFT_B))
     {
         Range range = SET_RANGE_B;
         int16 rShift = SET_RSHIFT_B;
@@ -1223,7 +1223,7 @@ void CountedToCurrentSettings()
 
             if (relValue < MIN_VALUE)       { dataOut1[i] = MIN_VALUE; }
             else if (relValue > MAX_VALUE)  { dataOut1[i] = MAX_VALUE; }
-            else                            { dataOut1[i] = relValue; }
+            else                            { dataOut1[i] = (uint8)relValue; }
         }
     }
 }
