@@ -63,12 +63,6 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Panel\Controls.c">
-      <Filter>Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.c">
-      <Filter>Panel</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -332,6 +326,12 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Panel\Controls.cpp">
+      <Filter>Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Panel\PanelFunctions.cpp">
+      <Filter>Panel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

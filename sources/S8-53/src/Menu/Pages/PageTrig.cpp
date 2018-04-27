@@ -202,7 +202,7 @@ static const Choice mcAutoFind_Mode =
         "Selecting the automatic search of synchronization:\n"
 #pragma push
 #pragma diag_suppress 192
-        "1. \"Hand\" - search is run on pressing of the button \"Find\" or on deduction during 0.5s the яхмуп button if it is established \"SERVICE\x99Mode long яхмуп\x99\Autolevel\".\n"
+        "1. \"Hand\" - search is run on pressing of the button \"Find\" or on deduction during 0.5s the яхмуп button if it is established \"SERVICE\x99Mode long яхмуп\x99\x41utolevel\".\n"
 #pragma pop
         "2. \"Auto\" - the search is automatically."
     },
