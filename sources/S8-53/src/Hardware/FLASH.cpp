@@ -171,7 +171,7 @@ RecordConfig *EPROM::FirstRecord()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool RecordExist(void)
+bool EPROM::RecordExist()
 {
     return READ_WORD(ADDR_ARRAY_POINTERS) != MAX_UINT;
 }
@@ -213,7 +213,7 @@ uint EPROM::CalculatFreeMemory()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint FindAddressNextDataInfo(void)
+uint EPROM::FindAddressNextDataInfo()
 {
     uint addressNextInfo = startDataInfo + MAX_NUM_SAVED_WAVES * 4;
 
@@ -226,7 +226,7 @@ static uint FindAddressNextDataInfo(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint FindActualDataInfo(void)
+uint EPROM::FindActualDataInfo()
 {
     return FindAddressNextDataInfo() - MAX_NUM_SAVED_WAVES * 4;
 }
@@ -279,29 +279,7 @@ void EPROM::EraseData()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int CalculateSizeRecordConfig(void)
-{
-    int size = sizeof(RecordConfig);
-    while (size % 4)
-    {
-        size++;
-    }
-    return size;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int CalculateSizeDataSettings(void)
-{
-    int size = sizeof(DataSettings);
-    while (size % 4)
-    {
-        size++;
-    }
-    return size;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int CalculateSizeData(DataSettings *ds)
+int EPROM::CalculateSizeData(DataSettings *ds)
 {
     int size = sizeof(DataSettings);
     if (ds->enableCh0 == 1)
@@ -316,7 +294,7 @@ int CalculateSizeData(DataSettings *ds)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint FreeMemory(void)
+uint EPROM::FreeMemory()
 {
     return ADDR_SECTOR_DATA_MAIN + 128 * 1024 - FindAddressNextDataInfo() - 1 - 4 * MAX_NUM_SAVED_WAVES - 3000;
 }
@@ -481,7 +459,7 @@ bool EPROM::GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint GetSector(uint startAddress)
+uint EPROM::GetSector(uint startAddress)
 {
     switch (startAddress)
     {

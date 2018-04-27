@@ -60,6 +60,12 @@ private:
     static RecordConfig *FirstEmptyRecord();
     static uint CalculatFreeMemory();
     static void CompactMemory();
+    static int CalculateSizeData(DataSettings *ds);
+    static uint FindActualDataInfo();
+    static uint FindAddressNextDataInfo();
+    static uint FreeMemory();
+    static uint GetSector(uint startAddress);
+    static bool RecordExist();
 };
 
 class OTP
