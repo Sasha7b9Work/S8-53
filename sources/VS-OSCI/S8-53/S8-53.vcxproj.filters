@@ -75,9 +75,6 @@
     <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_hal_msp.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_it.c">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -332,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Globals.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\libs\stm32f2xx_it.cpp">
+      <Filter>libs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

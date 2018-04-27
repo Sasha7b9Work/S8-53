@@ -1,5 +1,3 @@
-
-
 #include "usbd_desc.h"
 #include "defines.h"
 #include "VCP/VCP.h"
