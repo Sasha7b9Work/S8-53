@@ -907,11 +907,6 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Tables.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Tables.c</FilePath>
-            </File>
-            <File>
               <FileName>Tables.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Tables.h</FilePath>
@@ -988,6 +983,11 @@
               <FileName>defines.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\defines.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tables.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tables.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -123,9 +123,6 @@
     <ClCompile Include="..\..\S8-53\src\Globals.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Tables.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Panel\Controls.c">
       <Filter>Panel</Filter>
     </ClCompile>
@@ -331,6 +328,9 @@
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\defines.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Tables.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
