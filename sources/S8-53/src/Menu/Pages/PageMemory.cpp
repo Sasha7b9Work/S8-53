@@ -227,7 +227,7 @@ void PressSB_MemLast_IntEnter()
 {
     Menu::OpenPageAndSetItCurrent(PageMemory::Internal::GetPointer());
     MODE_WORK = ModeWork_MemInt;
-    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     EXIT_FROM_INT_TO_LAST = 1;
 }
 
@@ -550,8 +550,8 @@ static void SaveSignalToIntMemory(void)
     {
         if  (gDSmemLast != 0)
         {                               // то сохраняем сигнал из последних
-            FLASH_SaveData(CURRENT_NUM_INT_SIGNAL, gDSmemLast, gData0memLast, gData1memLast);
-            FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+            EPROM::SaveData(CURRENT_NUM_INT_SIGNAL, gDSmemLast, gData0memLast, gData1memLast);
+            EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
             Display::ShowWarningGood(SignalIsSaved);
         }
     }
@@ -559,8 +559,8 @@ static void SaveSignalToIntMemory(void)
     {
         if (gDSet != 0)
         {
-            FLASH_SaveData(CURRENT_NUM_INT_SIGNAL, gDSet, gData0, gData1);
-            FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSet, &gData0memInt, &gData1memInt);
+            EPROM::SaveData(CURRENT_NUM_INT_SIGNAL, gDSet, gData0, gData1);
+            EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSet, &gData0memInt, &gData1memInt);
             Display::ShowWarningGood(SignalIsSaved);
         }
     }
@@ -608,7 +608,7 @@ static void FuncAdditionDrawingSPageMemoryInt()
 
     bool exist[MAX_NUM_SAVED_WAVES] = {false};
 
-    FLASH_GetDataInfo(exist);
+    EPROM::GetDataInfo(exist);
 
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
@@ -633,7 +633,7 @@ static void FuncOnRegSetMemInt(int delta)
     {
         CircleIncreaseInt8(&CURRENT_NUM_INT_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
-    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     Painter::ResetFlash();
 }
 
@@ -764,7 +764,7 @@ static const SmallButton sbMemIntModeShow
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void PressSB_MemInt_Delete()
 {
-    FLASH_DeleteData(CURRENT_NUM_INT_SIGNAL);
+    EPROM::DeleteData(CURRENT_NUM_INT_SIGNAL);
 }
 
 static void DrawSB_MemInt_Delete(int x, int y)
@@ -807,7 +807,7 @@ const SmallButton sbMemIntSaveToFlash
 
 void PressSB_MemInt_Exit()
 {
-    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     if (EXIT_FROM_INT_TO_LAST)
     {
         Menu::OpenPageAndSetItCurrent(PageMemory::Latest::GetPointer());
@@ -1284,7 +1284,7 @@ void OnPressMemoryInt()
 {
     Menu::OpenPageAndSetItCurrent(PageMemory::Internal::GetPointer());
     MODE_WORK = ModeWork_MemInt;
-    FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+    EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
 }
 
 static const arrayItems itemsMemInt =

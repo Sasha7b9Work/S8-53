@@ -126,7 +126,7 @@ void Menu::Draw()
         }
         else if (gItemHint)
         {
-            DrawHintItem(x, y, width);
+            DrawHintItem(x + 1, y, width - 1);
         }
     }
 }

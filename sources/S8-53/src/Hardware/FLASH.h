@@ -29,16 +29,25 @@
 
 #define MAX_NUM_SAVED_WAVES 23  ///< Пока ограничено количеством квадратиков, которые можно вывести в одну линию внизу сетки
 
-void FLASH_LoadSettings();
-void FLASH_SaveSettings(bool verifyLoaded = false);
-     
-void FLASH_GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);                    ///< Если даннные есть, соответствующий элемент массива равен true/.
-bool FLASH_ExistData(int num);
-void FLASH_SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1);
-bool FLASH_GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1);
-void FLASH_DeleteData(int num);
-/// Стирает сектора с данными
-void FLASH_EraseData();
+class EPROM
+{
+public:
+    static void LoadSettings();
+    static void SaveSettings(bool verifyLoaded = false);
+    /// Если даннные есть, соответствующий элемент массива равен true/.
+    static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+    static bool ExistData(int num);
+    static void SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1);
+    static bool GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1);
+    static void DeleteData(int num);
+    /// Стирает сектора с данными
+    static void EraseData();
+};
 
-bool OTP_SaveSerialNumber(char *serialNumber);  ///< 
-int OTP_GetSerialNumber(char buffer[17]);       ///< \brief Функция возвращает число свободных мест для записи. Если 0, то места в OTP уже не осталось. 
+class OTP
+{
+public:   
+    static bool SaveSerialNumber(char *serialNumber);
+    /// Функция возвращает число свободных мест для записи. Если 0, то места в OTP уже не осталось. 
+    static int GetSerialNumber(char buffer[17]);
+};

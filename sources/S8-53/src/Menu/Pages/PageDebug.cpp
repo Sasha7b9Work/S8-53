@@ -881,7 +881,7 @@ static const Button bEraseData
 
 static void OnPress_EraseData()
 {
-    FLASH_EraseData();
+    EPROM::EraseData();
 }
 
 
@@ -964,7 +964,7 @@ static void Draw_EnterSerialNumber(void)
 
     // Теперь выведем информацию об оставшемся месте в OTP-памяти для записи
 
-    int allShots = OTP_GetSerialNumber(buffer);
+    int allShots = OTP::GetSerialNumber(buffer);
 
     Painter::DrawFormatText(x0 + deltaX, y0 + 130, COLOR_FILL, "Текущий сохранённый номер %s", buffer[0] == 0 ? "-- ----" : buffer);
 
@@ -1050,7 +1050,7 @@ static void OnPress_SerialNumber_Save(void)
 
     snprintf(stringSN, 19, "%02d %04d", s->number, s->year);
 
-    if (!OTP_SaveSerialNumber(stringSN))
+    if (!OTP::SaveSerialNumber(stringSN))
     {
         Display::ShowWarningBad(FullyCompletedOTP);
     }

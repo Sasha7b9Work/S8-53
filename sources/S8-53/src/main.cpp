@@ -89,7 +89,7 @@ void ProcessingSignal()
         data0 = &gData0memInt;
         data1 = &gData1memInt;
         ds = &gDSmemInt;
-        FLASH_GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
+        EPROM::GetData(CURRENT_NUM_INT_SIGNAL, &gDSmemInt, &gData0memInt, &gData1memInt);
     }
 
     if (MODE_WORK_IS_MEMINT)

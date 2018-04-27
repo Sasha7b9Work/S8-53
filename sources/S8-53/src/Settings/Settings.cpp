@@ -262,7 +262,7 @@ void Settings::Load(bool _default)
     }
     else
     {
-        FLASH_LoadSettings();
+        EPROM::LoadSettings();
     }
 
     Painter::LoadPalette();
@@ -277,7 +277,7 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
-    FLASH_SaveSettings();
+    EPROM::SaveSettings();
 }
 
 bool Settings::DebugModeEnable()
