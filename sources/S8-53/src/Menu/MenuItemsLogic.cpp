@@ -30,14 +30,14 @@ void Governor_StartChange(Governor *governor, int delta)
     {
         TIME_START_MS = gTimerMS;   
     }
-    IN_MOVE_INCREASE = (delta > 0) ? 1 : 0;
-    IN_MOVE_DECREASE = (delta < 0) ? 1 : 0;
+    IN_MOVE_INCREASE = (delta > 0) ? 1U : 0U;
+    IN_MOVE_DECREASE = (delta < 0) ? 1U : 0U;
 }
 
 void Governor_ChangeValue(Governor *governor, int delta)
 {
     int16 oldValue = *governor->cell;
-    LIMITATION(*governor->cell, oldValue + Math_Sign(delta) * Math_Pow10(gCurDigit), governor->minValue, governor->maxValue);
+    LIMITATION(*governor->cell, (int16)(oldValue + Math_Sign(delta) * Math_Pow10(gCurDigit)), (int16)governor->minValue, (int16)governor->maxValue);
     if (*governor->cell != oldValue)
     {
         if (governor->funcOfChanged)
@@ -74,11 +74,11 @@ void IPaddress_ChangeValue(IPaddress *ip, int delta)
     {
         if (numByte == 4)
         {
-            *ip->port = newValue;
+            *ip->port = (uint16)newValue;
         }
         else
         {
-            ip->ip0[numByte] = newValue;
+            ip->ip0[numByte] = (uint8)newValue;
         }
         Sound::GovernorChangedValue();
         Display::ShowWarningGood(NeedRebootDevice2);
@@ -193,12 +193,12 @@ void IPaddress_NextPosition(IPaddress *ipEthernet_IP)
 void ItemTime_SetOpened(Time *item)
 {
     PackedTime time = RTC_GetPackedTime();
-    *(item->seconds) = time.seconds;
-    *(item->minutes) = time.minutes;
-    *(item->hours) = time.hours;
-    *(item->day) = time.day;
-    *(item->month) = time.month;
-    *(item->year) = time.year ;
+    *(item->seconds) = (int8)time.seconds;
+    *(item->minutes) = (int8)time.minutes;
+    *(item->hours) = (int8)time.hours;
+    *(item->day) = (int8)time.day;
+    *(item->month) = (int8)time.month;
+    *(item->year) = (int8)time.year ;
 }
 
 void ItemTime_SetNewTime(Time *time)

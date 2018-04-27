@@ -438,7 +438,7 @@ void DrawGovernorColorValue(int x, int y, GovernorColor *govColor, int delta)
         Color_Init(ct);
     }
 
-    int16 vals[4] = {ct->brightness * 100, blue, green, red};
+    int vals[4] = {ct->brightness * 100, blue, green, red};
 
     Painter::FillRegionC(x, y, MI_WIDTH + delta - 2, MI_HEIGHT / 2 - 3, COLOR_BLACK);
     x += 92;
@@ -670,18 +670,18 @@ void ItemTime_DrawClosed(Time *item, int x, int y)
     int startX = 3;
     y += 21;
     PackedTime time = RTC_GetPackedTime();
-    Painter::DrawTextC(x + startX, y, Int2String(time.hours, false, 2, buffer), COLOR_BACK);
+    Painter::DrawTextC(x + startX, y, Int2String((int)time.hours, false, 2, buffer), COLOR_BACK);
     Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Int2String(time.minutes, false, 2, buffer));
+    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Int2String((int)time.minutes, false, 2, buffer));
     Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Int2String(time.seconds, false, 2, buffer));
+    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Int2String((int)time.seconds, false, 2, buffer));
 
     startX = 44;
-    Painter::DrawText(x + startX, y, Int2String(time.day, false, 2, buffer));
+    Painter::DrawText(x + startX, y, Int2String((int)time.day, false, 2, buffer));
     Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Int2String(time.month, false, 2, buffer));
+    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Int2String((int)time.month, false, 2, buffer));
     Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Int2String(time.year, false, 2, buffer));
+    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Int2String((int)time.year, false, 2, buffer));
 }
 
 void ItemTime_Draw(Time *time, int x, int y, bool opened)

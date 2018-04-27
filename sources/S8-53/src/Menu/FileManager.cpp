@@ -376,7 +376,7 @@ LabelNextNumber:
     {
         PackedTime time = RTC_GetPackedTime();
                            //  1          2           3         4           5             6
-        int values[] = {0, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
+        uint values[] = {0, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 
         char *ch = FILE_NAME_MASK;
         char *wr = name;
@@ -405,7 +405,7 @@ LabelNextNumber:
                 {
                     if (*ch >= 0x01 && *ch <= 0x06)
                     {
-                        strcpy(wr, Int2String(values[*ch], false, 2, buffer));
+                        strcpy(wr, Int2String((int)values[*ch], false, 2, buffer));
                         wr += strlen(buffer);
                     }
                 }
