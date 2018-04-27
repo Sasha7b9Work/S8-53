@@ -68,16 +68,16 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\ADC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\Hardware.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Hardware.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
@@ -86,7 +86,7 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\Sound.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\Timer.c">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Timer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.cpp" />

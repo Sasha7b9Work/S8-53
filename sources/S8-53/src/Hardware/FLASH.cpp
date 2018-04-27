@@ -266,6 +266,24 @@ void FLASH_DeleteData(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void FLASH_EraseData()
+{
+    CLEAR_FLAGS;
+
+    HAL_FLASH_Unlock();
+
+    FLASH_EraseInitTypeDef flashITD;
+    flashITD.TypeErase = TYPEERASE_SECTORS;
+    flashITD.Sector = FLASH_SECTOR_8;
+    flashITD.VoltageRange = VOLTAGE_RANGE_3;
+
+    uint error = 0;
+    HAL_FLASHEx_Erase(&flashITD, &error);
+
+    HAL_FLASH_Lock();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 int CalculateSizeRecordConfig(void)
 {
     int size = sizeof(RecordConfig);

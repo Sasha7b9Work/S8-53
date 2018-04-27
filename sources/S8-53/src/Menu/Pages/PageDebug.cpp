@@ -97,6 +97,8 @@ static void          Draw_SerialNumber_Change(int, int);
 extern const  SmallButton bSerialNumber_Save;               ///< ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü
 static void        OnPress_SerialNumber_Save();
 static void           Draw_SerialNumber_Save(int, int);
+extern const       Button bEraseData;                       ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
+static void       OnPress_EraseData();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Â ýòîé ñòðóêòóðå áóäóò õðàíèòüñÿ äàííûå ñåðèéíîãî íîìåðà ïðè îòêðûòîé ñòðàíèöå ppSerialNumer
@@ -119,12 +121,13 @@ void *PageDebug::SerialNumber::GetPointer()
 // ÎÒËÀÄÊÀ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static const arrayItems itemsDebug =
 {
-    (void*)&mcStats,            // ÎÒËÀÄÊÀ - Ñòàòèñòèêà
-    (void*)&mpConsole,          // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
-    (void*)&mpADC,              // ÎÒËÀÄÊÀ - ÀÖÏ
-    (void*)&mpRandomizer,       // ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ
-    (void*)&mcSizeSettings,     // ÎÒËÀÄÊÀ - Ðàçìåð íàñòðîåê
-    (void*)&mbSaveFirmware      // ÎÒËÀÄÊÀ - Ñîõð. ïðîøèâêó
+    (void *)&mcStats,            // ÎÒËÀÄÊÀ - Ñòàòèñòèêà
+    (void *)&mpConsole,          // ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
+    (void *)&mpADC,              // ÎÒËÀÄÊÀ - ÀÖÏ
+    (void *)&mpRandomizer,       // ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ
+    (void *)&mcSizeSettings,     // ÎÒËÀÄÊÀ - Ðàçìåð íàñòðîåê
+    (void *)&mbSaveFirmware,     // ÎÒËÀÄÊÀ - Ñîõð. ïðîøèâêó
+    (void *)&bEraseData          // ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
     //(void*)&ppSerialNumber     // ÎÒËÀÄÊÀ - Ñ/Í
     //(void*)&mspDebugInformation
 };
@@ -838,12 +841,12 @@ static const Button mbSaveFirmware
     OnPress_SaveFirmware
 );
 
-static bool IsActive_SaveFirmware(void)
+static bool IsActive_SaveFirmware()
 {
     return FLASH_DRIVE_IS_CONNECTED == 1;
 }
 
-static void OnPress_SaveFirmware(void)
+static void OnPress_SaveFirmware()
 {
     StructForWrite structForWrite;
 
@@ -863,6 +866,22 @@ static void OnPress_SaveFirmware(void)
     FlashDrive::CloseFile(&structForWrite);
 
     Display::ShowWarningGood(FirmwareSaved);
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static const Button bEraseData
+(
+    &pDebug, EmptyFuncBV,
+    "Ñòåðåòü äàííûå", "Erase data",
+    "Ñòèðàåò ñåêòîðà ñ äàííûìè",
+    "Erases data sectors",
+    OnPress_EraseData
+);
+
+static void OnPress_EraseData()
+{
+    FLASH_EraseData();
 }
 
 

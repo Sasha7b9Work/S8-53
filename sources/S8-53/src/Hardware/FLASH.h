@@ -37,6 +37,8 @@ bool FLASH_ExistData(int num);
 void FLASH_SaveData(int num, DataSettings *ds, uint8 *data0, uint8 *data1);
 bool FLASH_GetData(int num, DataSettings **ds, uint8 **data0, uint8 **data1);
 void FLASH_DeleteData(int num);
+/// Стирает сектора с данными
+void FLASH_EraseData();
 
 bool OTP_SaveSerialNumber(char *serialNumber);  ///< 
 int OTP_GetSerialNumber(char buffer[17]);       ///< \brief Функция возвращает число свободных мест для записи. Если 0, то места в OTP уже не осталось. 

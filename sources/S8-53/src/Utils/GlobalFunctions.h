@@ -77,4 +77,5 @@ void    EmptyFuncVpV(void *);                                   // Функция-заглу
 void    EmptyFuncpVII(void *, int, int);                        // Функция-заглушка. Ничего не делает.
 void    EmptyFuncVI16(int16);                                   // Функция-заглушка. Ничего не делает.
 void    EmptyFuncVB(bool);                                      // Функция-заглушка. Ничего не делает.
+bool    EmptyFuncBV();
 void    IntToStrCat(char *_buffer, int _value);

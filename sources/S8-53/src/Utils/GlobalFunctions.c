@@ -452,6 +452,11 @@ void EmptyFuncVI16(int16 i) {}
 
 void EmptyFuncVB(bool b) {}
 
+bool EmptyFuncBV()
+{
+    return true;
+}
+
 void IntToStrCat(char *_buffer, int _value)
 {
     static const int LENGHT = 10;

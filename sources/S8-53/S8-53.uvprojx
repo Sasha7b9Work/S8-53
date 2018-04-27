@@ -1240,19 +1240,9 @@
               <FilePath>.\src\Hardware\ADC.h</FilePath>
             </File>
             <File>
-              <FileName>FLASH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FLASH.c</FilePath>
-            </File>
-            <File>
               <FileName>FLASH.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FLASH.h</FilePath>
-            </File>
-            <File>
-              <FileName>FSMC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FSMC.c</FilePath>
             </File>
             <File>
               <FileName>FSMC.h</FileName>
@@ -1260,19 +1250,9 @@
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
             </File>
             <File>
-              <FileName>Hardware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Hardware.c</FilePath>
-            </File>
-            <File>
               <FileName>Hardware.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Hardware.h</FilePath>
-            </File>
-            <File>
-              <FileName>MSP_USBH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\MSP_USBH.c</FilePath>
             </File>
             <File>
               <FileName>RTC.cpp</FileName>
@@ -1295,14 +1275,39 @@
               <FilePath>.\src\Hardware\Sound.h</FilePath>
             </File>
             <File>
-              <FileName>Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Timer.c</FilePath>
-            </File>
-            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayHardware.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\DisplayHardware.inc</FilePath>
+            </File>
+            <File>
+              <FileName>FLASH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Hardware.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MSP_USBH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\MSP_USBH.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>

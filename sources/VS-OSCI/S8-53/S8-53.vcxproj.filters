@@ -60,22 +60,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\Hardware.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\Timer.c">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsChannel.c">
@@ -332,6 +317,21 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\PainterText.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\Hardware.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
