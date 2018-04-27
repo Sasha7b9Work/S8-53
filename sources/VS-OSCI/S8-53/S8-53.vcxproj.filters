@@ -60,15 +60,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\S8-53\src\Display\Math3D.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\PainterText.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.c">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -332,6 +323,15 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\font\Font.cpp">
       <Filter>Display\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Display\Math3D.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Display\PainterText.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@
     <ClCompile Include="..\..\S8-53\src\Display\Grid.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\Math3D.c">
+    <ClCompile Include="..\..\S8-53\src\Display\Math3D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\Painter.cpp">
@@ -37,10 +37,10 @@
     <ClCompile Include="..\..\S8-53\src\Display\PainterMem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\PainterText.c">
+    <ClCompile Include="..\..\S8-53\src\Display\PainterText.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.c">
+    <ClCompile Include="..\..\S8-53\src\Display\WelcomeScreen.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.cpp">
