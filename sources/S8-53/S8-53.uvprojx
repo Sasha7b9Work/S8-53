@@ -1735,19 +1735,9 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Strings.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Strings.c</FilePath>
-            </File>
-            <File>
               <FileName>Strings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Strings.h</FilePath>
-            </File>
-            <File>
-              <FileName>Map.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Map.c</FilePath>
             </File>
             <File>
               <FileName>Map.h</FileName>
@@ -1755,19 +1745,9 @@
               <FilePath>.\src\Utils\Map.h</FilePath>
             </File>
             <File>
-              <FileName>Generator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Generator.c</FilePath>
-            </File>
-            <File>
               <FileName>Generator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>GlobalFunctions.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\GlobalFunctions.c</FilePath>
             </File>
             <File>
               <FileName>GlobalFunctions.h</FileName>
@@ -1775,29 +1755,14 @@
               <FilePath>.\src\Utils\GlobalFunctions.h</FilePath>
             </File>
             <File>
-              <FileName>Math.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Math.c</FilePath>
-            </File>
-            <File>
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Measures.c</FilePath>
-            </File>
-            <File>
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Measures.h</FilePath>
-            </File>
-            <File>
-              <FileName>ProcessingSignal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\ProcessingSignal.c</FilePath>
             </File>
             <File>
               <FileName>ProcessingSignal.h</FileName>
@@ -1825,14 +1790,44 @@
               <FilePath>.\src\Utils\TablesLog.h</FilePath>
             </File>
             <File>
-              <FileName>TablesSin.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\TablesSin.h</FilePath>
-            </File>
-            <File>
               <FileName>TablesWindow.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\TablesWindow.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Generator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Map.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Map.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ProcessingSignal.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\ProcessingSignal.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Strings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Strings.cpp</FilePath>
             </File>
           </Files>
         </Group>

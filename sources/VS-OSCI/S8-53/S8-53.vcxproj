@@ -159,14 +159,14 @@
     <ClCompile Include="..\..\S8-53\src\Tables.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Utils\Generator.c" />
-    <ClCompile Include="..\..\S8-53\src\Utils\GlobalFunctions.c" />
-    <ClCompile Include="..\..\S8-53\src\Utils\Map.c" />
-    <ClCompile Include="..\..\S8-53\src\Utils\Math.c" />
-    <ClCompile Include="..\..\S8-53\src\Utils\Measures.c" />
-    <ClCompile Include="..\..\S8-53\src\Utils\ProcessingSignal.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Generator.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\GlobalFunctions.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Map.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Measures.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Utils\ProcessingSignal.cpp" />
     <ClCompile Include="..\..\S8-53\src\Utils\Stack2500uint16.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Utils\Strings.c" />
+    <ClCompile Include="..\..\S8-53\src\Utils\Strings.cpp" />
     <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>

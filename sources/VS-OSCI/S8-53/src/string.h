@@ -10,3 +10,4 @@ char toupper(char);
 int strcmp(const void *, const void *);
 void snprintf(const void *, ...);
 int memcmp(const void *, const void *, int);
+float atof(const void *);

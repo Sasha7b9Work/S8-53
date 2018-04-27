@@ -3,8 +3,6 @@
 #include "Log.h"
 #include "Display/Symbols.h"
 #include "Math.h"
-
-
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -176,7 +174,7 @@ char* Hex8toString(uint8 value, char buffer[3])
     return buffer;
 }
 
-char*    Voltage2String(float voltage, bool alwaysSign, char buffer[20])
+char* Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 {
     buffer[0] = 0;
     char *suffix;
@@ -202,7 +200,7 @@ char*    Voltage2String(float voltage, bool alwaysSign, char buffer[20])
     else
     {
         suffix = set.common.lang == Russian ? "\x10êÂ" : "\x10kV";
-        voltage *= 1e-3;
+        voltage *= 1e-3f;
     }
 
     char bufferOut[20];
