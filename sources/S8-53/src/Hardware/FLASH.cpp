@@ -275,6 +275,8 @@ void EPROM::EraseData()
 
     HAL_FLASHEx_Erase(&flashITD, &error);
 
+    PrepareSectorForData();
+
     HAL_FLASH_Lock();
 }
 
