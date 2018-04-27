@@ -55,6 +55,9 @@
     <Filter Include="HAL">
       <UniqueIdentifier>{3210115b-0d60-46e4-8194-3c5111056155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vs">
+      <UniqueIdentifier>{95614ff2-fdb6-422e-90f9-b4112092c840}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\S8-53\src\Display\Colors.c">
@@ -117,9 +120,6 @@
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsTime.c">
       <Filter>Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\defines.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Globals.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -134,36 +134,6 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Log.c">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.c">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.c">
-      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\app_ethernet.c">
       <Filter>libs</Filter>
@@ -264,41 +234,14 @@
     <ClCompile Include="..\..\S8-53\src\Panel\Panel.cpp">
       <Filter>Panel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Menu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuFunctions.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\main.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.cpp">
-      <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\SettingsTypes.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp">
-      <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Ethernet\Ethernet.cpp">
       <Filter>Ethernet</Filter>
@@ -329,6 +272,66 @@
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\VCP\SCPI\channelSCPI.cpp">
       <Filter>VCP\SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageCursors.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDebug.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageDisplay.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageHelp.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMeasures.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageMemory.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageService.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTime.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageTrig.c">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\FileManager.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuFunctions.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\defines.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,39 +467,6 @@
     <ClInclude Include="..\..\S8-53\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\Definition.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContent.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContentPages.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageCursors.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageHelp.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMemory.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\FileManager.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Menu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\MenuItems.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsGraphics.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsLogic.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\S8-53\src\libs\app_ethernet.h">
       <Filter>libs</Filter>
     </ClInclude>
@@ -590,14 +560,65 @@
     <ClInclude Include="src\cmsis_gcc.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h">
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\Definition.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContent.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\HelpContentPages.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageCursors.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageDebug.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageHelp.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMeasures.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageMemory.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Menu\Pages\PageService.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\FileManager.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItems.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsGraphics.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Menu\MenuItemsLogic.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\string.h">
+      <Filter>vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdint.h">
+      <Filter>vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdio.h">
+      <Filter>vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdlib.h">
+      <Filter>vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core_cminstr.h">
+      <Filter>vs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core_cm3.h">
+      <Filter>vs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -647,9 +668,6 @@
     </Text>
     <Text Include="..\..\S8-53\src\includes.txt">
       <Filter>src</Filter>
-    </Text>
-    <Text Include="..\..\S8-53\src\Menu\Menu_reference.txt">
-      <Filter>Menu</Filter>
     </Text>
   </ItemGroup>
 </Project>

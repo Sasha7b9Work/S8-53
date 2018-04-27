@@ -11,8 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\S8-53\src\defines.c">
+    <ClCompile Include="..\..\S8-53\src\defines.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Display\Colors.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -99,13 +100,13 @@
     <ClCompile Include="..\..\S8-53\src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Menu\FileManager.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\FileManager.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuDrawing.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuFunctions.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.c" />
-    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.c" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsGraphics.cpp" />
+    <ClCompile Include="..\..\S8-53\src\Menu\MenuItemsLogic.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\Definition.cpp" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\HelpContent.c" />
     <ClCompile Include="..\..\S8-53\src\Menu\Pages\PageChannels.c" />
@@ -351,6 +352,12 @@
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h" />
     <ClInclude Include="..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h" />
     <ClInclude Include="src\cmsis_gcc.h" />
+    <ClInclude Include="src\core_cm3.h" />
+    <ClInclude Include="src\core_cminstr.h" />
+    <ClInclude Include="src\stdint.h" />
+    <ClInclude Include="src\stdio.h" />
+    <ClInclude Include="src\stdlib.h" />
+    <ClInclude Include="src\string.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\S8-53\src\check.bat" />
@@ -378,7 +385,6 @@
     <Text Include="..\..\S8-53\src\includes.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>
-    <Text Include="..\..\S8-53\src\Menu\Menu_reference.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9963BBE1-43D7-4BAD-AA6A-A2D3161DA31A}</ProjectGuid>
@@ -413,7 +419,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\S8-53\src;..\..\S8-53\src\libs;..\..\S8-53\src\libs\USB;..\..\S8-53\src\libs\FatFS;..\..\S8-53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\S8-53\src\VCP\USBD;..\..\S8-53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Projects\stm32\S8-53_new\sources\VS-OSCI\S8-53\src;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Device\ST\STM32F2xx\Include;..\..\STM32Cube_FW_F2\Drivers\STM32F2xx_HAL_Driver\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Core\Src;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src;..\..\STM32Cube_FW_F2\\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\STM32Cube_FW_F2\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\FatFs\src\drivers;..\..\S8-53\src;..\..\S8-53\src\libs;..\..\S8-53\src\libs\USB;..\..\S8-53\src\libs\FatFS;..\..\S8-53\src\libs\HAL;..\..\STM32Cube_FW_F2\Drivers\CMSIS\Include;src;..\..\S8-53\src\VCP\USBD;..\..\S8-53\src\libs\USBH;..\..\common\Ethernet;..\..\common\libs\LwIP;..\..\STM32Cube_FW_F2\Middlewares\Third_Party\LwIP\system;..\..\common</IncludePath>
     <OutDir>.\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -426,7 +432,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_LIB;USE_HAL_DRIVER;STM32F207xx;__GNUC__;PACK_STRUCT_USE_INCLUDES;_MS_VS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
       <DisableSpecificWarnings>4244;4068;4005;4018;4024;4047;4113;4133;4028;4996</DisableSpecificWarnings>
