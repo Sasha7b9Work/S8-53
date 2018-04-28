@@ -12,26 +12,18 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SIZE_POOL   (30 * 1024)                     // Количество отведённой для измерений памяти.
-
-
-uint8 pool[SIZE_POOL] = {0};                        // Здесь хранятся данные.
-static uint8* beginPool = &(pool[0]);               // Адрес начала памяти для хранения
-static uint8* endPool = &(pool[SIZE_POOL - 1]);     // Адрес последнего байта памяти для хранения
-
-static uint  sum[NumChannels][FPGA_MAX_POINTS];        // Здесь хранятся суммы измерений обоих каналов
-static uint8 limitUp[NumChannels][FPGA_MAX_POINTS];    // Максимальные значения каналов
-static uint8 limitDown[NumChannels][FPGA_MAX_POINTS];  // Минимальные значения каналов
-
-static DataSettings* firstElem;                     // Указатель на первые сохранённые данные
-static DataSettings* lastElem;                      // Указатель на последние сохранённые данные
-
-static int allData = 0;                             // Всего данных сохранено
-
-static float aveData0[FPGA_MAX_POINTS] = {0.0f};    // В этих массивах хранятся усреднённые значения, подсчитанные по приблизительному алгоритму.
-static float aveData1[FPGA_MAX_POINTS] = {0.0f};
-
-static bool newSumCalculated[NumChannels] = {true, true};                  // Если true, то новые суммы рассчитаны, и нужно повторить расчёт среднего
+uint8  Storage::pool[SIZE_POOL] = {0};
+uint8 *Storage::beginPool = &(pool[0]);
+uint8 *Storage::endPool = &(pool[SIZE_POOL - 1]);
+int    Storage::allData = 0;
+float  Storage::aveData0[FPGA_MAX_POINTS] = {0.0f};
+float  Storage::aveData1[FPGA_MAX_POINTS] = {0.0f};
+bool   Storage::newSumCalculated[NumChannels] = {true, true};
+uint   Storage::sum[NumChannels][FPGA_MAX_POINTS];
+uint8  Storage::limitUp[NumChannels][FPGA_MAX_POINTS];
+uint8  Storage::limitDown[NumChannels][FPGA_MAX_POINTS];
+DataSettings *Storage::firstElem = 0;
+DataSettings *Storage::lastElem = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -410,15 +402,6 @@ int Storage::NumberAvailableEntries(void)
         return 0;
     }
     return SIZE_POOL / SizeElem(lastElem);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void VerifyAddress(uint8 *dst, uint size)
-{
-    if(dst < beginPool || dst > endPool || (dst + size) < beginPool || (dst + size) > endPool)
-    {
-        LOG_ERROR("!!!Ошибка записи в память");
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

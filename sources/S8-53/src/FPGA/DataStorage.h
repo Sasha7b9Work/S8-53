@@ -60,4 +60,31 @@ private:
     static void PrintElement(DataSettings *dp);
     
     static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss);
+    /// Количество отведённой для измерений памяти.
+    static const int SIZE_POOL = (30 * 1024);
+    /// Здесь хранятся данные.
+    static uint8 pool[SIZE_POOL];
+    /// Адрес начала памяти для хранения
+    static uint8* beginPool;
+    /// Адрес последнего байта памяти для хранения
+    static uint8* endPool;
+    /// Здесь хранятся суммы измерений обоих каналов
+    static uint  sum[NumChannels][FPGA_MAX_POINTS];
+    /// Максимальные значения каналов
+    static uint8 limitUp[NumChannels][FPGA_MAX_POINTS];
+    /// Минимальные значения каналов
+    static uint8 limitDown[NumChannels][FPGA_MAX_POINTS];
+    /// Указатель на первые сохранённые данные
+    static DataSettings* firstElem;
+    /// Указатель на последние сохранённые данные
+    static DataSettings* lastElem;
+    /// Всего данных сохранено
+    static int allData;
+    /// В этих массивах хранятся усреднённые значения, подсчитанные по приблизительному алгоритму.
+    static float aveData0[FPGA_MAX_POINTS];
+
+    static float aveData1[FPGA_MAX_POINTS];
+    /// Если true, то новые суммы рассчитаны, и нужно повторить расчёт среднего
+    static bool newSumCalculated[NumChannels];
+
 };
