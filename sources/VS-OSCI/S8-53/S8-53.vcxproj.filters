@@ -330,7 +330,7 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\EPROM.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\CLOCK.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\Clock.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
@@ -632,7 +632,7 @@
     <ClInclude Include="..\..\S8-53\src\Hardware\EPROM.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Hardware\CLOCK.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\Clock.h">
       <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>

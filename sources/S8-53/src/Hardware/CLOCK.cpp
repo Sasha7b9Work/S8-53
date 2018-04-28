@@ -1,4 +1,4 @@
-#include "CLOCK.h"
+#include "Clock.h"
 #include "Hardware/Hardware.h"
 #include "Log.h"
 #include "Display/Display.h"
@@ -41,7 +41,7 @@ static const RTC_HandleTypeDef rtcHandle =
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CLOCK::Init(void)
+void Clock::Init(void)
 {
     if (HAL_RTC_Init((RTC_HandleTypeDef*)(&rtcHandle)) != HAL_OK)
     {
@@ -58,7 +58,7 @@ void CLOCK::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PackedTime CLOCK::GetPackedTime(void)
+PackedTime Clock::GetPackedTime(void)
 {
     PackedTime time;
 
@@ -80,7 +80,7 @@ PackedTime CLOCK::GetPackedTime(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CLOCK::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
+bool Clock::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
 {
     RTC_DateTypeDef dateStruct =
     {

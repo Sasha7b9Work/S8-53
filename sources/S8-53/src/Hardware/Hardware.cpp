@@ -136,7 +136,7 @@ void Hardware::Init(void)
     
     HAL_GPIO_WritePin(GPIOG, GPIO_PIN_1, GPIO_PIN_RESET);                   // PG1 - когда равен 1, чтение дисплея, в остальных случаях 0
 
-    CLOCK::Init();
+    Clock::Init();
 
     crcHandle.Instance = CRC;
     if (HAL_CRC_Init(&crcHandle) != HAL_OK)

@@ -374,7 +374,7 @@ LabelNextNumber:
     }
     else
     {
-        PackedTime time = CLOCK::GetPackedTime();
+        PackedTime time = Clock::GetPackedTime();
                            //  1          2           3         4           5             6
         uint values[] = {0, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 

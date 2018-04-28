@@ -770,7 +770,7 @@ void Display::DrawTime(int x, int y)
     int dField = 10;
     int dSeparator = 2;
 
-    PackedTime time = CLOCK::GetPackedTime();
+    PackedTime time = Clock::GetPackedTime();
     
     char buffer[20];
     

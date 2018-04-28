@@ -2,7 +2,7 @@
 #include "defines.h"
 
 
-class CLOCK
+class Clock
 {
 public:
     static void Init();
