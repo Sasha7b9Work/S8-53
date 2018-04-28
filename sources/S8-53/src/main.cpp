@@ -96,12 +96,12 @@ void ProcessingSignal()
     { 
         if (!MODE_SHOW_MEMINT_IS_SAVED)
         {
-            Processing_SetSignal(gData0, gData1, gDSet, first, last);
+            Processing::SetSignal(gData0, gData1, gDSet, first, last);
         }
     }
     else
     {
-        Processing_SetSignal(*data0, *data1, *ds, first, last);
+        Processing::SetSignal(*data0, *data1, *ds, first, last);
     }
 
     Cursors_Update();    // В случае, если находимся в режиме курсорных измерений, обновляем их положение, если нужно.

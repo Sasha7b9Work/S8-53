@@ -117,11 +117,9 @@ static bool picIsCalculating[2] = {false, false};
 
 #define EXIT_IF_ERROR_FLOAT(x)      if((x) == ERROR_VALUE_FLOAT)                                return ERROR_VALUE_FLOAT;
 #define EXIT_IF_ERRORS_FLOAT(x, y)  if((x) == ERROR_VALUE_FLOAT || (y) == ERROR_VALUE_FLOAT)    return ERROR_VALUE_FLOAT;
-//#define EXIT_IF_ERROR_UINT8(x)      if((x) == ERROR_VALUE_UINT8)                                return ERROR_VALUE_FLOAT;
-//#define EXIT_IF_ERRORS_UINT8(x, y)  if((x) == ERROR_VALUE_UINT8 || (y) == ERROR_VALUE_UINT8)    return ERROR_VALUE_FLOAT;
 #define EXIT_IF_ERROR_INT(x)        if((x) == ERROR_VALUE_INT)                                  return ERROR_VALUE_FLOAT;
 
-void Processing_CalculateMeasures()
+void Processing::CalculateMeasures()
 {
     if(!SHOW_MEASURES || !dataSet)
     {
@@ -929,7 +927,7 @@ float CalculatePhazaMinus(Channel chan)
     return delay / period * 360.0f; 
 }
 
-void Processing_SetSignal(uint8 *data0, uint8 *data1, DataSettings *ds, int _firstPoint, int _lastPoint)
+void Processing::SetSignal(uint8 *data0, uint8 *data1, DataSettings *ds, int _firstPoint, int _lastPoint)
 {
     firstP = _firstPoint;
     lastP = _lastPoint;
@@ -947,7 +945,7 @@ void Processing_SetSignal(uint8 *data0, uint8 *data1, DataSettings *ds, int _fir
     CountedToCurrentSettings();
 }
 
-void Processing_GetData(uint8 **data0, uint8 **data1, DataSettings **ds)
+void Processing::GetData(uint8 **data0, uint8 **data1, DataSettings **ds)
 {
     if (data0)
     {
@@ -960,7 +958,7 @@ void Processing_GetData(uint8 **data0, uint8 **data1, DataSettings **ds)
     *ds = dataSet;
 }
 
-float Processing_GetCursU(Channel chan, float posCurT)
+float Processing::GetCursU(Channel chan, float posCurT)
 {
     if(!dataIn[chan])
     {
@@ -976,7 +974,7 @@ float Processing_GetCursU(Channel chan, float posCurT)
     return retValue;
 }
 
-float Processing_GetCursT(Channel chan, float posCurU, int numCur)
+float Processing::GetCursT(Channel chan, float posCurU, int numCur)
 {
     if(!dataIn[chan])
     {
@@ -1037,7 +1035,7 @@ float Processing_GetCursT(Channel chan, float posCurU, int numCur)
     return 0;
 }
 
-void Processing_InterpolationSinX_X(uint8 data[FPGA_MAX_POINTS], TBase tBase)
+void Processing::InterpolationSinX_X(uint8 data[FPGA_MAX_POINTS], TBase tBase)
 {
 /*
      Последовательности x в sin(x)
@@ -1135,7 +1133,7 @@ void Processing_InterpolationSinX_X(uint8 data[FPGA_MAX_POINTS], TBase tBase)
     }
 }
 
-char* Processing_GetStringMeasure(Measure measure, Channel chan, char buffer[20])
+char* Processing::GetStringMeasure(Measure measure, Channel chan, char buffer[20])
 {
     if (!SET_ENABLED(chan))
     {
@@ -1165,12 +1163,12 @@ char* Processing_GetStringMeasure(Measure measure, Channel chan, char buffer[20]
     return buffer;
 }
 
-int Processing_GetMarkerHorizontal(Channel chan, int numMarker)
+int Processing::GetMarkerHorizontal(Channel chan, int numMarker)
 {
     return markerHor[chan][numMarker] - MIN_VALUE;
 }
 
-int Processing_GetMarkerVertical(Channel chan, int numMarker)
+int Processing::GetMarkerVertical(Channel chan, int numMarker)
 {
     return markerVert[chan][numMarker];
 }

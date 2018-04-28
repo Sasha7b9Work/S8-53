@@ -185,13 +185,13 @@ void Display::DrawMarkersForMeasure(float scale, Channel chan)
     Painter::SetColor(ColorCursors(chan));
     for(int numMarker = 0; numMarker < 2; numMarker++)
     {
-        int pos = Processing_GetMarkerHorizontal(chan, numMarker);
+        int pos = Processing::GetMarkerHorizontal(chan, numMarker);
         if(pos != ERROR_VALUE_INT && pos > 0 && pos < 200)
         {
             Painter::DrawDashedHLine(Grid::FullBottom() - pos * scale, Grid::Left(), Grid::Right(), 3, 2, 0);
         }
 
-        pos = Processing_GetMarkerVertical(chan, numMarker);
+        pos = Processing::GetMarkerVertical(chan, numMarker);
         if (pos != ERROR_VALUE_INT && pos > 0 && pos < Grid::Right())
         {
             Painter::DrawDashedVLine(Grid::Left() + pos * scale, GRID_TOP, Grid::FullBottom(), 3, 2, 0);
@@ -340,7 +340,7 @@ void Display::DrawSignalPointed(const uint8 *data, const DataSettings *ds, int s
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-// Если data == 0, то данные брать из Processing_GetData
+// Если data == 0, то данные брать из GetData
 void Display::DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int minY, int maxY)
 {
     bool calculateFiltr = true;
@@ -349,11 +349,11 @@ void Display::DrawDataChannel(uint8 *data, Channel chan, DataSettings *ds, int m
         calculateFiltr = false;
         if (chan == A)
         {
-            Processing_GetData(&data, 0, &ds);
+            Processing::GetData(&data, 0, &ds);
         }
         else
         {
-            Processing_GetData(0, &data, &ds);
+            Processing::GetData(0, &data, &ds);
         }
     }
 
@@ -415,7 +415,7 @@ void Display::DrawMath()
     uint8 *dataRel0 = 0;
     uint8 *dataRel1 = 0;
     DataSettings *ds = 0;
-    Processing_GetData(&dataRel0, &dataRel1, &ds);
+    Processing::GetData(&dataRel0, &dataRel1, &ds);
 
     float dataAbs0[FPGA_MAX_POINTS];
     float dataAbs1[FPGA_MAX_POINTS];
@@ -609,7 +609,7 @@ void Display::DrawDataInModePoint2Point()
     uint8 *data0 = 0;
     uint8 *data1 = 0;
     DataSettings *ds = 0;
-    Processing_GetData(&data0, &data1, &ds);
+    Processing::GetData(&data0, &data1, &ds);
 
     if (LAST_AFFECTED_CHANNEL_IS_B)
     {
@@ -656,7 +656,7 @@ bool Display::DrawDataInModeNormal()
     uint8 *data0 = 0;
     uint8 *data1 = 0;
     DataSettings *ds = 0;
-    Processing_GetData(&data0, &data1, &ds);
+    Processing::GetData(&data0, &data1, &ds);
 
     int16 numSignals = (int16)Storage::NumElementsWithSameSettings();
     LIMITATION(numSignals, numSignals, 1, NUM_ACCUM);
@@ -1836,7 +1836,7 @@ void Display::DrawMeasures()
         return;
     }
 
-    Processing_CalculateMeasures();
+    Processing::CalculateMeasures();
 
     if(MEAS_FIELD_IS_HAND)
     {
@@ -1887,16 +1887,16 @@ void Display::DrawMeasures()
                 }
                 if(MEAS_SOURCE_IS_A)
                 {
-                    Painter::DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, A, buffer), ColorChannel(A));
+                    Painter::DrawTextC(x + 2, y + 11, Processing::GetStringMeasure(meas, A, buffer), ColorChannel(A));
                 }
                 else if(MEAS_SOURCE_IS_B)
                 {
-                    Painter::DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, B, buffer), ColorChannel(B));
+                    Painter::DrawTextC(x + 2, y + 11, Processing::GetStringMeasure(meas, B, buffer), ColorChannel(B));
                 }
                 else
                 {
-                    Painter::DrawTextC(x + 2, y + 11, Processing_GetStringMeasure(meas, A, buffer), ColorChannel(A));
-                    Painter::DrawTextC(x + 2, y + 20, Processing_GetStringMeasure(meas, B, buffer), ColorChannel(B));
+                    Painter::DrawTextC(x + 2, y + 11, Processing::GetStringMeasure(meas, A, buffer), ColorChannel(A));
+                    Painter::DrawTextC(x + 2, y + 20, Processing::GetStringMeasure(meas, B, buffer), ColorChannel(B));
                 }
             }
         }
