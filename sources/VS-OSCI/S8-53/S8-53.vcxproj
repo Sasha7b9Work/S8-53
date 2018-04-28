@@ -68,7 +68,7 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\ADC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\EPROM.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.cpp">
@@ -263,7 +263,7 @@
     <ClInclude Include="..\..\S8-53\src\Hardware\ADC.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Hardware\FLASH.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\EPROM.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\FSMC.h">

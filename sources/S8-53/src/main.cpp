@@ -11,7 +11,7 @@
 #include "FPGA/DataStorage.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
-#include "Hardware/FLASH.h"
+#include "Hardware/EPROM.h"
 #include "Menu/Pages/PageCursors.h"
 #include "Menu/Menu.h"
 #include "Panel/Panel.h"

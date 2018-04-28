@@ -228,9 +228,6 @@
     <ClCompile Include="..\..\S8-53\src\Display\PainterText.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\FLASH.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\FSMC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -333,6 +330,9 @@
     <ClCompile Include="..\..\S8-53\src\libs\usbd_desc.cpp">
       <Filter>libs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\EPROM.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
@@ -390,9 +390,6 @@
       <Filter>FPGA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\ADC.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Hardware\FLASH.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\FSMC.h">
@@ -634,6 +631,9 @@
     </ClInclude>
     <ClInclude Include="src\inttypes.h">
       <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Hardware\EPROM.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

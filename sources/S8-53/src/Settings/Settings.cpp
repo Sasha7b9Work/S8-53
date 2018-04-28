@@ -1,5 +1,5 @@
 #include "Settings.h"
-#include "Hardware/FLASH.H"
+#include "Hardware/EPROM.H"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Panel/Panel.h"

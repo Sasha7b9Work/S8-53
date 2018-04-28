@@ -11,7 +11,7 @@
 #include "FPGA/FPGA_Types.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Sound.h"
-#include "Hardware/FLASH.h"
+#include "Hardware/EPROM.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Log.h"

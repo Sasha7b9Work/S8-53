@@ -16,7 +16,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "Utils/Math.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/FLASH.h"
+#include "Hardware/EPROM.h"
 #include "Hardware/Sound.h"
 #include "Log.h"
 #include "Tables.h"

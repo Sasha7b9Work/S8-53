@@ -1240,11 +1240,6 @@
               <FilePath>.\src\Hardware\ADC.h</FilePath>
             </File>
             <File>
-              <FileName>FLASH.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FLASH.h</FilePath>
-            </File>
-            <File>
               <FileName>FSMC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
@@ -1285,11 +1280,6 @@
               <FilePath>.\src\Hardware\DisplayHardware.inc</FilePath>
             </File>
             <File>
-              <FileName>FLASH.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
@@ -1308,6 +1298,16 @@
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EPROM.h</FilePath>
             </File>
           </Files>
         </Group>
