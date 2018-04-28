@@ -108,7 +108,7 @@ static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::AddData(uint8 *data0, uint8 *data1, DataSettings dss)
 {
-    dss.time = RTC_GetPackedTime();
+    dss.time = CLOCK::GetPackedTime();
 
     if(dss.enableCh0 == 0 && dss.enableCh1 == 0)
     {

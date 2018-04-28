@@ -192,7 +192,7 @@ void IPaddress_NextPosition(IPaddress *ipEthernet_IP)
 
 void ItemTime_SetOpened(Time *item)
 {
-    PackedTime time = RTC_GetPackedTime();
+    PackedTime time = CLOCK::GetPackedTime();
     *(item->seconds) = (int8)time.seconds;
     *(item->minutes) = (int8)time.minutes;
     *(item->hours) = (int8)time.hours;
@@ -203,7 +203,7 @@ void ItemTime_SetOpened(Time *item)
 
 void ItemTime_SetNewTime(Time *time)
 {
-    RTC_SetTimeAndData(*time->day, *time->month, *time->year, *time->hours, *time->minutes, *time->seconds);
+    CLOCK::SetTimeAndData(*time->day, *time->month, *time->year, *time->hours, *time->minutes, *time->seconds);
 }
 
 void ItemTime_SelectNextPosition(Time *time)

@@ -374,7 +374,7 @@ LabelNextNumber:
     }
     else
     {
-        PackedTime time = RTC_GetPackedTime();
+        PackedTime time = CLOCK::GetPackedTime();
                            //  1          2           3         4           5             6
         uint values[] = {0, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 

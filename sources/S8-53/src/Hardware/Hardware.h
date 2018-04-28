@@ -16,9 +16,3 @@ public:
 #ifdef __cplusplus
 }
 #endif
-    
-
-
-
-// #define HARDWARE_ERROR HardwareErrorHandler(__FILE__, __FUNCTION__, __LINE__);
-// void HardwareErrorHandler(const char *file, const char *function, int line) {};

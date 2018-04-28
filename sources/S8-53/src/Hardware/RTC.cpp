@@ -1,5 +1,3 @@
-
-
 #include "RTC.h"
 #include "Hardware/Hardware.h"
 #include "Log.h"
@@ -29,11 +27,6 @@
 #endif
 
 
-void        RTC_Init();
-bool        RTC_SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds);
-PackedTime  RTC_GetPackedTime();
-
-
 static const RTC_HandleTypeDef rtcHandle =
 {
     RTC,
@@ -48,7 +41,7 @@ static const RTC_HandleTypeDef rtcHandle =
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void RTC_Init(void)
+void CLOCK::Init(void)
 {
     if (HAL_RTC_Init((RTC_HandleTypeDef*)(&rtcHandle)) != HAL_OK)
     {
@@ -57,7 +50,7 @@ void RTC_Init(void)
 
     if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef*)&rtcHandle, RTC_BKP_DR0) != VALUE_FOR_RTC)
     {
-        if(RTC_SetTimeAndData(11, 11, 11, 11, 11, 11))
+        if(SetTimeAndData(11, 11, 11, 11, 11, 11))
         {
             HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef*)&rtcHandle, RTC_BKP_DR0, VALUE_FOR_RTC);
         }
@@ -65,7 +58,7 @@ void RTC_Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PackedTime RTC_GetPackedTime(void)
+PackedTime CLOCK::GetPackedTime(void)
 {
     PackedTime time;
 
@@ -87,7 +80,7 @@ PackedTime RTC_GetPackedTime(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool RTC_SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
+bool CLOCK::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
 {
     RTC_DateTypeDef dateStruct =
     {
