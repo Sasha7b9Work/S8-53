@@ -57,7 +57,7 @@ static void ReadPeriod();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::Init(void) 
 {
-    dataStorage.Clear();
+    Storage::Clear();
     FPGA::LoadSettings();
     FPGA::SetNumSignalsInSec(sDisplay_NumSignalsInS());
     FPGA::SetNumberMeasuresForGates(NUM_MEAS_FOR_GATES);
@@ -460,7 +460,7 @@ void FPGA::DataRead(bool necessaryShift, bool saveToStorage)
             InverseDataIsNecessary(B, dataRel1);
         }
 
-        dataStorage.AddData(dataRel0, dataRel1, ds);
+        Storage::AddData(dataRel0, dataRel1, ds);
 
         if (TRIG_MODE_FIND_IS_AUTO && TRIG_AUTO_FIND)
         {
@@ -1155,7 +1155,7 @@ void FPGA::FillDataPointer(DataSettings *dp)
 void FPGA::FindAndSetTrigLevel(void)
 {
     TrigSource trigSource = TRIG_SOURCE;
-    if (dataStorage.AllDatas() == 0 || TRIG_SOURCE_IS_EXT)
+    if (Storage::AllDatas() == 0 || TRIG_SOURCE_IS_EXT)
     {
         return;
     }
@@ -1165,7 +1165,7 @@ void FPGA::FindAndSetTrigLevel(void)
     uint8 *data1 = 0;
     DataSettings *ds_ = 0;
 
-    dataStorage.GetDataFromEnd(0, &ds_, &data0, &data1);
+    Storage::GetDataFromEnd(0, &ds_, &data0, &data1);
 
     const uint8 *data = (chanTrig == A) ? data0 : data1;
 

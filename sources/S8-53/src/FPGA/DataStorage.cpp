@@ -11,9 +11,6 @@
 #include <string.h>
 
 
-DataStorage dataStorage;
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define SIZE_POOL   (30 * 1024)                     // Количество отведённой для измерений памяти.
 
@@ -38,7 +35,7 @@ static bool newSumCalculated[NumChannels] = {true, true};                  // Ес
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void DataStorage::PrintElement(DataSettings *dp)
+void Storage::PrintElement(DataSettings *dp)
 {
     if(dp == 0)
     {
@@ -51,7 +48,7 @@ void DataStorage::PrintElement(DataSettings *dp)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::Clear(void)
+void Storage::Clear(void)
 {
     firstElem = 0;
     lastElem = (DataSettings*)beginPool;
@@ -60,7 +57,7 @@ void DataStorage::Clear(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::ClearLimitsAndSums(void)
+void Storage::ClearLimitsAndSums(void)
 {
     memset(limitUp[0], 0, FPGA_MAX_POINTS);
     memset(limitUp[1], 0, FPGA_MAX_POINTS);
@@ -70,9 +67,9 @@ void DataStorage::ClearLimitsAndSums(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss)
+void Storage::CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss)
 {
-    int numAveData = dataStorage.NumElementsWithCurrentSettings();
+    int numAveData = NumElementsWithCurrentSettings();
     int size = (int)(dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2));
     if (numAveData == 1)
     {
@@ -106,7 +103,7 @@ static void CalculateAroundAverage(uint8 *data0, uint8 *data1, DataSettings *dss
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::AddData(uint8 *data0, uint8 *data1, DataSettings dss)
+void Storage::AddData(uint8 *data0, uint8 *data1, DataSettings dss)
 {
     dss.time = Clock::GetPackedTime();
 
@@ -125,17 +122,17 @@ void DataStorage::AddData(uint8 *data0, uint8 *data1, DataSettings dss)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::AllDatas(void)
+int Storage::AllDatas(void)
 {
     return allData;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
+void Storage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
 {
     uint numElements = dss->length1channel * (dss->peakDet == PeackDet_Disable ? 1 : 2);
 
-    if(dataStorage.NumElementsInStorage() == 0 || NUM_MIN_MAX == 1 || (!SettingsIsEquals(dss, GetSettingsDataFromEnd(0))))
+    if(NumElementsInStorage() == 0 || NUM_MIN_MAX == 1 || (!SettingsIsEquals(dss, GetSettingsDataFromEnd(0))))
     {
         for(int i = 0; i < numElements; i++)
         {
@@ -145,10 +142,10 @@ void DataStorage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
     }
     else
     {
-        int allDatas = dataStorage.NumElementsWithSameSettings();
+        int allDatas = NumElementsWithSameSettings();
         LIMITATION(allDatas, allDatas, 1, NUM_MIN_MAX);
         
-        if(dataStorage.NumElementsWithSameSettings() >= NUM_MIN_MAX)
+        if(NumElementsWithSameSettings() >= NUM_MIN_MAX)
         {
             for(int i = 0; i < numElements; i++)
             {
@@ -160,8 +157,8 @@ void DataStorage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
      
         for(int numData = 0; numData < allDatas; numData++)
         {
-            const uint8 *dataA = dataStorage.GetData(A, numData);
-            const uint8 *dataB = dataStorage.GetData(B, numData);
+            const uint8 *dataA = GetData(A, numData);
+            const uint8 *dataB = GetData(B, numData);
             for(int i = 0; i < numElements; i++)
             {
                 if(dataA[i] < limitDown[0][i])  limitDown[0][i] = dataA[i];
@@ -174,13 +171,13 @@ void DataStorage::CalculateLimits(uint8 *data0, uint8 *data1, DataSettings *dss)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::CalculateSums(void)
+void Storage::CalculateSums(void)
 {
     DataSettings *ds = 0;
     uint8 *data0 = 0;
     uint8 *data1 = 0;
 
-    dataStorage.GetDataFromEnd(0, &ds, &data0, &data1);
+    GetDataFromEnd(0, &ds, &data0, &data1);
     
     uint numPoints = ds->length1channel * (ds->peakDet == PeackDet_Disable ? 1 : 2);
 
@@ -222,7 +219,7 @@ void DataStorage::CalculateSums(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::NumElementsWithSameSettings(void)
+int Storage::NumElementsWithSameSettings(void)
 {
     int retValue = 0;
     int numElements = NumElementsInStorage();
@@ -237,7 +234,7 @@ int DataStorage::NumElementsWithSameSettings(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::NumElementsWithCurrentSettings(void)
+int Storage::NumElementsWithCurrentSettings(void)
 {
     DataSettings dp;
     FPGA::FillDataPointer(&dp);
@@ -254,7 +251,7 @@ int DataStorage::NumElementsWithCurrentSettings(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::NumElementsInStorage(void)
+int Storage::NumElementsInStorage(void)
 {
     int retValue = 0;
     DataSettings *elem = firstElem;
@@ -277,13 +274,13 @@ int DataStorage::NumElementsInStorage(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings* DataStorage::GetSettingsDataFromEnd(int fromEnd)
+DataSettings* Storage::GetSettingsDataFromEnd(int fromEnd)
 {
     return FromEnd(fromEnd);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool DataStorage::GetDataFromEnd(int fromEnd, DataSettings **ds, uint8 **data0, uint8 **data1)
+bool Storage::GetDataFromEnd(int fromEnd, DataSettings **ds, uint8 **data0, uint8 **data1)
 {
     static uint8 dataImportRel[2][FPGA_MAX_POINTS];
 
@@ -307,7 +304,7 @@ bool DataStorage::GetDataFromEnd(int fromEnd, DataSettings **ds, uint8 **data0, 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8* DataStorage::GetData(Channel chan, int fromEnd)
+uint8* Storage::GetData(Channel chan, int fromEnd)
 {
     static uint8 dataImportRel[2][FPGA_MAX_POINTS];
     DataSettings* dp = FromEnd(fromEnd);
@@ -320,7 +317,7 @@ uint8* DataStorage::GetData(Channel chan, int fromEnd)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool DataStorage::CopyData(DataSettings *ds, Channel chan, uint8 datatImportRel[2][FPGA_MAX_POINTS])
+bool Storage::CopyData(DataSettings *ds, Channel chan, uint8 datatImportRel[2][FPGA_MAX_POINTS])
 {
     if((chan == A && ds->enableCh0 == 0) || (chan == B && ds->enableCh1 == 0))
     {
@@ -343,7 +340,7 @@ bool DataStorage::CopyData(DataSettings *ds, Channel chan, uint8 datatImportRel[
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8* DataStorage::GetAverageData(Channel chan)
+uint8* Storage::GetAverageData(Channel chan)
 {
     static uint8 data[NumChannels][FPGA_MAX_POINTS];
     
@@ -389,7 +386,7 @@ uint8* DataStorage::GetAverageData(Channel chan)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8* DataStorage::GetLimitation(Channel chan, int direction)
+uint8* Storage::GetLimitation(Channel chan, int direction)
 {
     uint8 *retValue = 0;
 
@@ -406,7 +403,7 @@ uint8* DataStorage::GetLimitation(Channel chan, int direction)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::NumberAvailableEntries(void)
+int Storage::NumberAvailableEntries(void)
 {
     if(firstElem == 0)
     {
@@ -430,7 +427,7 @@ void VerifyAddress(uint8 *dst, uint size)
     address += (length);
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::PushData(DataSettings *dp, uint8 *data0, uint8 *data1)
+void Storage::PushData(DataSettings *dp, uint8 *data0, uint8 *data1)
 {
     int required = SizeElem(dp);
     while(MemoryFree() < required)
@@ -483,7 +480,7 @@ void DataStorage::PushData(DataSettings *dp, uint8 *data0, uint8 *data1)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::MemoryFree(void)
+int Storage::MemoryFree(void)
 {
     if (firstElem == 0)
     {
@@ -512,7 +509,7 @@ int DataStorage::MemoryFree(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int DataStorage::SizeElem(DataSettings *dp)
+int Storage::SizeElem(DataSettings *dp)
 {
     int retValue = sizeof(DataSettings);
     if(dp->enableCh0 == 1)
@@ -535,7 +532,7 @@ int DataStorage::SizeElem(DataSettings *dp)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DataStorage::RemoveFirstElement(void)
+void Storage::RemoveFirstElement(void)
 {
     firstElem = NextElem(firstElem);
     firstElem->addrPrev = 0;
@@ -543,13 +540,13 @@ void DataStorage::RemoveFirstElement(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings* DataStorage::NextElem(DataSettings *elem)
+DataSettings* Storage::NextElem(DataSettings *elem)
 {
     return (DataSettings*)elem->addrNext;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings* DataStorage::FromEnd(int indexFromEnd)
+DataSettings* Storage::FromEnd(int indexFromEnd)
 {
     if(firstElem == 0)
     {
@@ -570,7 +567,7 @@ DataSettings* DataStorage::FromEnd(int indexFromEnd)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool DataStorage::SettingsIsIdentical(int elemFromEnd0, int elemFromEnd1)
+bool Storage::SettingsIsIdentical(int elemFromEnd0, int elemFromEnd1)
 {
     DataSettings* dp0 = FromEnd(elemFromEnd0);
     DataSettings* dp1 = FromEnd(elemFromEnd1);
@@ -578,7 +575,7 @@ bool DataStorage::SettingsIsIdentical(int elemFromEnd0, int elemFromEnd1)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool DataStorage::SettingsIsEquals(DataSettings *dp0, DataSettings *dp1)
+bool Storage::SettingsIsEquals(DataSettings *dp0, DataSettings *dp1)
 {
     bool retValue = (dp0->enableCh0  == dp1->enableCh0) &&
         (dp0->enableCh1     == dp1->enableCh1) &&
