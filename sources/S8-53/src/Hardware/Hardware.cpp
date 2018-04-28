@@ -114,7 +114,7 @@ void Hardware::Init(void)
 
     FSMC::Init();
 
-    adc.Init();
+    ADConverter::Init();
 
     FlashDrive::Init();
     

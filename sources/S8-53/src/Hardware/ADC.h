@@ -4,8 +4,6 @@
 class ADConverter
 {
 public:
-    void Init();
-    uint16 GetValue();
+    static void Init();
+    static uint16 GetValue();
 };
-
-extern ADConverter adc;
