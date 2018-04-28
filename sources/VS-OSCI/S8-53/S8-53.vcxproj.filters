@@ -60,9 +60,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\libs\system_stm32f2xx.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -333,6 +330,9 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\EPROM.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Hardware\CLOCK.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
@@ -396,9 +396,6 @@
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\Hardware.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Hardware\RTC.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\Sound.h">
@@ -633,6 +630,9 @@
       <Filter>_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\EPROM.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Hardware\CLOCK.h">
       <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>

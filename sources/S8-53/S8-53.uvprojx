@@ -1250,16 +1250,6 @@
               <FilePath>.\src\Hardware\Hardware.h</FilePath>
             </File>
             <File>
-              <FileName>RTC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\RTC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\RTC.h</FilePath>
-            </File>
-            <File>
               <FileName>Sound.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Sound.cpp</FilePath>
@@ -1308,6 +1298,16 @@
               <FileName>EPROM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\EPROM.h</FilePath>
+            </File>
+            <File>
+              <FileName>CLOCK.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CLOCK.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CLOCK.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CLOCK.h</FilePath>
             </File>
           </Files>
         </Group>

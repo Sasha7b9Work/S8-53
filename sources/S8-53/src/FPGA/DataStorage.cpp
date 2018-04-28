@@ -7,7 +7,7 @@
 #include "Log.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include <string.h>
 
 

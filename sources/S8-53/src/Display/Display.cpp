@@ -15,7 +15,7 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "VCP/VCP.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/PageCursors.h"

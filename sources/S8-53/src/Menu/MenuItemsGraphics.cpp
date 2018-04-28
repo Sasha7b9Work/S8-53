@@ -2,7 +2,7 @@
 #include "MenuItemsLogic.h"
 #include "Menu.h"
 #include "Hardware/Hardware.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"

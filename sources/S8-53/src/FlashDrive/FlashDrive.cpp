@@ -9,7 +9,7 @@
 #include <usbh_msc.h>
 #include "ffconf.h"
 #include "Hardware/Hardware.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "FlashDrive.h"
 
 

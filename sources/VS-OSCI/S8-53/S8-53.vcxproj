@@ -80,7 +80,7 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\MSP_USBH.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\Hardware\RTC.cpp">
+    <ClCompile Include="..\..\S8-53\src\Hardware\CLOCK.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\Hardware\Sound.cpp">
@@ -272,7 +272,7 @@
     <ClInclude Include="..\..\S8-53\src\Hardware\Hardware.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\Hardware\RTC.h">
+    <ClInclude Include="..\..\S8-53\src\Hardware\CLOCK.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\Sound.h">

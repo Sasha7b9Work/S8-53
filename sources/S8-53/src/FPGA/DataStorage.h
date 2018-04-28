@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Settings/SettingsTypes.h"
-#include "Hardware/RTC.h"
+//#include "Hardware/CLOCK.h"
 
 
 class DataStorage

@@ -1,5 +1,3 @@
-
-
 #include <stm32f207xx.h>
 #include <stm32f2xx_hal.h>
 #include <stm32f2xx_hal_tim.h>
@@ -9,7 +7,7 @@
 #include "Hardware.h"
 #include "ADC.h"
 #include "Sound.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "FSMC.h"
 #include "Utils/GlobalFunctions.h"
 #include "Hardware/Timer.h"

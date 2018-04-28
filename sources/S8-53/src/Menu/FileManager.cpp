@@ -11,7 +11,7 @@
 #include "Utils/Math.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Panel/Panel.h"
 #include "Log.h"

@@ -7,7 +7,7 @@
 #include "Settings/Settings.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
-#include "Hardware/RTC.h"
+#include "Hardware/CLOCK.h"
 #include "Utils/Math.h"
 
 
