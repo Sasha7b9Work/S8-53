@@ -50,7 +50,7 @@
     <ClCompile Include="..\..\S8-53\src\FlashDrive\FlashDrive.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\FPGA\DataStorage.cpp">
+    <ClCompile Include="..\..\S8-53\src\FPGA\Storage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\S8-53\src\FPGA\FPGA.cpp">
@@ -246,7 +246,7 @@
     <ClInclude Include="..\..\S8-53\src\Ethernet\Ethernet.h" />
     <ClInclude Include="..\..\S8-53\src\Ethernet\TcpSocket.h" />
     <ClInclude Include="..\..\S8-53\src\FlashDrive\FlashDrive.h" />
-    <ClInclude Include="..\..\S8-53\src\FPGA\DataStorage.h">
+    <ClInclude Include="..\..\S8-53\src\FPGA\Storage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\FPGA\FPGA.h">

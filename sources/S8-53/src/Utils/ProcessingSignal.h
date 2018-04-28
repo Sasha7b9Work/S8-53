@@ -2,7 +2,7 @@
 #include "Measures.h"
 #include "defines.h"
 #include "FPGA/FPGA_Types.h"
-#include "FPGA/DataStorage.h"
+//#include "FPGA/DataStorage.h"
 
 
 void Processing_SetSignal(uint8 *data0, uint8 *data1, DataSettings *ds, int firstPoint, int lastPoint);         // Установить сигнал для обработки.

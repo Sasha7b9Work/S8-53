@@ -90,9 +90,6 @@
     <ClCompile Include="..\..\S8-53\src\FPGA\FPGA_Calibration.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\S8-53\src\FPGA\DataStorage.cpp">
-      <Filter>FPGA</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\S8-53\src\FlashDrive\FlashDrive.cpp">
       <Filter>FlashDrive</Filter>
     </ClCompile>
@@ -333,6 +330,9 @@
     <ClCompile Include="..\..\S8-53\src\Hardware\Clock.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\FPGA\Storage.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
@@ -379,9 +379,6 @@
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\FlashDrive\FlashDrive.h">
       <Filter>FlashDrive</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\S8-53\src\FPGA\DataStorage.h">
-      <Filter>FPGA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\FPGA\FPGA.h">
       <Filter>FPGA</Filter>
@@ -634,6 +631,9 @@
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\Hardware\Clock.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\FPGA\Storage.h">
+      <Filter>FPGA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

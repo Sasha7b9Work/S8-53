@@ -1190,16 +1190,6 @@
           <GroupName>FPGA</GroupName>
           <Files>
             <File>
-              <FileName>DataStorage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\DataStorage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataStorage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\DataStorage.h</FilePath>
-            </File>
-            <File>
               <FileName>FPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA.cpp</FilePath>
@@ -1223,6 +1213,16 @@
               <FileName>FPGA_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\Storage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\Storage.h</FilePath>
             </File>
           </Files>
         </Group>

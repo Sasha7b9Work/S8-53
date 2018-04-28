@@ -8,7 +8,7 @@
 #include "Ethernet/Ethernet.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/DataStorage.h"
+#include "FPGA/Storage.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
 #include "Hardware/EPROM.h"
