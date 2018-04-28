@@ -25,4 +25,58 @@ public:
     static int GetMarkerHorizontal(Channel chan, int numMarker);
     /// Возвращает значение вертикального маркера. Если ERROR_VALUE_INT - маркер рисовать не нужно.
     static int GetMarkerVertical(Channel chan, int numMarker);
+private:
+    static float CalculateVoltageMax(Channel chan);
+    static float CalculateVoltageMin(Channel chan);
+    static float CalculateVoltagePic(Channel chan);
+    static float CalculateVoltageMaxSteady(Channel chan);
+    static float CalculateVoltageMinSteady(Channel chan);
+    static float CalculateVoltageAmpl(Channel chan);
+    static float CalculateVoltageAverage(Channel chan);
+    static float CalculateVoltageRMS(Channel chan);
+    static float CalculateVoltageVybrosPlus(Channel chan);
+    static float CalculateVoltageVybrosMinus(Channel chan);
+    static float CalculatePeriod(Channel chan);
+    /// Точно вычисляет период или целое число периодов в точках сигнала.
+    static int   CalculatePeriodAccurately(Channel chan);
+    static float CalculateFreq(Channel chan);
+    static float CalculateTimeNarastaniya(Channel chan);
+    static float CalculateTimeSpada(Channel chan);
+    static float CalculateDurationPlus(Channel chan);
+    static float CalculateDurationMinus(Channel chan);
+    static float CalculateSkvaznostPlus(Channel chan);
+    static float CalculateSkvaznostMinus(Channel chan);
+    /// Возвращает минимальное значение относительного сигнала    
+    static float CalculateMinRel(Channel chan);
+    /// Возвращает минимальное установившееся значение относительного сигнала
+    static float CalculateMinSteadyRel(Channel chan);
+    /// Возвращает максимальное значение относительного сигнала
+    static float CalculateMaxRel(Channel chan);
+    /// Возвращает максимальное установившееся значение относительного сигнала
+    static float CalculateMaxSteadyRel(Channel chan);
+    /// Возвращает среденее значение относительного сигнала
+    static float CalculateAverageRel(Channel chan);
+    static float CalculatePicRel(Channel chan);
+    static float CalculateDelayPlus(Channel chan);
+    static float CalculateDelayMinus(Channel chan);
+    static float CalculatePhazaPlus(Channel chan);
+    static float CalculatePhazaMinus(Channel chan);
+    /// Найти точку пересечения сигнала с горизонтальной линией, проведённой на уровне yLine. numItersection - порядковый номер пересечения, 
+    /// начинается с 1. downToTop - если true, ищем пересечение сигнала со средней линией при прохождении из "-" в "+".
+    static float FindIntersectionWithHorLine(Channel chan, int numIntersection, bool downToUp, uint8 yLine);
+
+    static void CountedToCurrentSettings();
+
+    typedef float (*pFuncFCh)(Channel);
+
+    struct MeasureCalculate
+    {
+        char        *name;
+        pFuncFCh    FuncCalculate;
+        pFuncCFBC   FucnConvertate;
+        /// Если true, нужно показывать знак.
+        bool        showSign;
+    };
+
+    static const MeasureCalculate measures[Measure_NumMeasures];
 };
