@@ -113,7 +113,7 @@ void Hardware::Init(void)
     
     Panel::Init();
 
-    FSMC_Init();
+    FSMC::Init();
 
     adc.Init();
 

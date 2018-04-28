@@ -9,7 +9,11 @@
 #define ADDR_FPGA           ((uint8*)(ADDR_BANK + 0x00c80000))  // Адрес записи в аппаратные регистры.
 #define ADDR_NULL           ((uint8*)(ADDR_BANK + 0x00a00000))
 
+class FSMC
+{
+public:
+    static void  Init();
+    static uint8 Read(uint8* address);
+    static void  Write(uint8 *address, uint8 value);
+};
 
-void    FSMC_Init();
-uint8   FSMC_Read(uint8* address);
-void    FSMC_Write(uint8 *address, uint8 value);
