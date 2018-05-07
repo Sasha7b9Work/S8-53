@@ -137,6 +137,7 @@ static void OnPress_ResetSettings(void)
     if (Panel::WaitPressingButton() == B_Start)
     {
         Settings::Load(true);
+        FPGA::Init();
     }
 
     Timer::Disable(kTimerDrawHandFunction);
