@@ -12,15 +12,14 @@ namespace LibraryS8_53
 {
     public class StateObject
     {
-        public const int BUFFER_SIZE = 256;
+        public const int BUFFER_SIZE = 1;
         public byte[] buffer = new byte[BUFFER_SIZE];
-        public StringBuilder sb = new StringBuilder();
     }
 
     public class EventArgsReceiveSocketTCP : EventArgs
     {
-        public String data;
-        public EventArgsReceiveSocketTCP(String data)
+        public byte[] data;
+        public EventArgsReceiveSocketTCP(byte[] data)
         {
             this.data = data;
         }
@@ -28,15 +27,17 @@ namespace LibraryS8_53
 
     public class SocketTCP
     {
-        private Mutex mutex = new Mutex();
-
         private Socket socket = null;
 
         private String response = String.Empty;
 
-        public event EventHandler<EventArgs> ReceiveEvent;
+        static public event EventHandler<EventArgs> ReceiveEvent;
 
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
+
+        public SocketTCP()
+        {
+        }
 
         ~SocketTCP()
         {
@@ -66,6 +67,8 @@ namespace LibraryS8_53
                 IPEndPoint remoteEP = new IPEndPoint(address, port);
 
                 socket = new Socket(remoteEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+                socket.SendTimeout = 1;
 
                 socket.ReceiveBufferSize = 100 * 1024;
 
@@ -116,28 +119,13 @@ namespace LibraryS8_53
             }
         }
 
-        public void ClearRecvBuffer()
-        {
-            while (socket.Available > 0)
-            {
-                int size = socket.Available;
-                byte[] buffer = new byte[size];
-                socket.Receive(buffer, size, SocketFlags.None);
-            }
-        }
-
         public void SendString(string data)
         {
-            Console.WriteLine("Засылаю " + data);
-            mutex.WaitOne();
-
             if (socket.Connected)
             {
                 byte[] byteData = Encoding.ASCII.GetBytes(":" + data + "\x0d");
                 socket.Send(byteData);
             }
-
-            mutex.ReleaseMutex();
         }
 
         public string ReadString()
@@ -183,21 +171,16 @@ namespace LibraryS8_53
 
                         if (handler != null)
                         {
-                            state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-                            String data = state.sb.ToString();
-                            handler(null, new EventArgsReceiveSocketTCP(data.Substring(0, data.Length - 2)));
+                            byte[] data = new byte[bytesRead];
+                            for(int i = 0; i < bytesRead; i++)
+                            {
+                                data[i] = state.buffer[i];
+                            }
+                            handler(null, new EventArgsReceiveSocketTCP(data));
                         }
 
 
                         Receive();
-                    }
-                    else
-                    {
-                        if (state.sb.Length > 1)
-                        {
-                            response = state.sb.ToString();
-                            Console.WriteLine(response);
-                        }
                     }
                 }
             }
@@ -224,16 +207,6 @@ namespace LibraryS8_53
             }
         }
 
-        public bool DeviceExistOnAddress(string ip, int port)
-        {
-            return false;
-        }
-
-        public int BytesToRead()
-        {
-            return socket.Available;
-        }
-
         public void Read(byte[] buffer, int numBytes)
         {
             int recvBytes = socket.Receive(buffer, numBytes, SocketFlags.None);
@@ -244,9 +217,51 @@ namespace LibraryS8_53
             }
         }
 
-        public Socket GetSocket()
+        public byte[] ReadBytes(long timeWaitMS)
         {
-            return socket;
+            byte[] bytes = new byte[0];
+            try
+            {
+                long timeLast = CurrentTime();
+                int numPrevBytes = 0;
+                while (CurrentTime() - timeLast < timeWaitMS)
+                {
+                    if (socket.Available != numPrevBytes)
+                    {
+                        timeLast = CurrentTime();
+                        numPrevBytes = socket.Available;
+                    }
+                }
+
+                int numBytes = socket.Available;
+                if (numBytes != 0)
+                {
+                    bytes = new byte[numBytes];
+                    socket.Receive(bytes, numBytes, SocketFlags.None);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return bytes;
+        }
+
+        private static long CurrentTime()
+        {
+            return DateTime.Now.Ticks / 10000;
+        }
+
+        public void Clear()
+        {
+            if (socket.Connected)
+            {
+                while(socket.Available != 0)
+                {
+                    byte[] bytes = new byte[1];
+                    socket.Receive(bytes, 1, SocketFlags.None);
+                }
+            }
         }
     }
 }

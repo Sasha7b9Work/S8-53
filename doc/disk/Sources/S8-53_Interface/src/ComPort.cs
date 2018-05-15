@@ -23,17 +23,14 @@ namespace LibraryS8_53
         private static SerialPort port;
         private static string[] ports;
         private static Mutex mutex = new Mutex();
-        // Если true, то будет включён обработчик события SerialPort
-        private bool dataReceivedHandlerEnable = false;
-        public event EventHandler<EventArgs> ReceiveEvent;
 
         public ComPort()
         {
             port = new SerialPort();
             port.ReadTimeout = 100;
             port.BaudRate = 125000;
-
-            port.DataReceived += new SerialDataReceivedEventHandler(DataReceiveHandler);
+            // Устанавливаем количество байт в приёмном буфере, при котором будет вызываться обработчик приёма
+            port.ReceivedBytesThreshold = 1;
         }
 
         public override void Stop()
@@ -49,6 +46,10 @@ namespace LibraryS8_53
 
         public bool DeviceConnectToPort(int numPort)
         {
+            if(port.IsOpen)
+            {
+                port.Close();
+            }
             port.PortName = ports[numPort];
             string answer;
             try
@@ -70,6 +71,26 @@ namespace LibraryS8_53
             return false;
         }
 
+        // Прочитать данные из буфера. Данные будут считываться до тех пор, пока не пройдёт timeWaitMS с момента приёма последнего байта
+        public byte[] ReadBytes(long timeWaitMS)
+        {
+            long timeLast = CurrentTime();
+            int numBytesPrev = 0;
+            while(CurrentTime() - timeLast < timeWaitMS)
+            {
+                if(port.BytesToRead != numBytesPrev)
+                {
+                    timeLast = CurrentTime();
+                    numBytesPrev = port.BytesToRead;
+                }
+            }
+
+            int numBytes = port.BytesToRead;
+            byte[] bytes = new byte[numBytes];
+            port.Read(bytes, 0, numBytes);
+            return bytes;
+        }
+
         public override void SendByte(byte data)
         {
             if (port.IsOpen)
@@ -82,7 +103,7 @@ namespace LibraryS8_53
 
         public override void SendString(string str)
         {
-            mutex.WaitOne();
+            //mutex.WaitOne();
 
             if (port.IsOpen)
             {
@@ -90,7 +111,7 @@ namespace LibraryS8_53
                 port.Write(":" + str + "\x0d");
             }
 
-            mutex.ReleaseMutex();
+            //mutex.ReleaseMutex();
         }
 
         public void SendBytes(byte[] buffer)
@@ -126,8 +147,6 @@ namespace LibraryS8_53
 
         public bool Connect(int numPort, bool handlerEnable)
         {
-            dataReceivedHandlerEnable = handlerEnable;
-
             try
             {
                 port.PortName = ports[numPort];
@@ -136,11 +155,9 @@ namespace LibraryS8_53
                 {
                     SendString("REQUEST ?");
                     string answer = ReadLine();
-                    if (answer == "S8-53")
+                    if (answer != "S8-53" && answer != "S8-53/1")
                     {
-                    }
-                    else if (answer == "S8-53/1")
-                    {
+                        port.Close();
                     }
                 }
             }
@@ -163,23 +180,9 @@ namespace LibraryS8_53
             return port.IsOpen;
         }
 
-        private void DataReceiveHandler(object sender, SerialDataReceivedEventArgs args)
+        private static long CurrentTime()
         {
-            if(IsOpen() && dataReceivedHandlerEnable)
-            {
-                SerialPort sp = (SerialPort)sender;
-                if(sp != null)
-                {
-                    string indata = sp.ReadExisting();
-
-                    EventHandler<EventArgs> handler = ReceiveEvent;
-
-                    if(handler != null)
-                    {
-                        handler(null, new EventArgsReceiveComPort(indata));
-                    }
-                }
-            }
+            return DateTime.Now.Ticks / 10000;
         }
     }
 }
