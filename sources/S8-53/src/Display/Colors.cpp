@@ -24,7 +24,7 @@ Color ColorChannel(Channel chan)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 Color ColorCursors(Channel chan)
 {
-    static const Color colors[4] = {COLOR_CURSORS_A, COLOR_CURSORS_B, COLOR_WHITE, COLOR_WHITE};
+    static const Color colors[4] = {COLOR_DATA_A, COLOR_DATA_B, COLOR_WHITE, COLOR_WHITE};
     return colors[chan];
 }
 
