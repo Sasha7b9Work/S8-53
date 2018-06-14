@@ -29,22 +29,22 @@ static const Settings defaultSettings =
         100,                        // brightness
         20,                         // brightnessGrid
         {
-            MAKE_COLOR(0, 0, 0),
-            MAKE_COLOR(31, 63, 31),
-            MAKE_COLOR(15, 31, 15),
-            MAKE_COLOR(1, 50, 31),
-            MAKE_COLOR(0, 63, 0),
-            MAKE_COLOR(26, 54, 26),
-            MAKE_COLOR(31, 44, 0),
-            MAKE_COLOR(15, 22, 0),
-            MAKE_COLOR(31, 63, 0),
-            MAKE_COLOR(26, 34, 0),
-            MAKE_COLOR(13, 17, 0),
-            MAKE_COLOR(31, 51, 0),
-            MAKE_COLOR(0, 0, 0),
-            MAKE_COLOR(0, 0, 0),
-            MAKE_COLOR(1, 40, 25),
-            MAKE_COLOR(0, 51, 0)
+            MAKE_COLOR(0, 0, 0),     // COLOR_BLACK = 0x00,
+            MAKE_COLOR(31, 63, 31),  // COLOR_WHITE = 0x01,
+            MAKE_COLOR(15, 31, 15),  // COLOR_GRID = 0x02,
+            MAKE_COLOR(1, 50, 31),   // COLOR_DATA_A = 0x03,
+            MAKE_COLOR(0, 63, 0),    // COLOR_DATA_B = 0x04,
+            MAKE_COLOR(26, 54, 26),  // COLOR_MENU_FIELD = 0x05,
+            MAKE_COLOR(31, 44, 0),   // COLOR_MENU_TITLE = 0x06,
+            MAKE_COLOR(15, 22, 0),   // COLOR_MENU_TITLE_DARK = 0x07,
+            MAKE_COLOR(31, 63, 0),   // COLOR_MENU_TITLE_BRIGHT = 0x08,
+            MAKE_COLOR(26, 34, 0),   // COLOR_MENU_ITEM = 0x09,
+            MAKE_COLOR(13, 17, 0),   // COLOR_MENU_ITEM_DARK = 0x0a,
+            MAKE_COLOR(31, 51, 0),   // COLOR_MENU_ITEM_BRIGHT = 0x0b,
+            MAKE_COLOR(0, 0, 0),     // COLOR_MENU_SHADOW = 0x0c,
+            MAKE_COLOR(0, 0, 0),     // COLOR_EMPTY = 0x0d,
+            MAKE_COLOR(1, 40, 25),   // COLOR_EMPTY_A = 0x0e,
+            MAKE_COLOR(0, 51, 0)     // COLOR_EMPTY_B = 0x0f,
         },
         ModeDrawSignal_Lines,       // modeDrawSignal
         TypeGrid_1,                 // typeGrid
