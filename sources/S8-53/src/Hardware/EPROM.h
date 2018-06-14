@@ -36,7 +36,7 @@ class EPROM
 friend class OTP;
     
 public:
-    static void LoadSettings();
+    static bool LoadSettings();
     static void SaveSettings(bool verifyLoaded = false);
     /// Если даннные есть, соответствующий элемент массива равен true/.
     static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);

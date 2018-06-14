@@ -239,8 +239,14 @@ Settings set;
 
 
 void Settings::Load(bool _default)
-{
-    if (_default)                                                               // Если нужно сбросить настройки
+{   
+    if (!_default)
+    {
+        _default = !EPROM::LoadSettings();
+        
+    }
+    
+    if(_default)
     {
         uint16 rShiftAddA[RangeSize][2];
         uint16 rshiftAddB[RangeSize][2];
@@ -262,10 +268,6 @@ void Settings::Load(bool _default)
         BALANCE_ADC_B = balanceADC1;
         NUM_AVE_FOR_RAND = numAverageForRand;
         BALANCE_ADC_TYPE = balanceType;
-    }
-    else
-    {
-        EPROM::LoadSettings();
     }
 
     Painter::LoadPalette();
