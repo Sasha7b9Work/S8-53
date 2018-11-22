@@ -15,6 +15,9 @@ ToolArgsString=
 TraceCmdString=
 DebugOptions=
 [File001]
+Location=D:\Projects\stm32\S8-53_new\sources\PanelS8-53\mn_sever.o
+Folder=Intermediary
+[File002]
 Location=D:\Projects\S8-53\sources\PanelS8-53\mn_sever.HEX
 Folder=Output
 DeviceName=
@@ -27,7 +30,7 @@ SuiteArgsString=
 ToolArgsString=
 TraceCmdString=
 DebugOptions=
-[File002]
+[File003]
 Location=D:\Projects\S8-53\sources\PanelS8-53\mn_sever.LST
 Folder=Output
 DeviceName=
@@ -40,7 +43,7 @@ SuiteArgsString=
 ToolArgsString=
 TraceCmdString=
 DebugOptions=
-[File003]
+[File004]
 Location=D:\Projects\S8-53\sources\PanelS8-53\mn_sever.ERR
 Folder=Output
 DeviceName=
@@ -53,7 +56,7 @@ SuiteArgsString=
 ToolArgsString=
 TraceCmdString=
 DebugOptions=
-[File004]
+[File005]
 Location=D:\Projects\S8-53\sources\PanelS8-53\mn_sever.COF
 Folder=Output
 DeviceName=
@@ -66,5 +69,17 @@ SuiteArgsString=
 ToolArgsString=
 TraceCmdString=
 DebugOptions=
+[File006]
+Location=D:\Projects\stm32\S8-53_new\sources\PanelS8-53\mn_sever.HEX
+Folder=Output
+[File007]
+Location=D:\Projects\stm32\S8-53_new\sources\PanelS8-53\mn_sever.LST
+Folder=Output
+[File008]
+Location=D:\Projects\stm32\S8-53_new\sources\PanelS8-53\mn_sever.ERR
+Folder=Output
+[File009]
+Location=D:\Projects\stm32\S8-53_new\sources\PanelS8-53\mn_sever.COF
+Folder=Output
 [TOOL_LOC_STAMPS]
 tool_loc{0C155615-B197-4A4B-AEB6-343BB3F41A35}=C:\Program files\Picc\CCSC.exe

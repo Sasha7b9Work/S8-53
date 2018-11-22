@@ -2,7 +2,7 @@
 MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
 Version=1.0
 [File000]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Objects - Display\Primitive.o
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Objects - Display\Primitive.o
 Folder=Intermediary
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -13,9 +13,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=-Wall -mlarge-code -mlarge-data -Os -fno-ivopts -mlarge-arrays
 TraceCmdString=
-DebugOptions=
+DebugOptions=-D__DEBUG
 [File001]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Objects - Display\Palette.o
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Objects - Display\Palette.o
 Folder=Intermediary
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -26,9 +26,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=-Wall -mlarge-code -mlarge-data -Os -fno-ivopts -mlarge-arrays
 TraceCmdString=
-DebugOptions=
+DebugOptions=-D__DEBUG
 [File002]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Objects - Display\mchpGfxDrv.o
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Objects - Display\mchpGfxDrv.o
 Folder=Intermediary
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -39,9 +39,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=-Wall -mlarge-code -mlarge-data -Os -fno-ivopts -mlarge-arrays
 TraceCmdString=
-DebugOptions=
+DebugOptions=-D__DEBUG
 [File003]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Objects - Display\TimeDelay.o
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Objects - Display\TimeDelay.o
 Folder=Intermediary
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -52,9 +52,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=-Wall -mlarge-code -mlarge-data -Os -fno-ivopts -mlarge-arrays
 TraceCmdString=
-DebugOptions=
+DebugOptions=-D__DEBUG
 [File004]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Objects - Display\main.o
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Objects - Display\main.o
 Folder=Intermediary
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -65,9 +65,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=-Wall -mlarge-code -mlarge-data -Os -fno-ivopts -mlarge-arrays
 TraceCmdString=
-DebugOptions=
+DebugOptions=-D__DEBUG
 [File005]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Display53.cof
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Display53.cof
 Folder=Output
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -78,9 +78,9 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=--heap=1024 -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
 TraceCmdString=
-DebugOptions=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
 [File006]
-Location=D:\Projects\Archiv\S8-53_new\sources\Display\Display53.hex
+Location=D:\Projects\stm32\S8-53_new\sources\Display\Display53.hex
 Folder=Output
 DeviceName=PIC24FJ256DA210
 LanguageToolSuiteID={9BCCB495-CD65-480A-BA76-63D8E78B117F}
@@ -91,7 +91,7 @@ SOLK=<src>|Microchip\Graphics\Primitive.c|Microchip\Graphics\Palette.c|Microchip
 SuiteArgsString=
 ToolArgsString=--heap=1024 -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
 TraceCmdString=
-DebugOptions=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
 [TOOL_LOC_STAMPS]
 tool_loc{B1442D91-FF1F-4E60-9714-C39C1BA9DB62}=C:\Program Files (x86)\Microchip\xc16\v1.26\bin\xc16-gcc.exe
 tool_loc{6836D8CA-42BB-48FB-9E77-3F0AA8005073}=C:\Program Files (x86)\Microchip\xc16\v1.26\bin\xc16-ld.exe
