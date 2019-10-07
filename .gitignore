@@ -24,6 +24,8 @@ JLinkLog.txt
 bins/*
 
 doc/disk/Sources/S8-53_Interface/.vs/*
+doc/disk/Sources/S8-53_Interface/bin/*
+doc/disk/Sources/S8-53_Interface/bin/Debug/*
 
 sources/.vs/*
 
