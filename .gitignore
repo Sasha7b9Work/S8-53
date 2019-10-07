@@ -1,68 +1,63 @@
 *.bin
-*.bsc
 *.cof
-*.config
-*.dll
+*.opendb
+*.db
 *.err
-*.exe
 *.hex
-*.lib
 *.o
-*.pdb
-*.suo
-*.scvd
 *.sta
 *.sym
 *.tre
-*.tmp
-*~*
+*.scvd
+*.suo
+*.uvgu*.*
+*.bsc
+*.lib
 
-mn_sever.lst
-
-JLinkLog.txt
+JLink*.*
 
 bins/*
 
-doc/disk/Sources/S8-53_Interface/.vs/*
-doc/disk/Sources/S8-53_Interface/bin/*
-doc/disk/Sources/S8-53_Interface/bin/Debug/*
-
 sources/.vs/*
 
-sources/Tests/*
+doc/doxygen/BootS8-53/*
+doc/doxygen/S8-53/*
+doc/doxygen/TestDisplay/*
 
-sources/Device53/JLinkLog.txt
-sources/Device53/JLinkSettings.ini
-sources/Device53/DebugConfig/*
-sources/Device53/Listings/*
-sources/Device53/Objects/*
+doc/disk_dev/_Archiv_/S8-53_Interface.exe
 
-sources/Loader53/JLinkLog.txt
-sources/Loader53/JLinkSettings.ini
+doc/disk/Sources/S8-53_Interface/bin/*
+doc/disk/Sources/S8-53_Interface/obj/*
+
 sources/Loader53/DebugConfig/*
-sources/Loader53/Listings/*
 sources/Loader53/Objects/*
 
-sources/VS-OSCI/Loader53/Debug/*
-sources/VS-OSCI/Loader53/Release/*
+sources/S8-53/Listings/*
+sources/S8-53/Objects/*
+sources/S8-53/Bootloader/Listings/*
+sources/S8-53/Bootloader/Objects/*
 
-sources/VS-OSCI/Device53/Debug/*
-sources/VS-OSCI/Device53/Release/*
 
+sources/Tests/TestDisplay/stm32/Listings/*
+sources/Tests/TestDisplay/stm32/Objects/*
+sources/Tests/TestDisplay/VS2015/TestDisplay/Debug/*
+
+sources/VS-OSCI/Boot53/Debug/*
+sources/VS-OSCI/BootloaderS8-53/Debug/*
+sources/VS-OSCI/Client/Client/bin/*
+sources/VS-OSCI/Client/Client/obj/*
+sources/VS-OSCI/ControllerETH/bin/*
+sources/VS-OSCI/ControllerETH/obj/*
+sources/VS-OSCI/ControllerUSB/bin/*
+sources/VS-OSCI/ControllerUSB/obj/*
 sources/VS-OSCI/Display/Debug/*
-sources/VS-OSCI/Display/Release/*
-
-sources/VS-OSCI/PanelS8-53/Debug/*
-sources/VS-OSCI/PanelS8-53/Release/*
-
+sources/VS-OSCI/S8-53/Debug/*
+sources/VS-OSCI/S8-53/BootloaderS8-53/Debug/*
 sources/VS-OSCI/NET/ControlLibraryS8-53/obj/*
 sources/VS-OSCI/NET/LibraryS8-53/obj/*
 sources/VS-OSCI/NET/S8-53_ConsoleLAN/obj/*
-sources/VS-OSCI/NET/S8-53_LAN/obj/*
 sources/VS-OSCI/NET/S8-53_ConsoleUSB/obj/*
 sources/VS-OSCI/NET/S8-53_Interface/obj/*
+sources/VS-OSCI/NET/S8-53_LAN/obj/*
+sources/VS-OSCI/NET/S8-53_USB/bin/*
 sources/VS-OSCI/NET/S8-53_USB/obj/*
-
-sources/S8-53/Objects/*
-sources/S8-53/Listings/*
-sources/VS-OSCI/S8-53/Debug/*
