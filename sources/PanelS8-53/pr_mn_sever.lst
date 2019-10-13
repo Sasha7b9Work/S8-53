@@ -1,13 +1,13 @@
-CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
+CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 11:03
 
                Filename:   C:\My\Work\stm32\S8-53\sources\PanelS8-53\pr_mn_sever.lst
 
-               ROM used:   2514 bytes (5%)
-                           Largest free fragment is 45802
+               ROM used:   2486 bytes (5%)
+                           Largest free fragment is 46662
                RAM used:   154 (4%) at main() level
                            154 (4%) worst case
                Stack used: 3 locations (1 in main + 2 for interrupts)
-               Stack size: 30
+               Stack size: 31
 
 *
 0000:  GOTO   01C4
@@ -1484,9 +1484,9 @@ CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
 01C4:  CLRF   FF8
 01C6:  BCF    FD0.7
 01C8:  BSF    07.7
-01CA:  MOVLW  F2
+01CA:  MOVLW  7E
 01CC:  MOVWF  00
-01CE:  MOVLW  0F
+01CE:  MOVLW  10
 01D0:  MOVWF  01
 01D2:  MOVLW  02
 01D4:  MOVWF  FE9
@@ -1498,1216 +1498,1202 @@ CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
 01E0:  BRA    01DA
 01E2:  DECFSZ 01,F
 01E4:  BRA    01DA
-01E6:  MOVLW  80
-01E8:  MOVWF  00
-01EA:  MOVLW  01
-01EC:  MOVWF  01
-01EE:  MOVLW  00
-01F0:  MOVWF  FE9
-01F2:  MOVLW  0F
-01F4:  MOVWF  FEA
-01F6:  CLRF   FEE
-01F8:  CLRWDT
-01FA:  DECFSZ 00,F
-01FC:  BRA    01F6
-01FE:  DECFSZ 01,F
-0200:  BRA    01F6
-0202:  MOVF   FC1,W
-0204:  ANDLW  C0
-0206:  IORLW  0F
-0208:  MOVWF  FC1
-020A:  MOVLW  07
-020C:  MOVWF  FB4
+01E6:  MOVF   FC1,W
+01E8:  ANDLW  C0
+01EA:  IORLW  0F
+01EC:  MOVWF  FC1
+01EE:  MOVLW  07
+01F0:  MOVWF  FB4
 .................... { 
 .................... disable_interrupts(GLOBAL);   //общее запрещение прерываний 
-020E:  BCF    FF2.6
-0210:  BCF    FF2.7
-0212:  BTFSC  FF2.7
-0214:  BRA    0210
+01F2:  BCF    FF2.6
+01F4:  BCF    FF2.7
+01F6:  BTFSC  FF2.7
+01F8:  BRA    01F4
 .................... setup_oscillator(OSC_8MHZ);  //|OSC_INTRC 
-0216:  MOVLW  70
-0218:  MOVWF  FD3
-021A:  CLRF   F9B
-021C:  MOVF   FD3,W
+01FA:  MOVLW  70
+01FC:  MOVWF  FD3
+01FE:  CLRF   F9B
+0200:  MOVF   FD3,W
 ....................   
 .................... set_tris_a(0x00);   //выходы 
-021E:  MOVLW  00
-0220:  MOVWF  F92
+0202:  MOVLW  00
+0204:  MOVWF  F92
 .................... set_tris_b(0xff);   //входы 
-0222:  MOVLW  FF
-0224:  MOVWF  F93
+0206:  MOVLW  FF
+0208:  MOVWF  F93
 .................... set_tris_c(0x10);   //выходы, RC4-вход(данные от STM) 
-0226:  MOVLW  10
-0228:  MOVWF  F94
+020A:  MOVLW  10
+020C:  MOVWF  F94
 ....................  
 .................... //output_c(0x4f); 
 .................... portc=0xcf;  //7.05 
-022A:  MOVLW  CF
-022C:  MOVWF  F82
+020E:  MOVLW  CF
+0210:  MOVWF  F82
 .................... porta=0x7f; 
-022E:  MOVLW  7F
-0230:  MOVWF  F80
+0212:  MOVLW  7F
+0214:  MOVWF  F80
 .................... portb=0xff; 
-0232:  SETF   F81
+0216:  SETF   F81
 ....................  
 .................... //set_tris_c(0x10);   //выходы, RC4-вход(данные от STM) 
 .................... //output_a(0x7f); 
 .................... //output_b(0xff); 
 ....................  
 .................... pit_bykl(); 
-0234:  RCALL  00EC
+0218:  RCALL  00EC
 .................... pr_wkl_pit=0;   //пр. вкл. питания (исп. для 1-го нажатия кн. "Питание") 
-0236:  CLRF   30
+021A:  CLRF   30
 ....................  
 .................... delay_ms(1000);  //для настройки STM 
-0238:  MOVLW  04
-023A:  MOVWF  x98
-023C:  MOVLW  FA
-023E:  MOVWF  x99
-0240:  RCALL  019E
-0242:  DECFSZ x98,F
-0244:  BRA    023C
+021C:  MOVLW  04
+021E:  MOVWF  x98
+0220:  MOVLW  FA
+0222:  MOVWF  x99
+0224:  RCALL  019E
+0226:  DECFSZ x98,F
+0228:  BRA    0220
 ....................  
 .................... //Инициализация модуля MSSP(режим SPI) 
 .................... SSPCON1=0x31; 
-0246:  MOVLW  31
-0248:  MOVWF  FC6
+022A:  MOVLW  31
+022C:  MOVWF  FC6
 .................... SSPSTAT=0;    //0x80; 
-024A:  CLRF   FC7
+022E:  CLRF   FC7
 .................... SSPBUF=0x55; 
-024C:  MOVLW  55
-024E:  MOVWF  FC9
+0230:  MOVLW  55
+0232:  MOVWF  FC9
 ....................  
 .................... //иниц. таймеров: 
 .................... //t0con=0xc8; //8-ми разр 
 .................... t0con=0x88; //16-ми разр счетчик 
-0250:  MOVLW  88
-0252:  MOVWF  FD5
+0234:  MOVLW  88
+0236:  MOVWF  FD5
 .................... T1CON=0x85; 
-0254:  MOVLW  85
-0256:  MOVWF  FCD
+0238:  MOVLW  85
+023A:  MOVWF  FCD
 .................... setup_timer_1(T1_INTERNAL|T1_DIV_BY_1);   
-0258:  MOVWF  FCD
+023C:  MOVWF  FCD
 ....................  
 .................... set_timer1(62286); 
-025A:  MOVLW  F3
-025C:  MOVWF  FCF
-025E:  MOVLW  4E
-0260:  MOVWF  FCE
+023E:  MOVLW  F3
+0240:  MOVWF  FCF
+0242:  MOVLW  4E
+0244:  MOVWF  FCE
 .................... set_timer0(64536);  
-0262:  MOVLW  FC
-0264:  MOVWF  FD7
-0266:  MOVLW  18
-0268:  MOVWF  FD6
+0246:  MOVLW  FC
+0248:  MOVWF  FD7
+024A:  MOVLW  18
+024C:  MOVWF  FD6
 ....................  
 .................... //enable_interrupts(INT_TIMER2); 
 .................... enable_interrupts(INT_TIMER1); 
-026A:  BSF    F9D.0
+024E:  BSF    F9D.0
 .................... //enable_interrupts(INT_TIMER0); 
 .................... enable_interrupts(GLOBAL); 
-026C:  MOVLW  C0
-026E:  IORWF  FF2,F
+0250:  MOVLW  C0
+0252:  IORWF  FF2,F
 ....................  
 .................... //СОСТОЯНИЕ кнопок и ручек по ВКЛЮЧЕНИЮ: 
 .................... //---------------------------------------- 
 .................... for (ii=0; ii<6;ii++)  
-0270:  CLRF   29
-0272:  MOVF   29,W
-0274:  SUBLW  05
-0276:  BNC   02AA
+0254:  CLRF   29
+0256:  MOVF   29,W
+0258:  SUBLW  05
+025A:  BNC   028E
 ....................  { 
 ....................    du_pA=porta&0xc0|mask[ii]; 
-0278:  MOVF   F80,W
-027A:  ANDLW  C0
-027C:  MOVWF  x98
-027E:  CLRF   03
-0280:  MOVF   29,W
-0282:  RCALL  00AE
-0284:  MOVWF  01
-0286:  MOVF   x98,W
-0288:  IORWF  01,W
-028A:  MOVWF  2D
+025C:  MOVF   F80,W
+025E:  ANDLW  C0
+0260:  MOVWF  x98
+0262:  CLRF   03
+0264:  MOVF   29,W
+0266:  RCALL  00AE
+0268:  MOVWF  01
+026A:  MOVF   x98,W
+026C:  IORWF  01,W
+026E:  MOVWF  2D
 ....................    output_a(du_pA);    
-028C:  CLRF   F92
-028E:  MOVFF  2D,F89
+0270:  CLRF   F92
+0272:  MOVFF  2D,F89
 ....................    pr_state_rb[ii] = input_b(); 
-0292:  CLRF   03
-0294:  MOVF   29,W
-0296:  ADDLW  23
-0298:  MOVWF  FE9
-029A:  MOVLW  00
-029C:  ADDWFC 03,W
-029E:  MOVWF  FEA
-02A0:  SETF   F93
-02A2:  MOVFF  F81,FEF
-02A6:  INCF   29,F
-02A8:  BRA    0272
+0276:  CLRF   03
+0278:  MOVF   29,W
+027A:  ADDLW  23
+027C:  MOVWF  FE9
+027E:  MOVLW  00
+0280:  ADDWFC 03,W
+0282:  MOVWF  FEA
+0284:  SETF   F93
+0286:  MOVFF  F81,FEF
+028A:  INCF   29,F
+028C:  BRA    0256
 ....................  } 
 ....................  
 .................... while(1) 
 .................... { 
 ....................   for (ii=0; ii<6;ii++)  
-02AA:  CLRF   29
-02AC:  MOVF   29,W
-02AE:  SUBLW  05
-02B0:  BTFSS  FD8.0
-02B2:  GOTO   09D2
+028E:  CLRF   29
+0290:  MOVF   29,W
+0292:  SUBLW  05
+0294:  BTFSS  FD8.0
+0296:  GOTO   09B6
 ....................  {   pr_ruk=0; 
-02B6:  CLRF   2B
+029A:  CLRF   2B
 ....................   // output_a(mask[ii]);              //SL... -> PORTA 
 ....................    du_pA=porta&0xc0|mask[ii]; 
-02B8:  MOVF   F80,W
-02BA:  ANDLW  C0
-02BC:  MOVWF  x98
-02BE:  CLRF   03
-02C0:  MOVF   29,W
-02C2:  RCALL  00AE
-02C4:  MOVWF  01
-02C6:  MOVF   x98,W
-02C8:  IORWF  01,W
-02CA:  MOVWF  2D
+029C:  MOVF   F80,W
+029E:  ANDLW  C0
+02A0:  MOVWF  x98
+02A2:  CLRF   03
+02A4:  MOVF   29,W
+02A6:  RCALL  00AE
+02A8:  MOVWF  01
+02AA:  MOVF   x98,W
+02AC:  IORWF  01,W
+02AE:  MOVWF  2D
 ....................    output_a(du_pA);  
-02CC:  CLRF   F92
-02CE:  MOVFF  2D,F89
+02B0:  CLRF   F92
+02B2:  MOVFF  2D,F89
 ....................    tek_state_rb[ii] = input_b(); 
-02D2:  CLRF   03
-02D4:  MOVF   29,W
-02D6:  ADDLW  1A
-02D8:  MOVWF  FE9
-02DA:  MOVLW  00
-02DC:  ADDWFC 03,W
-02DE:  MOVWF  FEA
-02E0:  SETF   F93
-02E2:  MOVFF  F81,FEF
+02B6:  CLRF   03
+02B8:  MOVF   29,W
+02BA:  ADDLW  1A
+02BC:  MOVWF  FE9
+02BE:  MOVLW  00
+02C0:  ADDWFC 03,W
+02C2:  MOVWF  FEA
+02C4:  SETF   F93
+02C6:  MOVFF  F81,FEF
 ....................    if (pr_state_rb[ii] ^ tek_state_rb[ii]) 
-02E6:  CLRF   03
-02E8:  MOVF   29,W
-02EA:  ADDLW  23
-02EC:  MOVWF  FE9
-02EE:  MOVLW  00
-02F0:  ADDWFC 03,W
-02F2:  MOVWF  FEA
-02F4:  MOVFF  FEF,98
-02F8:  CLRF   03
-02FA:  MOVF   29,W
-02FC:  ADDLW  1A
-02FE:  MOVWF  FE9
-0300:  MOVLW  00
-0302:  ADDWFC 03,W
-0304:  MOVWF  FEA
-0306:  MOVF   FEF,W
-0308:  XORWF  x98,W
-030A:  BTFSC  FD8.2
-030C:  GOTO   09BC
+02CA:  CLRF   03
+02CC:  MOVF   29,W
+02CE:  ADDLW  23
+02D0:  MOVWF  FE9
+02D2:  MOVLW  00
+02D4:  ADDWFC 03,W
+02D6:  MOVWF  FEA
+02D8:  MOVFF  FEF,98
+02DC:  CLRF   03
+02DE:  MOVF   29,W
+02E0:  ADDLW  1A
+02E2:  MOVWF  FE9
+02E4:  MOVLW  00
+02E6:  ADDWFC 03,W
+02E8:  MOVWF  FEA
+02EA:  MOVF   FEF,W
+02EC:  XORWF  x98,W
+02EE:  BTFSC  FD8.2
+02F0:  GOTO   09A0
 ....................     //возможно  нажатие или вращение ? 
 ....................    { 
 ....................    if ((tek_state_rb[ii]&mask_kn[ii])!=mask_kn[ii])  //если это кнопка, то отрабат. дребезг 
+02F4:  CLRF   03
+02F6:  MOVF   29,W
+02F8:  ADDLW  1A
+02FA:  MOVWF  FE9
+02FC:  MOVLW  00
+02FE:  ADDWFC 03,W
+0300:  MOVWF  FEA
+0302:  MOVFF  FEF,98
+0306:  CLRF   03
+0308:  MOVF   29,W
+030A:  RCALL  00C4
+030C:  MOVWF  01
+030E:  ANDWF  x98,F
 0310:  CLRF   03
 0312:  MOVF   29,W
-0314:  ADDLW  1A
-0316:  MOVWF  FE9
-0318:  MOVLW  00
-031A:  ADDWFC 03,W
-031C:  MOVWF  FEA
-031E:  MOVFF  FEF,98
-0322:  CLRF   03
-0324:  MOVF   29,W
-0326:  RCALL  00C4
-0328:  MOVWF  01
-032A:  ANDWF  x98,F
-032C:  CLRF   03
-032E:  MOVF   29,W
-0330:  RCALL  00C4
-0332:  MOVWF  01
-0334:  SUBWF  x98,W
-0336:  BZ    035E
+0314:  RCALL  00C4
+0316:  MOVWF  01
+0318:  SUBWF  x98,W
+031A:  BZ    0342
 ....................       { //кнопка 
 .................... 	    delay_ms(1); 
-0338:  MOVLW  01
-033A:  MOVWF  x99
-033C:  RCALL  019E
+031C:  MOVLW  01
+031E:  MOVWF  x99
+0320:  RCALL  019E
 .................... 	    tek1_state_rb = input_b(); 
-033E:  SETF   F93
-0340:  MOVFF  F81,20
+0322:  SETF   F93
+0324:  MOVFF  F81,20
 .................... 	    delay_ms(1); 
-0344:  MOVLW  01
-0346:  MOVWF  x99
-0348:  RCALL  019E
+0328:  MOVLW  01
+032A:  MOVWF  x99
+032C:  RCALL  019E
 .................... 	    tek2_state_rb = input_b(); 
-034A:  SETF   F93
-034C:  MOVFF  F81,21
+032E:  SETF   F93
+0330:  MOVFF  F81,21
 .................... 	    delay_ms(1); 
-0350:  MOVLW  01
-0352:  MOVWF  x99
-0354:  RCALL  019E
+0334:  MOVLW  01
+0336:  MOVWF  x99
+0338:  RCALL  019E
 .................... 	    tek3_state_rb = input_b(); 
-0356:  SETF   F93
-0358:  MOVFF  F81,22
+033A:  SETF   F93
+033C:  MOVFF  F81,22
 .................... 	 
 .................... 	//    if (tek_state_rb[ii] == tek3_state_rb)  //дребезг зак.-есть нажатие/отжатие или вращение! 
 ....................       } 
-035C:  BRA    03AC
+0340:  BRA    0390
 ....................      else  //ручка 
 ....................        { 
 ....................          delay_us(200); 
-035E:  MOVLW  85
-0360:  MOVWF  00
-0362:  DECFSZ 00,F
-0364:  BRA    0362
+0342:  MOVLW  85
+0344:  MOVWF  00
+0346:  DECFSZ 00,F
+0348:  BRA    0346
 .................... 	     tek1_state_rb = input_b(); 
-0366:  SETF   F93
-0368:  MOVFF  F81,20
+034A:  SETF   F93
+034C:  MOVFF  F81,20
 .................... 	     delay_us(200); 
-036C:  MOVLW  85
-036E:  MOVWF  00
-0370:  DECFSZ 00,F
-0372:  BRA    0370
+0350:  MOVLW  85
+0352:  MOVWF  00
+0354:  DECFSZ 00,F
+0356:  BRA    0354
 .................... 	     tek2_state_rb = input_b(); 
-0374:  SETF   F93
-0376:  MOVFF  F81,21
+0358:  SETF   F93
+035A:  MOVFF  F81,21
 ....................  
 ....................          if (tek1_state_rb==tek2_state_rb)						 
-037A:  MOVF   21,W
-037C:  SUBWF  20,W
-037E:  BNZ   0390
+035E:  MOVF   21,W
+0360:  SUBWF  20,W
+0362:  BNZ   0374
 ....................            { 
 .................... 	         delay_us(200); 
-0380:  MOVLW  85
-0382:  MOVWF  00
-0384:  DECFSZ 00,F
-0386:  BRA    0384
+0364:  MOVLW  85
+0366:  MOVWF  00
+0368:  DECFSZ 00,F
+036A:  BRA    0368
 .................... 	         tek3_state_rb = input_b(); 
-0388:  SETF   F93
-038A:  MOVFF  F81,22
+036C:  SETF   F93
+036E:  MOVFF  F81,22
 ....................            } 
-038E:  BRA    03AC
+0372:  BRA    0390
 ....................          else 
 ....................            { 
 ....................              delay_us(200); 
-0390:  MOVLW  85
-0392:  MOVWF  00
-0394:  DECFSZ 00,F
-0396:  BRA    0394
+0374:  MOVLW  85
+0376:  MOVWF  00
+0378:  DECFSZ 00,F
+037A:  BRA    0378
 .................... 	         tek2_state_rb = input_b(); 
-0398:  SETF   F93
-039A:  MOVFF  F81,21
+037C:  SETF   F93
+037E:  MOVFF  F81,21
 ....................              delay_us(200); 
-039E:  MOVLW  85
-03A0:  MOVWF  00
-03A2:  DECFSZ 00,F
-03A4:  BRA    03A2
+0382:  MOVLW  85
+0384:  MOVWF  00
+0386:  DECFSZ 00,F
+0388:  BRA    0386
 .................... 	         tek3_state_rb = input_b(); 
-03A6:  SETF   F93
-03A8:  MOVFF  F81,22
+038A:  SETF   F93
+038C:  MOVFF  F81,22
 ....................            }         
 ....................         } 
 ....................  
 ....................   if ((tek2_state_rb == tek3_state_rb)&&(tek_state_rb[ii] == tek3_state_rb))  //дребезг зак.-есть нажатие/отжатие или вращение! 
-03AC:  MOVF   22,W
-03AE:  SUBWF  21,W
-03B0:  BTFSS  FD8.2
-03B2:  GOTO   09BC
-03B6:  CLRF   03
-03B8:  MOVF   29,W
-03BA:  ADDLW  1A
-03BC:  MOVWF  FE9
-03BE:  MOVLW  00
-03C0:  ADDWFC 03,W
-03C2:  MOVWF  FEA
-03C4:  MOVF   22,W
-03C6:  SUBWF  FEF,W
-03C8:  BTFSS  FD8.2
-03CA:  GOTO   09BC
+0390:  MOVF   22,W
+0392:  SUBWF  21,W
+0394:  BTFSS  FD8.2
+0396:  GOTO   09A0
+039A:  CLRF   03
+039C:  MOVF   29,W
+039E:  ADDLW  1A
+03A0:  MOVWF  FE9
+03A2:  MOVLW  00
+03A4:  ADDWFC 03,W
+03A6:  MOVWF  FEA
+03A8:  MOVF   22,W
+03AA:  SUBWF  FEF,W
+03AC:  BTFSS  FD8.2
+03AE:  GOTO   09A0
 ....................     {  
 ....................        switch(ii)   //номер сигнала SL0,SL1,SL2,SL3,SL4,SL5 
-03CE:  MOVF   29,W
-03D0:  BZ    03F2
-03D2:  XORLW  01
-03D4:  BTFSC  FD8.2
-03D6:  BRA    0524
-03D8:  XORLW  03
-03DA:  BTFSC  FD8.2
-03DC:  BRA    0644
-03DE:  XORLW  01
-03E0:  BTFSC  FD8.2
-03E2:  BRA    0764
-03E4:  XORLW  07
-03E6:  BTFSC  FD8.2
-03E8:  BRA    0848
-03EA:  XORLW  01
-03EC:  BTFSC  FD8.2
-03EE:  BRA    08E2
-03F0:  BRA    09AA
+03B2:  MOVF   29,W
+03B4:  BZ    03D6
+03B6:  XORLW  01
+03B8:  BTFSC  FD8.2
+03BA:  BRA    0508
+03BC:  XORLW  03
+03BE:  BTFSC  FD8.2
+03C0:  BRA    0628
+03C2:  XORLW  01
+03C4:  BTFSC  FD8.2
+03C6:  BRA    0748
+03C8:  XORLW  07
+03CA:  BTFSC  FD8.2
+03CC:  BRA    082C
+03CE:  XORLW  01
+03D0:  BTFSC  FD8.2
+03D2:  BRA    08C6
+03D4:  BRA    098E
 .................... 			{ 
 ....................               case 0:  //SL0 
 ....................                 //Кнопки K1, Ser: 
 .................... 				if (!(tek3_state_rb & (1 << 0)))  { buf_per=0x81;  //№1-наж. 
-03F2:  BTFSC  22.0
-03F4:  BRA    0410
-03F6:  MOVLW  81
-03F8:  MOVWF  2E
+03D6:  BTFSC  22.0
+03D8:  BRA    03F4
+03DA:  MOVLW  81
+03DC:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-03FA:  SETF   F93
-03FC:  MOVFF  F81,22
+03DE:  SETF   F93
+03E0:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 0))); 
-0400:  BTFSS  22.0
-0402:  BRA    03FA
+03E4:  BTFSS  22.0
+03E6:  BRA    03DE
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0404:  MOVF   2E,F
-0406:  BTFSS  FD8.2
-0408:  BRA    0404
+03E8:  MOVF   2E,F
+03EA:  BTFSS  FD8.2
+03EC:  BRA    03E8
 ....................                                                      buf_per=0x01;  //№1-отж. 
-040A:  MOVLW  01
-040C:  MOVWF  2E
+03EE:  MOVLW  01
+03F0:  MOVWF  2E
 ....................                                                     break;  
-040E:  BRA    09AA
+03F2:  BRA    098E
 ....................                                                   } 
 ....................                   if (!(tek3_state_rb & (1 << 5))) { buf_per=0x82;  //№2-наж. 
-0410:  BTFSC  22.5
-0412:  BRA    042E
-0414:  MOVLW  82
-0416:  MOVWF  2E
+03F4:  BTFSC  22.5
+03F6:  BRA    0412
+03F8:  MOVLW  82
+03FA:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0418:  SETF   F93
-041A:  MOVFF  F81,22
+03FC:  SETF   F93
+03FE:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-041E:  BTFSS  22.5
-0420:  BRA    0418
+0402:  BTFSS  22.5
+0404:  BRA    03FC
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0422:  MOVF   2E,F
-0424:  BTFSS  FD8.2
-0426:  BRA    0422
+0406:  MOVF   2E,F
+0408:  BTFSS  FD8.2
+040A:  BRA    0406
 ....................                                                      buf_per=0x02;  //№2-отж. 
-0428:  MOVLW  02
-042A:  MOVWF  2E
+040C:  MOVLW  02
+040E:  MOVWF  2E
 ....................                                                     break;  
-042C:  BRA    09AA
+0410:  BRA    098E
 ....................                                                   } 
 ....................  
 ....................                 //Ручки -B_K1, +B_K1 -Sm_K1, +Sm_K1: 
 ....................                 //*********************************** 
 ....................                  
 ....................               if  ((tek3_state_rb & 0x02)&&(tek3_state_rb & 0x04))  //RB1 & RB2==1 
-042E:  BTFSS  22.1
-0430:  BRA    04A0
-0432:  BTFSS  22.2
-0434:  BRA    04A0
+0412:  BTFSS  22.1
+0414:  BRA    0484
+0416:  BTFSS  22.2
+0418:  BRA    0484
 ....................                     {  
 ....................                      for (ib=0; ib<2;ib++)  
-0436:  CLRF   2A
-0438:  MOVF   2A,W
-043A:  SUBLW  01
-043C:  BNC   04A0
+041A:  CLRF   2A
+041C:  MOVF   2A,W
+041E:  SUBLW  01
+0420:  BNC   0484
 ....................                      { 
 ....................                        if ((tek3_state_rb & (0x02 << ib)) && (!(pr_state_rb[ii] & (0x02 << ib)))) 
-043E:  MOVLW  02
-0440:  MOVWF  00
-0442:  MOVF   2A,W
-0444:  MOVWF  01
-0446:  BZ    0450
-0448:  BCF    FD8.0
-044A:  RLCF   00,F
-044C:  DECFSZ 01,F
-044E:  BRA    0448
-0450:  MOVF   00,W
-0452:  ANDWF  22,W
-0454:  BZ    049C
-0456:  CLRF   03
-0458:  MOVF   29,W
-045A:  ADDLW  23
-045C:  MOVWF  FE9
-045E:  MOVLW  00
-0460:  ADDWFC 03,W
-0462:  MOVWF  FEA
-0464:  MOVFF  FEF,98
-0468:  MOVLW  02
-046A:  MOVWF  00
-046C:  MOVF   2A,W
-046E:  MOVWF  01
-0470:  BZ    047A
-0472:  BCF    FD8.0
-0474:  RLCF   00,F
-0476:  DECFSZ 01,F
-0478:  BRA    0472
-047A:  MOVF   00,W
-047C:  ANDWF  x98,W
-047E:  BNZ   049C
+0422:  MOVLW  02
+0424:  MOVWF  00
+0426:  MOVF   2A,W
+0428:  MOVWF  01
+042A:  BZ    0434
+042C:  BCF    FD8.0
+042E:  RLCF   00,F
+0430:  DECFSZ 01,F
+0432:  BRA    042C
+0434:  MOVF   00,W
+0436:  ANDWF  22,W
+0438:  BZ    0480
+043A:  CLRF   03
+043C:  MOVF   29,W
+043E:  ADDLW  23
+0440:  MOVWF  FE9
+0442:  MOVLW  00
+0444:  ADDWFC 03,W
+0446:  MOVWF  FEA
+0448:  MOVFF  FEF,98
+044C:  MOVLW  02
+044E:  MOVWF  00
+0450:  MOVF   2A,W
+0452:  MOVWF  01
+0454:  BZ    045E
+0456:  BCF    FD8.0
+0458:  RLCF   00,F
+045A:  DECFSZ 01,F
+045C:  BRA    0456
+045E:  MOVF   00,W
+0460:  ANDWF  x98,W
+0462:  BNZ   0480
 ....................                              
 ....................                             switch(ib) 
-0480:  MOVF   2A,W
-0482:  BZ    048A
-0484:  XORLW  01
-0486:  BZ    0494
-0488:  BRA    049C
+0464:  MOVF   2A,W
+0466:  BZ    046E
+0468:  XORLW  01
+046A:  BZ    0478
+046C:  BRA    0480
 .................... 			                { 
 ....................                                case 0:  
 ....................                                 pr_ruk=1; 
-048A:  MOVLW  01
-048C:  MOVWF  2B
+046E:  MOVLW  01
+0470:  MOVWF  2B
 ....................                                 buf_per=0x14;  //№20-влево  
-048E:  MOVLW  14
-0490:  MOVWF  2E
+0472:  MOVLW  14
+0474:  MOVWF  2E
 ....................                                break; 
-0492:  BRA    049C
+0476:  BRA    0480
 ....................  
 ....................                                case 1: 
 ....................                                 pr_ruk=1;   
-0494:  MOVLW  01
-0496:  MOVWF  2B
+0478:  MOVLW  01
+047A:  MOVWF  2B
 ....................                                 buf_per=0x94;  //№20-вправо 
-0498:  MOVLW  94
-049A:  MOVWF  2E
+047C:  MOVLW  94
+047E:  MOVWF  2E
 ....................                                break; 
 ....................                             }//switch  
-049C:  INCF   2A,F
-049E:  BRA    0438
+0480:  INCF   2A,F
+0482:  BRA    041C
 ....................                      } //for  ib     
 ....................                    } //if 
 ....................  
 ....................           //    else 
 ....................           //     {                  
 ....................                if  ((tek3_state_rb & 0x08)&&(tek3_state_rb & 0x10)&& (!pr_ruk))   //RB3 & RB4==1 & pr_ruk=0 
-04A0:  BTFSS  22.3
-04A2:  BRA    050E
-04A4:  BTFSS  22.4
-04A6:  BRA    050E
-04A8:  MOVF   2B,F
-04AA:  BNZ   050E
+0484:  BTFSS  22.3
+0486:  BRA    04F2
+0488:  BTFSS  22.4
+048A:  BRA    04F2
+048C:  MOVF   2B,F
+048E:  BNZ   04F2
 ....................                  { 
 ....................                      for (ib=0; ib<2;ib++)  
-04AC:  CLRF   2A
-04AE:  MOVF   2A,W
-04B0:  SUBLW  01
-04B2:  BNC   050E
+0490:  CLRF   2A
+0492:  MOVF   2A,W
+0494:  SUBLW  01
+0496:  BNC   04F2
 ....................                    { 
 ....................  
 ....................                      if ((tek3_state_rb & (0x08 << ib)) && (!(pr_state_rb[ii] & (0x08 << ib)))) 
-04B4:  MOVLW  08
-04B6:  MOVWF  00
-04B8:  MOVF   2A,W
-04BA:  MOVWF  01
-04BC:  BZ    04C6
-04BE:  BCF    FD8.0
-04C0:  RLCF   00,F
-04C2:  DECFSZ 01,F
-04C4:  BRA    04BE
-04C6:  MOVF   00,W
-04C8:  ANDWF  22,W
-04CA:  BZ    050A
-04CC:  CLRF   03
-04CE:  MOVF   29,W
-04D0:  ADDLW  23
-04D2:  MOVWF  FE9
-04D4:  MOVLW  00
-04D6:  ADDWFC 03,W
-04D8:  MOVWF  FEA
-04DA:  MOVFF  FEF,98
-04DE:  MOVLW  08
-04E0:  MOVWF  00
-04E2:  MOVF   2A,W
-04E4:  MOVWF  01
-04E6:  BZ    04F0
-04E8:  BCF    FD8.0
-04EA:  RLCF   00,F
-04EC:  DECFSZ 01,F
-04EE:  BRA    04E8
-04F0:  MOVF   00,W
-04F2:  ANDWF  x98,W
-04F4:  BNZ   050A
+0498:  MOVLW  08
+049A:  MOVWF  00
+049C:  MOVF   2A,W
+049E:  MOVWF  01
+04A0:  BZ    04AA
+04A2:  BCF    FD8.0
+04A4:  RLCF   00,F
+04A6:  DECFSZ 01,F
+04A8:  BRA    04A2
+04AA:  MOVF   00,W
+04AC:  ANDWF  22,W
+04AE:  BZ    04EE
+04B0:  CLRF   03
+04B2:  MOVF   29,W
+04B4:  ADDLW  23
+04B6:  MOVWF  FE9
+04B8:  MOVLW  00
+04BA:  ADDWFC 03,W
+04BC:  MOVWF  FEA
+04BE:  MOVFF  FEF,98
+04C2:  MOVLW  08
+04C4:  MOVWF  00
+04C6:  MOVF   2A,W
+04C8:  MOVWF  01
+04CA:  BZ    04D4
+04CC:  BCF    FD8.0
+04CE:  RLCF   00,F
+04D0:  DECFSZ 01,F
+04D2:  BRA    04CC
+04D4:  MOVF   00,W
+04D6:  ANDWF  x98,W
+04D8:  BNZ   04EE
 ....................                               
 ....................                             switch(ib) 
-04F6:  MOVF   2A,W
-04F8:  BZ    0500
-04FA:  XORLW  01
-04FC:  BZ    0506
-04FE:  BRA    050A
+04DA:  MOVF   2A,W
+04DC:  BZ    04E4
+04DE:  XORLW  01
+04E0:  BZ    04EA
+04E2:  BRA    04EE
 .................... 			                { 
 ....................                                case 0:  
 ....................                                { 
 ....................                                 buf_per=0x15;  //№21-влево  
-0500:  MOVLW  15
-0502:  MOVWF  2E
+04E4:  MOVLW  15
+04E6:  MOVWF  2E
 ....................                                 break; 
-0504:  BRA    050A
+04E8:  BRA    04EE
 ....................                                } 
 ....................  
 ....................                                case 1:  
 ....................                                { 
 ....................                                 buf_per=0x95;  //№21-вправо 
-0506:  MOVLW  95
-0508:  MOVWF  2E
+04EA:  MOVLW  95
+04EC:  MOVWF  2E
 ....................                                break; 
 ....................                                } 
 ....................                             }//switch ib 
-050A:  INCF   2A,F
-050C:  BRA    04AE
+04EE:  INCF   2A,F
+04F0:  BRA    0492
 ....................                      } //for 
 ....................                     
 ....................                    } //if 
 ....................          //      } //else 
 ....................               pr_state_rb[ii]=tek3_state_rb; 
-050E:  CLRF   03
-0510:  MOVF   29,W
-0512:  ADDLW  23
-0514:  MOVWF  FE9
-0516:  MOVLW  00
-0518:  ADDWFC 03,W
-051A:  MOVWF  FEA
-051C:  MOVFF  22,FEF
+04F2:  CLRF   03
+04F4:  MOVF   29,W
+04F6:  ADDLW  23
+04F8:  MOVWF  FE9
+04FA:  MOVLW  00
+04FC:  ADDWFC 03,W
+04FE:  MOVWF  FEA
+0500:  MOVFF  22,FEF
 ....................               pr_ruk=0; 
-0520:  CLRF   2B
+0504:  CLRF   2B
 .................... 			  break; 
-0522:  BRA    09AA
+0506:  BRA    098E
 ....................                                 
 ....................               case 1:    //SL1 
 ....................                //Кнопки K2, DISP: 
 .................... 				if (!(tek3_state_rb & (1 << 0))) { buf_per=0x83;  //№3-наж. 
-0524:  BTFSC  22.0
-0526:  BRA    0542
-0528:  MOVLW  83
-052A:  MOVWF  2E
+0508:  BTFSC  22.0
+050A:  BRA    0526
+050C:  MOVLW  83
+050E:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-052C:  SETF   F93
-052E:  MOVFF  F81,22
+0510:  SETF   F93
+0512:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 0))); 
-0532:  BTFSS  22.0
-0534:  BRA    052C
+0516:  BTFSS  22.0
+0518:  BRA    0510
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0536:  MOVF   2E,F
-0538:  BTFSS  FD8.2
-053A:  BRA    0536
+051A:  MOVF   2E,F
+051C:  BTFSS  FD8.2
+051E:  BRA    051A
 ....................                                                      buf_per=0x03;  //№2-отж. 
-053C:  MOVLW  03
-053E:  MOVWF  2E
+0520:  MOVLW  03
+0522:  MOVWF  2E
 ....................                                                     break;  
-0540:  BRA    09AA
+0524:  BRA    098E
 ....................                                                   } 
 ....................                   if (!(tek3_state_rb & (1 << 5))) { buf_per=0x84;  //№4-наж. 
-0542:  BTFSC  22.5
-0544:  BRA    0560
-0546:  MOVLW  84
-0548:  MOVWF  2E
+0526:  BTFSC  22.5
+0528:  BRA    0544
+052A:  MOVLW  84
+052C:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-054A:  SETF   F93
-054C:  MOVFF  F81,22
+052E:  SETF   F93
+0530:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-0550:  BTFSS  22.5
-0552:  BRA    054A
+0534:  BTFSS  22.5
+0536:  BRA    052E
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0554:  MOVF   2E,F
-0556:  BTFSS  FD8.2
-0558:  BRA    0554
+0538:  MOVF   2E,F
+053A:  BTFSS  FD8.2
+053C:  BRA    0538
 ....................                                                      buf_per=0x04;  //№4-отж. 
-055A:  MOVLW  04
-055C:  MOVWF  2E
+053E:  MOVLW  04
+0540:  MOVWF  2E
 ....................                                                     break;  
-055E:  BRA    09AA
+0542:  BRA    098E
 ....................                                                   } 
 ....................  
 ....................                 //Ручки -B_K2, +B_K2 -Sm_K2, +Sm_K2: 
 ....................                 //*********************************** 
 ....................                  
 ....................               if  ((tek3_state_rb & 0x02)&&(tek3_state_rb & 0x04))  //RB1 & RB2==1 
-0560:  BTFSS  22.1
-0562:  BRA    05D2
-0564:  BTFSS  22.2
-0566:  BRA    05D2
+0544:  BTFSS  22.1
+0546:  BRA    05B6
+0548:  BTFSS  22.2
+054A:  BRA    05B6
 ....................                     {  
 ....................                      for (ib=0; ib<2;ib++)  
-0568:  CLRF   2A
-056A:  MOVF   2A,W
-056C:  SUBLW  01
-056E:  BNC   05D2
+054C:  CLRF   2A
+054E:  MOVF   2A,W
+0550:  SUBLW  01
+0552:  BNC   05B6
 ....................                      { 
 ....................                        if ((tek3_state_rb & (0x02 << ib)) && (!(pr_state_rb[ii] & (0x02 << ib)))) 
-0570:  MOVLW  02
-0572:  MOVWF  00
-0574:  MOVF   2A,W
-0576:  MOVWF  01
-0578:  BZ    0582
-057A:  BCF    FD8.0
-057C:  RLCF   00,F
-057E:  DECFSZ 01,F
-0580:  BRA    057A
-0582:  MOVF   00,W
-0584:  ANDWF  22,W
-0586:  BZ    05CE
-0588:  CLRF   03
-058A:  MOVF   29,W
-058C:  ADDLW  23
-058E:  MOVWF  FE9
-0590:  MOVLW  00
-0592:  ADDWFC 03,W
-0594:  MOVWF  FEA
-0596:  MOVFF  FEF,98
-059A:  MOVLW  02
-059C:  MOVWF  00
-059E:  MOVF   2A,W
-05A0:  MOVWF  01
-05A2:  BZ    05AC
-05A4:  BCF    FD8.0
-05A6:  RLCF   00,F
-05A8:  DECFSZ 01,F
-05AA:  BRA    05A4
-05AC:  MOVF   00,W
-05AE:  ANDWF  x98,W
-05B0:  BNZ   05CE
+0554:  MOVLW  02
+0556:  MOVWF  00
+0558:  MOVF   2A,W
+055A:  MOVWF  01
+055C:  BZ    0566
+055E:  BCF    FD8.0
+0560:  RLCF   00,F
+0562:  DECFSZ 01,F
+0564:  BRA    055E
+0566:  MOVF   00,W
+0568:  ANDWF  22,W
+056A:  BZ    05B2
+056C:  CLRF   03
+056E:  MOVF   29,W
+0570:  ADDLW  23
+0572:  MOVWF  FE9
+0574:  MOVLW  00
+0576:  ADDWFC 03,W
+0578:  MOVWF  FEA
+057A:  MOVFF  FEF,98
+057E:  MOVLW  02
+0580:  MOVWF  00
+0582:  MOVF   2A,W
+0584:  MOVWF  01
+0586:  BZ    0590
+0588:  BCF    FD8.0
+058A:  RLCF   00,F
+058C:  DECFSZ 01,F
+058E:  BRA    0588
+0590:  MOVF   00,W
+0592:  ANDWF  x98,W
+0594:  BNZ   05B2
 ....................                               
 ....................                             switch(ib) 
-05B2:  MOVF   2A,W
-05B4:  BZ    05BC
-05B6:  XORLW  01
-05B8:  BZ    05C6
-05BA:  BRA    05CE
+0596:  MOVF   2A,W
+0598:  BZ    05A0
+059A:  XORLW  01
+059C:  BZ    05AA
+059E:  BRA    05B2
 .................... 			                { 
 ....................                                case 0:  
 ....................                                 pr_ruk=1; 
-05BC:  MOVLW  01
-05BE:  MOVWF  2B
+05A0:  MOVLW  01
+05A2:  MOVWF  2B
 ....................                                 buf_per=0x16;  //№22-влево 
-05C0:  MOVLW  16
-05C2:  MOVWF  2E
+05A4:  MOVLW  16
+05A6:  MOVWF  2E
 ....................                                break; 
-05C4:  BRA    05CE
+05A8:  BRA    05B2
 ....................  
 ....................                                case 1:  
 ....................                                 pr_ruk=1; 
-05C6:  MOVLW  01
-05C8:  MOVWF  2B
+05AA:  MOVLW  01
+05AC:  MOVWF  2B
 ....................                                 buf_per=0x96;  //№22-вправо 
-05CA:  MOVLW  96
-05CC:  MOVWF  2E
+05AE:  MOVLW  96
+05B0:  MOVWF  2E
 ....................                                break; 
 ....................                             }//switch  
-05CE:  INCF   2A,F
-05D0:  BRA    056A
+05B2:  INCF   2A,F
+05B4:  BRA    054E
 ....................                      } //for       
 ....................                    } //if 
 ....................  
 ....................            //   else 
 ....................            //    {                  
 ....................                if  ((tek3_state_rb & 0x08)&&(tek3_state_rb & 0x10) && (!pr_ruk))   //RB3 & RB4==1 & (!pr_ruk) 
-05D2:  BTFSS  22.3
-05D4:  BRA    0640
-05D6:  BTFSS  22.4
-05D8:  BRA    0640
-05DA:  MOVF   2B,F
-05DC:  BNZ   0640
+05B6:  BTFSS  22.3
+05B8:  BRA    0624
+05BA:  BTFSS  22.4
+05BC:  BRA    0624
+05BE:  MOVF   2B,F
+05C0:  BNZ   0624
 ....................                  { 
 ....................                      for (ib=0; ib<2;ib++)  
-05DE:  CLRF   2A
-05E0:  MOVF   2A,W
-05E2:  SUBLW  01
-05E4:  BNC   0640
+05C2:  CLRF   2A
+05C4:  MOVF   2A,W
+05C6:  SUBLW  01
+05C8:  BNC   0624
 ....................                    { 
 ....................  
 ....................                      if ((tek3_state_rb & (0x08 << ib)) && (!(pr_state_rb[ii] & (0x08 << ib)))) 
-05E6:  MOVLW  08
-05E8:  MOVWF  00
-05EA:  MOVF   2A,W
-05EC:  MOVWF  01
-05EE:  BZ    05F8
-05F0:  BCF    FD8.0
-05F2:  RLCF   00,F
-05F4:  DECFSZ 01,F
-05F6:  BRA    05F0
-05F8:  MOVF   00,W
-05FA:  ANDWF  22,W
-05FC:  BZ    063C
-05FE:  CLRF   03
-0600:  MOVF   29,W
-0602:  ADDLW  23
-0604:  MOVWF  FE9
-0606:  MOVLW  00
-0608:  ADDWFC 03,W
-060A:  MOVWF  FEA
-060C:  MOVFF  FEF,98
-0610:  MOVLW  08
-0612:  MOVWF  00
-0614:  MOVF   2A,W
-0616:  MOVWF  01
-0618:  BZ    0622
-061A:  BCF    FD8.0
-061C:  RLCF   00,F
-061E:  DECFSZ 01,F
-0620:  BRA    061A
-0622:  MOVF   00,W
-0624:  ANDWF  x98,W
-0626:  BNZ   063C
+05CA:  MOVLW  08
+05CC:  MOVWF  00
+05CE:  MOVF   2A,W
+05D0:  MOVWF  01
+05D2:  BZ    05DC
+05D4:  BCF    FD8.0
+05D6:  RLCF   00,F
+05D8:  DECFSZ 01,F
+05DA:  BRA    05D4
+05DC:  MOVF   00,W
+05DE:  ANDWF  22,W
+05E0:  BZ    0620
+05E2:  CLRF   03
+05E4:  MOVF   29,W
+05E6:  ADDLW  23
+05E8:  MOVWF  FE9
+05EA:  MOVLW  00
+05EC:  ADDWFC 03,W
+05EE:  MOVWF  FEA
+05F0:  MOVFF  FEF,98
+05F4:  MOVLW  08
+05F6:  MOVWF  00
+05F8:  MOVF   2A,W
+05FA:  MOVWF  01
+05FC:  BZ    0606
+05FE:  BCF    FD8.0
+0600:  RLCF   00,F
+0602:  DECFSZ 01,F
+0604:  BRA    05FE
+0606:  MOVF   00,W
+0608:  ANDWF  x98,W
+060A:  BNZ   0620
 ....................                               
 ....................                             switch(ib) 
-0628:  MOVF   2A,W
-062A:  BZ    0632
-062C:  XORLW  01
-062E:  BZ    0638
-0630:  BRA    063C
+060C:  MOVF   2A,W
+060E:  BZ    0616
+0610:  XORLW  01
+0612:  BZ    061C
+0614:  BRA    0620
 .................... 			                { 
 ....................                                case 0:  
 ....................                                { 
 ....................                                 buf_per=0x17;  //№23-влево 
-0632:  MOVLW  17
-0634:  MOVWF  2E
+0616:  MOVLW  17
+0618:  MOVWF  2E
 ....................                                 break; 
-0636:  BRA    063C
+061A:  BRA    0620
 ....................                                } 
 ....................  
 ....................                                case 1:  
 ....................                                { 
 ....................                                buf_per=0x97;  //№23-вправо 
-0638:  MOVLW  97
-063A:  MOVWF  2E
+061C:  MOVLW  97
+061E:  MOVWF  2E
 ....................                                break; 
 ....................                                } 
 ....................                             }//switch  
-063C:  INCF   2A,F
-063E:  BRA    05E0
+0620:  INCF   2A,F
+0622:  BRA    05C4
 ....................                      } //for 
 ....................                     
 ....................                    } //if 
 ....................            //    } //else 
 .................... //              pr_state_rb[ii]=tek3_state_rb; 
 ....................               pr_ruk=0; 
-0640:  CLRF   2B
+0624:  CLRF   2B
 .................... 						 		                         
 .................... 			  break; 
-0642:  BRA    09AA
+0626:  BRA    098E
 ....................        
 ....................               case 2: //SL2 
 ....................                //Кнопки Raz, Pam: 
 .................... 				if (!(tek3_state_rb & (1 << 0))) { buf_per=0x85;  //№5-наж. 
-0644:  BTFSC  22.0
-0646:  BRA    0662
-0648:  MOVLW  85
-064A:  MOVWF  2E
+0628:  BTFSC  22.0
+062A:  BRA    0646
+062C:  MOVLW  85
+062E:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-064C:  SETF   F93
-064E:  MOVFF  F81,22
+0630:  SETF   F93
+0632:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 0))); 
-0652:  BTFSS  22.0
-0654:  BRA    064C
+0636:  BTFSS  22.0
+0638:  BRA    0630
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0656:  MOVF   2E,F
-0658:  BTFSS  FD8.2
-065A:  BRA    0656
+063A:  MOVF   2E,F
+063C:  BTFSS  FD8.2
+063E:  BRA    063A
 ....................                                                      buf_per=0x05;  //№5-отж. 
-065C:  MOVLW  05
-065E:  MOVWF  2E
+0640:  MOVLW  05
+0642:  MOVWF  2E
 ....................                                                     break;  
-0660:  BRA    09AA
+0644:  BRA    098E
 ....................                                                   } 
 ....................                   if (!(tek3_state_rb & (1 << 5))) { buf_per=0x86;  //№6-наж. 
-0662:  BTFSC  22.5
-0664:  BRA    0680
-0666:  MOVLW  86
-0668:  MOVWF  2E
+0646:  BTFSC  22.5
+0648:  BRA    0664
+064A:  MOVLW  86
+064C:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-066A:  SETF   F93
-066C:  MOVFF  F81,22
+064E:  SETF   F93
+0650:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-0670:  BTFSS  22.5
-0672:  BRA    066A
+0654:  BTFSS  22.5
+0656:  BRA    064E
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0674:  MOVF   2E,F
-0676:  BTFSS  FD8.2
-0678:  BRA    0674
+0658:  MOVF   2E,F
+065A:  BTFSS  FD8.2
+065C:  BRA    0658
 ....................                                                      buf_per=0x06;  //№6-отж. 
-067A:  MOVLW  06
-067C:  MOVWF  2E
+065E:  MOVLW  06
+0660:  MOVWF  2E
 ....................                                                     break;  
-067E:  BRA    09AA
+0662:  BRA    098E
 ....................                                                   } 
 ....................                 //Ручки -T, +T -Del, +Del: 
 ....................                 //*********************************** 
 ....................                  
 ....................               if  ((tek3_state_rb & 0x02)&&(tek3_state_rb & 0x04))  //RB1 & RB2==1 
-0680:  BTFSS  22.1
-0682:  BRA    06F2
-0684:  BTFSS  22.2
-0686:  BRA    06F2
+0664:  BTFSS  22.1
+0666:  BRA    06D6
+0668:  BTFSS  22.2
+066A:  BRA    06D6
 ....................                     {  
 ....................                      for (ib=0; ib<2;ib++)  
-0688:  CLRF   2A
-068A:  MOVF   2A,W
-068C:  SUBLW  01
-068E:  BNC   06F2
+066C:  CLRF   2A
+066E:  MOVF   2A,W
+0670:  SUBLW  01
+0672:  BNC   06D6
 ....................                      { 
 ....................                        if ((tek3_state_rb & (0x02 << ib)) && (!(pr_state_rb[ii] & (0x02 << ib)))) 
-0690:  MOVLW  02
-0692:  MOVWF  00
-0694:  MOVF   2A,W
-0696:  MOVWF  01
-0698:  BZ    06A2
-069A:  BCF    FD8.0
-069C:  RLCF   00,F
-069E:  DECFSZ 01,F
-06A0:  BRA    069A
-06A2:  MOVF   00,W
-06A4:  ANDWF  22,W
-06A6:  BZ    06EE
-06A8:  CLRF   03
-06AA:  MOVF   29,W
-06AC:  ADDLW  23
-06AE:  MOVWF  FE9
-06B0:  MOVLW  00
-06B2:  ADDWFC 03,W
-06B4:  MOVWF  FEA
-06B6:  MOVFF  FEF,98
-06BA:  MOVLW  02
-06BC:  MOVWF  00
-06BE:  MOVF   2A,W
-06C0:  MOVWF  01
-06C2:  BZ    06CC
-06C4:  BCF    FD8.0
-06C6:  RLCF   00,F
-06C8:  DECFSZ 01,F
-06CA:  BRA    06C4
-06CC:  MOVF   00,W
-06CE:  ANDWF  x98,W
-06D0:  BNZ   06EE
+0674:  MOVLW  02
+0676:  MOVWF  00
+0678:  MOVF   2A,W
+067A:  MOVWF  01
+067C:  BZ    0686
+067E:  BCF    FD8.0
+0680:  RLCF   00,F
+0682:  DECFSZ 01,F
+0684:  BRA    067E
+0686:  MOVF   00,W
+0688:  ANDWF  22,W
+068A:  BZ    06D2
+068C:  CLRF   03
+068E:  MOVF   29,W
+0690:  ADDLW  23
+0692:  MOVWF  FE9
+0694:  MOVLW  00
+0696:  ADDWFC 03,W
+0698:  MOVWF  FEA
+069A:  MOVFF  FEF,98
+069E:  MOVLW  02
+06A0:  MOVWF  00
+06A2:  MOVF   2A,W
+06A4:  MOVWF  01
+06A6:  BZ    06B0
+06A8:  BCF    FD8.0
+06AA:  RLCF   00,F
+06AC:  DECFSZ 01,F
+06AE:  BRA    06A8
+06B0:  MOVF   00,W
+06B2:  ANDWF  x98,W
+06B4:  BNZ   06D2
 ....................                               
 ....................                             switch(ib) 
-06D2:  MOVF   2A,W
-06D4:  BZ    06DC
-06D6:  XORLW  01
-06D8:  BZ    06E6
-06DA:  BRA    06EE
+06B6:  MOVF   2A,W
+06B8:  BZ    06C0
+06BA:  XORLW  01
+06BC:  BZ    06CA
+06BE:  BRA    06D2
 .................... 			                { 
 ....................                                case 0:  
 ....................                                 pr_ruk=1; 
-06DC:  MOVLW  01
-06DE:  MOVWF  2B
+06C0:  MOVLW  01
+06C2:  MOVWF  2B
 ....................                                 buf_per=0x18;  //№24-влево 
-06E0:  MOVLW  18
-06E2:  MOVWF  2E
+06C4:  MOVLW  18
+06C6:  MOVWF  2E
 ....................                                break; 
-06E4:  BRA    06EE
+06C8:  BRA    06D2
 ....................  
 ....................                                case 1:  
 ....................                                 pr_ruk=1; 
-06E6:  MOVLW  01
-06E8:  MOVWF  2B
+06CA:  MOVLW  01
+06CC:  MOVWF  2B
 ....................                                 buf_per=0x98;  //№24-вправо 
-06EA:  MOVLW  98
-06EC:  MOVWF  2E
+06CE:  MOVLW  98
+06D0:  MOVWF  2E
 ....................                                break; 
 ....................                             }//switch  
-06EE:  INCF   2A,F
-06F0:  BRA    068A
+06D2:  INCF   2A,F
+06D4:  BRA    066E
 ....................                      } //for       
 ....................                    } //if 
 ....................  
 ....................            //   else 
 ....................                {                  
 ....................                if  ((tek3_state_rb & 0x08)&&(tek3_state_rb & 0x10) && (!pr_ruk))   //RB3 & RB4==1 & (!pr_ruk) 
-06F2:  BTFSS  22.3
-06F4:  BRA    0760
-06F6:  BTFSS  22.4
-06F8:  BRA    0760
-06FA:  MOVF   2B,F
-06FC:  BNZ   0760
+06D6:  BTFSS  22.3
+06D8:  BRA    0744
+06DA:  BTFSS  22.4
+06DC:  BRA    0744
+06DE:  MOVF   2B,F
+06E0:  BNZ   0744
 ....................                  { 
 ....................                      for (ib=0; ib<2;ib++)  
-06FE:  CLRF   2A
-0700:  MOVF   2A,W
-0702:  SUBLW  01
-0704:  BNC   0760
+06E2:  CLRF   2A
+06E4:  MOVF   2A,W
+06E6:  SUBLW  01
+06E8:  BNC   0744
 ....................                    { 
 ....................  
 ....................                      if ((tek3_state_rb & (0x08 << ib)) && (!(pr_state_rb[ii] & (0x08 << ib)))) 
-0706:  MOVLW  08
-0708:  MOVWF  00
-070A:  MOVF   2A,W
-070C:  MOVWF  01
-070E:  BZ    0718
-0710:  BCF    FD8.0
-0712:  RLCF   00,F
-0714:  DECFSZ 01,F
-0716:  BRA    0710
-0718:  MOVF   00,W
-071A:  ANDWF  22,W
-071C:  BZ    075C
-071E:  CLRF   03
-0720:  MOVF   29,W
-0722:  ADDLW  23
-0724:  MOVWF  FE9
-0726:  MOVLW  00
-0728:  ADDWFC 03,W
-072A:  MOVWF  FEA
-072C:  MOVFF  FEF,98
-0730:  MOVLW  08
-0732:  MOVWF  00
-0734:  MOVF   2A,W
-0736:  MOVWF  01
-0738:  BZ    0742
-073A:  BCF    FD8.0
-073C:  RLCF   00,F
-073E:  DECFSZ 01,F
-0740:  BRA    073A
-0742:  MOVF   00,W
-0744:  ANDWF  x98,W
-0746:  BNZ   075C
+06EA:  MOVLW  08
+06EC:  MOVWF  00
+06EE:  MOVF   2A,W
+06F0:  MOVWF  01
+06F2:  BZ    06FC
+06F4:  BCF    FD8.0
+06F6:  RLCF   00,F
+06F8:  DECFSZ 01,F
+06FA:  BRA    06F4
+06FC:  MOVF   00,W
+06FE:  ANDWF  22,W
+0700:  BZ    0740
+0702:  CLRF   03
+0704:  MOVF   29,W
+0706:  ADDLW  23
+0708:  MOVWF  FE9
+070A:  MOVLW  00
+070C:  ADDWFC 03,W
+070E:  MOVWF  FEA
+0710:  MOVFF  FEF,98
+0714:  MOVLW  08
+0716:  MOVWF  00
+0718:  MOVF   2A,W
+071A:  MOVWF  01
+071C:  BZ    0726
+071E:  BCF    FD8.0
+0720:  RLCF   00,F
+0722:  DECFSZ 01,F
+0724:  BRA    071E
+0726:  MOVF   00,W
+0728:  ANDWF  x98,W
+072A:  BNZ   0740
 ....................                               
 ....................                             switch(ib) 
-0748:  MOVF   2A,W
-074A:  BZ    0752
-074C:  XORLW  01
-074E:  BZ    0758
-0750:  BRA    075C
+072C:  MOVF   2A,W
+072E:  BZ    0736
+0730:  XORLW  01
+0732:  BZ    073C
+0734:  BRA    0740
 .................... 			                { 
 ....................                                case 0:  
 ....................                                { 
 ....................                                 buf_per=0x19;  //№25-влево 
-0752:  MOVLW  19
-0754:  MOVWF  2E
+0736:  MOVLW  19
+0738:  MOVWF  2E
 ....................                                 break; 
-0756:  BRA    075C
+073A:  BRA    0740
 ....................                                } 
 ....................  
 ....................                                case 1:  
 ....................                                { 
 ....................                                buf_per=0x99;  //№25-вправо 
-0758:  MOVLW  99
-075A:  MOVWF  2E
+073C:  MOVLW  99
+073E:  MOVWF  2E
 ....................                                break; 
 ....................                                } 
 ....................                             }//switch  
-075C:  INCF   2A,F
-075E:  BRA    0700
+0740:  INCF   2A,F
+0742:  BRA    06E4
 ....................                      } //for 
 ....................                     
 ....................                    } //if 
 ....................                } //else 
 .................... //              pr_state_rb[ii]=tek3_state_rb;  
 .................... 			  pr_ruk=0;			 		                         
-0760:  CLRF   2B
+0744:  CLRF   2B
 .................... 			  break;  
-0762:  BRA    09AA
+0746:  BRA    098E
 ....................  
 ....................               case 3:  //SL3 
 ....................  
 ....................                //Кнопки Sinch, Pusk, Kurs, Izm: 
 .................... 				if (!(tek3_state_rb & (1 << 0))) { buf_per=0x87;  //№7-наж. 
-0764:  BTFSC  22.0
-0766:  BRA    0782
-0768:  MOVLW  87
-076A:  MOVWF  2E
+0748:  BTFSC  22.0
+074A:  BRA    0766
+074C:  MOVLW  87
+074E:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-076C:  SETF   F93
-076E:  MOVFF  F81,22
+0750:  SETF   F93
+0752:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 0))); 
-0772:  BTFSS  22.0
-0774:  BRA    076C
+0756:  BTFSS  22.0
+0758:  BRA    0750
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0776:  MOVF   2E,F
-0778:  BTFSS  FD8.2
-077A:  BRA    0776
+075A:  MOVF   2E,F
+075C:  BTFSS  FD8.2
+075E:  BRA    075A
 ....................                                                      buf_per=0x07;  //№7-отж. 
-077C:  MOVLW  07
-077E:  MOVWF  2E
+0760:  MOVLW  07
+0762:  MOVWF  2E
 ....................                                                     break;  
-0780:  BRA    09AA
+0764:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 3))) { buf_per=0x88;  //№8-наж. 
-0782:  BTFSC  22.3
-0784:  BRA    07A0
-0786:  MOVLW  88
-0788:  MOVWF  2E
+0766:  BTFSC  22.3
+0768:  BRA    0784
+076A:  MOVLW  88
+076C:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-078A:  SETF   F93
-078C:  MOVFF  F81,22
+076E:  SETF   F93
+0770:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 3))); 
-0790:  BTFSS  22.3
-0792:  BRA    078A
+0774:  BTFSS  22.3
+0776:  BRA    076E
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0794:  MOVF   2E,F
-0796:  BTFSS  FD8.2
-0798:  BRA    0794
+0778:  MOVF   2E,F
+077A:  BTFSS  FD8.2
+077C:  BRA    0778
 ....................                                                      buf_per=0x08;  //№8-отж. 
-079A:  MOVLW  08
-079C:  MOVWF  2E
+077E:  MOVLW  08
+0780:  MOVWF  2E
 ....................                                                     break;  
-079E:  BRA    09AA
+0782:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 4))) { buf_per=0x89;  //№9-наж. 
-07A0:  BTFSC  22.4
-07A2:  BRA    07BE
-07A4:  MOVLW  89
-07A6:  MOVWF  2E
+0784:  BTFSC  22.4
+0786:  BRA    07A2
+0788:  MOVLW  89
+078A:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-07A8:  SETF   F93
-07AA:  MOVFF  F81,22
+078C:  SETF   F93
+078E:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 4))); 
-07AE:  BTFSS  22.4
-07B0:  BRA    07A8
+0792:  BTFSS  22.4
+0794:  BRA    078C
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-07B2:  MOVF   2E,F
-07B4:  BTFSS  FD8.2
-07B6:  BRA    07B2
+0796:  MOVF   2E,F
+0798:  BTFSS  FD8.2
+079A:  BRA    0796
 ....................                                                      buf_per=0x09;  //№9-отж. 
-07B8:  MOVLW  09
-07BA:  MOVWF  2E
+079C:  MOVLW  09
+079E:  MOVWF  2E
 ....................                                                     break;  
-07BC:  BRA    09AA
+07A0:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 5))) { buf_per=0x8A;  //№10-наж. 
-07BE:  BTFSC  22.5
-07C0:  BRA    07DC
-07C2:  MOVLW  8A
-07C4:  MOVWF  2E
+07A2:  BTFSC  22.5
+07A4:  BRA    07C0
+07A6:  MOVLW  8A
+07A8:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-07C6:  SETF   F93
-07C8:  MOVFF  F81,22
+07AA:  SETF   F93
+07AC:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-07CC:  BTFSS  22.5
-07CE:  BRA    07C6
+07B0:  BTFSS  22.5
+07B2:  BRA    07AA
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-07D0:  MOVF   2E,F
-07D2:  BTFSS  FD8.2
-07D4:  BRA    07D0
+07B4:  MOVF   2E,F
+07B6:  BTFSS  FD8.2
+07B8:  BRA    07B4
 ....................                                                      buf_per=0x0A;  //№10-отж. 
-07D6:  MOVLW  0A
-07D8:  MOVWF  2E
+07BA:  MOVLW  0A
+07BC:  MOVWF  2E
 ....................                                                     break;  
-07DA:  BRA    09AA
+07BE:  BRA    098E
 ....................                                                   } 
 ....................  
 ....................                 //Ручки -Ur, +Ur : 
 ....................                 //**************** 
 ....................                  
 ....................               if  ((tek3_state_rb & 0x02)&&(tek3_state_rb & 0x04))  //RB1 & RB2==1 
-07DC:  BTFSS  22.1
-07DE:  BRA    0846
-07E0:  BTFSS  22.2
-07E2:  BRA    0846
+07C0:  BTFSS  22.1
+07C2:  BRA    082A
+07C4:  BTFSS  22.2
+07C6:  BRA    082A
 ....................                     {  
 ....................                      for (ib=0; ib<2;ib++)  
-07E4:  CLRF   2A
-07E6:  MOVF   2A,W
-07E8:  SUBLW  01
-07EA:  BNC   0846
+07C8:  CLRF   2A
+07CA:  MOVF   2A,W
+07CC:  SUBLW  01
+07CE:  BNC   082A
 ....................                      { 
 ....................                        if ((tek3_state_rb & (0x02 << ib)) && (!(pr_state_rb[ii] & (0x02 << ib)))) 
-07EC:  MOVLW  02
-07EE:  MOVWF  00
-07F0:  MOVF   2A,W
-07F2:  MOVWF  01
-07F4:  BZ    07FE
-07F6:  BCF    FD8.0
-07F8:  RLCF   00,F
-07FA:  DECFSZ 01,F
-07FC:  BRA    07F6
-07FE:  MOVF   00,W
-0800:  ANDWF  22,W
-0802:  BZ    0842
-0804:  CLRF   03
-0806:  MOVF   29,W
-0808:  ADDLW  23
-080A:  MOVWF  FE9
-080C:  MOVLW  00
-080E:  ADDWFC 03,W
-0810:  MOVWF  FEA
-0812:  MOVFF  FEF,98
-0816:  MOVLW  02
-0818:  MOVWF  00
-081A:  MOVF   2A,W
-081C:  MOVWF  01
-081E:  BZ    0828
-0820:  BCF    FD8.0
-0822:  RLCF   00,F
-0824:  DECFSZ 01,F
-0826:  BRA    0820
-0828:  MOVF   00,W
-082A:  ANDWF  x98,W
-082C:  BNZ   0842
+07D0:  MOVLW  02
+07D2:  MOVWF  00
+07D4:  MOVF   2A,W
+07D6:  MOVWF  01
+07D8:  BZ    07E2
+07DA:  BCF    FD8.0
+07DC:  RLCF   00,F
+07DE:  DECFSZ 01,F
+07E0:  BRA    07DA
+07E2:  MOVF   00,W
+07E4:  ANDWF  22,W
+07E6:  BZ    0826
+07E8:  CLRF   03
+07EA:  MOVF   29,W
+07EC:  ADDLW  23
+07EE:  MOVWF  FE9
+07F0:  MOVLW  00
+07F2:  ADDWFC 03,W
+07F4:  MOVWF  FEA
+07F6:  MOVFF  FEF,98
+07FA:  MOVLW  02
+07FC:  MOVWF  00
+07FE:  MOVF   2A,W
+0800:  MOVWF  01
+0802:  BZ    080C
+0804:  BCF    FD8.0
+0806:  RLCF   00,F
+0808:  DECFSZ 01,F
+080A:  BRA    0804
+080C:  MOVF   00,W
+080E:  ANDWF  x98,W
+0810:  BNZ   0826
 ....................                               
 ....................                             switch(ib) 
-082E:  MOVF   2A,W
-0830:  BZ    0838
-0832:  XORLW  01
-0834:  BZ    083E
-0836:  BRA    0842
+0812:  MOVF   2A,W
+0814:  BZ    081C
+0816:  XORLW  01
+0818:  BZ    0822
+081A:  BRA    0826
 .................... 			                { 
 ....................                                case 0:  
 ....................                                 buf_per=0x1A;  //№26-влево 
-0838:  MOVLW  1A
-083A:  MOVWF  2E
+081C:  MOVLW  1A
+081E:  MOVWF  2E
 ....................                                break; 
-083C:  BRA    0842
+0820:  BRA    0826
 ....................  
 ....................                                case 1: 
 ....................                                buf_per=0x9A;  //№26-вправо 
-083E:  MOVLW  9A
-0840:  MOVWF  2E
+0822:  MOVLW  9A
+0824:  MOVWF  2E
 ....................                                break; 
 ....................                             }//switch  
-0842:  INCF   2A,F
-0844:  BRA    07E6
+0826:  INCF   2A,F
+0828:  BRA    07CA
 ....................                      } //for       
 ....................                    } //if 
 .................... //			    pr_state_rb[ii]=tek3_state_rb; 			 		                         
 .................... 			  break; 
-0846:  BRA    09AA
+082A:  BRA    098E
 ....................  
 ....................               case 4: // SL4 
 ....................               //Кнопки Pit, Sbor: 
 .................... 				if (!(tek3_state_rb & (1 << 0)))  { buf_per=0x8B;  //№11-наж. 
-0848:  BTFSC  22.0
-084A:  BRA    0858
-084C:  MOVLW  8B
-084E:  MOVWF  2E
+082C:  BTFSC  22.0
+082E:  BRA    083C
+0830:  MOVLW  8B
+0832:  MOVWF  2E
 ....................                                                     if (pr_wkl_pit==0) 
-0850:  MOVF   30,F
-0852:  BNZ   0856
+0834:  MOVF   30,F
+0836:  BNZ   083A
 ....................                                                       { 
 ....................                                                        pit_bkl(); 
-0854:  RCALL  00DA
+0838:  RCALL  00DA
 ....................                                                         
 ....................                                                       }  
 ....................                                                     break;  
-0856:  BRA    09AA
+083A:  BRA    098E
 ....................                                                   } 
 ....................                   if (!(tek3_state_rb & (1 << 5))) { buf_per=0x8C;  //№12-наж. 
-0858:  BTFSC  22.5
-085A:  BRA    0876
-085C:  MOVLW  8C
-085E:  MOVWF  2E
+083C:  BTFSC  22.5
+083E:  BRA    085A
+0840:  MOVLW  8C
+0842:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0860:  SETF   F93
-0862:  MOVFF  F81,22
+0844:  SETF   F93
+0846:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-0866:  BTFSS  22.5
-0868:  BRA    0860
+084A:  BTFSS  22.5
+084C:  BRA    0844
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-086A:  MOVF   2E,F
-086C:  BTFSS  FD8.2
-086E:  BRA    086A
+084E:  MOVF   2E,F
+0850:  BTFSS  FD8.2
+0852:  BRA    084E
 ....................                                                      buf_per=0x0C;  //№12-отж. 
-0870:  MOVLW  0C
-0872:  MOVWF  2E
+0854:  MOVLW  0C
+0856:  MOVWF  2E
 ....................                                                     break;  
-0874:  BRA    09AA
+0858:  BRA    098E
 ....................                                                   } 
 ....................  
 ....................  
@@ -2715,272 +2701,272 @@ CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
 ....................                 //**************** 
 ....................                  
 ....................               if  ((tek3_state_rb & 0x02)&&(tek3_state_rb & 0x04))  //RB1 & RB2==1 
-0876:  BTFSS  22.1
-0878:  BRA    08E0
-087A:  BTFSS  22.2
-087C:  BRA    08E0
+085A:  BTFSS  22.1
+085C:  BRA    08C4
+085E:  BTFSS  22.2
+0860:  BRA    08C4
 ....................                     {  
 ....................                      for (ib=0; ib<2;ib++)  
-087E:  CLRF   2A
-0880:  MOVF   2A,W
-0882:  SUBLW  01
-0884:  BNC   08E0
+0862:  CLRF   2A
+0864:  MOVF   2A,W
+0866:  SUBLW  01
+0868:  BNC   08C4
 ....................                      { 
 ....................                        if ((tek3_state_rb & (0x02 << ib)) && (!(pr_state_rb[ii] & (0x02 << ib)))) 
-0886:  MOVLW  02
-0888:  MOVWF  00
-088A:  MOVF   2A,W
-088C:  MOVWF  01
-088E:  BZ    0898
-0890:  BCF    FD8.0
-0892:  RLCF   00,F
-0894:  DECFSZ 01,F
-0896:  BRA    0890
-0898:  MOVF   00,W
-089A:  ANDWF  22,W
-089C:  BZ    08DC
-089E:  CLRF   03
-08A0:  MOVF   29,W
-08A2:  ADDLW  23
-08A4:  MOVWF  FE9
-08A6:  MOVLW  00
-08A8:  ADDWFC 03,W
-08AA:  MOVWF  FEA
-08AC:  MOVFF  FEF,98
-08B0:  MOVLW  02
-08B2:  MOVWF  00
-08B4:  MOVF   2A,W
-08B6:  MOVWF  01
-08B8:  BZ    08C2
-08BA:  BCF    FD8.0
-08BC:  RLCF   00,F
-08BE:  DECFSZ 01,F
-08C0:  BRA    08BA
-08C2:  MOVF   00,W
-08C4:  ANDWF  x98,W
-08C6:  BNZ   08DC
+086A:  MOVLW  02
+086C:  MOVWF  00
+086E:  MOVF   2A,W
+0870:  MOVWF  01
+0872:  BZ    087C
+0874:  BCF    FD8.0
+0876:  RLCF   00,F
+0878:  DECFSZ 01,F
+087A:  BRA    0874
+087C:  MOVF   00,W
+087E:  ANDWF  22,W
+0880:  BZ    08C0
+0882:  CLRF   03
+0884:  MOVF   29,W
+0886:  ADDLW  23
+0888:  MOVWF  FE9
+088A:  MOVLW  00
+088C:  ADDWFC 03,W
+088E:  MOVWF  FEA
+0890:  MOVFF  FEF,98
+0894:  MOVLW  02
+0896:  MOVWF  00
+0898:  MOVF   2A,W
+089A:  MOVWF  01
+089C:  BZ    08A6
+089E:  BCF    FD8.0
+08A0:  RLCF   00,F
+08A2:  DECFSZ 01,F
+08A4:  BRA    089E
+08A6:  MOVF   00,W
+08A8:  ANDWF  x98,W
+08AA:  BNZ   08C0
 ....................                               
 ....................                             switch(ib) 
-08C8:  MOVF   2A,W
-08CA:  BZ    08D2
-08CC:  XORLW  01
-08CE:  BZ    08D8
-08D0:  BRA    08DC
+08AC:  MOVF   2A,W
+08AE:  BZ    08B6
+08B0:  XORLW  01
+08B2:  BZ    08BC
+08B4:  BRA    08C0
 .................... 			                { 
 ....................                                case 0:  
 ....................                                 buf_per=0x1B;  //№27-влево 
-08D2:  MOVLW  1B
-08D4:  MOVWF  2E
+08B6:  MOVLW  1B
+08B8:  MOVWF  2E
 ....................                                break; 
-08D6:  BRA    08DC
+08BA:  BRA    08C0
 ....................  
 ....................                                case 1:  
 ....................                                 buf_per=0x9B;  //№27-вправо 
-08D8:  MOVLW  9B
-08DA:  MOVWF  2E
+08BC:  MOVLW  9B
+08BE:  MOVWF  2E
 ....................                                break; 
 ....................                             }//switch  
-08DC:  INCF   2A,F
-08DE:  BRA    0880
+08C0:  INCF   2A,F
+08C2:  BRA    0864
 ....................                      } //for       
 ....................                    } //if 
 .................... //			     pr_state_rb[ii]=tek3_state_rb; 			 		                         
 .................... 			  break;  
-08E0:  BRA    09AA
+08C4:  BRA    098E
 ....................  
 ....................               case 5: //SL5  
 ....................                //Кнопки Men,"1", "2", "3", "4", "5": 
 .................... 				if (!(tek3_state_rb & (1 << 0))) { buf_per=0x8D;  //№13-наж. 
-08E2:  BTFSC  22.0
-08E4:  BRA    0900
-08E6:  MOVLW  8D
-08E8:  MOVWF  2E
+08C6:  BTFSC  22.0
+08C8:  BRA    08E4
+08CA:  MOVLW  8D
+08CC:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-08EA:  SETF   F93
-08EC:  MOVFF  F81,22
+08CE:  SETF   F93
+08D0:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 0))); 
-08F0:  BTFSS  22.0
-08F2:  BRA    08EA
+08D4:  BTFSS  22.0
+08D6:  BRA    08CE
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-08F4:  MOVF   2E,F
-08F6:  BTFSS  FD8.2
-08F8:  BRA    08F4
+08D8:  MOVF   2E,F
+08DA:  BTFSS  FD8.2
+08DC:  BRA    08D8
 ....................                                                      buf_per=0x0D;  //№13-отж. 
-08FA:  MOVLW  0D
-08FC:  MOVWF  2E
+08DE:  MOVLW  0D
+08E0:  MOVWF  2E
 ....................                                                     break;  
-08FE:  BRA    09AA
+08E2:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 1))) { buf_per=0x8e;  //№14-наж. 
-0900:  BTFSC  22.1
-0902:  BRA    091E
-0904:  MOVLW  8E
-0906:  MOVWF  2E
+08E4:  BTFSC  22.1
+08E6:  BRA    0902
+08E8:  MOVLW  8E
+08EA:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0908:  SETF   F93
-090A:  MOVFF  F81,22
+08EC:  SETF   F93
+08EE:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 1))); 
-090E:  BTFSS  22.1
-0910:  BRA    0908
+08F2:  BTFSS  22.1
+08F4:  BRA    08EC
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0912:  MOVF   2E,F
-0914:  BTFSS  FD8.2
-0916:  BRA    0912
+08F6:  MOVF   2E,F
+08F8:  BTFSS  FD8.2
+08FA:  BRA    08F6
 ....................                                                      buf_per=0x0e;  //№14-отж. 
-0918:  MOVLW  0E
-091A:  MOVWF  2E
+08FC:  MOVLW  0E
+08FE:  MOVWF  2E
 ....................                                                     break;  
-091C:  BRA    09AA
+0900:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 2))) { buf_per=0x8f;  //№15-наж. 
-091E:  BTFSC  22.2
-0920:  BRA    093C
-0922:  MOVLW  8F
-0924:  MOVWF  2E
+0902:  BTFSC  22.2
+0904:  BRA    0920
+0906:  MOVLW  8F
+0908:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0926:  SETF   F93
-0928:  MOVFF  F81,22
+090A:  SETF   F93
+090C:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 2))); 
-092C:  BTFSS  22.2
-092E:  BRA    0926
+0910:  BTFSS  22.2
+0912:  BRA    090A
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-0930:  MOVF   2E,F
-0932:  BTFSS  FD8.2
-0934:  BRA    0930
+0914:  MOVF   2E,F
+0916:  BTFSS  FD8.2
+0918:  BRA    0914
 ....................                                                      buf_per=0x0f;  //№15-отж. 
-0936:  MOVLW  0F
-0938:  MOVWF  2E
+091A:  MOVLW  0F
+091C:  MOVWF  2E
 ....................                                                     break;  
-093A:  BRA    09AA
+091E:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 3))) { buf_per=0x90;  //№16-наж. 
-093C:  BTFSC  22.3
-093E:  BRA    095A
-0940:  MOVLW  90
-0942:  MOVWF  2E
+0920:  BTFSC  22.3
+0922:  BRA    093E
+0924:  MOVLW  90
+0926:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0944:  SETF   F93
-0946:  MOVFF  F81,22
+0928:  SETF   F93
+092A:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 3))); 
-094A:  BTFSS  22.3
-094C:  BRA    0944
+092E:  BTFSS  22.3
+0930:  BRA    0928
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-094E:  MOVF   2E,F
-0950:  BTFSS  FD8.2
-0952:  BRA    094E
+0932:  MOVF   2E,F
+0934:  BTFSS  FD8.2
+0936:  BRA    0932
 ....................                                                      buf_per=0x10;  //№16-отж. 
-0954:  MOVLW  10
-0956:  MOVWF  2E
+0938:  MOVLW  10
+093A:  MOVWF  2E
 ....................                                                     break;  
-0958:  BRA    09AA
+093C:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 4))) { buf_per=0x91;  //№17-наж. 
-095A:  BTFSC  22.4
-095C:  BRA    0978
-095E:  MOVLW  91
-0960:  MOVWF  2E
+093E:  BTFSC  22.4
+0940:  BRA    095C
+0942:  MOVLW  91
+0944:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0962:  SETF   F93
-0964:  MOVFF  F81,22
+0946:  SETF   F93
+0948:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 4))); 
-0968:  BTFSS  22.4
-096A:  BRA    0962
+094C:  BTFSS  22.4
+094E:  BRA    0946
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-096C:  MOVF   2E,F
-096E:  BTFSS  FD8.2
-0970:  BRA    096C
+0950:  MOVF   2E,F
+0952:  BTFSS  FD8.2
+0954:  BRA    0950
 ....................                                                      buf_per=0x11;  //№17-отж. 
-0972:  MOVLW  11
-0974:  MOVWF  2E
+0956:  MOVLW  11
+0958:  MOVWF  2E
 ....................                                                     break;  
-0976:  BRA    09AA
+095A:  BRA    098E
 ....................                                                   } 
 ....................                 if (!(tek3_state_rb & (1 << 5))) { buf_per=0x92;  //№18-наж. 
-0978:  BTFSC  22.5
-097A:  BRA    0996
-097C:  MOVLW  92
-097E:  MOVWF  2E
+095C:  BTFSC  22.5
+095E:  BRA    097A
+0960:  MOVLW  92
+0962:  MOVWF  2E
 ....................                                                     do 
 ....................                                                      tek3_state_rb = input_b();  
-0980:  SETF   F93
-0982:  MOVFF  F81,22
+0964:  SETF   F93
+0966:  MOVFF  F81,22
 ....................                                                     while (!(tek3_state_rb & (1 << 5))); 
-0986:  BTFSS  22.5
-0988:  BRA    0980
+096A:  BTFSS  22.5
+096C:  BRA    0964
 ....................                                                     //отжатие произошло 
 ....................                                                     while (buf_per!=0) {} 
-098A:  MOVF   2E,F
-098C:  BTFSS  FD8.2
-098E:  BRA    098A
+096E:  MOVF   2E,F
+0970:  BTFSS  FD8.2
+0972:  BRA    096E
 ....................                                                      buf_per=0x12;  //№18-отж. 
-0990:  MOVLW  12
-0992:  MOVWF  2E
+0974:  MOVLW  12
+0976:  MOVWF  2E
 ....................                                                     break;  
-0994:  BRA    09AA
+0978:  BRA    098E
 ....................                                                   } 
 ....................  
 ....................    
 ....................                 pr_state_rb[ii]=tek3_state_rb; 						 		                         
-0996:  CLRF   03
-0998:  MOVF   29,W
-099A:  ADDLW  23
-099C:  MOVWF  FE9
-099E:  MOVLW  00
-09A0:  ADDWFC 03,W
-09A2:  MOVWF  FEA
-09A4:  MOVFF  22,FEF
+097A:  CLRF   03
+097C:  MOVF   29,W
+097E:  ADDLW  23
+0980:  MOVWF  FE9
+0982:  MOVLW  00
+0984:  ADDWFC 03,W
+0986:  MOVWF  FEA
+0988:  MOVFF  22,FEF
 .................... 			  break; 
-09A8:  BRA    09AA
+098C:  BRA    098E
 ....................  
 ....................               default: 
 ....................               break;   
 ....................  
 ....................             }//switch(ii)  
 ....................     pr_state_rb[ii]=tek3_state_rb;   
-09AA:  CLRF   03
-09AC:  MOVF   29,W
-09AE:  ADDLW  23
-09B0:  MOVWF  FE9
-09B2:  MOVLW  00
-09B4:  ADDWFC 03,W
-09B6:  MOVWF  FEA
-09B8:  MOVFF  22,FEF
+098E:  CLRF   03
+0990:  MOVF   29,W
+0992:  ADDLW  23
+0994:  MOVWF  FE9
+0996:  MOVLW  00
+0998:  ADDWFC 03,W
+099A:  MOVWF  FEA
+099C:  MOVFF  22,FEF
 ....................     
 ....................   } 
 ....................         
 ....................    }//if 
 ....................     if  (pr_wykl==1)  
-09BC:  DECFSZ x97,W
-09BE:  BRA    09CE
+09A0:  DECFSZ x97,W
+09A2:  BRA    09B2
 ....................    { 
 ....................       output_low(pin_A6); 
-09C0:  BCF    F92.6
-09C2:  BCF    F89.6
+09A4:  BCF    F92.6
+09A6:  BCF    F89.6
 ....................       output_high(pin_A7); 
-09C4:  BCF    F92.7
-09C6:  BSF    F89.7
+09A8:  BCF    F92.7
+09AA:  BSF    F89.7
 ....................       output_high(pin_C7);    //low 7.05. 
-09C8:  BCF    F94.7
-09CA:  BSF    F8B.7
+09AC:  BCF    F94.7
+09AE:  BSF    F8B.7
 ....................       pr_wykl=0;    
-09CC:  CLRF   x97
+09B0:  CLRF   x97
 ....................    } 
-09CE:  INCF   29,F
-09D0:  BRA    02AC
+09B2:  INCF   29,F
+09B4:  BRA    0290
 ....................    
 ....................       
 ....................  }//for (ii) 
-09D2:  BRA    02AA
+09B6:  BRA    028E
 ....................   
 ....................   
 ....................  
@@ -2993,7 +2979,7 @@ CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
 ....................  
 .................... }  //main 
 ....................  
-09D4:  BRA    09D4
+09B8:  SLEEP 
 ....................  
 .................... void pit_bkl(void) 
 .................... { 
@@ -3110,11 +3096,9 @@ CCS PCH C Compiler, Version 5.049, 5967               13-окт-19 10:23
 
 Configuration Fuses:
    Word  1: CF00   FCMEN IESO
-   Word  2: 1E19   NOPUT NOBROWNOUT BORV21 NOWDT WDT32768
+   Word  2: 1E1E   PUT BROWNOUT BORV21 NOWDT WDT32768
    Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
-   Word  4: 0000   NOSTVREN NOLVP NOXINST DEBUG
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
    Word  5: C00F   NOPROTECT NOCPB
    Word  6: E00F   NOWRT NOWRTC NOWRTB
    Word  7: 400F   NOEBTR NOEBTRB
-
-   Some fuses have been forced to be compatible with the ICD debugger.
