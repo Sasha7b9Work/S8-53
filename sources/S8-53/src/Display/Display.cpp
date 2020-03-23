@@ -1017,11 +1017,17 @@ void Display::DrawMemoryWindow()
     // Маркер tShift
     float scale = (float)(rightX - leftX + 1) / ((float)sMemory_GetNumPoints(false) - (sMemory_GetNumPoints(false) == 281 ? 1 : 0));
     float xShift = 1 + (sTime_TPosInPoints((PeackDetMode)gDSet->peakDet, (int)gDSet->length1channel, SET_TPOS) - sTime_TShiftInPoints((PeackDetMode)gDSet->peakDet)) * scale;
+    
+    if(xShift < leftX - 2)
+    {
+        xShift = leftX - 2;
+    }
 
     Painter::FillRegionC(xShift - 1, 3, 6, 6, COLOR_BACK);
     Painter::FillRegionC(xShift, 4, 4, 4, COLOR_FILL);
     Painter::SetColor(COLOR_BACK);
-    if(xShift < leftX - 2)
+
+    if(xShift == leftX - 2)
     {
         xShift = leftX - 2;
         Painter::DrawLine(xShift + 3, 5, xShift + 3, 7);
