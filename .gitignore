@@ -13,12 +13,19 @@
 *.uvgu*.*
 *.bsc
 *.lib
+*.pdb
+
+archive.zip
 
 JLink*.*
 
 bins/*
 
 sources/.vs/*
+
+sources/VS-OSCI/PanelS8-53/Debug/*
+sources/VS-OSCI/NET/S8-53_Interface/bin/Debug/*
+sources/VS-OSCI/NET/LibraryS8-53/bin/*
 
 doc/doxygen/BootS8-53/*
 doc/doxygen/S8-53/*
