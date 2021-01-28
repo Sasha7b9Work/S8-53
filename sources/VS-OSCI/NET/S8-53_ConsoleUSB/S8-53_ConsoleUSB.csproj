@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LibraryS8-53">
-      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8_53.dll</HintPath>
-    </Reference>
-    <Reference Include="LibraryS8_53">
-      <HintPath>..\LibraryS8-53\bin\Release\LibraryS8_53.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryS8-53\LibraryS8-53.csproj">
+      <Project>{99fafeef-151b-4355-8bcf-d36bbe29d92f}</Project>
+      <Name>LibraryS8-53</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

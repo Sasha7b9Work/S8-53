@@ -61,10 +61,15 @@ sources/VS-OSCI/Display/Debug/*
 sources/VS-OSCI/S8-53/Debug/*
 sources/VS-OSCI/S8-53/BootloaderS8-53/Debug/*
 sources/VS-OSCI/NET/ControlLibraryS8-53/obj/*
+sources/VS-OSCI/NET/ControlLibraryS8-53/bin/*
 sources/VS-OSCI/NET/LibraryS8-53/obj/*
 sources/VS-OSCI/NET/S8-53_ConsoleLAN/obj/*
+sources/VS-OSCI/NET/S8-53_ConsoleLAN/bin/*
 sources/VS-OSCI/NET/S8-53_ConsoleUSB/obj/*
+sources/VS-OSCI/NET/S8-53_ConsoleUSB/bin/*
 sources/VS-OSCI/NET/S8-53_Interface/obj/*
+sources/VS-OSCI/NET/S8-53_Interface/bin/*
 sources/VS-OSCI/NET/S8-53_LAN/obj/*
+sources/VS-OSCI/NET/S8-53_LAN/bin/*
 sources/VS-OSCI/NET/S8-53_USB/bin/*
 sources/VS-OSCI/NET/S8-53_USB/obj/*
