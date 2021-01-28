@@ -1,7 +1,5 @@
 *.bin
 *.cof
-*.opendb
-*.db
 *.err
 *.hex
 *.o
@@ -9,11 +7,8 @@
 *.sym
 *.tre
 *.scvd
-*.suo
 *.uvgu*.*
 *.bsc
-*.lib
-*.pdb
 
 archive.zip
 
@@ -31,7 +26,7 @@ doc/doxygen/BootS8-53/*
 doc/doxygen/S8-53/*
 doc/doxygen/TestDisplay/*
 
-doc/disk_dev/_Archiv_/S8-53_Interface.exe
+doc/disk_dev/*.exe
 
 doc/disk/Sources/S8-53_Interface/bin/*
 doc/disk/Sources/S8-53_Interface/obj/*
@@ -73,3 +68,4 @@ sources/VS-OSCI/NET/S8-53_LAN/obj/*
 sources/VS-OSCI/NET/S8-53_LAN/bin/*
 sources/VS-OSCI/NET/S8-53_USB/bin/*
 sources/VS-OSCI/NET/S8-53_USB/obj/*
+sources/VS-OSCI/PanelS8-53/.vs/*
