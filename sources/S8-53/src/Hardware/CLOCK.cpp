@@ -45,7 +45,7 @@ void Clock::Init(void)
 {
     if (HAL_RTC_Init((RTC_HandleTypeDef*)(&handle)) != HAL_OK)
     {
-        HARDWARE_ERROR
+//        HARDWARE_ERROR
     }
 
     if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef*)&handle, RTC_BKP_DR0) != VALUE_FOR_RTC)

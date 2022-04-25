@@ -21,15 +21,17 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 
     if (HAL_RCC_OscConfig(&oscIS) != HAL_OK)
     {
-        HARDWARE_ERROR
+//        HARDWARE_ERROR
     }
 
     periphClkIS.PeriphClockSelection = RCC_PERIPHCLK_RTC;
     periphClkIS.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+
     if (HAL_RCCEx_PeriphCLKConfig(&periphClkIS) != HAL_OK)
     {
-        HARDWARE_ERROR
+//        HARDWARE_ERROR
     }
+
     __HAL_RCC_RTC_ENABLE();
 }
 
