@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77C0F0DB-0A3B-4E5D-891F-CE7ACCFDBE05}</ProjectGuid>
+    <ProjectGuid>{34803313-7A7F-4380-9490-728A39D6AA68}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>S8_53_USB</RootNamespace>
