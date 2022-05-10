@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnF1 = new System.Windows.Forms.Button();
             this.btnF2 = new System.Windows.Forms.Button();
@@ -64,6 +65,7 @@
             this.govRShift1 = new ControlLibraryS8_53.Governor();
             this.govRShift0 = new ControlLibraryS8_53.Governor();
             this.display = new ControlLibraryS8_53.Display();
+            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -501,11 +503,16 @@
             this.display.Size = new System.Drawing.Size(644, 484);
             this.display.TabIndex = 0;
             // 
+            // timerMain
+            // 
+            this.timerMain.Enabled = true;
+            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 493);
+            this.ClientSize = new System.Drawing.Size(984, 481);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label4);
@@ -543,6 +550,7 @@
             this.Name = "MainForm";
             this.Text = "C8-53_Interface";
             this.Closed += new System.EventHandler(this.MainForm_Closed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -595,6 +603,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Timer timerMain;
     }
 }
 

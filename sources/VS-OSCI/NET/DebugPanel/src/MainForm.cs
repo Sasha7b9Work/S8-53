@@ -544,5 +544,33 @@ namespace S8_53_USB {
         {
             return DateTime.Now.Ticks / 10000;
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timerMain_Tick(object sender, EventArgs e)
+        {
+            int i = 0;
+            if (i == 0)
+            {
+                commands.Enqueue("KEY:F2 DOWN");
+                commands.Enqueue("KEY:F2 UP");
+            }
+            else if(i == 1)
+            {
+                commands.Enqueue("KEY:F3 DOWN");
+                commands.Enqueue("KEY:F3 UP");
+            }
+            else if(i == 2)
+            {
+                commands.Enqueue("GOV:SET RIGHT");
+            }
+            else if(i == 3)
+            {
+                commands.Enqueue("GOV:SET LEFT");
+            }
+        }
     }
 }
