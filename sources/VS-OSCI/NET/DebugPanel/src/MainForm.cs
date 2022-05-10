@@ -24,9 +24,11 @@ using LibraryS8_53;
  * 6. Перейти к п.1
  * */
 
-namespace S8_53_USB {
+namespace S8_53_USB
+{
 
-    public partial class MainForm : Form {
+    public partial class MainForm : Form
+    {
         // Этот порт используется для соединения по USB
         private static LibraryS8_53.ComPort port = new LibraryS8_53.ComPort();
         // Этот сокет используется для соединения по LAN
@@ -65,26 +67,27 @@ namespace S8_53_USB {
             LOAD_FONT = 19
         };
 
-        public MainForm() {
+        public MainForm()
+        {
             InitializeComponent();
 
-            mapButtons.Add(btnChannel0,    "CHAN1");
-            mapButtons.Add(btnService,     "SERVICE");
-            mapButtons.Add(btnChannel1,    "CHAN2");
-            mapButtons.Add(btnDisplay,     "DISPLAY");
-            mapButtons.Add(btnTime,        "TIME");
-            mapButtons.Add(btnMemory,      "MEMORY");
-            mapButtons.Add(btnTrig,        "TRIG");
-            mapButtons.Add(btnStart,       "START");
-            mapButtons.Add(btnCursors,     "CURSORS");
-            mapButtons.Add(btnMeasures,    "MEASURES");
-            mapButtons.Add(btnHelp,        "HELP");
-            mapButtons.Add(btnMenu,        "MENU");
-            mapButtons.Add(btnF1,          "1");
-            mapButtons.Add(btnF2,          "2");
-            mapButtons.Add(btnF3,          "3");
-            mapButtons.Add(btnF4,          "4");
-            mapButtons.Add(btnF5,          "5");
+            mapButtons.Add(btnChannel0, "CHAN1");
+            mapButtons.Add(btnService, "SERVICE");
+            mapButtons.Add(btnChannel1, "CHAN2");
+            mapButtons.Add(btnDisplay, "DISPLAY");
+            mapButtons.Add(btnTime, "TIME");
+            mapButtons.Add(btnMemory, "MEMORY");
+            mapButtons.Add(btnTrig, "TRIG");
+            mapButtons.Add(btnStart, "START");
+            mapButtons.Add(btnCursors, "CURSORS");
+            mapButtons.Add(btnMeasures, "MEASURES");
+            mapButtons.Add(btnHelp, "HELP");
+            mapButtons.Add(btnMenu, "MENU");
+            mapButtons.Add(btnF1, "1");
+            mapButtons.Add(btnF2, "2");
+            mapButtons.Add(btnF3, "3");
+            mapButtons.Add(btnF4, "4");
+            mapButtons.Add(btnF5, "5");
 
             buttonUpdatePorts_Click(null, null);
 
@@ -97,7 +100,8 @@ namespace S8_53_USB {
             readerLAN.RunWorkerCompleted += ReaderLAN_Completed;
         }
 
-        private void button_MouseDown(object sender, MouseEventArgs args) {
+        private void button_MouseDown(object sender, MouseEventArgs args)
+        {
             if ((Button)sender != buttonConnectUSB)
             {
                 try
@@ -111,7 +115,8 @@ namespace S8_53_USB {
             }
         }
 
-        private void button_MouseUp(object sender, MouseEventArgs args) {
+        private void button_MouseUp(object sender, MouseEventArgs args)
+        {
             if ((Button)sender != buttonConnectUSB)
             {
                 try
@@ -125,36 +130,39 @@ namespace S8_53_USB {
             }
         }
 
-        private void governor_RotateLeft(object sender, EventArgs args) {
+        private void governor_RotateLeft(object sender, EventArgs args)
+        {
             try
             {
                 commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " LEFT");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
         }
 
-        private void governor_RotateRight(object sender, EventArgs args) {
+        private void governor_RotateRight(object sender, EventArgs args)
+        {
             try
             {
                 commands.Enqueue("GOV:" + ((Governor)sender).ValueToSend + " RIGHT");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
         }
 
-        private string StringToSendForButton(object btn) {
+        private string StringToSendForButton(object btn)
+        {
             string retValue = "";
-            
+
             try
             {
                 retValue = mapButtons[(Button)btn];
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -162,7 +170,8 @@ namespace S8_53_USB {
             return retValue;
         }
 
-        private void buttonUpdatePorts_Click(object sender, EventArgs args) {
+        private void buttonUpdatePorts_Click(object sender, EventArgs args)
+        {
             try
             {
                 string[] ports = port.GetPorts();
@@ -170,7 +179,7 @@ namespace S8_53_USB {
                 comboBoxPorts.Items.AddRange(ports);
                 comboBoxPorts.SelectedIndex = ports.Length - 1;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -208,7 +217,7 @@ namespace S8_53_USB {
         private void ReaderUSB_DoWork(object sender, DoWorkEventArgs args)
         {
             byte[] bytes = port.ReadBytes(20);
-            for(int i = 0; i < bytes.Length; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 data.Enqueue(bytes[i]);
             }
@@ -256,7 +265,7 @@ namespace S8_53_USB {
         {
             try
             {
-                if(socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
+                if (socket.IsConnected())                                            // Проверяем, установлено ли уже соединение, и если да
                 {
                     needForDisconnect = true;
                     buttonConnectLAN.Text = "Подкл";
@@ -267,7 +276,7 @@ namespace S8_53_USB {
                 }
                 else                                                                // А по этой ветке подключаемся
                 {
-                    if(socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
+                    if (socket.Connect(textBoxIP.Text, Int32.Parse(textBoxPort.Text)))
                     {
                         needForDisconnect = false;
                         buttonConnectLAN.Text = "Откл";
@@ -282,7 +291,7 @@ namespace S8_53_USB {
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -366,7 +375,7 @@ namespace S8_53_USB {
         }
 
         // Активировать/деактивировать элементы управления, отвечающие за связь по USB
-       private void EnableControlsUSB(bool enable)
+        private void EnableControlsUSB(bool enable)
         {
             if (enable)
             {
@@ -525,7 +534,7 @@ namespace S8_53_USB {
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -554,25 +563,28 @@ namespace S8_53_USB {
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
-            int i = rnd.Next(-1, 4);
+            for (int j = 0; j < 10; j++)
+            {
+                int i = rnd.Next(-1, 4);
 
-            if (i == 0)
-            {
-//                commands.Enqueue("KEY:F2 DOWN");
-                commands.Enqueue("KEY:F2 UP");
-            }
-            else if(i == 1)
-            {
-//                commands.Enqueue("KEY:F3 DOWN");
-                commands.Enqueue("KEY:F3 UP");
-            }
-            else if(i == 2)
-            {
-                commands.Enqueue("GOV:SET RIGHT");
-            }
-            else if(i == 3)
-            {
-                commands.Enqueue("GOV:SET LEFT");
+                if (i == 0)
+                {
+                    commands.Enqueue("KEY:2 DOWN");
+                    commands.Enqueue("KEY:2 UP");
+                }
+                else if (i == 1)
+                {
+                    commands.Enqueue("KEY:3 DOWN");
+                    commands.Enqueue("KEY:3 UP");
+                }
+                else if (i == 2)
+                {
+                    commands.Enqueue("GOV:SET RIGHT");
+                }
+                else if (i == 3)
+                {
+                    commands.Enqueue("GOV:SET LEFT");
+                }
             }
         }
     }
