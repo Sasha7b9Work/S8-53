@@ -56,6 +56,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.govTBase = new ControlLibraryS8_53.Governor();
             this.govRange1 = new ControlLibraryS8_53.Governor();
             this.govSet = new ControlLibraryS8_53.Governor();
@@ -65,7 +66,6 @@
             this.govRShift1 = new ControlLibraryS8_53.Governor();
             this.govRShift0 = new ControlLibraryS8_53.Governor();
             this.display = new ControlLibraryS8_53.Display();
-            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -408,6 +408,12 @@
             this.tabPage2.Text = "Ethernet";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // timerMain
+            // 
+            this.timerMain.Enabled = true;
+            this.timerMain.Interval = 1;
+            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
+            // 
             // govTBase
             // 
             this.govTBase.Location = new System.Drawing.Point(853, 441);
@@ -502,11 +508,6 @@
             this.display.Name = "display";
             this.display.Size = new System.Drawing.Size(644, 484);
             this.display.TabIndex = 0;
-            // 
-            // timerMain
-            // 
-            this.timerMain.Enabled = true;
-            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // MainForm
             // 

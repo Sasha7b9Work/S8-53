@@ -44,6 +44,8 @@ namespace S8_53_USB {
         // Будет использоваться для чтения данных из LAN
         private BackgroundWorker readerLAN = new BackgroundWorker();
 
+        Random rnd = new Random();
+
         private enum Command : byte
         {
             SET_COLOR = 1,
@@ -552,15 +554,16 @@ namespace S8_53_USB {
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
-            int i = 0;
+            int i = rnd.Next(-1, 4);
+
             if (i == 0)
             {
-                commands.Enqueue("KEY:F2 DOWN");
+//                commands.Enqueue("KEY:F2 DOWN");
                 commands.Enqueue("KEY:F2 UP");
             }
             else if(i == 1)
             {
-                commands.Enqueue("KEY:F3 DOWN");
+//                commands.Enqueue("KEY:F3 DOWN");
                 commands.Enqueue("KEY:F3 UP");
             }
             else if(i == 2)
