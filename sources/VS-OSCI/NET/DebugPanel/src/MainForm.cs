@@ -563,7 +563,7 @@ namespace S8_53_USB
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 100; j++)
             {
                 int i = rnd.Next(-1, 4);
 

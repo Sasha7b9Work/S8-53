@@ -411,7 +411,6 @@
             // timerMain
             // 
             this.timerMain.Enabled = true;
-            this.timerMain.Interval = 1;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // govTBase
