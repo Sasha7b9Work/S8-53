@@ -579,11 +579,19 @@ namespace S8_53_USB
                 }
                 else if (i == 2)
                 {
-                    commands.Enqueue("GOV:SET RIGHT");
+                    int num = rnd.Next(1, 100);
+                    for (int n = 0; n < num; n++)
+                    {
+                        commands.Enqueue("GOV:SET RIGHT");
+                    }
                 }
                 else if (i == 3)
                 {
-                    commands.Enqueue("GOV:SET LEFT");
+                    int num = rnd.Next(1, 100);
+                    for (int n = 0; n < num; n++)
+                    {
+                        commands.Enqueue("GOV:SET LEFT");
+                    }
                 }
             }
         }
