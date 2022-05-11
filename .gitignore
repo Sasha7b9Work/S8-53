@@ -9,6 +9,9 @@
 *.scvd
 *.uvgu*.*
 *.bsc
+*.idb
+*.pdb
+*.lib
 
 archive.zip
 
