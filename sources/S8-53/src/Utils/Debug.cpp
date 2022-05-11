@@ -1,6 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include "Hardware/Timer.h"
 
@@ -24,16 +23,16 @@ int   Debug::pushed = 0;
 
 void Debug::StartProfilingMS()
 {
-    timeStartMS = TIME_MS;
-    timePrevMS = TIME_MS; //-V656
+    timeStartMS = gTimerMS;
+    timePrevMS = gTimerMS; //-V656
 }
 
 
 uint Debug::PointProfilingMS(pchar _file, int _line)
 {
-    uint d = TIME_MS - timePrevMS;
-    LOG_WRITE("%s %d %d", _file, _line, d);
-    timePrevMS = TIME_MS;
+    uint d = gTimerMS - timePrevMS;
+//    LOG_WRITE("%s %d %d", _file, _line, d);
+    timePrevMS = gTimerMS;
 
     return d;
 }
@@ -41,16 +40,16 @@ uint Debug::PointProfilingMS(pchar _file, int _line)
 
 void Debug::StartProfilingUS()
 {
-    timeStart = TIME_TICKS;
+    timeStart = gTimerTics;
     timePrev = timeStart;
 }
 
 
 uint Debug::PointProfilingUS(pchar _file, int _line)
 {
-    uint d = TIME_TICKS - timePrev;
-    LOG_WRITE("%s:%d - %d us", _file, _line, d);
-    timePrev = TIME_TICKS;
+    uint d = gTimerTics - timePrev;
+//    LOG_WRITE("%s:%d - %d us", _file, _line, d);
+    timePrev = gTimerTics;
     return d;
 }
 
@@ -63,13 +62,13 @@ void Debug::ClearTimeCounter()
 
 void Debug::StartIncreaseCounter()
 {
-    timeStartCounter = TIME_TICKS;
+    timeStartCounter = gTimerTics;
 }
 
 
 void Debug::StopIncreaseCounter()
 {
-    timeCounter += (TIME_TICKS - timeStartCounter);
+    timeCounter += (gTimerTics - timeStartCounter);
 }
 
 

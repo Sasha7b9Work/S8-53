@@ -333,6 +333,9 @@
     <ClCompile Include="..\..\S8-53\src\FPGA\Storage.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Utils\Debug.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\S8-53\src\Display\Colors.h">
@@ -634,6 +637,9 @@
     </ClInclude>
     <ClInclude Include="..\..\S8-53\src\FPGA\Storage.h">
       <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Utils\Debug.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

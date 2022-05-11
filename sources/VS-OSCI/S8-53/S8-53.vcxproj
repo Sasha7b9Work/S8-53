@@ -159,6 +159,7 @@
     <ClCompile Include="..\..\S8-53\src\Tables.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\S8-53\src\Utils\Debug.cpp" />
     <ClCompile Include="..\..\S8-53\src\Utils\Generator.cpp" />
     <ClCompile Include="..\..\S8-53\src\Utils\GlobalFunctions.cpp" />
     <ClCompile Include="..\..\S8-53\src\Utils\Map.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="..\..\S8-53\src\Tables.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\S8-53\src\Utils\Debug.h" />
     <ClInclude Include="..\..\S8-53\src\Utils\Generator.h" />
     <ClInclude Include="..\..\S8-53\src\Utils\GlobalFunctions.h" />
     <ClInclude Include="..\..\S8-53\src\Utils\Map.h" />
