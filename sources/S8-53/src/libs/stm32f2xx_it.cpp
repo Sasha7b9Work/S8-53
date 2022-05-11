@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "VCP/VCP.h"
 #include "Log.h"
+#include "Utils/Debug.h"
 #include <usbd_cdc_interface.h>
 
 
@@ -18,9 +19,18 @@ void NMI_Handler(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void HardFault_Handler(void)
 {
-    while (1)
-    {
-    }
+        volatile int line = Debug::line[0];
+        volatile pchar file = Debug::file[0];
+        volatile int counter = Debug::counter;
+        volatile int pushed = Debug::pushed;
+
+        while (1) //-V776
+        {
+            line = line;
+            file = file;
+            counter = counter;
+            pushed = pushed;
+        }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
