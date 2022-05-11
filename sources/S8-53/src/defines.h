@@ -122,3 +122,4 @@ typedef struct
 void HardwareErrorHandler(const char *file, const char *function, int line);
 
 #include "Globals.h"
+#include "Utils/Debug.h"
