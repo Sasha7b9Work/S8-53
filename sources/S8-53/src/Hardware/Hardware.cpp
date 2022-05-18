@@ -16,6 +16,7 @@
 #include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Panel/Panel.h"
+#include <stm32f2xx_ll_dac.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,6 +165,33 @@ void TIM8_UP_TIM13_IRQHandler(void)
         Timer::Update1ms();
         __HAL_TIM_CLEAR_FLAG(&handleTIM13forTimer, TIM_FLAG_UPDATE);
         __HAL_TIM_CLEAR_IT(&handleTIM13forTimer, TIM_IT_UPDATE);
+    }
+}
+
+
+void DacUnderrunError_Callback(void)
+{
+    /* Note: Disable DAC interruption that caused this error before entering in */
+    /*       infinite loop below.                                               */
+
+    /* Disable interruption DAC channel1 underrun */
+    LL_DAC_DisableIT_DMAUDR1(DAC1);
+
+    /* Error from ADC */
+//    LED_Blinking(LED_BLINK_ERROR);
+}
+
+
+void TIM6_DAC_IRQHandler(void)
+{
+    /* Check whether DAC channel1 underrun caused the DAC interruption */
+    if (LL_DAC_IsActiveFlag_DMAUDR1(DAC1) != 0)
+    {
+        /* Clear flag DAC channel1 underrun */
+        LL_DAC_ClearFlag_DMAUDR1(DAC1);
+
+        /* Call interruption treatment function */
+        DacUnderrunError_Callback();
     }
 }
 
