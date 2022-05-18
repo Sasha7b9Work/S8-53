@@ -19,9 +19,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TIM_HandleTypeDef handleTIM6forTimer =
+static TIM_HandleTypeDef handleTIM13forTimer =
 {
-    TIM6,
+    TIM13,
     {
         119,                    // Init.Prescaler
         TIM_COUNTERMODE_UP,     // Init.CounterMode
@@ -60,6 +60,7 @@ void Hardware::Init(void)
     __TIM6_CLK_ENABLE();        // Для отсчёта миллисекунд
     __TIM2_CLK_ENABLE();        // Для тиков
     __TIM7_CLK_ENABLE();        // Для DAC1 (бикалка)
+    __TIM13_CLK_ENABLE();
     __DAC_CLK_ENABLE();         // Для бикалки
     __PWR_CLK_ENABLE();
 
@@ -71,15 +72,15 @@ void Hardware::Init(void)
     //RCC_PCLK1Config(RCC_HCLK_Div1);
 
     // Таймер для мс
-    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+    HAL_NVIC_SetPriority(TIM8_UP_TIM13_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(TIM8_UP_TIM13_IRQn);
 
-    if (HAL_TIM_Base_Init(&handleTIM6forTimer) != HAL_OK)
+    if (HAL_TIM_Base_Init(&handleTIM13forTimer) != HAL_OK)
     {
         HARDWARE_ERROR
     }
 
-    if (HAL_TIM_Base_Start_IT(&handleTIM6forTimer) != HAL_OK)
+    if (HAL_TIM_Base_Start_IT(&handleTIM13forTimer) != HAL_OK)
     {
         HARDWARE_ERROR
     }
@@ -156,13 +157,13 @@ extern "C" {
 #endif
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void TIM6_DAC_IRQHandler(void)
+void TIM8_UP_TIM13_IRQHandler(void)
 {
-    if (__HAL_TIM_GET_FLAG(&handleTIM6forTimer, TIM_FLAG_UPDATE) == SET && __HAL_TIM_GET_ITSTATUS(&handleTIM6forTimer, TIM_IT_UPDATE))
+    if (__HAL_TIM_GET_FLAG(&handleTIM13forTimer, TIM_FLAG_UPDATE) == SET && __HAL_TIM_GET_ITSTATUS(&handleTIM13forTimer, TIM_IT_UPDATE))
     {
         Timer::Update1ms();
-        __HAL_TIM_CLEAR_FLAG(&handleTIM6forTimer, TIM_FLAG_UPDATE);
-        __HAL_TIM_CLEAR_IT(&handleTIM6forTimer, TIM_IT_UPDATE);
+        __HAL_TIM_CLEAR_FLAG(&handleTIM13forTimer, TIM_FLAG_UPDATE);
+        __HAL_TIM_CLEAR_IT(&handleTIM13forTimer, TIM_IT_UPDATE);
     }
 }
 
